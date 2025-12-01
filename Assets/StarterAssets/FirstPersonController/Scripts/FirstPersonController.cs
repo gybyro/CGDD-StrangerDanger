@@ -11,6 +11,8 @@ namespace StarterAssets
 #endif
 	public class FirstPersonController : MonoBehaviour
 	{
+
+		public Transform cameraTransform; 
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
@@ -51,6 +53,11 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+		// camera rotation
+		private float _yaw;
+		private float _pitch;
+
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -88,10 +95,11 @@ namespace StarterAssets
 
 		private void Awake()
 		{
+			_yaw = transform.eulerAngles.y;
 			// get a reference to our main camera
-			if (_mainCamera == null)
+			if (cameraTransform == null)
 			{
-				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+				cameraTransform = Camera.main.transform;
 			}
 		}
 
@@ -108,6 +116,13 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			// init camera yaw/pitch
+			_yaw = transform.eulerAngles.y;
+			if (cameraTransform != null)
+			{
+				_pitch = cameraTransform.localEulerAngles.x;
+    }
 		}
 
 		private void Update()
@@ -130,29 +145,36 @@ namespace StarterAssets
 		}
 
 		private void CameraRotation()
+{
+    // if there is an input
+		if (_input.look.sqrMagnitude >= _threshold)
 		{
-			// if there is an input
-			if (_input.look.sqrMagnitude >= _threshold)
+			float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+
+			// update yaw and pitch based on input
+			_yaw += _input.look.x * RotationSpeed * deltaTimeMultiplier;
+			_pitch += _input.look.y * RotationSpeed * deltaTimeMultiplier; // invert if desired
+
+			// clamp pitch (up/down)
+			_pitch = ClampAngle(_pitch, BottomClamp, TopClamp);
+
+			// apply to player (yaw)
+			transform.rotation = Quaternion.Euler(0.0f, _yaw, 0.0f);
+
+			// apply to camera (pitch)
+			if (cameraTransform != null)
 			{
-				//Don't multiply mouse input by Time.deltaTime
-				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-				
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
-				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
-
-				// clamp our pitch rotation
-				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-
-				// Update Cinemachine camera target pitch
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
-
-				// rotate the player left and right
-				transform.Rotate(Vector3.up * _rotationVelocity);
+				cameraTransform.localRotation = Quaternion.Euler(_pitch, 0.0f, 0.0f);
 			}
 		}
+	}
+
+
+
 
 		private void Move()
 		{
+			Debug.Log("Move input: " + _input.move + " | sprint: " + _input.sprint);
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
