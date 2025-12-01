@@ -441,13 +441,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d78b9799bd8f0f48accd4b14b756d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeadBopScript
-  Amount: 0.01
+  Amount: 1
   Frequancy: 10
   Smooth: 40
   rotationSpeed: 180
   speed: 0
   playerIsWalking: 0
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 978612971}
 --- !u!1 &1357250638
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HeadBopScript
   Amount: 0.01
   Frequancy: 12.4
-  Smooth: 20
+  Smooth: 22.8
   rotationSpeed: 180
   speed: 1
   playerIsWalking: 1
