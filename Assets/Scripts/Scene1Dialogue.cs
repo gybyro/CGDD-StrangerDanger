@@ -26,11 +26,13 @@ public class Scene1Dialogue : MonoBehaviour {
         public GameObject ArtBG1;
         public GameObject Choice1a;
         public GameObject Choice1b;
+        public TMP_Text Choice1aText;
+        public TMP_Text Choice1bText;
         public GameObject NextScene1Button;
         public GameObject NextScene2Button;
         public GameObject nextButton;
        //public AudioSource audioSource1;
-        private bool allowSpace = true;
+        //private bool allowSpace = true;
 
        
 
@@ -38,7 +40,7 @@ public class Scene1Dialogue : MonoBehaviour {
         void Start(){  
              DialogueDisplay.SetActive(false);
              ArtChar1a.SetActive(false);
-             ArtBG1.SetActive(false);
+             ArtBG1.SetActive(true);
              Choice1a.SetActive(false);
              Choice1b.SetActive(false);
              NextScene1Button.SetActive(false);
@@ -114,9 +116,11 @@ public void Next(){
                 Char2speech.text = "Do not play the stupid. You will take me to him.";
                 // Turn off the "Next" button, turn on "Choice" buttons
                 nextButton.SetActive(false);
-                allowSpace = false;
+                //allowSpace = false;
                 Choice1a.SetActive(true); // function Choice1aFunct()
                 Choice1b.SetActive(true); // function Choice1bFunct()
+                Choice1aText.text = "I don't know what you're talking about!";
+                Choice1bText.text = "Sure, anything you want... just lay off the club.";
         }
 
        // after choice 1a
@@ -134,7 +138,7 @@ public void Next(){
                 Char2speech.text = "Come back here! Do not think you can hide from me!";
                 // Turn off the "Next" button, turn on "Scene" button/s
                 nextButton.SetActive(false);
-                allowSpace = false;
+                //allowSpace = false;
                 NextScene1Button.SetActive(true);
         }
 
@@ -152,7 +156,7 @@ public void Next(){
                 Char2speech.text = "";
                 // Turn off the "Next" button, turn on "Scene" button/s
                 nextButton.SetActive(false);
-                allowSpace = false;
+                //allowSpace = false;
                 NextScene2Button.SetActive(true);
         }
 
@@ -169,7 +173,7 @@ public void Next(){
                 Choice1a.SetActive(false);
                 Choice1b.SetActive(false);
                 nextButton.SetActive(true);
-                allowSpace = true;
+                //allowSpace = true;
         }
         public void Choice1bFunct(){
                 Char1name.text = "YOU";
@@ -180,7 +184,7 @@ public void Next(){
                 Choice1a.SetActive(false);
                 Choice1b.SetActive(false);
                 nextButton.SetActive(true);
-                allowSpace = true;
+                //allowSpace = true;
         }
 
         public void SceneChange1(){
