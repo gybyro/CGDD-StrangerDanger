@@ -4,7 +4,7 @@ public class deathScrean : MonoBehaviour
 {
     public void RestartGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()

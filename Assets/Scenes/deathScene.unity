@@ -504,7 +504,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 524083398}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 655650720}
+        m_TargetAssemblyTypeName: deathScrean, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &524083398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1299,7 +1311,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2002284241}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 655650720}
+        m_TargetAssemblyTypeName: deathScrean, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2002284241
 MonoBehaviour:
   m_ObjectHideFlags: 0
