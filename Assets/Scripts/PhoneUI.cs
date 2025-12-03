@@ -20,5 +20,7 @@ public class PhoneUI : MonoBehaviour
 
         // Make the button disappear after first click
         getInfoButton.gameObject.SetActive(false);
+        infoText.gameObject.SetActive(true);
+        
     }
 }
