@@ -3,12 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public string toLoad;
+    public string sceneNameToLoad;
     
     public void LoadScene()
     {
-        SceneManager.LoadScene(toLoad);
-        Debug.Log($"Scene {toLoad} loaded");
+        SceneManager.LoadScene(sceneNameToLoad);
+        Debug.Log($"Scene {sceneNameToLoad} loaded");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the thing entering is the player
+        if (other.CompareTag("Player"))
+        {
+            GameManager.Instance.FadeToScene(sceneNameToLoad);
+        }
     }
 
     public void Quit()
