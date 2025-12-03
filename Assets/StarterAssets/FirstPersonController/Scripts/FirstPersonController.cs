@@ -53,6 +53,9 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+		[Header("Stuff we added :3")]
+		public bool IsMoving { get; private set; }
+
 		// camera rotation
 		private float _yaw;
 		private float _pitch;
@@ -183,6 +186,7 @@ namespace StarterAssets
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is no input, set the target speed to 0
 			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+			IsMoving = (_input.move.x != 0 || _input.move.y != 0);
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
