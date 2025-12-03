@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-
 public class Scene1Dialogue : MonoBehaviour
 {
     public int primeInt = 1;
@@ -12,7 +11,11 @@ public class Scene1Dialogue : MonoBehaviour
     public TMP_Text Char2speech;
 
     public GameObject DialogueDisplay;
-    public GameObject ArtChar1a;
+    public GameObject JohnCustomer;
+    public GameObject VictoriaCustomer;
+
+    public GameObject DoorOpen;
+    public GameObject DoorClosed;
     public GameObject ArtBG1;
 
     // Question buttons
@@ -40,23 +43,35 @@ public class Scene1Dialogue : MonoBehaviour
     private bool isCustomer2 = false;
     private bool isCustomer3 = false;
 
-    // Customer data
+    // Customer data (pulled from GameManager)
     private string cName;
     private int cAge;
     private string cWork;
 
     private string c3FirstName;
     private string c3FakeLastName;
-    // Which scenes to load after Stay/Leave
-        public string BackToWalkingScene;   // when customer was GOOD and you stayed
-        //public string DeathScene;    // when customer was BAD and you stayed
-        public string leaveSceneName;
 
+    // Scenes to load
+    public string BackToWalkingScene;   // when you stay
+    public string leaveSceneName;       // when you leave
 
     void Start()
     {
+        // Basic null-safety: if there is no GameManager, stop this script
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("Scene1Dialogue: No GameManager.Instance found in scene!");
+            enabled = false;
+            return;
+        }
+
         DialogueDisplay.SetActive(false);
-        ArtChar1a.SetActive(false);
+        DoorOpen.SetActive(true);
+        DoorClosed.SetActive(false);
+
+        JohnCustomer.SetActive(false);
+        VictoriaCustomer.SetActive(false);
+
         ArtBG1.SetActive(true);
 
         ChoiceNameButton.SetActive(false);
@@ -68,11 +83,9 @@ public class Scene1Dialogue : MonoBehaviour
 
         nextButton.SetActive(true);
 
-        if (GameManager.Instance != null)
-        {
-            if (GameManager.Instance.currentCustomerNumber == 0)
-                GameManager.Instance.GenerateNextCustomer();
-        }
+        // Only generate if no customer has been generated yet
+        if (GameManager.Instance.currentCustomerNumber == 0)
+            GameManager.Instance.GenerateNextCustomer();
 
         LoadCustomerData();
     }
@@ -86,6 +99,7 @@ public class Scene1Dialogue : MonoBehaviour
 
         if (isCustomer2)
         {
+            // Customer 2 uses possibly wrong spoken data
             cName = GameManager.Instance.currentSpoken.name;
             cAge = GameManager.Instance.currentSpoken.age;
             cWork = GameManager.Instance.currentSpoken.workplace;
@@ -104,20 +118,24 @@ public class Scene1Dialogue : MonoBehaviour
         }
         else
         {
+            // Customer 1 – correct data
             var a = GameManager.Instance.currentActual;
             cName = a.name;
             cAge = a.age;
             cWork = a.workplace;
         }
+
+        Debug.Log($"Loaded data: name={cName}, age={cAge}, work={cWork}, is2={isCustomer2}, is3={isCustomer3}");
     }
 
     public void Next()
     {
+        // If we just showed an answer, Next should go to question/tip logic
         if (primeInt == 101 || primeInt == 201 || primeInt == 301)
         {
-        nextButton.SetActive(false);
-        AfterAnswer();
-        return;
+            nextButton.SetActive(false);
+            AfterAnswer();
+            return;
         }
 
         primeInt++;
@@ -128,7 +146,23 @@ public class Scene1Dialogue : MonoBehaviour
         if (primeInt == 2)
         {
             DialogueDisplay.SetActive(true);
-            ArtChar1a.SetActive(true);
+            DoorOpen.SetActive(false);
+            DoorClosed.SetActive(true);
+
+            // pick which sprite to show
+            if (!isCustomer2 && !isCustomer3)
+            {
+                JohnCustomer.SetActive(true);
+            }
+            else if (isCustomer2)
+            {
+                // TODO: add customer 2 sprite here when you have one
+                JohnCustomer.SetActive(true); // temp
+            }
+            else if (isCustomer3)
+            {
+                VictoriaCustomer.SetActive(true);
+            }
 
             if (!isCustomer2 && !isCustomer3)
                 Char2speech.text = "Hey, you must be the delivery driver.";
@@ -268,28 +302,21 @@ public class Scene1Dialogue : MonoBehaviour
             primeInt = 301;
         }
 
-        // TIP LINE happens when primeInt == 600
+        // TIP LINE extra guard: if something set primeInt to 600, ensure we show tip once
         if (primeInt == 600)
         {
-        // Show the correct customer tip line
-        if (!isCustomer2 && !isCustomer3)
+            if (!isCustomer2 && !isCustomer3)
                 Char2speech.text = "If you stay a little longer, I can go get a tip for you.";
-        else if (isCustomer2)
+            else if (isCustomer2)
                 Char2speech.text = "Wait here while I get a tip for you.";
-        else
+            else
                 Char2speech.text = "I will retrieve the money and tip. Stay there.";
 
-        // Show stay/leave buttons
-        StayButton.SetActive(true);
-        LeaveButton.SetActive(true);
-
-        // Hide next
-        nextButton.SetActive(false);
-
-        // Prevent this from running every frame
-        primeInt = 601;
+            StayButton.SetActive(true);
+            LeaveButton.SetActive(true);
+            nextButton.SetActive(false);
+            primeInt = 601; // prevent repeat
         }
-
     }
 
     private void AfterAnswer()
@@ -300,58 +327,51 @@ public class Scene1Dialogue : MonoBehaviour
             return;
         }
 
-        // After 2 questions → show NEXT button
-        //nextButton.SetActive(true);
-        primeInt = 600; // Next() will handle tip line
+        // After 2 questions → go to the tip flow
+        primeInt = 600;
     }
 
     // ------------------------------
     // ENDING – STAY / LEAVE
     // ------------------------------
     public void OnStay()
-{
-    StayButton.SetActive(false);
-    LeaveButton.SetActive(false);
-    nextButton.SetActive(false);
-
-    Char2name.text = "Customer";
-
-    if (GameManager.Instance.currentTruth == CustomerTruthState.Bad)
     {
-        Char2speech.text = "Customer was BAD.";
-        //if (!string.IsNullOrEmpty(badSceneName))
-            //StartCoroutine(WaitAndLoadScene());
-    }
-    else
-    {
-        Char2speech.text = "Customer was GOOD.";
-        if (!string.IsNullOrEmpty(BackToWalkingScene))
-            StartCoroutine(WaitAndLoadScene(leaveSceneName));
-    }
-}
+        StayButton.SetActive(false);
+        LeaveButton.SetActive(false);
+        nextButton.SetActive(false);
 
+        Char2name.text = "Customer";
+
+        if (GameManager.Instance.currentTruth == CustomerTruthState.Bad)
+        {
+            Char2speech.text = "Customer was BAD.";
+            if (!string.IsNullOrEmpty(BackToWalkingScene))
+                StartCoroutine(WaitAndLoadScene(BackToWalkingScene));
+        }
+        else
+        {
+            Char2speech.text = "Customer was GOOD.";
+            if (!string.IsNullOrEmpty(BackToWalkingScene))
+                StartCoroutine(WaitAndLoadScene(BackToWalkingScene));
+        }
+    }
 
     public void OnLeave()
-{
-    StayButton.SetActive(false);
-    LeaveButton.SetActive(false);
-    nextButton.SetActive(false);
+    {
+        StayButton.SetActive(false);
+        LeaveButton.SetActive(false);
+        nextButton.SetActive(false);
 
-    Char2name.text = "Customer";
-    Char2speech.text = "You left.";
+        Char2name.text = "Customer";
+        Char2speech.text = "You left.";
 
-    if (!string.IsNullOrEmpty(leaveSceneName))
-        StartCoroutine(WaitAndLoadScene(BackToWalkingScene));
-}
+        if (!string.IsNullOrEmpty(leaveSceneName))
+            StartCoroutine(WaitAndLoadScene(leaveSceneName));
+    }
 
-private IEnumerator WaitAndLoadScene(string sceneName)
-{
-    // wait 3 seconds so player can read the text
-    yield return new WaitForSeconds(1f);
-
-    // load the given scene
-    SceneManager.LoadScene(sceneName);
-}
-
-
+    private IEnumerator WaitAndLoadScene(string sceneName)
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(sceneName);
+    }
 }

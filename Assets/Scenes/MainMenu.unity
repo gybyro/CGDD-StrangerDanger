@@ -685,7 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c23f8e567668b47aca8637e22860d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
-  toLoad: CarScene
+  sceneNameToLoad: CarScene
 --- !u!114 &828142876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -968,7 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c23f8e567668b47aca8637e22860d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
-  toLoad: WalkingScene
+  sceneNameToLoad: WalkingScene
 --- !u!114 &1812597016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c23f8e567668b47aca8637e22860d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
-  toLoad: 
+  sceneNameToLoad: 
 --- !u!114 &2044172414
 MonoBehaviour:
   m_ObjectHideFlags: 0

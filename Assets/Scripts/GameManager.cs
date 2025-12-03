@@ -2,11 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public enum CustomerTruthState
-{
-    Good,
-    Bad
-}
+public enum CustomerTruthState { Good, Bad }
 
 public class GameManager : MonoBehaviour
 {
@@ -14,11 +10,6 @@ public class GameManager : MonoBehaviour
 
     public CanvasGroup fadeGroup;
     public float fadeTime = 1f;
-
-
-
-
-
 
     [System.Serializable]
     public class CustomerData
@@ -28,20 +19,17 @@ public class GameManager : MonoBehaviour
         public string workplace;
     }
 
-    // Customer templates (always correct)
+    // Fixed customer data
     public CustomerData customer1 = new CustomerData();
     public CustomerData customer2 = new CustomerData();
     public CustomerData customer3 = new CustomerData();
 
-    // Active customer data
-    public CustomerData currentActual = new CustomerData(); // Real correct data
-    public CustomerData currentSpoken = new CustomerData(); // What customer says (may be wrong)
+    // Current truth and spoken data
+    public CustomerData currentActual = new CustomerData(); // What customer really is
+    public CustomerData currentSpoken = new CustomerData(); // What customer will SAY
+    public CustomerTruthState currentTruth = CustomerTruthState.Good;
 
-    // Truth state for “Customer was GOOD/BAD”
-    public CustomerTruthState currentTruth;
-
-    // Tracks which customer you are on (1,2,3)
-    public int currentCustomerNumber = 0;
+    public int currentCustomerNumber = 0; // 1,2,3 meaning which customer we are on
 
     private void Awake()
     {
@@ -53,55 +41,58 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
         }
     }
 
     private void Start()
     {
-        // Scene Fade
-        fadeGroup.alpha = 0;
+        // EXAMPLE hardcoded baseline values —
+        // You can change these in the Inspector.
+        customer1.name = "John Miller";
+        customer1.age = 26;
+        customer1.workplace = "City Library";
 
-        // Example hard-coded values (you can also set these in the Inspector)
-        customer1.eyeColor   = "green eyes";
-        customer1.hasPiercing = false; // no piercing
-        customer1.hasBraces   = true;
+        customer2.name = "Charlie Vega";
+        customer2.age = 34;
+        customer2.workplace = "Carpentry Shop";
 
-        customer2.name = "Carol";
-        customer2.age = 63;
-        customer2.workplace = "Schoolbus driver";
-
-        customer3.name = "Victor";
-        customer3.age = 74;
+        customer3.name = "Victor Hale";
+        customer3.age = 67;
         customer3.workplace = "Unknown";
     }
 
-    // --------------------------------------------------------
-    // GENERATE CUSTOMER (called before the scene starts)
-    // --------------------------------------------------------
+    // ----------------------------------------------
+    // GENERATE NEW CUSTOMER
+    // ----------------------------------------------
     public void GenerateNextCustomer()
     {
-        CustomerData template;
+        currentCustomerNumber++;
 
-        // Pick the correct template based on customer #
-        if (currentCustomerNumber == 0)      template = customer1;
-        else if (currentCustomerNumber == 1) template = customer2;
-        else                                 template = customer3;
+        // Clamp to 1–3
+        if (currentCustomerNumber < 1) currentCustomerNumber = 1;
+        if (currentCustomerNumber > 3) currentCustomerNumber = 3;
 
-        // Copy real data
-        currentActual.name = template.name;
-        currentActual.age = template.age;
-        currentActual.workplace = template.workplace;
+        CustomerData source = null;
 
-        // Start with spoken = actual
+        if (currentCustomerNumber == 1)
+            source = customer1;
+        else if (currentCustomerNumber == 2)
+            source = customer2;
+        else if (currentCustomerNumber == 3)
+            source = customer3;
+
+        // Copy true data
+        currentActual.name = source.name;
+        currentActual.age = source.age;
+        currentActual.workplace = source.workplace;
+
+        // Default spoken = truth
         currentSpoken.name = currentActual.name;
         currentSpoken.age = currentActual.age;
         currentSpoken.workplace = currentActual.workplace;
 
-        // --------------------------------------------------------
-        // CUSTOMER 2 MUST LIE AT LEAST ONCE
-        // --------------------------------------------------------
-        if (currentCustomerNumber == 1)
+        // Customer 2 must lie (1 wrong answer)
+        if (currentCustomerNumber == 2)
         {
             MakeCustomerLie();
             currentTruth = CustomerTruthState.Bad;
@@ -111,36 +102,37 @@ public class GameManager : MonoBehaviour
             currentTruth = CustomerTruthState.Good;
         }
 
-        currentCustomerNumber++;
-
-        Debug.Log("Generated customer #" + currentCustomerNumber);
-        Debug.Log("Actual:  " + currentActual.name + ", " + currentActual.age + ", " + currentActual.workplace);
-        Debug.Log("Spoken:  " + currentSpoken.name + ", " + currentSpoken.age + ", " + currentSpoken.workplace);
+        Debug.Log($"GENERATED CUSTOMER {currentCustomerNumber}");
+        Debug.Log($"Actual: {GetActualDescription()}");
+        Debug.Log($"Spoken: {GetPhoneDescription()}");
     }
 
-    // --------------------------------------------------------
-    // FORCE CUSTOMER 2 TO LIE AT LEAST ONCE (Name/Work/Age)
-    // --------------------------------------------------------
+    // ----------------------------------------------
+    // CUSTOMER 2 LIES ABOUT ONE THING
+    // ----------------------------------------------
     private void MakeCustomerLie()
     {
-        int field = Random.Range(0, 3); // 0 = name, 1 = age, 2 = workplace
+        int f = Random.Range(0, 3);
 
-        switch (field)
+        switch (f)
         {
-            case 0:
-                currentSpoken.name = "Victoria";  // wrong last name
+            case 0: // name
+                currentSpoken.name = "Wrong Name";
                 break;
 
-            case 1:
-                currentSpoken.age = currentActual.age + Random.Range(50, 80); // a different age
+            case 1: // workplace
+                currentSpoken.workplace = "Wrong Workplace";
                 break;
 
-            case 2:
-                currentSpoken.workplace = "Schoolbus driver"; // definitely wrong workplace
+            case 2: // age
+                currentSpoken.age = currentActual.age + Random.Range(3, 15);
                 break;
         }
     }
 
+    // ----------------------------------------------
+    // DESCRIPTION HELPERS
+    // ----------------------------------------------
     public string GetPhoneDescription()
     {
         return $"{currentSpoken.name}, Age {currentSpoken.age}, Works at {currentSpoken.workplace}";
@@ -151,8 +143,7 @@ public class GameManager : MonoBehaviour
         return $"{currentActual.name}, Age {currentActual.age}, Works at {currentActual.workplace}";
     }
 
-
-    // ========================== Scene Fade =====================================
+        // ========================== Scene Fade =====================================
     public void FadeToScene(string sceneName)
     {
         StartCoroutine(FadeIn(sceneName));
