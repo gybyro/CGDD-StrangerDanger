@@ -16,7 +16,8 @@ public class SceneTransition : MonoBehaviour
         // Check if the thing entering is the player
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.FadeToScene(sceneNameToLoad);
+            //GameManager.Instance.FadeToScene(sceneNameToLoad);
+            SceneManager.LoadScene(sceneNameToLoad);
         }
     }
 

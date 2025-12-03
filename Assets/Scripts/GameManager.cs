@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+public enum CustomerTruthState { Good, Bad }
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -9,145 +11,139 @@ public class GameManager : MonoBehaviour
     public CanvasGroup fadeGroup;
     public float fadeTime = 1f;
 
-
-
-
-
-
     [System.Serializable]
     public class CustomerData
     {
-        public string eyeColor;   // "green eyes" / "blue eyes"
-        public bool hasPiercing;  // nose piercing
-        public bool hasBraces;
+        public string name;
+        public int age;
+        public string workplace;
     }
 
-    // Actual, fixed info for each customer
+    // Fixed customer data
     public CustomerData customer1 = new CustomerData();
     public CustomerData customer2 = new CustomerData();
     public CustomerData customer3 = new CustomerData();
 
-    // Who we are currently dealing with
-    public CustomerData currentActual = new CustomerData(); // how they really look
-    public CustomerData currentPhone  = new CustomerData(); // what the phone says
+    // Current truth and spoken data
+    public CustomerData currentActual = new CustomerData(); // What customer really is
+    public CustomerData currentSpoken = new CustomerData(); // What customer will SAY
+    public CustomerTruthState currentTruth = CustomerTruthState.Good;
 
-    private int customerIndex = 0; // 0 = first, 1 = second, 2 = third
+    public int currentCustomerNumber = 0; // 1,2,3 meaning which customer we are on
 
     private void Awake()
     {
-        Instance = this;
-        // if (Instance == null)
-        // {
-        //     Instance = this;
-        //     DontDestroyOnLoad(gameObject);
-        // }
-        // else
-        // {
-        //     Destroy(gameObject);
-        //     return;
-        // }
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
     {
-        // Scene Fade
-        fadeGroup.alpha = 0;
+        // EXAMPLE hardcoded baseline values —
+        // You can change these in the Inspector.
+        customer1.name = "John Miller";
+        customer1.age = 26;
+        customer1.workplace = "City Library";
 
-        // Example hard-coded values (you can also set these in the Inspector)
-        customer1.eyeColor   = "green eyes";
-        customer1.hasPiercing = false; // no piercing
-        customer1.hasBraces   = true;
+        customer2.name = "Charlie Vega";
+        customer2.age = 34;
+        customer2.workplace = "Carpentry Shop";
 
-        customer2.eyeColor   = "blue eyes";
-        customer2.hasPiercing = true;
-        customer2.hasBraces   = false;
-
-        customer3.eyeColor   = "green eyes";
-        customer3.hasPiercing = false;
-        customer3.hasBraces   = false;
+        customer3.name = "Victor Hale";
+        customer3.age = 67;
+        customer3.workplace = "Unknown";
     }
 
-    /// <summary>
-    /// Call this before showing the phone text for each new customer.
-    /// 1st: phone matches actual
-    /// 2nd: phone is slightly wrong
-    /// 3rd: phone matches actual
-    /// </summary>
+    // ----------------------------------------------
+    // GENERATE NEW CUSTOMER
+    // ----------------------------------------------
     public void GenerateNextCustomer()
     {
-        CustomerData template;
+        currentCustomerNumber++;
 
-        if (customerIndex == 0)
-            template = customer1;
-        else if (customerIndex == 1)
-            template = customer2;
+        // Clamp to 1–3
+        if (currentCustomerNumber < 1) currentCustomerNumber = 1;
+        if (currentCustomerNumber > 3) currentCustomerNumber = 3;
+
+        CustomerData source = null;
+
+        if (currentCustomerNumber == 1)
+            source = customer1;
+        else if (currentCustomerNumber == 2)
+            source = customer2;
+        else if (currentCustomerNumber == 3)
+            source = customer3;
+
+        // Copy true data
+        currentActual.name = source.name;
+        currentActual.age = source.age;
+        currentActual.workplace = source.workplace;
+
+        // Default spoken = truth
+        currentSpoken.name = currentActual.name;
+        currentSpoken.age = currentActual.age;
+        currentSpoken.workplace = currentActual.workplace;
+
+        // Customer 2 must lie (1 wrong answer)
+        if (currentCustomerNumber == 2)
+        {
+            MakeCustomerLie();
+            currentTruth = CustomerTruthState.Bad;
+        }
         else
-            template = customer3;
-
-        // Copy template into "actual"
-        currentActual.eyeColor   = template.eyeColor;
-        currentActual.hasPiercing = template.hasPiercing;
-        currentActual.hasBraces   = template.hasBraces;
-
-        // By default, phone info matches actual
-        currentPhone.eyeColor   = currentActual.eyeColor;
-        currentPhone.hasPiercing = currentActual.hasPiercing;
-        currentPhone.hasBraces   = currentActual.hasBraces;
-
-        // If this is the second customer, we make the phone info wrong
-        if (customerIndex == 1)
         {
-            MakePhoneInfoSlightlyWrong();
+            currentTruth = CustomerTruthState.Good;
         }
 
-        Debug.Log($"Customer #{customerIndex + 1}");
-        Debug.Log($"Phone:  {GetPhoneDescription()}");
+        Debug.Log($"GENERATED CUSTOMER {currentCustomerNumber}");
         Debug.Log($"Actual: {GetActualDescription()}");
-
-        customerIndex++;
+        Debug.Log($"Spoken: {GetPhoneDescription()}");
     }
 
-    private void MakePhoneInfoSlightlyWrong()
+    // ----------------------------------------------
+    // CUSTOMER 2 LIES ABOUT ONE THING
+    // ----------------------------------------------
+    private void MakeCustomerLie()
     {
-        // Change ONE thing to be wrong
-        int fieldToChange = Random.Range(0, 3); // 0 = eyes, 1 = piercing, 2 = braces
+        int f = Random.Range(0, 3);
 
-        switch (fieldToChange)
+        switch (f)
         {
-            case 0: // eyes
-                currentPhone.eyeColor = (currentActual.eyeColor == "green eyes")
-                    ? "blue eyes"
-                    : "green eyes";
+            case 0: // name
+                currentSpoken.name = "Wrong Name";
                 break;
 
-            case 1: // piercing
-                currentPhone.hasPiercing = !currentActual.hasPiercing;
+            case 1: // workplace
+                currentSpoken.workplace = "Wrong Workplace";
                 break;
 
-            case 2: // braces
-                currentPhone.hasBraces = !currentActual.hasBraces;
+            case 2: // age
+                currentSpoken.age = currentActual.age + Random.Range(3, 15);
                 break;
         }
     }
 
+    // ----------------------------------------------
+    // DESCRIPTION HELPERS
+    // ----------------------------------------------
     public string GetPhoneDescription()
     {
-        string piercingText = currentPhone.hasPiercing ? "nose piercing" : "no nose piercing";
-        string bracesText   = currentPhone.hasBraces   ? "braces"       : "no braces";
-
-        return $"{currentPhone.eyeColor}, {piercingText}, {bracesText}";
+        return $"{currentSpoken.name}, Age {currentSpoken.age}, Works at {currentSpoken.workplace}";
     }
 
     public string GetActualDescription()
     {
-        string piercingText = currentActual.hasPiercing ? "nose piercing" : "no nose piercing";
-        string bracesText   = currentActual.hasBraces   ? "braces"        : "no braces";
-
-        return $"{currentActual.eyeColor}, {piercingText}, {bracesText}";
+        return $"{currentActual.name}, Age {currentActual.age}, Works at {currentActual.workplace}";
     }
 
-
-    // ========================== Scene Fade =====================================
+        // ========================== Scene Fade =====================================
     public void FadeToScene(string sceneName)
     {
         StartCoroutine(FadeIn(sceneName));

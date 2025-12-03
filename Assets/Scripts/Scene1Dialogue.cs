@@ -1,196 +1,377 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
-using UnityEngine.InputSystem;
+using System.Collections;
 
+public class Scene1Dialogue : MonoBehaviour
+{
+    public int primeInt = 1;
 
-public class Scene1Dialogue : MonoBehaviour {
-// These are the script variables.
-// For more character images / buttons, copy & renumber the variables:
-        public int primeInt = 1;        // This integer drives game progress!
-        public TMP_Text Char1name;
-        public TMP_Text Char1speech;
-        public TMP_Text Char2name;
-        public TMP_Text Char2speech;
-       //public TMP_Text Char3name;
-       //public TMP_Text Char3speech;
-        public GameObject DialogueDisplay;
-        public GameObject ArtChar1a;
-       //public GameObject ArtChar1b;
-       //public GameObject ArtChar1c;
-       //public GameObject ArtChar2;
-        public GameObject ArtBG1;
-        public GameObject Choice1a;
-        public GameObject Choice1b;
-        public TMP_Text Choice1aText;
-        public TMP_Text Choice1bText;
-        public GameObject NextScene1Button;
-        public GameObject NextScene2Button;
-        public GameObject nextButton;
-       //public AudioSource audioSource1;
-        //private bool allowSpace = true;
+    public TMP_Text Char2name;
+    public TMP_Text Char2speech;
 
-       
+    public GameObject DialogueDisplay;
+    public GameObject JohnCustomer;
+    public GameObject VictoriaCustomer;
 
-// Set initial visibility. Added images or buttons need to also be SetActive(false);
-        void Start(){  
-             DialogueDisplay.SetActive(false);
-             ArtChar1a.SetActive(false);
-             ArtBG1.SetActive(true);
-             Choice1a.SetActive(false);
-             Choice1b.SetActive(false);
-             NextScene1Button.SetActive(false);
-             NextScene2Button.SetActive(false);
-             nextButton.SetActive(true);
-        }
+    public GameObject DoorOpen;
+    public GameObject DoorClosed;
+    public GameObject ArtBG1;
 
-// Use the spacebar as a faster "Next" button:
-        // void Update(){        
-        //      if (allowSpace == true){
-        //          if (Input.GetKeyDown("space")){
-        //               Next();
-        //          }
+    // Question buttons
+    public GameObject ChoiceNameButton;
+    public GameObject ChoiceWorkButton;
+    public GameObject ChoiceAgeButton;
 
-        //          // secret debug code: go back 1 Story Unit, if NEXT is visible
-        //          if (Input.GetKeyDown("p")) {
-        //               primeInt -= 2;
-        //               Next();
-        //          }
-        //      }
-        // }
+    public TMP_Text ChoiceNameText;
+    public TMP_Text ChoiceWorkText;
+    public TMP_Text ChoiceAgeText;
 
-//Story Units! The main story function.
-//Players hit [NEXT] to progress to the next primeInt:
-public void Next(){
-        primeInt += 1;
-        if (primeInt == 1){
-                // audioSource1.Play();
-        }
-        else if (primeInt == 2){
-                ArtChar1a.SetActive(true);
-                DialogueDisplay.SetActive(true);
-                Char1name.text = "";
-                Char1speech.text = "";
-                Char2name.text = "Jeda";
-                Char2speech.text = "Wakey wakey, human.";
-        }
-       else if (primeInt ==3){
-                Char1name.text = "YOU";
-                Char1speech.text = "Wuh..? What happened?";
-                Char2name.text = "";
-                Char2speech.text = "";
-                //gameHandler.AddPlayerStat(1);
-        }
-       else if (primeInt == 4){
-                Char1name.text = "";
-                Char1speech.text = "";
-                Char2name.text = "Jeda";
-                Char2speech.text = "I know I did not hit you that hard.";
-        }
-       else if (primeInt == 5){
-                Char1name.text = "YOU";
-                Char1speech.text = "Hit me? Why?";
-                Char2name.text = "";
-                Char2speech.text = "";
-        }
-       else if (primeInt == 6){
-                Char1name.text = "";
-                Char1speech.text = "";
-                Char2name.text = "Jeda";
-                Char2speech.text = "I am searching for a fugitive. Ragu Fahn.";
-        }
-       else if (primeInt ==7){
-                Char1name.text = "YOU";
-                Char1speech.text = "Why do you think I know anything?";
-                Char2name.text = "";
-                Char2speech.text = "";
-        }
-       else if (primeInt == 8){
-                Char1name.text = "";
-                Char1speech.text = "";
-                Char2name.text = "Jeda";
-                Char2speech.text = "Do not play the stupid. You will take me to him.";
-                // Turn off the "Next" button, turn on "Choice" buttons
-                nextButton.SetActive(false);
-                //allowSpace = false;
-                Choice1a.SetActive(true); // function Choice1aFunct()
-                Choice1b.SetActive(true); // function Choice1bFunct()
-                Choice1aText.text = "I don't know what you're talking about!";
-                Choice1bText.text = "Sure, anything you want... just lay off the club.";
+    // Stay/Leave buttons
+    public GameObject StayButton;
+    public GameObject LeaveButton;
+
+    public GameObject nextButton;
+
+    // Question tracking
+    private bool askedName = false;
+    private bool askedWork = false;
+    private bool askedAge = false;
+    private int questionsAsked = 0;
+
+    // Which customer we're dealing with
+    private bool isCustomer2 = false;
+    private bool isCustomer3 = false;
+
+    // Customer data (pulled from GameManager)
+    private string cName;
+    private int cAge;
+    private string cWork;
+
+    private string c3FirstName;
+    private string c3FakeLastName;
+
+    // Scenes to load
+    public string BackToWalkingScene;   // when you stay
+    public string leaveSceneName;       // when you leave
+
+    void Start()
+    {
+        // Basic null-safety: if there is no GameManager, stop this script
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("Scene1Dialogue: No GameManager.Instance found in scene!");
+            enabled = false;
+            return;
         }
 
-       // after choice 1a
-       else if (primeInt == 20){
-                //gameHandler.AddPlayerStat(1);
-                Char1name.text = "";
-                Char1speech.text = "";
-                Char2name.text = "Jeda";
-                Char2speech.text = "Then you are no use to me, and must be silenced.";
+        DialogueDisplay.SetActive(false);
+        DoorOpen.SetActive(true);
+        DoorClosed.SetActive(false);
+
+        JohnCustomer.SetActive(false);
+        VictoriaCustomer.SetActive(false);
+
+        ArtBG1.SetActive(true);
+
+        ChoiceNameButton.SetActive(false);
+        ChoiceWorkButton.SetActive(false);
+        ChoiceAgeButton.SetActive(false);
+
+        StayButton.SetActive(false);
+        LeaveButton.SetActive(false);
+
+        nextButton.SetActive(true);
+
+        // Only generate if no customer has been generated yet
+        if (GameManager.Instance.currentCustomerNumber == 0)
+            GameManager.Instance.GenerateNextCustomer();
+
+        LoadCustomerData();
+    }
+
+    private void LoadCustomerData()
+    {
+        int num = GameManager.Instance.currentCustomerNumber;
+
+        isCustomer2 = (num == 2);
+        isCustomer3 = (num == 3);
+
+        if (isCustomer2)
+        {
+            // Customer 2 uses possibly wrong spoken data
+            cName = GameManager.Instance.currentSpoken.name;
+            cAge = GameManager.Instance.currentSpoken.age;
+            cWork = GameManager.Instance.currentSpoken.workplace;
         }
-       else if (primeInt == 21){
-                Char1name.text = "";
-                Char1speech.text = "";
-                Char2name.text = "Jeda";
-                Char2speech.text = "Come back here! Do not think you can hide from me!";
-                // Turn off the "Next" button, turn on "Scene" button/s
-                nextButton.SetActive(false);
-                //allowSpace = false;
-                NextScene1Button.SetActive(true);
+        else if (isCustomer3)
+        {
+            var a = GameManager.Instance.currentActual;
+
+            string[] parts = a.name.Split(' ');
+            c3FirstName = parts.Length > 0 ? parts[0] : "Unknown";
+            c3FakeLastName = (parts.Length > 1 ? parts[1] : "Lastname") + "son";
+
+            cName = a.name;
+            cAge = a.age;
+            cWork = a.workplace;
+        }
+        else
+        {
+            // Customer 1 – correct data
+            var a = GameManager.Instance.currentActual;
+            cName = a.name;
+            cAge = a.age;
+            cWork = a.workplace;
         }
 
-       // after choice 1b
-       else if (primeInt == 30){
-                Char1name.text = "";
-                Char1speech.text = "";
-                Char2name.text = "Jeda";
-                Char2speech.text = "Do not think you can fool me, human. Where will we find him?";
-        }
-       else if (primeInt == 31){
-                Char1name.text = "YOU";
-                Char1speech.text = "Ragu hangs out in a rough part of town. I'll take you now.";
-                Char2name.text = "";
-                Char2speech.text = "";
-                // Turn off the "Next" button, turn on "Scene" button/s
-                nextButton.SetActive(false);
-                //allowSpace = false;
-                NextScene2Button.SetActive(true);
+        Debug.Log($"Loaded data: name={cName}, age={cAge}, work={cWork}, is2={isCustomer2}, is3={isCustomer3}");
+    }
+
+    public void Next()
+    {
+        // If we just showed an answer, Next should go to question/tip logic
+        if (primeInt == 101 || primeInt == 201 || primeInt == 301)
+        {
+            nextButton.SetActive(false);
+            AfterAnswer();
+            return;
         }
 
-      //Please do NOT delete this final bracket that ends the Next() function:
-     }
+        primeInt++;
 
-// FUNCTIONS FOR BUTTONS TO ACCESS (Choice #1 and SceneChanges)
-        public void Choice1aFunct(){
-                Char1name.text = "YOU";
-                Char1speech.text = "I don't know what you're talking about!";
-                Char2name.text = "";
-                Char2speech.text = "";
-                primeInt = 19; // so hitting "NEXT" goes to primeInt==20!
-                Choice1a.SetActive(false);
-                Choice1b.SetActive(false);
-                nextButton.SetActive(true);
-                //allowSpace = true;
+        Char2name.text = "Customer";
+        Char2speech.text = "";
+
+        if (primeInt == 2)
+        {
+            DialogueDisplay.SetActive(true);
+            DoorOpen.SetActive(false);
+            DoorClosed.SetActive(true);
+
+            // pick which sprite to show
+            if (!isCustomer2 && !isCustomer3)
+            {
+                JohnCustomer.SetActive(true);
+            }
+            else if (isCustomer2)
+            {
+                // TODO: add customer 2 sprite here when you have one
+                JohnCustomer.SetActive(true); // temp
+            }
+            else if (isCustomer3)
+            {
+                VictoriaCustomer.SetActive(true);
+            }
+
+            if (!isCustomer2 && !isCustomer3)
+                Char2speech.text = "Hey, you must be the delivery driver.";
+            else if (isCustomer2)
+                Char2speech.text = "Heyyy, pizza is here!";
+            else
+                Char2speech.text = "You're late.";
         }
-        public void Choice1bFunct(){
-                Char1name.text = "YOU";
-                Char1speech.text = "Sure, anything you want... just lay off the club.";
-                Char2name.text = "";
-                Char2speech.text = "";
-                primeInt = 29; // so hitting "NEXT" goes to primeInt==30!
-                Choice1a.SetActive(false);
-                Choice1b.SetActive(false);
-                nextButton.SetActive(true);
-                //allowSpace = true;
+        else if (primeInt == 3)
+        {
+            if (!isCustomer2 && !isCustomer3)
+                Char2speech.text = "Man, I'm so hungry.";
+            else if (isCustomer2)
+                Char2speech.text = "Whoa, you were fast.";
+            else
+                Char2speech.text = "I am an important man, and I require my pizzas on time.";
+        }
+        else if (primeInt == 4)
+        {
+            if (!isCustomer2 && !isCustomer3)
+                Char2speech.text = "Now give me the pizza.";
+            else if (isCustomer2)
+                Char2speech.text = "Now hurry and give me the pizza.";
+            else
+                Char2speech.text = "Give me the pizza now.";
+        }
+        else if (primeInt == 5)
+        {
+            nextButton.SetActive(false);
+            ShowRemainingQuestions();
+        }
+        else if (primeInt == 600)
+        {
+            // TIP LINE AFTER SECOND QUESTION
+            if (!isCustomer2 && !isCustomer3)
+                Char2speech.text = "If you stay a little longer, I can go get a tip for you.";
+            else if (isCustomer2)
+                Char2speech.text = "Wait here while I get a tip for you.";
+            else
+                Char2speech.text = "I will retrieve the money and tip. Stay there.";
+
+            nextButton.SetActive(false);
+            StayButton.SetActive(true);
+            LeaveButton.SetActive(true);
+        }
+    }
+
+    private void ShowRemainingQuestions()
+    {
+        ChoiceNameButton.SetActive(!askedName);
+        ChoiceWorkButton.SetActive(!askedWork);
+        ChoiceAgeButton.SetActive(!askedAge);
+
+        ChoiceNameText.text = "What is your name?";
+        ChoiceWorkText.text = "Where do you work?";
+        ChoiceAgeText.text = "How old are you?";
+    }
+
+    // ------------------------------
+    // QUESTION BUTTONS
+    // ------------------------------
+    public void OnAskName()
+    {
+        askedName = true;
+        questionsAsked++;
+
+        DisableQuestions();
+        nextButton.SetActive(true);
+
+        primeInt = 100;
+    }
+
+    public void OnAskWork()
+    {
+        askedWork = true;
+        questionsAsked++;
+
+        DisableQuestions();
+        nextButton.SetActive(true);
+
+        primeInt = 200;
+    }
+
+    public void OnAskAge()
+    {
+        askedAge = true;
+        questionsAsked++;
+
+        DisableQuestions();
+        nextButton.SetActive(true);
+
+        primeInt = 300;
+    }
+
+    private void DisableQuestions()
+    {
+        ChoiceNameButton.SetActive(false);
+        ChoiceWorkButton.SetActive(false);
+        ChoiceAgeButton.SetActive(false);
+    }
+
+    // ------------------------------
+    // ANSWER HANDLING
+    // ------------------------------
+    void Update()
+    {
+        // NAME ANSWER
+        if (primeInt == 100)
+        {
+            if (!isCustomer3)
+                Char2speech.text = $"My name? It's {cName}.";
+            else
+                Char2speech.text = $"My name is {c3FirstName} {c3FakeLastName}.";
+
+            primeInt = 101;
         }
 
-        public void SceneChange1(){
-               SceneManager.LoadScene("Scene2a");
+        // WORK ANSWER
+        if (primeInt == 200)
+        {
+            if (!isCustomer3)
+                Char2speech.text = $"I work at {cWork}.";
+            else
+                Char2speech.text = "I am an important man, and my work is important.";
+
+            primeInt = 201;
         }
-        public void SceneChange2(){
-                SceneManager.LoadScene("Scene2b");
+
+        // AGE ANSWER
+        if (primeInt == 300)
+        {
+            if (!isCustomer3)
+                Char2speech.text = $"I'm {cAge}.";
+            else
+                Char2speech.text = "How dare you ask my age? I'm old.";
+
+            primeInt = 301;
         }
+
+        // TIP LINE extra guard: if something set primeInt to 600, ensure we show tip once
+        if (primeInt == 600)
+        {
+            if (!isCustomer2 && !isCustomer3)
+                Char2speech.text = "If you stay a little longer, I can go get a tip for you.";
+            else if (isCustomer2)
+                Char2speech.text = "Wait here while I get a tip for you.";
+            else
+                Char2speech.text = "I will retrieve the money and tip. Stay there.";
+
+            StayButton.SetActive(true);
+            LeaveButton.SetActive(true);
+            nextButton.SetActive(false);
+            primeInt = 601; // prevent repeat
+        }
+    }
+
+    private void AfterAnswer()
+    {
+        if (questionsAsked < 2)
+        {
+            ShowRemainingQuestions();
+            return;
+        }
+
+        // After 2 questions → go to the tip flow
+        primeInt = 600;
+    }
+
+    // ------------------------------
+    // ENDING – STAY / LEAVE
+    // ------------------------------
+    public void OnStay()
+    {
+        StayButton.SetActive(false);
+        LeaveButton.SetActive(false);
+        nextButton.SetActive(false);
+
+        Char2name.text = "Customer";
+
+        if (GameManager.Instance.currentTruth == CustomerTruthState.Bad)
+        {
+            Char2speech.text = "Customer was BAD.";
+            if (!string.IsNullOrEmpty(BackToWalkingScene))
+                StartCoroutine(WaitAndLoadScene(BackToWalkingScene));
+        }
+        else
+        {
+            Char2speech.text = "Customer was GOOD.";
+            if (!string.IsNullOrEmpty(BackToWalkingScene))
+                StartCoroutine(WaitAndLoadScene(BackToWalkingScene));
+        }
+    }
+
+    public void OnLeave()
+    {
+        StayButton.SetActive(false);
+        LeaveButton.SetActive(false);
+        nextButton.SetActive(false);
+
+        Char2name.text = "Customer";
+        Char2speech.text = "You left.";
+
+        if (!string.IsNullOrEmpty(leaveSceneName))
+            StartCoroutine(WaitAndLoadScene(leaveSceneName));
+    }
+
+    private IEnumerator WaitAndLoadScene(string sceneName)
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(sceneName);
+    }
 }
