@@ -3,17 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-    public string toLoad;
-
+    public string sceneNameToLoad;
+    
     public void LoadScene()
     {
-        SceneManager.LoadScene(toLoad);
-        Debug.Log($"Scene {toLoad} loaded");
+        SceneManager.LoadScene(sceneNameToLoad);
+        Debug.Log($"Scene {sceneNameToLoad} loaded");
     }
-    public void LoadScene(string sceneName)
+
+    private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene(sceneName);
-        Debug.Log($"Scene {sceneName} loaded");
+        // Check if the thing entering is the player
+        if (other.CompareTag("Player"))
+        {
+            GameManager.Instance.FadeToScene(sceneNameToLoad);
+        }
     }
 
     public void Quit()

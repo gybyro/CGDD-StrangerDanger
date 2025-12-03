@@ -50,21 +50,17 @@ public class HeadBopScript : MonoBehaviour
             Amount = 0.05f;
             Frequancy = 10.0f;
             Smooth = 10.0f;
+
+            if (playerInput.sprint) Frequancy = 20.0f;
         }
         else
         {
             playerIsWalking = false;
 
             // your “idle” feel
-            Amount = 0.02f;
-            Frequancy = 3.0f;
-            Smooth = 5.0f;
-        }
-
-        // ---- Sprint (same idea as old LeftShift, but new system) ----
-        if (playerInput.sprint && isMoving)
-        {
-            Frequancy = 20.0f;
+            // Amount = 0.02f;
+            // Frequancy = 3.0f;
+            // Smooth = 5.0f;
         }
 
         ApplyHeadBop();
@@ -72,6 +68,22 @@ public class HeadBopScript : MonoBehaviour
 
     private void ApplyHeadBop()
     {
+        // --- NO BOB IF NOT MOVING --- 
+        Vector2 move = playerInput.move;
+        bool isMoving = move.sqrMagnitude > 0.01f;
+
+        if (!isMoving)
+        {
+            // Smoothly reset to the exact start position when NOT moving
+            transform.localPosition = Vector3.Lerp(
+                transform.localPosition,
+                startPos,
+                Smooth * Time.deltaTime
+            );
+            return;
+        }
+
+        // --- ONLY BOB IF MOVING ---
         float sin = Mathf.Sin(Time.time * Frequancy);
         float cos = Mathf.Cos(Time.time * (Frequancy / 2f));
 

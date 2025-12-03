@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public enum CustomerTruthState
 {
@@ -9,6 +11,14 @@ public enum CustomerTruthState
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    public CanvasGroup fadeGroup;
+    public float fadeTime = 1f;
+
+
+
+
+
 
     [System.Serializable]
     public class CustomerData
@@ -43,15 +53,19 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
     }
 
     private void Start()
     {
-        // Example data — replace with your real customers later
-        customer1.name = "John";
-        customer1.age = 22;
-        customer1.workplace = "GooseMart";
+        // Scene Fade
+        fadeGroup.alpha = 0;
+
+        // Example hard-coded values (you can also set these in the Inspector)
+        customer1.eyeColor   = "green eyes";
+        customer1.hasPiercing = false; // no piercing
+        customer1.hasBraces   = true;
 
         customer2.name = "Carol";
         customer2.age = 63;
@@ -137,4 +151,39 @@ public class GameManager : MonoBehaviour
         return $"{currentActual.name}, Age {currentActual.age}, Works at {currentActual.workplace}";
     }
 
+
+    // ========================== Scene Fade =====================================
+    public void FadeToScene(string sceneName)
+    {
+        StartCoroutine(FadeIn(sceneName));
+    }
+
+    IEnumerator FadeIn(string sceneName)
+    {
+        float t = 0;
+
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+            fadeGroup.alpha = t / fadeTime;
+            yield return null;
+        }
+
+        SceneManager.LoadScene(sceneName);
+
+        // Now fade out after the scene loads
+        yield return StartCoroutine(FadeOut());
+    }
+
+    IEnumerator FadeOut()
+    {
+        float t = 0;
+
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+            fadeGroup.alpha = 1 - (t / fadeTime);
+            yield return null;
+        }
+    }
 }
