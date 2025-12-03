@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "StrangerDanger.slnx"
+    "dotnet.defaultSolution": "CGDD-StrangerDanger.slnx"
 }
