@@ -1,5 +1,11 @@
 using UnityEngine;
 
+public enum CustomerTruthState
+{
+    Good,
+    Bad
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -7,21 +13,25 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     public class CustomerData
     {
-        public string eyeColor;   // "green eyes" / "blue eyes"
-        public bool hasPiercing;  // nose piercing
-        public bool hasBraces;
+        public string name;
+        public int age;
+        public string workplace;
     }
 
-    // Actual, fixed info for each customer
+    // Customer templates (always correct)
     public CustomerData customer1 = new CustomerData();
     public CustomerData customer2 = new CustomerData();
     public CustomerData customer3 = new CustomerData();
 
-    // Who we are currently dealing with
-    public CustomerData currentActual = new CustomerData(); // how they really look
-    public CustomerData currentPhone  = new CustomerData(); // what the phone says
+    // Active customer data
+    public CustomerData currentActual = new CustomerData(); // Real correct data
+    public CustomerData currentSpoken = new CustomerData(); // What customer says (may be wrong)
 
-    private int customerIndex = 0; // 0 = first, 1 = second, 2 = third
+    // Truth state for “Customer was GOOD/BAD”
+    public CustomerTruthState currentTruth;
+
+    // Tracks which customer you are on (1,2,3)
+    public int currentCustomerNumber = 0;
 
     private void Awake()
     {
@@ -38,96 +48,93 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Example hard-coded values (you can also set these in the Inspector)
-        customer1.eyeColor   = "green eyes";
-        customer1.hasPiercing = false; // no piercing
-        customer1.hasBraces   = true;
+        // Example data — replace with your real customers later
+        customer1.name = "John";
+        customer1.age = 22;
+        customer1.workplace = "GooseMart";
 
-        customer2.eyeColor   = "blue eyes";
-        customer2.hasPiercing = true;
-        customer2.hasBraces   = false;
+        customer2.name = "Carol";
+        customer2.age = 63;
+        customer2.workplace = "Schoolbus driver";
 
-        customer3.eyeColor   = "green eyes";
-        customer3.hasPiercing = false;
-        customer3.hasBraces   = false;
+        customer3.name = "Victor";
+        customer3.age = 74;
+        customer3.workplace = "Unknown";
     }
 
-    /// <summary>
-    /// Call this before showing the phone text for each new customer.
-    /// 1st: phone matches actual
-    /// 2nd: phone is slightly wrong
-    /// 3rd: phone matches actual
-    /// </summary>
+    // --------------------------------------------------------
+    // GENERATE CUSTOMER (called before the scene starts)
+    // --------------------------------------------------------
     public void GenerateNextCustomer()
     {
         CustomerData template;
 
-        if (customerIndex == 0)
-            template = customer1;
-        else if (customerIndex == 1)
-            template = customer2;
-        else
-            template = customer3;
+        // Pick the correct template based on customer #
+        if (currentCustomerNumber == 0)      template = customer1;
+        else if (currentCustomerNumber == 1) template = customer2;
+        else                                 template = customer3;
 
-        // Copy template into "actual"
-        currentActual.eyeColor   = template.eyeColor;
-        currentActual.hasPiercing = template.hasPiercing;
-        currentActual.hasBraces   = template.hasBraces;
+        // Copy real data
+        currentActual.name = template.name;
+        currentActual.age = template.age;
+        currentActual.workplace = template.workplace;
 
-        // By default, phone info matches actual
-        currentPhone.eyeColor   = currentActual.eyeColor;
-        currentPhone.hasPiercing = currentActual.hasPiercing;
-        currentPhone.hasBraces   = currentActual.hasBraces;
+        // Start with spoken = actual
+        currentSpoken.name = currentActual.name;
+        currentSpoken.age = currentActual.age;
+        currentSpoken.workplace = currentActual.workplace;
 
-        // If this is the second customer, we make the phone info wrong
-        if (customerIndex == 1)
+        // --------------------------------------------------------
+        // CUSTOMER 2 MUST LIE AT LEAST ONCE
+        // --------------------------------------------------------
+        if (currentCustomerNumber == 1)
         {
-            MakePhoneInfoSlightlyWrong();
+            MakeCustomerLie();
+            currentTruth = CustomerTruthState.Bad;
+        }
+        else
+        {
+            currentTruth = CustomerTruthState.Good;
         }
 
-        Debug.Log($"Customer #{customerIndex + 1}");
-        Debug.Log($"Phone:  {GetPhoneDescription()}");
-        Debug.Log($"Actual: {GetActualDescription()}");
+        currentCustomerNumber++;
 
-        customerIndex++;
+        Debug.Log("Generated customer #" + currentCustomerNumber);
+        Debug.Log("Actual:  " + currentActual.name + ", " + currentActual.age + ", " + currentActual.workplace);
+        Debug.Log("Spoken:  " + currentSpoken.name + ", " + currentSpoken.age + ", " + currentSpoken.workplace);
     }
 
-    private void MakePhoneInfoSlightlyWrong()
+    // --------------------------------------------------------
+    // FORCE CUSTOMER 2 TO LIE AT LEAST ONCE (Name/Work/Age)
+    // --------------------------------------------------------
+    private void MakeCustomerLie()
     {
-        // Change ONE thing to be wrong
-        int fieldToChange = Random.Range(0, 3); // 0 = eyes, 1 = piercing, 2 = braces
+        int field = Random.Range(0, 3); // 0 = name, 1 = age, 2 = workplace
 
-        switch (fieldToChange)
+        switch (field)
         {
-            case 0: // eyes
-                currentPhone.eyeColor = (currentActual.eyeColor == "green eyes")
-                    ? "blue eyes"
-                    : "green eyes";
+            case 0:
+                currentSpoken.name = "Victoria";  // wrong last name
                 break;
 
-            case 1: // piercing
-                currentPhone.hasPiercing = !currentActual.hasPiercing;
+            case 1:
+                currentSpoken.age = currentActual.age + Random.Range(50, 80); // a different age
                 break;
 
-            case 2: // braces
-                currentPhone.hasBraces = !currentActual.hasBraces;
+            case 2:
+                currentSpoken.workplace = "Schoolbus driver"; // definitely wrong workplace
                 break;
         }
     }
 
     public string GetPhoneDescription()
     {
-        string piercingText = currentPhone.hasPiercing ? "nose piercing" : "no nose piercing";
-        string bracesText   = currentPhone.hasBraces   ? "braces"       : "no braces";
-
-        return $"{currentPhone.eyeColor}, {piercingText}, {bracesText}";
+        return $"{currentSpoken.name}, Age {currentSpoken.age}, Works at {currentSpoken.workplace}";
     }
 
     public string GetActualDescription()
     {
-        string piercingText = currentActual.hasPiercing ? "nose piercing" : "no nose piercing";
-        string bracesText   = currentActual.hasBraces   ? "braces"        : "no braces";
-
-        return $"{currentActual.eyeColor}, {piercingText}, {bracesText}";
+        return $"{currentActual.name}, Age {currentActual.age}, Works at {currentActual.workplace}";
     }
+
 }
