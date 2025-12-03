@@ -174,7 +174,7 @@ namespace StarterAssets
 
 		private void Move()
 		{
-			Debug.Log("Move input: " + _input.move + " | sprint: " + _input.sprint);
+			//Debug.Log("Move input: " + _input.move + " | sprint: " + _input.sprint);
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 

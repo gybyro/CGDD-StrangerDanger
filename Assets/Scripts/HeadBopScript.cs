@@ -1,97 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;   // <- THIS is important
 
 public class HeadBopScript : MonoBehaviour
 {
-    [Range(0.001f, 0.01f)]
-    public float Amount = 1f;
+    [Header("Bob settings")]
+    [Range(0f, 0.5f)]
+    public float Amount = 0.05f;
     [Range(1f, 30f)]
     public float Frequancy = 10.0f;
-    [Range(10f, 100f)]
-    public float Smooth = 40.0f;
+    [Range(0f, 20f)]
+    public float Smooth = 10.0f;
 
-    public int rotationSpeed = 180; 
+    public int rotationSpeed = 180;
     public int speed = 0;
 
     public bool playerIsWalking = false;
 
+    // Instead of Input.GetKey we use this:
+    [Header("References")]
+    public StarterAssetsInputs playerInput;   // drag PlayerCapsule here
+
+    private Vector3 startPos;
+
     void Start()
     {
-        //StartPos = transform.localPosition;
+        startPos = transform.localPosition;
     }
 
     void Update()
     {
-        //Debug.Log("Update");
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (playerInput == null)
+        {
+            // If you see this in the console, you forgot to assign PlayerCapsule
+            //Debug.LogWarning("HeadBopScript: playerInput is NOT assigned!");
+            return;
+        }
+
+        // ---- OLD 'is moving' check, but using new input ----
+        Vector2 move = playerInput.move;
+        bool isMoving = move.sqrMagnitude > 0.01f;
+
+        if (isMoving)
         {
             playerIsWalking = true;
-            //Debug.Log("Hello KeyDown");
 
-            Amount = 1f;
+            // your “walking” feel
+            Amount = 0.05f;
             Frequancy = 10.0f;
-            Smooth = 0.40f;
-
-        } 
-        
+            Smooth = 10.0f;
+        }
         else
-
         {
             playerIsWalking = false;
-            //Debug.Log("CUUHHHH");
-            
-            Amount = 0.3f;
+
+            // your “idle” feel
+            Amount = 0.02f;
             Frequancy = 3.0f;
-            Smooth = 0.5f;
-            StartHeadBop();
-
-
-
+            Smooth = 5.0f;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        // ---- Sprint (same idea as old LeftShift, but new system) ----
+        if (playerInput.sprint && isMoving)
         {
             Frequancy = 20.0f;
-        } 
-        
-        else
-        
-        {
-            Frequancy = 10.0f;
         }
 
-        if(playerIsWalking)
-        {
-            StartHeadBop();
-        }
-        
-        //CheckForHeadbopTrigger();
+        ApplyHeadBop();
     }
 
-    //private void CheckForHeadbopTrigger()
-    //{
-        //if gameManager segir að player ma  byrja að labba 
-        //StartHeadBop();
-        
-    //}
-
-    private Vector3 StartHeadBop()
+    private void ApplyHeadBop()
     {
-        Vector3 pos = Vector3.zero;
-        pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * Frequancy) * Amount * 1.4f, Smooth * Time.deltaTime);
-        pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * Frequancy / 2f) * Amount * 1.6f, Smooth * Time.deltaTime);
-        transform.localPosition += pos;
+        float sin = Mathf.Sin(Time.time * Frequancy);
+        float cos = Mathf.Cos(Time.time * (Frequancy / 2f));
 
-        return pos;
+        Vector3 offset = Vector3.zero;
+        offset.y = sin * Amount * 1.4f;
+        offset.x = cos * Amount * 1.6f;
+
+        Vector3 targetPos = startPos + offset;
+
+        // smooth movement, like your old Smooth variable
+        transform.localPosition = Vector3.Lerp(
+            transform.localPosition,
+            targetPos,
+            Smooth * Time.deltaTime
+        );
     }
 
     private void StopHeadBop()
     {
-        //ef player snertir PlayerTrigger á husinu. þa stop
+        // you can snap back if you ever need to:
+        // transform.localPosition = startPos;
     }
 }
-
-
-    
-
