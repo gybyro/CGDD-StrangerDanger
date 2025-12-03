@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c23f8e567668b47aca8637e22860d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
-  toLoad: WalkingScene
+  sceneNameToLoad: WalkingScene
 --- !u!114 &77891871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1557,6 +1557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ea573bbff96f747a0194e135a51ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  fadeGroup: {fileID: 0}
+  fadeTime: 1
   customer1:
     eyeColor: 
     hasPiercing: 0
