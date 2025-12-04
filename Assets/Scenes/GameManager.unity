@@ -163,8 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ea573bbff96f747a0194e135a51ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  fadeGroup: {fileID: 0}
-  fadeTime: 0.2
   customer1:
     name: 
     age: 0
