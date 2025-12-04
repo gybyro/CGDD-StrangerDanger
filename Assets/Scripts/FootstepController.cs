@@ -78,7 +78,7 @@ public class FootstepController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2f))
         {
-            // Debug.Log("Hit: " + hit.collider.gameObject.name + " / Tag: " + hit.collider.tag);
+            Debug.Log("Hit: " + hit.collider.gameObject.name + " / Tag: " + hit.collider.tag);
             
             if (hit.collider.CompareTag("Grass")) return grassSteps;
 
