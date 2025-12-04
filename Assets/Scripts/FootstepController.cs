@@ -9,17 +9,15 @@ public class FootstepController : MonoBehaviour
 
     [Header("References")] // =====================================================
     public GameObject playerCapsule;  // drag PlayerCapsule once
+    public AudioSource audioSource;
+
+    [Header("Audio")] // ==========================================================
+    public AudioClip[] grassSteps;
+    public AudioClip[] stoneSteps;
 
     private CharacterController cc;
     private StarterAssetsInputs input;
     private FirstPersonController controller;
-
-
-    [Header("Audio")] // ==========================================================
-    public AudioSource audioSource;
-
-    public AudioClip[] grassSteps;
-    public AudioClip[] stoneSteps;
 
     private float stepTimer = 0f;
     private AudioClip[] lastSurface;
@@ -32,7 +30,7 @@ public class FootstepController : MonoBehaviour
         input = playerCapsule.GetComponent<StarterAssetsInputs>();
         controller = playerCapsule.GetComponent<FirstPersonController>();
 
-        lastPos = playerCapsule.transform.position;
+        // lastPos = playerCapsule.transform.position;
     }
 
     private void Update()
@@ -46,8 +44,11 @@ public class FootstepController : MonoBehaviour
             lastSurface = currentSurface;
         }
 
+        float horizontalSpeed = new Vector3(cc.velocity.x, 0, cc.velocity.z).magnitude;
+        bool isMoving = horizontalSpeed > 1f; // threshold; avoids micro movements
+
         // bool isMoving = input.move.sqrMagnitude > 0.01f;
-        bool isMoving = IsActuallyMoving();
+        //bool isMoving = IsActuallyMoving();
         if (isMoving && controller.Grounded)
         {
             stepTimer -= Time.deltaTime;
@@ -78,29 +79,28 @@ public class FootstepController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2f))
         {
-            Debug.Log("Hit: " + hit.collider.gameObject.name + " / Tag: " + hit.collider.tag);
+            // Debug.Log("Hit: " + hit.collider.gameObject.name + " / Tag: " + hit.collider.tag);
             
             if (hit.collider.CompareTag("Grass")) return grassSteps;
 
             else if (hit.collider.CompareTag("Road")) return stoneSteps;
-            
             
         }
         // fallback
         return stoneSteps; 
     }
 
-    private bool IsActuallyMoving()
-    {
-        Vector3 currentPos = playerCapsule.transform.position;
+    // private bool IsActuallyMoving()
+    // {
+    //     Vector3 currentPos = playerCapsule.transform.position;
 
-        // movement distance this frame
-        Vector3 delta = currentPos - lastPos;
-        delta.y = 0f; // ignore vertical motion
+    //     // movement distance this frame
+    //     Vector3 delta = currentPos - lastPos;
+    //     delta.y = 0f; // ignore vertical motion
 
-        float distance = delta.magnitude;
-        lastPos = currentPos;
+    //     float distance = delta.magnitude;
+    //     lastPos = currentPos;
         
-        return distance > 0.02f; // threshold: 0.01–0.03
-    }
+    //     return distance > 0.015f; // threshold: 0.01–0.03
+    // }
 }
