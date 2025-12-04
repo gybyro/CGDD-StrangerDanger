@@ -35,6 +35,19 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // move init here so it’s ready ASAP
+            customer1.name = "John Miller";
+            customer1.age = 26;
+            customer1.workplace = "City Library";
+
+            customer2.name = "Charlie Vega";
+            customer2.age = 34;
+            customer2.workplace = "Carpentry Shop";
+            
+            customer3.name = "Victor Hale";
+            customer3.age = 67;
+            customer3.workplace = "Unknown";
         }
         else
         {
@@ -43,22 +56,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        // EXAMPLE hardcoded baseline values —
-        // You can change these in the Inspector.
-        customer1.name = "John Miller";
-        customer1.age = 26;
-        customer1.workplace = "City Library";
-
-        customer2.name = "Charlie Vega";
-        customer2.age = 34;
-        customer2.workplace = "Carpentry Shop";
-
-        customer3.name = "Victor Hale";
-        customer3.age = 67;
-        customer3.workplace = "Unknown";
-    }
 
     // ----------------------------------------------
     // GENERATE NEW CUSTOMER
