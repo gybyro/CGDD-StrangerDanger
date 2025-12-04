@@ -15,6 +15,7 @@ public GameObject imageUnchecked;   // PhoneDown
         imageChecked.SetActive(true);     // Show PhoneUp
         extraObject.SetActive(true);      // Show the 3rd object
         extraObject2.SetActive(false);
+        LeaveButton.SetActive(true);
     }
 
     public void SelectUnchecked()

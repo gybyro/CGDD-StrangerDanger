@@ -23,10 +23,14 @@ public class GameManager : MonoBehaviour
 
     // Current truth and spoken data
     public CustomerData currentActual = new CustomerData(); // What customer really is
-    public CustomerData currentSpoken = new CustomerData(); // What customer will SAY
+    public CustomerData currentSpoken = new CustomerData(); // What customer will SAY on the phone
     public CustomerTruthState currentTruth = CustomerTruthState.Good;
 
+    // Who we are currently serving (1,2,3)
     public int currentCustomerNumber = 0;
+
+    // Who the phone will load next time
+    public int nextCustomerNumber = 1;
 
     private void Awake()
     {
@@ -34,6 +38,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Init fixed customers
             customer1.name = "John Miller";
             customer1.age = 26;
             customer1.workplace = "City Library";
@@ -41,10 +47,14 @@ public class GameManager : MonoBehaviour
             customer2.name = "Charlie Vega";
             customer2.age = 34;
             customer2.workplace = "Carpentry Shop";
-            
+
             customer3.name = "Victor Hale";
             customer3.age = 67;
             customer3.workplace = "Unknown";
+
+            // Start from scratch
+            currentCustomerNumber = 0;
+            nextCustomerNumber = 1;
         }
         else
         {
@@ -53,25 +63,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     // ----------------------------------------------
-    // GENERATE NEW CUSTOMER
+    // GENERATE NEW CUSTOMER – called ONLY by the phone
     // ----------------------------------------------
     public void GenerateNextCustomer()
     {
-        currentCustomerNumber++;
+        // Decide who is next
+        if (nextCustomerNumber < 1) nextCustomerNumber = 1;
+        if (nextCustomerNumber > 3) nextCustomerNumber = 3;
 
-        // Clamp to 1–3
-        if (currentCustomerNumber < 1) currentCustomerNumber = 1;
-        if (currentCustomerNumber > 3) currentCustomerNumber = 3;
+        currentCustomerNumber = nextCustomerNumber;
 
+        // Prepare for *next* time
+        if (nextCustomerNumber < 3)
+            nextCustomerNumber++;
+
+        // Pick source data
         CustomerData source = null;
 
         if (currentCustomerNumber == 1)
             source = customer1;
         else if (currentCustomerNumber == 2)
             source = customer2;
-        else if (currentCustomerNumber == 3)
+        else
             source = customer3;
 
         // Copy true data
@@ -79,48 +93,20 @@ public class GameManager : MonoBehaviour
         currentActual.age = source.age;
         currentActual.workplace = source.workplace;
 
-        // Default spoken = truth
+        // Phone shows expected true info
         currentSpoken.name = currentActual.name;
         currentSpoken.age = currentActual.age;
         currentSpoken.workplace = currentActual.workplace;
 
-        // Customer 2 must lie (1 wrong answer)
+        // Customer 2 is logically bad, others good
         if (currentCustomerNumber == 2)
-        {
-            MakeCustomerLie();
             currentTruth = CustomerTruthState.Bad;
-        }
         else
-        {
             currentTruth = CustomerTruthState.Good;
-        }
 
-        Debug.Log($"GENERATED CUSTOMER {currentCustomerNumber}");
-        Debug.Log($"Actual: {GetActualDescription()}");
-        Debug.Log($"Spoken: {GetPhoneDescription()}");
-    }
-
-    // ----------------------------------------------
-    // CUSTOMER 2 LIES ABOUT ONE THING
-    // ----------------------------------------------
-    private void MakeCustomerLie()
-    {
-        int f = Random.Range(0, 3);
-
-        switch (f)
-        {
-            case 0: // name
-                currentSpoken.name = "Wrong Name";
-                break;
-
-            case 1: // workplace
-                currentSpoken.workplace = "Wrong Workplace";
-                break;
-
-            case 2: // age
-                currentSpoken.age = currentActual.age + Random.Range(3, 15);
-                break;
-        }
+        Debug.Log($"[GM] GENERATED CUSTOMER current={currentCustomerNumber}, next={nextCustomerNumber}");
+        Debug.Log($"[GM] Actual: {GetActualDescription()}");
+        Debug.Log($"[GM] Phone:  {GetPhoneDescription()}");
     }
 
     // ----------------------------------------------
@@ -135,5 +121,4 @@ public class GameManager : MonoBehaviour
     {
         return $"{currentActual.name}, Age {currentActual.age}, Works at {currentActual.workplace}";
     }
-
 }
