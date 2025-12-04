@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
             customer2.name = "Charlie Vega";
             customer2.age = 34;
             customer2.workplace = "Carpentry Shop";
-
+            
             customer3.name = "Victor Hale";
             customer3.age = 67;
             customer3.workplace = "Unknown";
@@ -53,11 +53,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        // EXAMPLE hardcoded baseline values —
-        // You can change these in the Inspector.
-    }
 
     // ----------------------------------------------
     // GENERATE NEW CUSTOMER
