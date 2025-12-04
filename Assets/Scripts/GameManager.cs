@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-
     [System.Serializable]
     public class CustomerData
     {
@@ -27,7 +26,7 @@ public class GameManager : MonoBehaviour
     public CustomerData currentSpoken = new CustomerData(); // What customer will SAY
     public CustomerTruthState currentTruth = CustomerTruthState.Good;
 
-    public int currentCustomerNumber = 0; // 1,2,3 meaning which customer we are on
+    public int currentCustomerNumber = 0;
 
     private void Awake()
     {
@@ -35,6 +34,17 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            customer1.name = "John Miller";
+            customer1.age = 26;
+            customer1.workplace = "City Library";
+
+            customer2.name = "Charlie Vega";
+            customer2.age = 34;
+            customer2.workplace = "Carpentry Shop";
+
+            customer3.name = "Victor Hale";
+            customer3.age = 67;
+            customer3.workplace = "Unknown";
         }
         else
         {
@@ -47,17 +57,6 @@ public class GameManager : MonoBehaviour
     {
         // EXAMPLE hardcoded baseline values —
         // You can change these in the Inspector.
-        customer1.name = "John Miller";
-        customer1.age = 26;
-        customer1.workplace = "City Library";
-
-        customer2.name = "Charlie Vega";
-        customer2.age = 34;
-        customer2.workplace = "Carpentry Shop";
-
-        customer3.name = "Victor Hale";
-        customer3.age = 67;
-        customer3.workplace = "Unknown";
     }
 
     // ----------------------------------------------
