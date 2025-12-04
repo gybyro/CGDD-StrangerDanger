@@ -4,7 +4,7 @@ using StarterAssets;
 public class FootstepController : MonoBehaviour
 {
     [Header("Settings")] // =======================================================
-    public float walkStepInterval = 1f;   // time between steps (walking)
+    public float walkStepInterval = 0.8f;   // time between steps (walking)
     public float sprintStepInterval = 0.5f; // time between steps (sprinting)
 
     [Header("References")] // =====================================================
