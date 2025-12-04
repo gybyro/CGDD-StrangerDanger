@@ -1936,8 +1936,8 @@ MonoBehaviour:
   CaraCustomer: {fileID: 1487916586}
   JohnCustomer: {fileID: 1924696665}
   VictoriaCustomer: {fileID: 200175533}
-  DoorOpen: {fileID: 443681920}
-  DoorClosed: {fileID: 2098876099}
+  DoorOpen: {fileID: 2098876099}
+  DoorClosed: {fileID: 443681920}
   ArtBG1: {fileID: 1910891384}
   ChoiceNameButton: {fileID: 906159150}
   ChoiceWorkButton: {fileID: 963102709}

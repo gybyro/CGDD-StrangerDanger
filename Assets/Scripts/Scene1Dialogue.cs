@@ -285,7 +285,7 @@ public class Scene1Dialogue : MonoBehaviour
     private string GetFakeName()
     {
         // Simple fake; you can customize
-        return "Alex Turner";
+        return "Alex";
     }
 
     private string GetFakeWork()
@@ -335,7 +335,7 @@ public class Scene1Dialogue : MonoBehaviour
             }
             else if (isCustomer3)
             {
-                Char2speech.text = $"My name is {c3FirstName} {c3FakeLastName}.";
+                Char2speech.text = $"My name is {c3FirstName}";
             }
             else
             {
@@ -510,7 +510,7 @@ public class Scene1Dialogue : MonoBehaviour
 
     private IEnumerator WaitAndLoadScene(string sceneName)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(sceneName);
     }
 }

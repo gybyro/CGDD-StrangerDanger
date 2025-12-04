@@ -191,6 +191,7 @@ MonoBehaviour:
     workplace: 
   currentTruth: 0
   currentCustomerNumber: 0
+  nextCustomerNumber: 1
 --- !u!114 &681021445
 MonoBehaviour:
   m_ObjectHideFlags: 0

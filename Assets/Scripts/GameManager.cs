@@ -40,16 +40,16 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             // Init fixed customers
-            customer1.name = "John Miller";
+            customer1.name = "Ryan";
             customer1.age = 26;
-            customer1.workplace = "City Library";
+            customer1.workplace = "a Restaurant";
 
-            customer2.name = "Charlie Vega";
-            customer2.age = 34;
+            customer2.name = "Carol";
+            customer2.age = 55;
             customer2.workplace = "Carpentry Shop";
 
-            customer3.name = "Victor Hale";
-            customer3.age = 67;
+            customer3.name = "Victor";
+            customer3.age = 76;
             customer3.workplace = "Unknown";
 
             // Start from scratch
@@ -121,4 +121,18 @@ public class GameManager : MonoBehaviour
     {
         return $"{currentActual.name}, Age {currentActual.age}, Works at {currentActual.workplace}";
     }
+
+    public void ResetAllData()
+    {
+        currentCustomerNumber = 0;
+        nextCustomerNumber = 1;
+        currentTruth = CustomerTruthState.Good;
+
+        currentActual = new CustomerData();
+        currentSpoken = new CustomerData();
+
+        Debug.Log("GAME MANAGER RESET");
+    }
+
+
 }
