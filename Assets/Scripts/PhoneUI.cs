@@ -18,9 +18,10 @@ public class PhoneUI : MonoBehaviour
         GameManager.Instance.GenerateNextCustomer();
         infoText.text = GameManager.Instance.GetPhoneDescription();
 
-        // Make the button disappear after first click
+        Debug.Log("[PhoneUI] Showing customer #" + GameManager.Instance.currentCustomerNumber);
+
+        // Make the button disappear after first click (per job)
         getInfoButton.gameObject.SetActive(false);
         infoText.gameObject.SetActive(true);
-        
     }
 }

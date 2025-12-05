@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DialogueChoiceExample : MonoBehaviour
+public class Money_Received : MonoBehaviour
 {
     // You can tweak these in the inspector if you want different values later
     [SerializeField] private int safeReward = 10;

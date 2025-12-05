@@ -10,22 +10,6 @@ public class Moving_forward_event : MonoBehaviour
         curr_position = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // go right
-        if (Input.GetKey(KeyCode.D))
-        {
-            curr_position.x = curr_position.x + speed * Time.deltaTime;
-        }
-        transform.position = curr_position;
-        // go left
-        if (Input.GetKey(KeyCode.A))
-        {
-            curr_position.x = curr_position.x - speed * Time.deltaTime;
-        }
-        transform.position = curr_position;
-    }
 
     public void Button_click_right () {
         curr_position = transform.position;

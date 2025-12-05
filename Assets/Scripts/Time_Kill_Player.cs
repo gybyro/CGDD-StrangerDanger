@@ -1,35 +1,20 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Time_Kill_Player : MonoBehaviour
 {
-    public GameObject Game_Over_Panel;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    // void OnTriggerEnter2D (Collider2D other) 
-    // {
-    //    if (other.CompareTag("Player")) 
-    //    {
-    //         Game_Over_Panel.SetActive(true);
-    //    } 
-    // }
-
-    void OnTriggerEnter2D (Collider2D other) 
-    {
-       if (other.CompareTag("Player")) 
-       {
-        if (Money_Manager.Instance.money < 35)
-            
-            Game_Over_Panel.SetActive(true);
-       } 
+        if (other.CompareTag("Player"))
+        {
+            if (Money_Manager.Instance.money < 35)
+            {
+                SceneManager.LoadScene("GameOver_Screen");
+            }
+            else
+            {
+                SceneManager.LoadScene("Win_Screen");
+            }
+        }
     }
 }
