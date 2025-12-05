@@ -735,7 +735,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: d39e67cbfd02b5741bfbc26298cac4a2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -755,7 +755,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1.0073166
+      value: 0.97623444
       inSlope: 0.034360126
       outSlope: 0.034360126
       tangentMode: 0
@@ -763,26 +763,26 @@ AudioSource:
       inWeight: 0
       outWeight: 0.83495164
     - serializedVersion: 3
-      time: 0.22036794
-      value: 0.7030449
-      inSlope: -2.4862733
-      outSlope: -2.4862733
+      time: 0.18665364
+      value: 0.66210556
+      inSlope: -1.8701754
+      outSlope: -1.8701754
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.28155324
+      inWeight: 0.38640988
       outWeight: 0.50662005
     - serializedVersion: 3
-      time: 0.31476033
-      value: 0.45576477
-      inSlope: -2.9316661
-      outSlope: -2.9316661
+      time: 0.2988912
+      value: 0.43530273
+      inSlope: -1.5199177
+      outSlope: -1.5199177
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.28764117
-      outWeight: 0.46612483
+      inWeight: 0.87390095
+      outWeight: 0.4749487
     - serializedVersion: 3
-      time: 0.44632366
-      value: 0.24273682
+      time: 0.4483073
+      value: 0.25149536
       inSlope: -0.79607815
       outSlope: -0.79607815
       tangentMode: 0
@@ -800,7 +800,7 @@ AudioSource:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0.058937583
+      value: 0
       inSlope: -0.010806659
       outSlope: -0.010806659
       tangentMode: 0
@@ -7949,7 +7949,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &158639031
 Transform:
   m_ObjectHideFlags: 0
@@ -74782,7 +74782,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: dcd7ef5122cb4ca45abc43ef0727698b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
