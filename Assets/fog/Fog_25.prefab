@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &533755819339562935
+--- !u!1001 &4607954354234760017
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,15 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 143152470426625015, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_Name
-      value: Fog_50
+      value: Fog_25
       objectReference: {fileID: 0}
     - target: {fileID: 2214575285824829510, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 50
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214575285824829510, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime1
+      value: 32768
       objectReference: {fileID: 0}
     - target: {fileID: 2214575285824829510, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key1.a
-      value: 0.078431375
+      value: 0.039215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214575285824829510, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3699466824740592808, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -58,6 +66,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3699466824740592808, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
+      propertyPath: m_MinParticleSize
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

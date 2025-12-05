@@ -118,7 +118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -196,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -274,7 +274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -352,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -430,7 +430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -508,7 +508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -586,7 +586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -664,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -742,7 +742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -820,7 +820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -898,7 +898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -976,7 +976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1054,7 +1054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1132,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1210,7 +1210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1288,7 +1288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1366,7 +1366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1444,7 +1444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1522,7 +1522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1600,7 +1600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1678,7 +1678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4396691003521744952, guid: 380df71531de92c49a23e186d9d2c31e, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
