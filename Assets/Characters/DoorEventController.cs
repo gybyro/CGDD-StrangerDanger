@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class DoorEventController : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class DoorEventController : MonoBehaviour
 
     [Header("Characters")]
     public string[] characterIDs; // "john", "mary", "leo"
-    public PortraitController portraitController;
+    public CharacterSpriteController characterSpriteController;
 
     [Header("Dialogue")]
     public DialogueManager dialogueManager; // your VN dialogue system
@@ -23,7 +25,7 @@ public class DoorEventController : MonoBehaviour
     private IEnumerator EventSequence()
     {
         // 1. Knock SFX
-        AudioManager.Play("knock");
+        //AudioManager.Play("knock");
 
         yield return new WaitForSeconds(0.5f);
 
@@ -39,13 +41,13 @@ public class DoorEventController : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         // 4. Portrait slide-in animation
-        portraitController.ShowCharacter(character);
+        characterSpriteController.ShowCharacter(character);
 
         // 5. Start the dialogue
-        yield return dialogueManager.RunDialogue(dialogueFileName, character);
+        // yield return dialogueManager.RunDialogue(dialogueFileName, character);
 
         // 6. Slide portrait out
-        portraitController.HideCharacter();
+        characterSpriteController.HideCharacter();
 
         yield return new WaitForSeconds(0.5f);
 

@@ -5,11 +5,11 @@ public class CharacterSpriteController : MonoBehaviour
 {
     public Image portraitImage;
     public Animator portraitAnimator; // has SlideIn + SlideOut animations
-    public CharacterPortraitDatabase portraitDB;
+    public CharacterSpriteDatabase spriteDB;
 
     public void ShowCharacter(string characterID)
     {
-        portraitImage.sprite = portraitDB.GetDefaultPortrait(characterID);
+        portraitImage.sprite = spriteDB.GetDefaultPortrait(characterID);
         portraitAnimator.Play("SlideIn");
     }
 
@@ -20,6 +20,6 @@ public class CharacterSpriteController : MonoBehaviour
 
     public void ChangeExpression(string characterID, string emotion)
     {
-        portraitImage.sprite = portraitDB.GetPortrait(characterID, emotion);
+        portraitImage.sprite = spriteDB.GetPortrait(characterID, emotion);
     }
 }

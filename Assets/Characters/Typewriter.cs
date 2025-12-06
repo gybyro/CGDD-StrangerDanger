@@ -16,6 +16,11 @@ public class Typewriter : MonoBehaviour
     private Coroutine typingCoroutine;
     private Character currentSpeaker;
 
+    public void SetSpeaker(Character speaker)
+    {
+        currentSpeaker = speaker;
+    }
+
     /// <summary>
     /// Starts typing a new line of dialogue.
     /// </summary>

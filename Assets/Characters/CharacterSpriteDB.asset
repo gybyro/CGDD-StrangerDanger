@@ -10,6 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: s
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueSequence
-  lines: []
+  m_Name: CharacterSpriteDB
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSpriteDatabase
+  characters:
+  - characterID: 
+    defaultPortrait: {fileID: 0}
+    expressions: []

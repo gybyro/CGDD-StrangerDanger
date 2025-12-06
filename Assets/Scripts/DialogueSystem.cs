@@ -9,14 +9,14 @@ public class DialogueSystem : MonoBehaviour
     public TMP_Text dialogueText;
     public UnityEngine.UI.Image portrait;
 
-    private PlayerInput playerInput;
+    //private PlayerInput playerInput;
     private DialogueSequence current;
     private int index;
 
-    void Awake()
-    {
-        playerInput = new PlayerInput();
-    }
+    // void Awake()
+    // {
+    //     playerInput = new PlayerInput();
+    // }
 
     // void OnEnable()
     // {

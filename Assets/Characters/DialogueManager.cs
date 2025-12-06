@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Characters")]
     public CharacterDatabase characterDB;
+    private Character currentSpeaker;
 
     private DialogueFile dialogue;
     private DialogueLine currentLine;
@@ -61,14 +62,14 @@ public class DialogueManager : MonoBehaviour
     // ==============================
     private IEnumerator RunLine(DialogueLine line)
     {
-        // ❗ handle random branches BEFORE showing text
+        // handle random branches BEFORE showing text
         if (line.type == "random")
         {
             currentLine = PickRandomLine(line);
             yield break;
         }
 
-        // ❗ handle player choices BEFORE showing text
+        // handle player choices BEFORE showing text
         if (line.type == "choice")
         {
             yield return HandleChoice(line);
@@ -86,8 +87,8 @@ public class DialogueManager : MonoBehaviour
             nameBox.text = speaker.displayName;
             speaker.Show();
 
-            if (!string.IsNullOrEmpty(line.emotion))
-                speaker.SetExpression(line.emotion);
+            if (!string.IsNullOrEmpty(line.portrait))
+                speaker.SetExpression(line.portrait);
         }
         else
         {
