@@ -3,14 +3,22 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "VN/Character Database")]
 public class CharacterDatabase : ScriptableObject
 {
-    public Character[] characters;
+    [Header("Character Prefabs")]
+    public GameObject[] characterPrefabs;   // drag prefabs here, NOT scene objects
 
     public Character GetCharacter(string id)
     {
-        foreach (var c in characters)
-            if (c.characterID == id)
-                return c;
+        foreach (var prefab in characterPrefabs)
+        {
+            if (prefab == null) continue;
 
+            Character c = prefab.GetComponent<Character>();
+
+            if (c != null && c.characterID == id)
+                return c;
+        }
+
+        Debug.LogWarning("Character not found in database: " + id);
         return null;
     }
 }

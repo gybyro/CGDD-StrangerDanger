@@ -1,0 +1,59 @@
+{
+    "scene": "ProxyVis01",
+    "lines": [
+        {
+        "id": "test01",
+        "speaker": "proxy",
+        "portrait": "visitorOpen",
+        "color": "red",
+        "text": "hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+        "animationTriggerDoor": "DoorOpen",
+        "showChar": "true",
+        "next": "test02"
+        },
+        {
+        "id": "test02",
+        "speaker": "proxy",
+        "portrait": "visitorUp",
+        "text": "...",
+        "next": "test03"
+        },
+        {
+        "id": "test03",
+        "speaker": "proxy",
+        "portrait": "visitor1",
+        "text": "...",
+        "next": "test04"
+        },
+        {
+        "id": "test04",
+        "speaker": "proxy",
+        "portrait": "visitor2",
+        "text": "what?",
+        "next": "test05"
+        },
+        {
+        "id": "test05",
+        "speaker": "proxy",
+        "portrait": "visitor3",
+        "color": "#474DC8",
+        "text": "...",
+        "next": "test06"
+        },
+        {
+        "id": "test06",
+        "speaker": "proxy",
+        "portrait": "visitor3",
+        "color": "#474DC8",
+        "text": "...",
+        "animationTriggerDoor": "DoorSlam",
+        "showChar": "false",
+        "next": "test07"
+        },
+        {
+        "id": "test07",
+        "nextScene": "ProxyVis01",
+        "finished": true
+        }
+    ]
+}

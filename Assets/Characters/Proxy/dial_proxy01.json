@@ -1,0 +1,234 @@
+{
+"scene": "Proxy01",
+"lines": 
+    [
+        {
+        "id": "start",
+        "speaker": "you",
+        "text": "...",
+        "waitSeconds": 2,
+        "next": "01_01"
+        },
+        {
+        "id": "01_01",
+        "speaker": "proxy",
+        "emotion": "openDoor1",
+        "text": "Who's there?",
+        "animationTriggerDoor": "DoorHalfOpen",
+        "showChar": true,
+        "next": "01_02"
+        },
+        {
+        "id": "01_02",
+        "speaker": "you",
+        "text": "...",
+        "next": "01_03"
+        },
+        {
+        "id": "01_03",
+        "speaker": "proxy",
+        "text": "...",
+        "next": "01_04"
+        },
+        {
+        "id": "01_04",
+        "speaker": "proxy",
+        "text": "You aren't the usual delivery guy...",
+        "next": "01_05"
+        },
+        {
+        "id": "01_05",
+        "speaker": "you",
+        "text": "yeah, he uh... quit.",
+        "next": "01_06"
+        },
+        {
+        "id": "01_06",
+        "speaker": "proxy",
+        "text": "Aight.",
+        "waitSeconds": 1,
+        "next": "01_07"
+        },
+        {
+        "id": "01_07",
+        "speaker": "you",
+        "prompt": "You did order    uh...",
+        "options": [
+            {"text": "a large mexican style right?", "next": "pizza01_correct"},
+            {"text": "a medium greek style?", "next": "pizza01_wrong1"},
+            {"text": "a small ham n' cheese?", "next": "pizza01_wrong1"}
+        ]
+        },
+        {
+        "id": "pizza01_correct",
+        "speaker": "proxy",
+        "emotion": "openDoor2",
+        "text": "Yep",
+        "animationTriggerDoor": "DoorOpen",
+        "next": "01_081"
+        },
+        {
+        "id": "pizza01_wrong1",
+        "speaker": "proxy",
+        "text": "No, Its suposed to be large mexican style",
+        "next": "pizza01_wrong2"
+        },
+        {
+        "id": "pizza01_wrong2",
+        "speaker": "proxy",
+        "text": "PLEASE don't tell me you got my order wrong???",
+        "next": "pizza01_wrong3"
+        },
+        {
+        "id": "pizza01_wrong3",
+        "speaker": "you",
+        "text": "NOpE! juST Reaad iT wRoNg... (oops)",
+        "next": "pizza01_wrong4"
+        },
+        {
+        "id": "pizza01_wrong4",
+        "speaker": "proxy",
+        "emotion": "openDoor2",
+        "text": "ok",
+        "waitSeconds": 1,
+        "animationTriggerDoor": "DoorOpen",
+        "next": "01_081"
+        },
+        {
+        "id": "01_081",
+        "speaker": "you",
+        "text": "That will be $29.99",
+        "next": "01_082"
+        },
+        {
+        "id": "01_082",
+        "speaker": "proxy",
+        "text": "I already paid online",
+        "next": "01_083"
+        },
+        {
+        "id": "01_083",
+        "speaker": "you",
+        "text": "ri-right...",
+        "next": "01_08"
+        },
+        {
+        "id": "01_08",
+        "speaker": "you",
+        "color": "gray",
+        "prompt": "should I ask why they left their name blank?",
+        "options": [
+            {"text": "hmmm", "next": "pizza01_name1"},
+            {"text": "Pfft naaaah", "next": "pizza01_bad1"}
+        ]
+        },
+        {
+        "id": "pizza01_bad1",
+        "speaker": "you",
+        "emotion": "pizzaUp",
+        "text": "Here is your pizza sir!",
+        "trigger": "hidePizzabox",
+        "next": "pizza01_bad2"
+        },
+        {
+        "id": "pizza01_bad2",
+        "speaker": "proxy",
+        "text": "................",
+        "next": "pizza01_bad3"
+        },
+        {
+        "id": "pizza01_bad3",
+        "speaker": "proxy",
+        "text": "Thank   You   Very   Much",
+        "waitSeconds": 1.0,
+        "next": "pizza01_bad4"
+        },
+        {
+        "id": "pizza01_bad4",
+        "speaker": "proxy",
+        "text": "",
+        "animationTriggerDoor": "DoorSlam",
+        "showChar": false,
+        "waitSeconds": 4.0,
+        "next": "pizza01_bad5"
+        },
+        {
+        "id": "pizza01_bad5",
+        "speaker": "you",
+        "color": "gray",
+        "text": "Aaaand thank you too!!       please DO NOT order from us again.",
+        "nextScene": "ProxyVis01",
+        "finished": true
+        },
+
+        {
+        "id": "pizza01_name1",
+        "speaker": "you",
+        "emotion": "pizzaUp",
+        "text": "Why did you leave your name empty?",
+        "trigger": "hidePizzabox",
+        "next": "pizza01_name2"
+        },
+        {
+        "id": "pizza01_name2",
+        "speaker": "proxy",
+        "emotion": "pizzaSide1",
+        "text": "I - I wasn't really sure what to put down tbh... sorry",
+        "next": "pizza01_name3"
+        },
+        {
+        "id": "pizza01_name3",
+        "speaker": "you",
+        "text": "ah no worries! We just want to make sure we deliver to the right person.",
+        "next": "pizza01_name4"
+        },
+        {
+        "id": "pizza01_name4",
+        "speaker": "proxy",
+        "text": "right,,, ill write it out next time...",
+        "next": "pizza01_name5"
+        },
+        {
+        "id": "pizza01_name5",
+        "speaker": "you",
+        "text": "...",
+        "next": "pizza01_name6"
+        },
+        {
+        "id": "pizza01_name6",
+        "speaker": "proxy",
+        "emotion": "pizzaUp",
+        "text": "you can just call me proxy.",
+        "next": "pizza01_name7"
+        },
+        {
+        "id": "pizza01_name7",
+        "speaker": "you",
+        "text": "sure?",
+        "next": "pizza01_name8"
+        },
+        {
+        "id": "pizza01_name8",
+        "speaker": "proxy",
+        "text": "and thanks for the pizza",
+        "next": "pizza01_name9"
+        },
+        {
+        "id": "pizza01_name9",
+        "speaker": "you",
+        "text": "thank you?",
+        "animationTriggerDoor": "DoorClose",
+        "showChar": false,
+        "next": "pizza01_name10"
+        },
+        {
+        "id": "pizza01_name10",
+        "speaker": "you",
+        "color": "gray",
+        "text": "*sigh*",
+        "nextScene": "ProxyVis01",
+        "finished": true
+        }
+    ]
+}
+

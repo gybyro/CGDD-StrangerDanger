@@ -1,0 +1,42 @@
+{
+    "scene": "test2",
+    "lines": [
+        {
+        "id": "test01",
+        "speaker": "face",
+        "animationTriggerDoor": "DoorOpenWide",
+        "text": "",
+        "next": "test02"
+        },
+        {
+        "id": "test02",
+        "speaker": "face",
+        "portrait": "1",
+        "text": "",
+        "showChar": "true",
+        "next": "test03"
+        },
+        {
+        "id": "test03",
+        "speaker": "face",
+        "portrait": "1",
+        "text": "YOU HAVE FAILEDDD THE WVIBE CHECKK",
+        "next": "test06"
+        },
+        {
+        "id": "test06",
+        "speaker": "face",
+        "portrait": "",
+        "color": "#474DC8",
+        "text": "...",
+        "animationTriggerDoor": "DoorClose",
+        "showChar": "false",
+        "next": "test07"
+        },
+        {
+        "id": "test07",
+        "nextScene": "ProxyVis01",
+        "finished": true
+        }
+    ]
+}

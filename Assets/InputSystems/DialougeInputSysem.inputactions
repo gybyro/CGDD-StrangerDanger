@@ -27,17 +27,6 @@
                     "action": "Next",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ca2c1929-ada7-4f66-8ad6-d750cf86ec51",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Next",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

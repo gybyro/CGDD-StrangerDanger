@@ -1,12 +1,23 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
     [Header("UI")]
-    public TMP_Text nameBox;
+    public CanvasGroup textBox;
+    public CanvasGroup nameBox;
+    public TMP_Text nameBoxText;
     public Typewriter typewriter;
+
+    [Header("Refrences")]
+    public PlayerInput playerInput;
+    [Header("Extra Systems")]
+    public Animator doorAnimator;
+    public AudioSource sfxSource;
+    // public SceneTransition sceneTransition; // optional fade system
+
 
     [Header("Characters")]
     public CharacterDatabase characterDB;
@@ -16,6 +27,47 @@ public class DialogueManager : MonoBehaviour
     private DialogueLine currentLine;
 
     private bool waitingForPlayerInput = false;
+    private InputAction advanceAction;
+    private Character currentSpeakerInstance;
+    private bool advanceRequested;
+
+    private Character GetOrSpawnCharacter(string id)
+    {
+        // If already spawned, reuse it
+        if (currentSpeakerInstance != null &&
+            currentSpeakerInstance.characterID == id)
+            return currentSpeakerInstance;
+
+        // Get prefab from database
+        Character prefab = characterDB.GetCharacter(id);
+
+        if (prefab == null)
+        {
+            Debug.LogWarning("No character prefab found for: " + id);
+            return null;
+        }
+
+        // Spawn into scene
+        currentSpeakerInstance = Instantiate(prefab);
+
+        return currentSpeakerInstance;
+    }
+
+
+
+    void Awake()
+    {
+        advanceAction = playerInput.actions["Next"];
+        nameBox.alpha = 0;
+        textBox.alpha = 0;
+    }
+
+    public void OnAdvancePressed()
+    {
+        advanceRequested = true;
+    }
+
+
 
     // ==============================
     //   LOAD JSON
@@ -62,61 +114,92 @@ public class DialogueManager : MonoBehaviour
     // ==============================
     private IEnumerator RunLine(DialogueLine line)
     {
-        // handle random branches BEFORE showing text
+        // RANDOM BRANCH ======================
         if (line.type == "random")
         {
             currentLine = PickRandomLine(line);
             yield break;
         }
 
-        // handle player choices BEFORE showing text
+        // CHOICE BRANCH ======================
         if (line.type == "choice")
         {
             yield return HandleChoice(line);
             yield break;
         }
 
-        // =====================
-        //  Character Handling
-        // =====================
-        Character speaker = characterDB.GetCharacter(line.speaker);
-        typewriter.SetSpeaker(speaker);
+        // SPEAKER HANDLING ======================
+        // Character speaker = characterDB.GetCharacter(line.speaker);
+        Character speaker = GetOrSpawnCharacter(line.speaker);
 
         if (speaker != null)
         {
-            nameBox.text = speaker.displayName;
-            speaker.Show();
-
-            if (!string.IsNullOrEmpty(line.portrait))
-                speaker.SetExpression(line.portrait);
+            currentSpeaker = speaker;
+            typewriter.SetSpeaker(speaker);
+            nameBoxText.text = speaker.displayName;
         }
-        else
-        {
-            nameBox.text = "";
-        }
+        else { 
+            nameBox.alpha = 0;
+            Debug.Log("Character speaker is NULL");
+            }
 
-        // =====================
-        //   Typewriter Begin
-        // =====================
-        typewriter.StartTyping(line.text);
 
-        // WAIT until typing done OR skip pressed
+        // SET PORTRAIT / SPRITE IMAGE
+        if (!string.IsNullOrEmpty(line.portrait)) { speaker.SetExpression(line.portrait); }
+
+        // TEXT COLOR ======================
+        ApplyTextColor(line.color);
+
+        // DOOR ANIMATION ======================
+        TriggerDoorAnimation(line.animationTriggerDoor);
+
+        // after door play show or hides
+        if (line.showChar == "true") { speaker.Show(); }
+        else if (line.showChar == "false") { speaker.Hide(); }
+
+        // SOUND ======================
+        PlayDialogueSound(line.sound);
+
+        // TYPEWRITER / TEXT ======================
+        if (!string.IsNullOrEmpty(line.text)) { 
+            textBox.alpha = 1;
+            nameBox.alpha = 1;
+            typewriter.StartTyping(line.text);
+            speaker.SetExpression(line.portrait); 
+            }
+
         while (!typewriter.lineComplete)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (advanceAction.WasPressedThisFrame() || advanceRequested)
+            {
+                advanceRequested = false;
                 typewriter.CompleteLineNow();
-
+            }
             yield return null;
         }
 
-        // WAIT for Space to continue
+        // LINE WAIT IN SECONDS ======================
+        if (line.waitSeconds > 0)
+            yield return new WaitForSeconds(line.waitSeconds);
+
+        // WAIT FOR ADVANCE INPUT ======================
         waitingForPlayerInput = true;
         while (waitingForPlayerInput)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (advanceAction.WasPressedThisFrame() || advanceRequested)
+            {
+                advanceRequested = false;
                 waitingForPlayerInput = false;
+            }
 
             yield return null;
+        }
+
+        // SCENE CHANGE ======================
+        if (!string.IsNullOrEmpty(line.nextScene))
+        {
+            //sceneTransition.LoadScene(line.nextScene);
+            yield break;
         }
     }
 
@@ -173,5 +256,34 @@ public class DialogueManager : MonoBehaviour
 
         Debug.LogWarning("Line not found: " + id);
         return null;
+    }
+
+    private void ApplyTextColor(string hex)
+    {
+        if (string.IsNullOrEmpty(hex))
+        {
+            typewriter.dialogueText.color = Color.white;
+            return;
+        }
+
+        if (ColorUtility.TryParseHtmlString(hex, out Color c))
+            typewriter.dialogueText.color = c;
+        else
+            typewriter.dialogueText.color = Color.white;
+    }
+
+    private void PlayDialogueSound(string soundName)
+    {
+        if (string.IsNullOrEmpty(soundName)) return;
+
+        AudioClip clip = Resources.Load<AudioClip>("SFX/" + soundName);
+        if (clip != null)
+            sfxSource.PlayOneShot(clip);
+    }
+
+    private void TriggerDoorAnimation(string trigger)
+    {
+        if (string.IsNullOrEmpty(trigger) || doorAnimator == null) return;
+        doorAnimator.SetTrigger(trigger);
     }
 }

@@ -9,7 +9,6 @@ public class CharacterExpression
     public Sprite sprite;
 }
 
-
 public class Character : MonoBehaviour
 {
     [Header("Character Info")] // =======================================================
@@ -23,7 +22,6 @@ public class Character : MonoBehaviour
     public AudioClip[] voiceSounds;   // small clips, 20–200 ms
     public float voicePitchMin = 0.95f;
     public float voicePitchMax = 1.05f;
-    [HideInInspector]
     public AudioSource audioSource;
 
 
@@ -46,9 +44,9 @@ public class Character : MonoBehaviour
 
 
     // ===================================================================================
-    void Awake()
+  void Awake()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
+        
     }
 
     // ===================================================================================
@@ -79,46 +77,20 @@ public class Character : MonoBehaviour
     public void Show()
     {
         if (animator != null)
-            animator.Play("SlideIn");
+            animator.SetTrigger("DoorOpen");
         else
+        {
+            Debug.LogWarning("where is my animation???");
             gameObject.SetActive(true);
+        }
+            
     }
 
     public void Hide()
     {
         if (animator != null)
-            animator.Play("SlideOut");
+            animator.SetTrigger("DoorClose");
         else
             gameObject.SetActive(false);
     }
 }
-
-// [Header("Settings")] // =======================================================
-//     public float walkStepInterval = 0.8f;   // time between steps (walking)
-//     public float sprintStepInterval = 0.5f; // time between steps (sprinting)
-
-//     [Header("References")] // =====================================================
-//     public GameObject playerCapsule;  // drag PlayerCapsule once
-//     public AudioSource audioSource;
-
-//     [Header("Audio")] // ==========================================================
-//     public AudioClip[] grassSteps;
-//     public AudioClip[] stoneSteps;
-
-//     private CharacterController cc;
-//     private StarterAssetsInputs input;
-//     private FirstPersonController controller;
-
-//     private float stepTimer = 0f;
-//     private AudioClip[] lastSurface;
-//     private AudioClip[] currentSurface;
-//     private Vector3 lastPos;
-
-//     void Start()
-//     {
-//         cc = playerCapsule.GetComponent<CharacterController>();
-//         input = playerCapsule.GetComponent<StarterAssetsInputs>();
-//         controller = playerCapsule.GetComponent<FirstPersonController>();
-
-//         // lastPos = playerCapsule.transform.position;
-//     }
