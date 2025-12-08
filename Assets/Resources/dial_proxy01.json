@@ -13,6 +13,7 @@
         "id": "01_01",
         "speaker": "proxy",
         "emotion": "openDoor1",
+        "color": "#474DC8",
         "text": "Who's there?",
         "animationTriggerDoor": "DoorHalfOpen",
         "showChar": true,
@@ -27,12 +28,14 @@
         {
         "id": "01_03",
         "speaker": "proxy",
+        "color": "#474DC8",
         "text": "...",
         "next": "01_04"
         },
         {
         "id": "01_04",
         "speaker": "proxy",
+        "color": "#474DC8",
         "text": "You aren't the usual delivery guy...",
         "next": "01_05"
         },
@@ -45,6 +48,7 @@
         {
         "id": "01_06",
         "speaker": "proxy",
+        "color": "#474DC8",
         "text": "Aight.",
         "waitSeconds": 1,
         "next": "01_07"
@@ -62,6 +66,7 @@
         {
         "id": "pizza01_correct",
         "speaker": "proxy",
+        "color": "#474DC8",
         "emotion": "openDoor2",
         "text": "Yep",
         "animationTriggerDoor": "DoorOpen",
@@ -70,12 +75,14 @@
         {
         "id": "pizza01_wrong1",
         "speaker": "proxy",
+        "color": "#474DC8",
         "text": "No, Its suposed to be large mexican style",
         "next": "pizza01_wrong2"
         },
         {
         "id": "pizza01_wrong2",
         "speaker": "proxy",
+        "color": "#474DC8",
         "text": "PLEASE don't tell me you got my order wrong???",
         "next": "pizza01_wrong3"
         },
