@@ -438,6 +438,7 @@ public class Scene1Dialogue : MonoBehaviour
         if (num == 2)
         {
             Char2speech.text = "Customer was BAD.";
+            Sanity_Meter.Instance.Lower_Sanity(25);
             if (!string.IsNullOrEmpty(deathSceneName))
                 StartCoroutine(WaitAndLoadScene(deathSceneName));
             return;
