@@ -8,6 +8,7 @@ TagManager:
   - Grass
   - Road
   - Fog
+  - CarStop
   layers:
   - Default
   - TransparentFX
