@@ -83,6 +83,7 @@ public class DialogueLine
     public bool finished;
 
     public string type;      // "choice", "random", or null
+    public string prompt;
     public ChoiceOption[] options;
     public RandomChoice[] choices;
 }

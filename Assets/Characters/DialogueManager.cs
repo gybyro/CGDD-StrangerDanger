@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Refrences")]
     public PlayerInput playerInput;
-    [Header("Extra Systems")]
+    public ChoiceUI choiceUI;
     public Animator doorAnimator;
     public AudioSource sfxSource;
     // public SceneTransition sceneTransition; // optional fade system
@@ -28,31 +29,33 @@ public class DialogueManager : MonoBehaviour
 
     private bool waitingForPlayerInput = false;
     private InputAction advanceAction;
-    private Character currentSpeakerInstance;
+    private Dictionary<string, Character> spawnedCharacters = new Dictionary<string, Character>();
     private bool advanceRequested;
     private float defaultTypeSpeed;
+    private bool isChoosing;
+    private bool lineWasHandledByChoice;
 
     private Character GetOrSpawnCharacter(string id)
+{
+    // If character already exists, reuse it
+    if (spawnedCharacters.TryGetValue(id, out Character existing))
+        return existing;
+
+    // Get prefab from database
+    Character prefab = characterDB.GetCharacter(id);
+
+    if (prefab == null)
     {
-        // If already spawned, reuse it
-        if (currentSpeakerInstance != null &&
-            currentSpeakerInstance.characterID == id)
-            return currentSpeakerInstance;
-
-        // Get prefab from database
-        Character prefab = characterDB.GetCharacter(id);
-
-        if (prefab == null)
-        {
-            Debug.LogWarning("No character prefab found for: " + id);
-            return null;
-        }
-
-        // Spawn into scene
-        currentSpeakerInstance = Instantiate(prefab);
-
-        return currentSpeakerInstance;
+        Debug.LogWarning("No character prefab found for: " + id);
+        return null;
     }
+
+    // Spawn only ONCE
+    Character newChar = Instantiate(prefab);
+    spawnedCharacters.Add(id, newChar);
+
+    return newChar;
+}
 
 
 
@@ -97,13 +100,31 @@ public class DialogueManager : MonoBehaviour
         // Start at line 0
         currentLine = dialogue.lines[0];
 
-        while (currentLine != null && !currentLine.finished)
+        while (currentLine != null)
         {
+            lineWasHandledByChoice = false;
+
             yield return RunLine(currentLine);
-            currentLine = GetNextLine(currentLine);
+
+            // ✅ Stop after final line
+            if (currentLine.finished)
+                break;
+
+            // ✅ ONLY advance automatically if NOT a choice
+            if (!lineWasHandledByChoice)
+                currentLine = GetNextLine(currentLine);
         }
 
+        // while (currentLine != null && !currentLine.finished)
+        // {
+        //     yield return RunLine(currentLine);
+        //     currentLine = GetNextLine(currentLine);
+        // }
+
         Debug.Log("Dialogue finished.");
+        foreach (var c in spawnedCharacters.Values)
+            { Destroy(c.gameObject); }
+        spawnedCharacters.Clear();
     }
 
     // idk somewhere in "game" put this to read the dialouge:
@@ -116,19 +137,7 @@ public class DialogueManager : MonoBehaviour
     // ==============================
     private IEnumerator RunLine(DialogueLine line)
     {
-        // RANDOM BRANCH ======================
-        if (line.type == "random")
-        {
-            currentLine = PickRandomLine(line);
-            yield break;
-        }
-
-        // CHOICE BRANCH ======================
-        if (line.type == "choice")
-        {
-            yield return HandleChoice(line);
-            yield break;
-        }
+        advanceRequested = false;
 
         // SPEAKER HANDLING ======================
         // Character speaker = characterDB.GetCharacter(line.speaker);
@@ -162,6 +171,22 @@ public class DialogueManager : MonoBehaviour
         // SOUND ======================
         PlayDialogueSound(line.sound);
 
+
+        // BRANCHES
+        // RANDOM BRANCH ======================
+        if (line.type == "random")
+        {
+            currentLine = PickRandomLine(line);
+            yield break;
+        }
+
+        // CHOICE BRANCH ======================
+        if (line.type == "choice")
+        {
+            yield return HandleChoice(line);
+            yield break;
+        } 
+
         // TYPEWRITER SPEED =======================
         if (line.typeSpeed > 0)
             typewriter.typeSpeed = line.typeSpeed;
@@ -179,7 +204,7 @@ public class DialogueManager : MonoBehaviour
             // WAIT FOR TYPEWRITER OR SKIP
             while (!typewriter.lineComplete)
             {
-                if (advanceAction.WasPressedThisFrame() || advanceRequested)
+                if (!isChoosing && (advanceAction.WasPressedThisFrame() || advanceRequested))
                 {
                     advanceRequested = false;
                     typewriter.CompleteLineNow();
@@ -203,7 +228,7 @@ public class DialogueManager : MonoBehaviour
             waitingForPlayerInput = true;
             while (waitingForPlayerInput)
             {
-                if (advanceAction.WasPressedThisFrame() || advanceRequested)
+                if (!isChoosing && (advanceAction.WasPressedThisFrame() || advanceRequested))
                 {
                     advanceRequested = false;
                     waitingForPlayerInput = false;
@@ -243,15 +268,51 @@ public class DialogueManager : MonoBehaviour
         return null;
     }
 
-    // ==============================
-    // CHOICE HANDLING (simple)
-    // ==============================
+
+    // CHOICE HANDLING ==============================
+    public void ClearAdvanceInput() { advanceRequested = false; }
+
+
+    // CHOICE HANDLING ==============================
     private IEnumerator HandleChoice(DialogueLine line)
     {
-        Debug.Log("CHOICE DETECTED — not fully implemented UI here.");
+        bool hasText = !string.IsNullOrEmpty(line.text);
 
-        // TEMP: pick first option automatically
-        currentLine = FindLine(line.options[0].next);
+        // ✅ Show prompt using normal text
+        if (hasText)
+        {
+            textBox.alpha = 1;
+            typewriter.StartTyping(line.text);
+
+            while (!typewriter.lineComplete)
+            {
+                if (advanceAction.WasPressedThisFrame() || advanceRequested)
+                {
+                    advanceRequested = false;
+                    typewriter.CompleteLineNow();
+                }
+                yield return null;
+            }
+        }
+
+        bool choiceMade = false;
+        int selectedIndex = 0;
+
+        isChoosing = true;
+        lineWasHandledByChoice = true; // ✅ IMPORTANT
+
+        choiceUI.ShowChoices(line, (index) =>
+        {
+            selectedIndex = index;
+            choiceMade = true;
+            isChoosing = false;
+        });
+
+        while (!choiceMade)
+            yield return null;
+
+        // ✅ Set next line from selected option
+        currentLine = FindLine(line.options[selectedIndex].next);
         yield return null;
     }
 
@@ -278,16 +339,25 @@ public class DialogueManager : MonoBehaviour
 
     private void ApplyTextColor(string hex)
     {
-        if (string.IsNullOrEmpty(hex))
+        // JSON override always wins
+        if (!string.IsNullOrEmpty(hex))
         {
-            typewriter.dialogueText.color = Color.white;
+            if (ColorUtility.TryParseHtmlString(hex, out Color c))
+            {
+                typewriter.dialogueText.color = c;
+                return;
+            }
+        }
+
+        // Use character default color
+        if (currentSpeaker != null)
+        {
+            typewriter.dialogueText.color = currentSpeaker.defaultTextColor;
             return;
         }
 
-        if (ColorUtility.TryParseHtmlString(hex, out Color c))
-            typewriter.dialogueText.color = c;
-        else
-            typewriter.dialogueText.color = Color.white;
+        // Fallback
+        typewriter.dialogueText.color = Color.white;
     }
 
     private void PlayDialogueSound(string soundName)

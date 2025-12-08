@@ -15,3 +15,4 @@ MonoBehaviour:
   characterPrefabs:
   - {fileID: 46065221635854547, guid: bab8735158f94604ebe44a140ef9bf8d, type: 3}
   - {fileID: 46065221635854547, guid: 908fd9c4e092e9d4dbbbb30c49fdf58a, type: 3}
+  - {fileID: 175512414187382506, guid: 9faecbd157151cc449242affdc3de35a, type: 3}

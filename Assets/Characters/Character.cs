@@ -24,6 +24,8 @@ public class Character : MonoBehaviour
     public float voicePitchMax = 1.05f;
     public AudioSource audioSource;
 
+    [Header("Text Color")]
+    public Color defaultTextColor = Color.white;
 
     [Header("Sprite stuff")] // =========================================================
     public SpriteRenderer spriteRenderer;  // drag SpriteRenderer here

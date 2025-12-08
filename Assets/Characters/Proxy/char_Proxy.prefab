@@ -56,6 +56,7 @@ MonoBehaviour:
   voicePitchMin: 0.8
   voicePitchMax: 0.9
   audioSource: {fileID: -8079158275568158221}
+  defaultTextColor: {r: 0.2784314, g: 0.3019608, b: 0.78431374, a: 1}
   spriteRenderer: {fileID: 7718615900848793663}
   expressions:
   - name: openDoor1
