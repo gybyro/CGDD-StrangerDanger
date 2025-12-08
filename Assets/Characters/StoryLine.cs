@@ -21,8 +21,8 @@ public class StoryLine : MonoBehaviour
         if (string.IsNullOrEmpty(currentDialogue))
             currentDialogue = "start";
 
-        
+        StartCoroutine(dialogueManager.RunDialogue("dial_proxy01"));
         // StartCoroutine(dialogueManager.RunDialogue("dial_test"));
-        StartCoroutine(dialogueManager.RunDialogue("dial_test2"));
+        // StartCoroutine(dialogueManager.RunDialogue("dial_test2"));
     }
 }
