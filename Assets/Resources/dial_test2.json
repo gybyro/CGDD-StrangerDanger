@@ -31,10 +31,12 @@
         "text": "...",
         "animationTriggerDoor": "DoorClose",
         "showChar": "false",
-        "next": "test07"
+        "next": "end"
         },
         {
-        "id": "test07",
+        "id": "end",
+        "speaker": "you",
+        "text": "",
         "nextScene": "ProxyVis01",
         "finished": true
         }

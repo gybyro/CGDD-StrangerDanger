@@ -5,7 +5,6 @@
         "id": "test01",
         "speaker": "proxy",
         "portrait": "visitorOpen",
-        "color": "red",
         "text": "hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
         "animationTriggerDoor": "DoorOpen",
         "showChar": "true",
@@ -48,10 +47,12 @@
         "text": "...",
         "animationTriggerDoor": "DoorSlam",
         "showChar": "false",
-        "next": "test07"
+        "next": "end"
         },
         {
-        "id": "test07",
+        "id": "end",
+        "speaker": "you",
+        "text": "",
         "nextScene": "ProxyVis01",
         "finished": true
         }

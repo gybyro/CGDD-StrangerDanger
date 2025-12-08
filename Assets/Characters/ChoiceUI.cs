@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using System;
 
 public class ChoiceUI : MonoBehaviour
@@ -68,11 +69,12 @@ public class ChoiceUI : MonoBehaviour
                 optionLabels[i].text = line.options[i].text;
 
                 int index = i;
+
                 optionButtons[i].onClick.RemoveAllListeners();
-                optionButtons[i].onClick.AddListener(() =>
-                {
-                    SelectOption(index);
-                });
+                optionButtons[i].onClick.AddListener(() => SelectOption(index));
+
+                // ✅ Mouse hover sync
+                AddHoverSync(optionButtons[i], index);
             }
             else
             {
@@ -81,6 +83,25 @@ public class ChoiceUI : MonoBehaviour
         }
 
         HighlightCurrent();
+    }
+
+    private void AddHoverSync(Button button, int index)
+    {
+        EventTrigger trigger = button.GetComponent<EventTrigger>();
+        if (trigger == null)
+            trigger = button.gameObject.AddComponent<EventTrigger>();
+
+        trigger.triggers.Clear();
+
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerEnter;
+        entry.callback.AddListener((_) =>
+        {
+            currentIndex = index;
+            HighlightCurrent();
+        });
+
+        trigger.triggers.Add(entry);
     }
 
     private void MoveSelection(int direction)
@@ -107,6 +128,9 @@ public class ChoiceUI : MonoBehaviour
                 colors.normalColor = new Color(1f, 1f, 1f, 0.35f);
                 colors.highlightedColor = colors.normalColor;
                 colors.selectedColor = colors.normalColor;
+
+                // ✅ Force Unity's EventSystem to match our selection
+                EventSystem.current.SetSelectedGameObject(optionButtons[i].gameObject);
             }
             else
             {
@@ -130,15 +154,7 @@ public class ChoiceUI : MonoBehaviour
         panel.interactable = false;
         panel.blocksRaycasts = false;
 
-        
-        isActive = false;
-
-        panel.alpha = 0;
-        panel.interactable = false;
-        panel.blocksRaycasts = false;
-
-        // ✅ CLEAR DIALOGUE INPUT SO IT DOESN'T SKIP NEXT LINE
-        FindAnyObjectByType<DialogueManager>().ClearAdvanceInput();
+        EventSystem.current.SetSelectedGameObject(null);
 
         onChoiceSelected?.Invoke(index);
     }

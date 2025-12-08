@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 362345135}
   - component: {fileID: 362345137}
   - component: {fileID: 362345138}
+  - component: {fileID: 362345139}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -395,10 +396,32 @@ MonoBehaviour:
   nameBoxText: {fileID: 1460104194}
   typewriter: {fileID: 2030624849}
   playerInput: {fileID: 362345137}
-  choiceUI: {fileID: 0}
+  choiceUI: {fileID: 362345139}
   doorAnimator: {fileID: 637218779}
   sfxSource: {fileID: 1352443260}
   characterDB: {fileID: 11400000, guid: ff3d9f0e44d63a94abdb1de0b6923ee2, type: 2}
+--- !u!114 &362345139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362345133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0781c7464fa2d40b85a45681de519e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChoiceUI
+  panel: {fileID: 1070251619}
+  optionButtons:
+  - {fileID: 1778255377}
+  - {fileID: 1533820611}
+  - {fileID: 879033880}
+  optionLabels:
+  - {fileID: 2054806276}
+  - {fileID: 22738712}
+  - {fileID: 505930343}
+  playerInput: {fileID: 362345137}
 --- !u!1 &410265065
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,7 +842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -827,8 +850,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 0.654902}
+    m_HighlightedColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.654902}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -863,7 +886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.654902}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1078,7 +1101,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1070251617}
   - component: {fileID: 1070251619}
-  - component: {fileID: 1070251618}
   m_Layer: 5
   m_Name: ChoicePanel
   m_TagString: Untagged
@@ -1108,27 +1130,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 125.00001}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1070251618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1070251616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc0781c7464fa2d40b85a45681de519e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChoiceUI
-  panel: {fileID: 1070251616}
-  optionButtons:
-  - {fileID: 1778255377}
-  - {fileID: 1533820611}
-  - {fileID: 879033880}
-  optionLabels:
-  - {fileID: 2054806276}
-  - {fileID: 22738712}
-  - {fileID: 505930343}
 --- !u!225 &1070251619
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1364,7 +1365,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194454086}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -1890,7 +1891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1898,8 +1899,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 0.654902}
+    m_HighlightedColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.654902}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1934,7 +1935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.654902}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2162,7 +2163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -2170,8 +2171,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 1}
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 0.654902}
+    m_HighlightedColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.654902}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2206,7 +2207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.654902}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.654902}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2351,7 +2352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Typewriter
   dialogueText: {fileID: 1148685588}
-  typeSpeed: 0.08
+  typeSpeed: 0.05
 --- !u!224 &2030624850
 RectTransform:
   m_ObjectHideFlags: 0

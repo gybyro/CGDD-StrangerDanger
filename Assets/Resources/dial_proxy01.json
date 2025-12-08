@@ -96,7 +96,6 @@
         "speaker": "proxy",
         "portrait": "openDoor2",
         "text": "ok",
-        "waitSeconds": 1,
         "animationTriggerDoor": "DoorOpen",
         "next": "01_081"
         },
@@ -164,7 +163,7 @@
         "id": "pizza01_bad5",
         "speaker": "you",
         "color": "#657385",
-        "text": "Aaaand thank you too!!       please DO NOT order from us again.",
+        "text": "(Aaaand thank you too!!  please DO NOT order from us again.)",
         "next": "end"
         },
 
@@ -213,7 +212,7 @@
         "id": "pizza01_ask7",
         "speaker": "proxy",
         "portrait": "pizzaUp",
-        "typeSpeed": 0.12,
+        "typeSpeed": 0.1,
         "text": "Be careful not to 'quit' prematurely as well.",
         "next": "pizza01_ask9"
         },
@@ -289,21 +288,21 @@
         {
         "id": "pizza01_name9",
         "speaker": "proxy",
-        "animationTriggerDoor": "DoorClose",
+        
         "showChar": false,
         "next": "pizza01_name10"
         },
         {
         "id": "pizza01_name10",
         "speaker": "you",
-        "text": "thank you for ordering with us!",
-        "waitSeconds": 2,
+        "animationTriggerDoor": "DoorClose",
+        "text": "Thank you for ... ordering with us..",
         "next": "pizza01_name11"
         },
         {
         "id": "pizza01_name11",
         "speaker": "you",
-        "color": "gray",
+        "color": "#657385",
         "text": "*sigh*",
         "next": "end"
         },
