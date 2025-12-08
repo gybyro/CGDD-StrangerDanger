@@ -5,7 +5,6 @@ using TMPro;
 public class Money_UI : MonoBehaviour
 {
     private TMP_Text MoneyText;
-    private TMP_Text QuotaText;
 
     private void Awake()
     {
