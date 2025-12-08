@@ -2,18 +2,17 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(TMP_Text))]
-public class Money_UI : MonoBehaviour
+public class Quota_UI : MonoBehaviour
 {
-    private TMP_Text MoneyText;
     private TMP_Text QuotaText;
 
     private void Awake()
     {
-        MoneyText = GetComponent<TMP_Text>();
+        QuotaText = GetComponent<TMP_Text>();
     }
 
     private void Update()
     {
-        MoneyText.text = "$" + Money_Manager.Instance.money;
+        QuotaText.text = "$" + Money_Manager.Instance.quota;
     }
 }

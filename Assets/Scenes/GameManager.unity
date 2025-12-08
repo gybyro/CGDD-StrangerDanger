@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Money_Manager
   money: 0
+  quota: 0
 --- !u!114 &681021446
 MonoBehaviour:
   m_ObjectHideFlags: 0
