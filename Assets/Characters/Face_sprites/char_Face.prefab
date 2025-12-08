@@ -274,5 +274,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 86c31a3dcb5352745b340beaca60e15c, type: 3}
   - {fileID: 21300000, guid: 61576ced3f2f6ce4097e985873a7f5ce, type: 3}
   - {fileID: 21300000, guid: 60171fa821bc5104fa6813c5d24675a2, type: 3}
-  frameRate: 1
+  frameRate: 1.6
   loop: 1

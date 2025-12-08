@@ -30,6 +30,7 @@ public class DialogueManager : MonoBehaviour
     private InputAction advanceAction;
     private Character currentSpeakerInstance;
     private bool advanceRequested;
+    private float defaultTypeSpeed;
 
     private Character GetOrSpawnCharacter(string id)
     {
@@ -60,6 +61,7 @@ public class DialogueManager : MonoBehaviour
         advanceAction = playerInput.actions["Next"];
         nameBox.alpha = 0;
         textBox.alpha = 0;
+        defaultTypeSpeed = typewriter.typeSpeed;
     }
 
     public void OnAdvancePressed()
@@ -160,39 +162,55 @@ public class DialogueManager : MonoBehaviour
         // SOUND ======================
         PlayDialogueSound(line.sound);
 
+        // TYPEWRITER SPEED =======================
+        if (line.typeSpeed > 0)
+            typewriter.typeSpeed = line.typeSpeed;
+        else
+            typewriter.typeSpeed = defaultTypeSpeed;
+            
         // TYPEWRITER / TEXT ======================
-        if (!string.IsNullOrEmpty(line.text)) { 
+        bool hasText = !string.IsNullOrEmpty(line.text);
+        if (hasText)
+        {
             textBox.alpha = 1;
             nameBox.alpha = 1;
             typewriter.StartTyping(line.text);
-            speaker.SetExpression(line.portrait); 
-            }
 
-        while (!typewriter.lineComplete)
-        {
-            if (advanceAction.WasPressedThisFrame() || advanceRequested)
+            // WAIT FOR TYPEWRITER OR SKIP
+            while (!typewriter.lineComplete)
             {
-                advanceRequested = false;
-                typewriter.CompleteLineNow();
+                if (advanceAction.WasPressedThisFrame() || advanceRequested)
+                {
+                    advanceRequested = false;
+                    typewriter.CompleteLineNow();
+                }
+
+                yield return null;
             }
-            yield return null;
         }
+        else { textBox.alpha = 0; }
+      
+
 
         // LINE WAIT IN SECONDS ======================
         if (line.waitSeconds > 0)
             yield return new WaitForSeconds(line.waitSeconds);
+        typewriter.typeSpeed = defaultTypeSpeed;
 
         // WAIT FOR ADVANCE INPUT ======================
-        waitingForPlayerInput = true;
-        while (waitingForPlayerInput)
+        if (hasText)
         {
-            if (advanceAction.WasPressedThisFrame() || advanceRequested)
+            waitingForPlayerInput = true;
+            while (waitingForPlayerInput)
             {
-                advanceRequested = false;
-                waitingForPlayerInput = false;
-            }
+                if (advanceAction.WasPressedThisFrame() || advanceRequested)
+                {
+                    advanceRequested = false;
+                    waitingForPlayerInput = false;
+                }
 
-            yield return null;
+                yield return null;
+            }
         }
 
         // SCENE CHANGE ======================

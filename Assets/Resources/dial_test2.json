@@ -4,29 +4,29 @@
         {
         "id": "test01",
         "speaker": "face",
+        "waitSeconds": 0,
         "animationTriggerDoor": "DoorOpenWide",
-        "text": "",
         "next": "test02"
         },
         {
         "id": "test02",
         "speaker": "face",
-        "portrait": "1",
-        "text": "",
+        "waitSeconds": 3,
+        "text": "testing testing",
         "showChar": "true",
         "next": "test03"
         },
         {
         "id": "test03",
         "speaker": "face",
-        "portrait": "1",
+        "typeSpeed": 0.12,
         "text": "YOU HAVE FAILEDDD THE WVIBE CHECKK",
         "next": "test06"
         },
         {
         "id": "test06",
         "speaker": "face",
-        "portrait": "",
+     
         "color": "#474DC8",
         "text": "...",
         "animationTriggerDoor": "DoorClose",

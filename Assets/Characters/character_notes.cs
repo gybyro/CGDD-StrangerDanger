@@ -77,6 +77,7 @@ public class DialogueLine
     public string animationTriggerDoor;
     public string showChar;  // character.Show() or character.Hide()
     public float waitSeconds;
+    public float typeSpeed;
     public string next;
     public string nextScene;
     public bool finished;
