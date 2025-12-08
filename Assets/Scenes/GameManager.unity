@@ -192,6 +192,7 @@ MonoBehaviour:
   currentTruth: 0
   currentCustomerNumber: 0
   nextCustomerNumber: 1
+  carPhase: 0
 --- !u!114 &681021445
 MonoBehaviour:
   m_ObjectHideFlags: 0

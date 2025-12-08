@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     // Who the phone will load next time
     public int nextCustomerNumber = 1;
 
+    public int carPhase = 0;
+
     private void Awake()
     {
         if (Instance == null)
@@ -107,6 +109,18 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GM] GENERATED CUSTOMER current={currentCustomerNumber}, next={nextCustomerNumber}");
         Debug.Log($"[GM] Actual: {GetActualDescription()}");
         Debug.Log($"[GM] Phone:  {GetPhoneDescription()}");
+    }
+
+    public void AdvanceCarPhase()
+    {
+        carPhase++;
+        Debug.Log("[GM] Car phase is now: " + carPhase);
+    }
+
+    public void ResetCarPhase()
+    {
+        carPhase = 0;
+        Debug.Log("[GM] Car phase reset to 0");
     }
 
     // ----------------------------------------------

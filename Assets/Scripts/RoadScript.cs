@@ -1,47 +1,147 @@
 using UnityEngine;
+using System.Collections;   // Needed for IEnumerator & coroutines
 
-public class RoadPieceLooper : MonoBehaviour
+public class RoadScript : MonoBehaviour
 {
     [Header("Movement")]
-    public float speed = 10f;         // How fast the road moves on the Z axis
+    public float speed = 10f;         // Target max speed
+    private float currentSpeed = 0f;  // Actual speed used to move
 
     [Header("Loop Settings")]
-    public float resetZ = -20f;       // When Z position is less than this -> teleport
-    public float startZ = 40f;        // New Z position after teleport
+    public float resetZ = -20f;
+    public float startZ = 40f;
 
-    [Header("Stop Settings")]
-    public float stopDuration = 3f;   // Time (in seconds) to fully stop
+    [Header("Start Behavior")]
+    public float accelerationTime = 3f;   // Time to accelerate to full speed
+    public float delayBeforeStart = 2f;   // Only used when carPhase > 0
 
-    private static bool globalStop = false;   // Shared by ALL RoadPieceLooper objects
+    [Header("Stop Behavior")]
+    public float stopDuration = 3f;       // Time to slowly stop after hitting MainCamera
+
+    // Shared between ALL RoadPieceLooper instances
+    private static bool globalStop = false;
+
+    // Acceleration state
+    private bool isAccelerating = false;
+    private float accelerationTimer = 0f;
+
+    // Stopping state
+    private bool isStopping = false;
     private float stopTimer = 0f;
-    private float startSpeed;
-    private bool hasSavedSpeed = false;
+    private float startStopSpeed = 0f;
 
-    void Update()
+    [Header("Objects for each Car Phase")]
+    public GameObject[] phaseObjects;
+
+    private void Start()
     {
-        // If the global stop has been triggered, all pieces slow down
+        // Reset stop state each time scene starts
+        globalStop = false;
+        isStopping = false;
+        stopTimer = 0f;
+
+        // -------------------------
+        // Get carPhase from GameManager
+        // -------------------------
+        int phase = 0;
+        if (GameManager.Instance != null)
+        {
+            phase = GameManager.Instance.carPhase;
+        }
+
+        // -------------------------
+        // Enable correct phase object
+        // -------------------------
+        if (phaseObjects != null && phaseObjects.Length > 0)
+        {
+            // Clamp so we don’t go outside the array
+            phase = Mathf.Clamp(phase, 0, phaseObjects.Length - 1);
+
+            // Disable all
+            for (int i = 0; i < phaseObjects.Length; i++)
+            {
+                if (phaseObjects[i] != null)
+                    phaseObjects[i].SetActive(false);
+            }
+
+            // Enable the correct phase object
+            if (phaseObjects[phase] != null)
+                phaseObjects[phase].SetActive(true);
+
+            Debug.Log("Enabled Car Phase Object: " + phase);
+        }
+
+        // -------------------------
+        // Start movement behavior based on carPhase
+        // -------------------------
+        if (phase == 0)
+        {
+            // First car scene → start moving immediately
+            currentSpeed = speed;
+            isAccelerating = false;
+        }
+        else
+        {
+            // Later car scenes → wait, then accelerate
+            currentSpeed = 0f;
+            isAccelerating = false;
+            StartCoroutine(StartAfterDelay());
+        }
+    }
+
+    private IEnumerator StartAfterDelay()
+    {
+        // Wait before starting motion (for carPhase > 0)
+        yield return new WaitForSeconds(delayBeforeStart);
+
+        accelerationTimer = 0f;
+        isAccelerating = true;
+    }
+
+    private void Update()
+    {
+        // If global stop triggered by MainCamera collision
         if (globalStop)
         {
-            if (!hasSavedSpeed)
+            if (!isStopping)
             {
-                startSpeed = speed;   // Save original speed once
-                hasSavedSpeed = true;
+                isStopping = true;
+                isAccelerating = false;     // Cancel any acceleration
+                stopTimer = 0f;
+                startStopSpeed = currentSpeed;
             }
 
             stopTimer += Time.deltaTime;
-            float t = stopTimer / stopDuration;
-            t = Mathf.Clamp01(t);
+            float t = Mathf.Clamp01(stopTimer / stopDuration);
+            currentSpeed = Mathf.Lerp(startStopSpeed, 0f, t);
 
-            speed = Mathf.Lerp(startSpeed, 0f, t);
+            if (t >= 1f)
+            {
+                currentSpeed = 0f;
+                // We stay stopped; globalStop remains true
+            }
+        }
+        else
+        {
+            // Only accelerate if we're not in stop mode
+            if (isAccelerating)
+            {
+                accelerationTimer += Time.deltaTime;
+                float t = Mathf.Clamp01(accelerationTimer / accelerationTime);
+                currentSpeed = Mathf.Lerp(0f, speed, t);
 
-            if (Mathf.Approximately(speed, 0f))
-                speed = 0f;
+                if (t >= 1f)
+                {
+                    currentSpeed = speed;
+                    isAccelerating = false;
+                }
+            }
         }
 
-        // Move backwards
-        transform.Translate(Vector3.back * speed * Time.deltaTime);
+        // Move road using currentSpeed
+        transform.Translate(Vector3.back * currentSpeed * Time.deltaTime);
 
-        // Loop object
+        // Loop road piece
         if (transform.position.z <= resetZ)
         {
             Vector3 pos = transform.position;
@@ -51,12 +151,16 @@ public class RoadPieceLooper : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("MainCamera"))
     {
-        // If ANY road piece touches an object tagged "MainCamera"
-        if (other.CompareTag("MainCamera"))
+        globalStop = true;
+
+        if (GameManager.Instance != null)
         {
-            Debug.Log("StopCar");
-            globalStop = true;   // Stop ALL road pieces
+            GameManager.Instance.AdvanceCarPhase();
         }
     }
+}
+
 }
