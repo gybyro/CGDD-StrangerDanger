@@ -392,11 +392,12 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue(DialogueLine line)
     {
-        int index = characterDB.GetIndex(activeNPC);
+        int charID = activeNPC.ID;
         string nextDialogue = line.nextDialFile;
+        
 
         // GameManager updates the next file to play for that character
-        GameManager.Instance.AdvanceCharDial(index, nextDialogue);
+        GameManager.Instance.AdvanceCharDial(charID, nextDialogue);
         
         // goes back to StoryLine class after this
     }

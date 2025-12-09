@@ -55,6 +55,7 @@
 // visitor2
 // visitor3
 
+using UnityEngine;
 using System;
 
 [Serializable]
@@ -100,3 +101,13 @@ public class RandomChoice {
 }
 
 
+//// for door bg
+[Serializable]
+public class SpriteColorSet
+{
+    public string setName;
+    public Sprite doorS;
+    public Sprite outerWallS;
+    public Sprite innerWallS;
+    public Sprite floorS;
+}

@@ -12,8 +12,10 @@ public class StoryLine : MonoBehaviour
     private string defaultDialogue = "start";
     private string currentDialogue;
     private bool hasStarted = false;
-    private int gameTick = 0;
     private int charIndex = 0;
+
+    private int currentDay;
+    private int currentTime;
 
     void Start()
     {
@@ -49,38 +51,41 @@ public class StoryLine : MonoBehaviour
 
     private void RunDay()
     {
-        if (gameTick == 0) {
-            // day before
-            GameManager.Instance.AdvanceTime(true); // day time
-            currentDialogue = "start";
-        }
-        else
+        // next time slot    // REMEMBER TO MOVE THIS TO THE CAR
+        GameManager.Instance.AdvanceTime();
+        
+        currentDay = GameManager.Instance.currentDay;
+        currentTime = GameManager.Instance.currentTime;
+        
+        Debug.Log("Current Day: " + currentDay + "Current Time: " + currentTime);
+
+        if (currentDay == 1 || currentDay == 2) // DAY 1 & 2
         {
-            if (gameTick == 1) charIndex = 1;
-            else if (gameTick == 2) charIndex = 2;
-            else if (gameTick == 3) charIndex = 3;
-            else if (gameTick == 4) charIndex = 1;
-            else if (gameTick == 5) charIndex = 2;
-            else if (gameTick == 6) charIndex = 3;
-            currentDialogue = GameManager.Instance.GetNextDialogue(charIndex);
+            charIndex = currentTime;
+            
+            // if (currentTime == 0) charIndex = 0;
+            // else if (currentTime == 1) charIndex = 1;
+            // else if (currentTime == 2) charIndex = 2;
+            // else if (currentTime == 3) charIndex = 3;   
         }
+            
         
-        GameManager.Instance.AdvanceTime(false);
-        gameTick++;
+        currentDialogue = GameManager.Instance.GetNextDialogue(charIndex);
+        Debug.Log("GetNextDialogue Called from StoryLine! index: " + charIndex + ", nextDialogue: " + currentDialogue);
+
+      
+
         StartCoroutine(RunStory());
-        
     }
 
     private IEnumerator RunStory()
     {
         // run the dialogue once for this scene
+        Debug.Log("Current dialogue: " + currentDialogue);
         yield return StartCoroutine(dialogueManager.RunDialogue(currentDialogue));
 
-
-        Debug.Log("StoryLine finished dialogue: " + currentDialogue);
-
+        // needs to be loaded AFTERWARDS >:(
         string sceneNameToLoad = "WalkingScene";
-
         SceneManager.LoadScene(sceneNameToLoad);
         Debug.Log($"Scene {sceneNameToLoad} loaded");
     }

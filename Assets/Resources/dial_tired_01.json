@@ -5,7 +5,7 @@
         "id": "test01",
         "speaker": "npc01",
         "portrait": "01",
-        "text": "Hi thre pizza sir!",
+        "text": "THIS IS dial_tired_01 !!!!!!!!!",
         "animationTriggerDoor": "DoorOpenWide",
         "showChar": "true",
         "next": "test02"

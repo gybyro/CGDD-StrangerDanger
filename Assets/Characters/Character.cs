@@ -12,8 +12,14 @@ public class CharacterExpression
 public class Character : MonoBehaviour
 {
     [Header("Character Info")] // =======================================================
+    public int ID;
     public string characterID;      // "john" (matches JSON)
     public string displayName;      // "John" (shown in UI)
+
+    [Header("House Palette")]
+    private DoorBGPallet doorBGPallet;
+    public string houseColorGood = "Brown";
+    public string houseColorBad = "Brown";
 
     [Header("Animation")] // ============================================================
     public Animator animator; // optional - slide in/out, talk, idle animations
@@ -46,14 +52,24 @@ public class Character : MonoBehaviour
 
 
     // ===================================================================================
-  void Awake()
+    void Awake()
     {
-        
+        // Find controller already in the scene
+        doorBGPallet = FindFirstObjectByType<DoorBGPallet>();
+        if (doorBGPallet != null) doorBGPallet.ApplyColorSet(houseColorGood);
     }
 
     // ===================================================================================
     // PUBLIC METHODS
     // ===================================================================================
+    public void SetHouse()
+    {
+        if (doorBGPallet != null) doorBGPallet.ApplyColorSet(houseColorGood);
+    }
+    public void SetBadHouse()
+    {
+        if (doorBGPallet != null) doorBGPallet.ApplyColorSet(houseColorBad);
+    }
 
     public void SetExpression(string expressionName)
     {
