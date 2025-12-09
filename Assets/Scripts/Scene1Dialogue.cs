@@ -5,6 +5,9 @@ using System.Collections;
 
 public class Scene1Dialogue : MonoBehaviour
 {
+    [SerializeField] private GameObject customer1;
+    [SerializeField] private GameObject customer2;
+    [SerializeField] private GameObject customer3;
     public int primeInt = 1;
 
     public TMP_Text Char2name;
@@ -63,6 +66,13 @@ public class Scene1Dialogue : MonoBehaviour
     public string deathSceneName;       // when you die (customer 2, stay)
     public string winSceneName;         // when you win (customer 3, enough money)
     public string loseSceneName;
+
+    private IEnumerator HideCustomerForSeconds(GameObject customer, float time)
+    {
+        customer.SetActive(false);
+        yield return new WaitForSeconds(time);
+        customer.SetActive(true);
+    }
 
     void Start()
     {
@@ -434,9 +444,10 @@ public class Scene1Dialogue : MonoBehaviour
 
         Debug.Log($"STAY CLICKED → Customer {num}, Money = ${money}, Truth = {GameManager.Instance.currentTruth}");
 
-        // 1) CUSTOMER 2 → ALWAYS DEATH
+        // 1) CUSTOMER 2 → ALWAYS IMPOSTER
         if (num == 2)
         {
+            StartCoroutine(HideCustomerForSeconds(customer1, 10f));
             Char2speech.text = "Customer was BAD.";
             Sanity_Meter.Instance.Lower_Sanity(25);
             if (!string.IsNullOrEmpty(deathSceneName))
@@ -447,6 +458,7 @@ public class Scene1Dialogue : MonoBehaviour
         // 2) CUSTOMER 3 → WIN or LOSE based on money
         if (num == 3)
         {
+            StartCoroutine(HideCustomerForSeconds(customer1, 10f));
             if (money >= 35)
             {
                 Char2speech.text = "Customer was GOOD. You earned enough tips!";
@@ -463,6 +475,7 @@ public class Scene1Dialogue : MonoBehaviour
         }
 
         // 3) CUSTOMER 1 → normal continue
+        StartCoroutine(HideCustomerForSeconds(customer1, 10f));
         Char2speech.text = "Customer was GOOD.";
         if (!string.IsNullOrEmpty(BackToWalkingScene))
             StartCoroutine(WaitAndLoadScene(BackToWalkingScene));

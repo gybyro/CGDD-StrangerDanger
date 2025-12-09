@@ -2079,6 +2079,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf14dd9fecde6d94e925efc35c76175d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scene1Dialogue
+  customer1: {fileID: 1487916586}
+  customer2: {fileID: 200175533}
+  customer3: {fileID: 1924696665}
   primeInt: 1
   Char2name: {fileID: 273781708}
   Char2speech: {fileID: 783829978}
