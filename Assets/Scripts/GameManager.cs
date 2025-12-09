@@ -9,11 +9,16 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public string nextDialogue = "dial_test2";
     public string lastDialoguePlayed;
+    
+    // car stuff
+    public int carPhase = 0;
 
     public int currentCustomerNumber = 0;
     public int nextCustomerNumber = 1;
 
     private int day = 1;
+
+    
 
     private void Awake()
     {
@@ -36,6 +41,21 @@ public class GameManager : MonoBehaviour
             nextCustomerNumber = 1;
     }
 
+    // CAR STUFF =====================================
+    public void AdvanceCarPhase()
+    {
+        carPhase++;
+        Debug.Log("[GM] Car phase is now: " + carPhase);
+    }
+
+    public void ResetCarPhase()
+    {
+        carPhase = 0;
+        Debug.Log("[GM] Car phase reset to 0");
+    }
+
+
+    // DAY STUFF =====================================
     public void AdvanceDay()
     {
         
