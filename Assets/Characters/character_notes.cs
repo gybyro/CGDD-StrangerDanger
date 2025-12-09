@@ -79,6 +79,7 @@ public class DialogueLine
     public float waitSeconds;
     public float typeSpeed;
     public string next;
+    public int tips;
     public string nextScene;
     public bool finished;
 

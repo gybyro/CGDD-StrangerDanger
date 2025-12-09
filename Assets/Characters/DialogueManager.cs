@@ -213,6 +213,7 @@ public class DialogueManager : MonoBehaviour
 
                 yield return null;
             }
+            if (line.tips != 0) Money_Manager.Instance.AddMoney(line.tips);
         }
         else { textBox.alpha = 0; }
       

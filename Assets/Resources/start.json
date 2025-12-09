@@ -89,6 +89,35 @@
         "id": "test13",
         "speaker": "you",
         "text": "hmmmmmmmmm...",
+        "next": "test14"
+        },
+        {
+        "id": "test14",
+        "speaker": "npc01",
+        "animationTriggerDoor": "DoorOpenWide",
+        "showChar": "true",
+        "next": "test15"
+        },
+        {
+        "id": "test15",
+        "speaker": "you",
+        "text": "!",
+        "next": "test16"
+        },
+        {
+        "id": "test16",
+        "speaker": "npc01",
+        "text": "Teehee I forgor your tip!",
+        "tips": 15,
+        "next": "test17"
+        },
+        {
+        "id": "test17",
+        "speaker": "npc01",
+        "waitSeconds": 1,
+        "text": "Toodles.",
+        "animationTriggerDoor": "DoorClose",
+        "showChar": "false",
         "next": "end"
         },
         {

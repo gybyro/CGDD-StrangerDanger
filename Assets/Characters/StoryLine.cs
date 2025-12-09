@@ -7,7 +7,7 @@ public class StoryLine : MonoBehaviour
     [Header("References")]
     public DialogueManager dialogueManager;
 
-    private string defaultDialogue = "start";
+    private string defaultDialogue = "dial_test2";
     private string currentDialogue;
     private bool hasStarted = false;
 
