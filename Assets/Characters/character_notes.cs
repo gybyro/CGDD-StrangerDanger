@@ -80,7 +80,7 @@ public class DialogueLine
     public float typeSpeed;
     public string next;
     public int tips;
-    public string nextScene;
+    public string nextDialFile;
     public bool finished;
 
     public string type;      // "choice", "random", or null
@@ -98,3 +98,5 @@ public class RandomChoice {
     public int weight;
     public string next;
 }
+
+

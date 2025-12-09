@@ -1,11 +1,11 @@
 {
-    "scene": "start",
+    "scene": "dial_tired_01",
     "lines": [
         {
         "id": "test01",
         "speaker": "npc01",
         "portrait": "01",
-        "text": "Hi thre pizza sir!",
+        "text": "THIS FILE IS dial_tired_02!!!!!!!!!!!",
         "animationTriggerDoor": "DoorOpenWide",
         "showChar": "true",
         "next": "test02"
@@ -124,7 +124,7 @@
         "id": "end",
         "speaker": "you",
         "text": "",
-        "nextDialFile": "ProxyVis01",
+        "nextDialFile": "dial_tired_03",
         "finished": true
         }
     ]

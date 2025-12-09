@@ -1,5 +1,5 @@
 {
-"scene": "Proxy01",
+"scene": "dial_proxy_01",
 "lines": 
     [
         {
@@ -310,7 +310,7 @@
         "id": "end",
         "speaker": "you",
         "text": "",
-        "nextScene": "ProxyVis01",
+        "nextDialFile": "dial_proxy_02",
         "finished": true
         }
     ]

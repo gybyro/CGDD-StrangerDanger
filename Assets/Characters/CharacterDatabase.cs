@@ -21,6 +21,19 @@ public class CharacterDatabase : ScriptableObject
         Debug.LogWarning("Character not found in database: " + id);
         return null;
     }
+
+    public int GetIndex(Character character)
+    {
+        if (character == null) return -1;
+
+        for (int i = 0; i < characterPrefabs.Length; i++)
+        {
+            if (characterPrefabs[i] == character)
+                return i;
+        }
+
+        return -1; // not found
+    }
 }
 
 [CreateAssetMenu(menuName = "VN/Character Sprite Database")]

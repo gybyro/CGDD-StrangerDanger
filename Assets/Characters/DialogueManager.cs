@@ -23,6 +23,7 @@ public class DialogueManager : MonoBehaviour
     [Header("Characters")]
     public CharacterDatabase characterDB;
     private Character currentSpeaker;
+    private Character activeNPC;
 
     private DialogueFile dialogue;
     private DialogueLine currentLine;
@@ -141,11 +142,21 @@ public class DialogueManager : MonoBehaviour
         advanceRequested = false;
 
         // SPEAKER HANDLING ======================
-        // Character speaker = characterDB.GetCharacter(line.speaker);
+        bool isPlayerSpeaking = line.speaker.ToLower() == "you";
         Character speaker = GetOrSpawnCharacter(line.speaker);
 
-        if (speaker != null)
+        if (!isPlayerSpeaking)
         {
+            // NPC is speaking -> they become the active conversation target
+            currentSpeaker = speaker;
+            activeNPC = speaker;
+
+            typewriter.SetSpeaker(speaker);
+            nameBoxText.text = speaker.displayName;
+        }
+        else if (isPlayerSpeaking)
+        {
+            // Player is speaking -> keep portrait focus on last NPC
             currentSpeaker = speaker;
             typewriter.SetSpeaker(speaker);
             nameBoxText.text = speaker.displayName;
@@ -155,9 +166,20 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("Character speaker is NULL");
             }
 
+        
+
 
         // SET PORTRAIT / SPRITE IMAGE
         if (!string.IsNullOrEmpty(line.portrait)) { speaker.SetExpression(line.portrait); }
+
+        if (!string.IsNullOrEmpty(line.portrait))
+        {
+            if (isPlayerSpeaking)
+                if (activeNPC != null) 
+                    activeNPC.SetExpression(line.portrait);
+            
+            else speaker.SetExpression(line.portrait);
+        }
 
         // TEXT COLOR ======================
         ApplyTextColor(line.color);
@@ -166,8 +188,8 @@ public class DialogueManager : MonoBehaviour
         TriggerDoorAnimation(line.animationTriggerDoor);
 
         // after door play show or hides
-        if (line.showChar == "true") { speaker.Show(); }
-        else if (line.showChar == "false") { speaker.Hide(); }
+        if (line.showChar == "true") { activeNPC.Show(); }
+        else if (line.showChar == "false") { activeNPC.Hide(); }
 
         // SOUND ======================
         PlayDialogueSound(line.sound);
@@ -370,9 +392,12 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue(DialogueLine line)
     {
-        GameManager.Instance.nextDialogue = line.nextScene;
+        int index = characterDB.GetIndex(activeNPC);
+        string nextDialogue = line.nextDialFile;
+
+        // GameManager updates the next file to play for that character
+        GameManager.Instance.AdvanceCharDial(index, nextDialogue);
         
-        // go back to StoryLine class???
-        
+        // goes back to StoryLine class after this
     }
 }

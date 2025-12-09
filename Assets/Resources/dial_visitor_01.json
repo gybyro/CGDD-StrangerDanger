@@ -1,5 +1,5 @@
 {
-    "scene": "test2",
+    "scene": "dial_visitor_01",
     "lines": [
         {
         "id": "test00",
@@ -34,7 +34,7 @@
         "speaker": "face",
      
         "color": "#474DC8",
-        "text": "...",
+        "text": "",
         "animationTriggerDoor": "DoorClose",
         "showChar": "false",
         "next": "end"
@@ -43,7 +43,7 @@
         "id": "end",
         "speaker": "you",
         "text": "",
-        "nextScene": "ProxyVis01",
+        "nextDialFile": "dial_visitor_02",
         "finished": true
         }
     ]

@@ -6,20 +6,14 @@ public class StoryLine : MonoBehaviour
 {
     [Header("References")]
     public DialogueManager dialogueManager;
+    public bool testDialogue = false;
+    public string ifTestDialogueFileName = "start";
 
-    private string defaultDialogue = "dial_test2";
+    private string defaultDialogue = "start";
     private string currentDialogue;
     private bool hasStarted = false;
-
-
-    void Awake()
-    {
-        // Pull dialogue key from GameManager
-        if (GameManager.Instance != null && !string.IsNullOrEmpty(GameManager.Instance.nextDialogue))
-            currentDialogue = GameManager.Instance.nextDialogue;
-        else
-            currentDialogue = defaultDialogue; // fallback
-    }
+    private int gameTick = 0;
+    private int charIndex = 0;
 
     void Start()
     {
@@ -29,7 +23,13 @@ public class StoryLine : MonoBehaviour
         if (string.IsNullOrEmpty(currentDialogue))
             currentDialogue = defaultDialogue;
 
-        StartCoroutine(RunStory());
+        if (testDialogue) StartCoroutine(dialogueManager.RunDialogue(ifTestDialogueFileName));
+        else
+        {
+            RunDay();
+        }
+
+        
 
 
         // 1st dialogue = "start
@@ -46,13 +46,36 @@ public class StoryLine : MonoBehaviour
 
     }
 
+
+    private void RunDay()
+    {
+        if (gameTick == 0) {
+            // day before
+            GameManager.Instance.AdvanceTime(true); // day time
+            currentDialogue = "start";
+        }
+        else
+        {
+            if (gameTick == 1) charIndex = 1;
+            else if (gameTick == 2) charIndex = 2;
+            else if (gameTick == 3) charIndex = 3;
+            else if (gameTick == 4) charIndex = 1;
+            else if (gameTick == 5) charIndex = 2;
+            else if (gameTick == 6) charIndex = 3;
+            currentDialogue = GameManager.Instance.GetNextDialogue(charIndex);
+        }
+        
+        GameManager.Instance.AdvanceTime(false);
+        gameTick++;
+        StartCoroutine(RunStory());
+        
+    }
+
     private IEnumerator RunStory()
     {
         // run the dialogue once for this scene
         yield return StartCoroutine(dialogueManager.RunDialogue(currentDialogue));
 
-        // After dialogue ends, tell GameManager we finished this scene’s dialogue
-        if (GameManager.Instance != null) { GameManager.Instance.lastDialoguePlayed = currentDialogue; }
 
         Debug.Log("StoryLine finished dialogue: " + currentDialogue);
 
