@@ -5,6 +5,9 @@ using System.Collections;
 
 public class Scene1Dialogue : MonoBehaviour
 {
+    [SerializeField] private GameObject customer1;
+    [SerializeField] private GameObject customer2;
+    [SerializeField] private GameObject customer3;
     public int primeInt = 1;
 
     public TMP_Text Char2name;
@@ -63,6 +66,13 @@ public class Scene1Dialogue : MonoBehaviour
     public string deathSceneName;       // when you die (customer 2, stay)
     public string winSceneName;         // when you win (customer 3, enough money)
     public string loseSceneName;
+
+    private IEnumerator HideCustomerForSeconds(GameObject customer, float time)
+    {
+        customer.SetActive(false);
+        yield return new WaitForSeconds(time);
+        customer.SetActive(true);
+    }
 
     void Start()
     {

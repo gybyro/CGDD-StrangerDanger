@@ -14,16 +14,21 @@ public class SceneTransition : MonoBehaviour
         Debug.Log($"Scene {sceneNameToLoad} loaded");
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    public void LoadSceneWithFade() 
     {
-        // Check if the thing entering is the player
-        if (other.CompareTag("Player"))
-        {
-            FadeToScene(sceneNameToLoad);
-            // SceneManager.LoadScene(sceneNameToLoad);
-        }
+        FadeToScene(sceneNameToLoad);
     }
+
+
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     // Check if the thing entering is the player
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         FadeToScene(sceneNameToLoad);
+    //         // SceneManager.LoadScene(sceneNameToLoad);
+    //     }
+    // }
 
     public void Quit()
     {
