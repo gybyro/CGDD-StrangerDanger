@@ -10,6 +10,7 @@ public class Money_Received : MonoBehaviour
     public void OnSafeChoice()
     {
         Money_Manager.Instance.AddMoney(safeReward);
+        Money_Manager.Instance.UpdateQuotaAmount(safeReward);
         // Continue dialogue, close UI, etc...
     }
 
@@ -17,6 +18,8 @@ public class Money_Received : MonoBehaviour
     public void OnRiskyChoice()
     {
         Money_Manager.Instance.AddMoney(riskyReward);
+        Money_Manager.Instance.UpdateQuotaAmount(riskyReward);
         // Continue dialogue, close UI, etc...
     }
+
 }

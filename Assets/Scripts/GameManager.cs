@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
     // DAY STUFF =====================================
     public void AdvanceDay()
     {
+        day = 1;
         
     }
 
