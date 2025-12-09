@@ -364,7 +364,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(soundName)) return;
 
-        AudioClip clip = Resources.Load<AudioClip>("SFX/" + soundName);
+        AudioClip clip = Resources.Load<AudioClip>("Sounds/" + soundName);
         if (clip != null)
             sfxSource.PlayOneShot(clip);
     }

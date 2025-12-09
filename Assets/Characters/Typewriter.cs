@@ -6,6 +6,7 @@ public class Typewriter : MonoBehaviour
 {
     [Header("References")]
     public TMP_Text dialogueText;
+    public GameObject continueArrow;
 
     [Header("Settings")]
     public float typeSpeed = 0.03f;
@@ -23,6 +24,9 @@ public class Typewriter : MonoBehaviour
 
     public void StartTyping(string text)
     {
+        if (continueArrow != null)
+            continueArrow.SetActive(false);
+
         if (dialogueText == null)
         {
             Debug.LogError("Typewriter: dialogueText is NOT assigned!");
@@ -48,6 +52,9 @@ public class Typewriter : MonoBehaviour
             StopCoroutine(typingCoroutine);
 
         dialogueText.maxVisibleCharacters = dialogueText.textInfo.characterCount;
+
+        if (continueArrow != null)
+            continueArrow.SetActive(true);
     }
 
     private IEnumerator TypeText(string text)
@@ -83,6 +90,9 @@ public class Typewriter : MonoBehaviour
 
         isTyping = false;
         lineComplete = true;
+
+        if (continueArrow != null)
+            continueArrow.SetActive(true);
     }
 
     private void PlayVoiceSound(Character speaker)

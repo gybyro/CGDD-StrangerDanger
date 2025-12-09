@@ -2,9 +2,16 @@
     "scene": "test2",
     "lines": [
         {
+        "id": "test00",
+        "speaker": "face",
+        "waitSeconds": 5,
+        "sound": "Ambience_2",
+        "next": "test01"
+        },
+        {
         "id": "test01",
         "speaker": "face",
-        "waitSeconds": 0,
+        "waitSeconds": 0.2,
         "animationTriggerDoor": "DoorOpenWide",
         "next": "test02"
         },
@@ -12,7 +19,6 @@
         "id": "test02",
         "speaker": "face",
         "waitSeconds": 3,
-        "text": "testing testing",
         "showChar": "true",
         "next": "test03"
         },

@@ -46,7 +46,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -150,5 +150,6 @@ MonoBehaviour:
   voicePitchMin: 0.95
   voicePitchMax: 1.05
   audioSource: {fileID: 1675929663158637842}
+  defaultTextColor: {r: 1, g: 1, b: 1, a: 1}
   spriteRenderer: {fileID: 0}
   expressions: []
