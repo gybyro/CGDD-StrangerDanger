@@ -149,9 +149,9 @@ MonoBehaviour:
   houseColorBad: Brown
   animator: {fileID: 0}
   voiceSounds:
-  - {fileID: 8300000, guid: 771dfb5cd4dcb9a46ad2e63e2558779a, type: 3}
-  voicePitchMin: 0.95
-  voicePitchMax: 1.05
+  - {fileID: 8300000, guid: a2fc19e30bcceb44290b649ac8babe9a, type: 3}
+  voicePitchMin: 0.8
+  voicePitchMax: 0.9
   audioSource: {fileID: 1675929663158637842}
   defaultTextColor: {r: 1, g: 1, b: 1, a: 1}
   spriteRenderer: {fileID: 0}

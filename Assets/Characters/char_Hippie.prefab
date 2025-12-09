@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2683408179688032825}
   - component: {fileID: -8079158275568158221}
   m_Layer: 0
-  m_Name: char_Placeholder
+  m_Name: char_Hippie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,30 +48,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f697fcd10346d4f9c542b1e29a9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
-  ID: 0
-  characterID: npc01
-  displayName: npc01
+  ID: 4
+  characterID: proxy
+  displayName: Proxy
   houseColorGood: Brown
   houseColorBad: Brown
   animator: {fileID: 62286867094759595}
   voiceSounds:
-  - {fileID: 8300000, guid: 32070317eb5aadc4cbe79c84b9c28c78, type: 3}
-  voicePitchMin: 0.95
-  voicePitchMax: 1.05
+  - {fileID: 8300000, guid: 018dc87f43a444d4299f5ec559e4d090, type: 3}
+  voicePitchMin: 0.8
+  voicePitchMax: 0.9
   audioSource: {fileID: -8079158275568158221}
-  defaultTextColor: {r: 1, g: 0.9772984, b: 0.7150943, a: 1}
+  defaultTextColor: {r: 0.2784314, g: 0.3019608, b: 0.78431374, a: 1}
   spriteRenderer: {fileID: 7718615900848793663}
   expressions:
-  - name: 01
-    sprite: {fileID: 21300000, guid: d9ebf30da82e6214a8e219fee498dff9, type: 3}
-  - name: 02
-    sprite: {fileID: 21300000, guid: 565061da77e1f9941b766d86f28e41cc, type: 3}
-  - name: 03
-    sprite: {fileID: 21300000, guid: b688c8e75a104894b9b844fa912b1ccf, type: 3}
-  - name: 04
-    sprite: {fileID: 21300000, guid: bdd372c282e13124d95ea71423bee041, type: 3}
-  - name: 05
-    sprite: {fileID: 21300000, guid: 628c2084332e0e6409954e506457dce1, type: 3}
+  - name: normal
+    sprite: {fileID: 21300000, guid: 3648ebb5f84720f43972cd37f9a03012, type: 3}
+  - name: pizza
+    sprite: {fileID: 21300000, guid: 188829be5e9c89e44bdef564b561ffa2, type: 3}
 --- !u!95 &62286867094759595
 Animator:
   serializedVersion: 7
@@ -82,7 +76,7 @@ Animator:
   m_GameObject: {fileID: 46065221635854547}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4dc92b776bc1dce498373c5cfce9bea8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 32773ea5e5058014c81a2cc94a961254, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -141,7 +135,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d9ebf30da82e6214a8e219fee498dff9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3648ebb5f84720f43972cd37f9a03012, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
