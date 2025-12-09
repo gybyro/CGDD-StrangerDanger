@@ -168,11 +168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ea573bbff96f747a0194e135a51ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  nextDialogue: dial_test2
+  nextDialogue: dial_proxy01
   lastDialoguePlayed: 
+  carPhase: 0
   currentCustomerNumber: 0
   nextCustomerNumber: 1
-  carPhase: 0
 --- !u!114 &681021445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Money_Manager
   money: 0
+  quota: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
