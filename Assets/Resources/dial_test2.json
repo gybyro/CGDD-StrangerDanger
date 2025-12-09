@@ -11,7 +11,7 @@
         {
         "id": "test01",
         "speaker": "face",
-        "waitSeconds": 0.2,
+        "waitSeconds": 0,
         "animationTriggerDoor": "DoorOpenWide",
         "next": "test02"
         },

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public string nextDialogue = "start";
+    public string lastDialoguePlayed;
 
     public int currentCustomerNumber = 0;
     public int nextCustomerNumber = 1;

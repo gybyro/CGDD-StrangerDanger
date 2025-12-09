@@ -35,7 +35,6 @@
         "id": "test05",
         "speaker": "proxy",
         "portrait": "visitor3",
-        "color": "#474DC8",
         "text": "...",
         "next": "test06"
         },
@@ -43,7 +42,6 @@
         "id": "test06",
         "speaker": "proxy",
         "portrait": "visitor3",
-        "color": "#474DC8",
         "text": "...",
         "animationTriggerDoor": "DoorSlam",
         "showChar": "false",

@@ -286,10 +286,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1739038757}
+  - {fileID: 982186708}
   - {fileID: 1057485029}
   - {fileID: 1959764470}
   - {fileID: 637218777}
-  - {fileID: 982186708}
   - {fileID: 1352443261}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -743,7 +743,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 5a30e5043bf238743824701b4bc5e680, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 402034c1c0d211944b3bb4db189f1155, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -990,7 +990,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 3beb8ff25a0b40d44841922ae0e32f89, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b341fb8fafe911741a5343704cd36e74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 1057485029}
   - component: {fileID: 1057485028}
   m_Layer: 0
-  m_Name: BG_house
+  m_Name: BG_house_back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1065,7 +1065,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: a925929ae82083a4f9497e7252d75662, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c91749753c247c549b386c3454bc57aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1366,7 +1366,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194454086}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2410,7 +2410,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9c457de98d8221f468b828d34c7a5a70, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f35e27d9af86e9442a90eec42d9a5a04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

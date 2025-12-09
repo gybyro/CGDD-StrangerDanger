@@ -36,26 +36,27 @@ public class DialogueManager : MonoBehaviour
     private bool lineWasHandledByChoice;
 
     private Character GetOrSpawnCharacter(string id)
-{
-    // If character already exists, reuse it
-    if (spawnedCharacters.TryGetValue(id, out Character existing))
-        return existing;
-
-    // Get prefab from database
-    Character prefab = characterDB.GetCharacter(id);
-
-    if (prefab == null)
     {
-        Debug.LogWarning("No character prefab found for: " + id);
-        return null;
+        // If character already exists, reuse it
+        if (spawnedCharacters.TryGetValue(id, out Character existing))
+            return existing;
+
+        // Get prefab from database
+        Character prefab = characterDB.GetCharacter(id);
+
+
+        if (prefab == null)
+        {
+            Debug.LogWarning("No character prefab found for: " + id);
+            return null;
+        }
+
+        // Spawn only ONCE
+        Character newChar = Instantiate(prefab);
+        spawnedCharacters.Add(id, newChar);
+
+        return newChar;
     }
-
-    // Spawn only ONCE
-    Character newChar = Instantiate(prefab);
-    spawnedCharacters.Add(id, newChar);
-
-    return newChar;
-}
 
 
 
@@ -106,11 +107,11 @@ public class DialogueManager : MonoBehaviour
 
             yield return RunLine(currentLine);
 
-            // ✅ Stop after final line
+            // Stop after "finished": true
             if (currentLine.finished)
-                break;
+                EndDialogue(currentLine);
 
-            // ✅ ONLY advance automatically if NOT a choice
+            // ONLY advance automatically if NOT a choice
             if (!lineWasHandledByChoice)
                 currentLine = GetNextLine(currentLine);
         }
@@ -237,13 +238,6 @@ public class DialogueManager : MonoBehaviour
                 yield return null;
             }
         }
-
-        // SCENE CHANGE ======================
-        if (!string.IsNullOrEmpty(line.nextScene))
-        {
-            //sceneTransition.LoadScene(line.nextScene);
-            yield break;
-        }
     }
 
     // ==============================
@@ -278,7 +272,6 @@ public class DialogueManager : MonoBehaviour
     {
         bool hasText = !string.IsNullOrEmpty(line.text);
 
-        // ✅ Show prompt using normal text
         if (hasText)
         {
             textBox.alpha = 1;
@@ -299,7 +292,7 @@ public class DialogueManager : MonoBehaviour
         int selectedIndex = 0;
 
         isChoosing = true;
-        lineWasHandledByChoice = true; // ✅ IMPORTANT
+        lineWasHandledByChoice = true;
 
         choiceUI.ShowChoices(line, (index) =>
         {
@@ -311,7 +304,6 @@ public class DialogueManager : MonoBehaviour
         while (!choiceMade)
             yield return null;
 
-        // ✅ Set next line from selected option
         currentLine = FindLine(line.options[selectedIndex].next);
         yield return null;
     }
@@ -373,5 +365,13 @@ public class DialogueManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(trigger) || doorAnimator == null) return;
         doorAnimator.SetTrigger(trigger);
+    }
+
+    private void EndDialogue(DialogueLine line)
+    {
+        GameManager.Instance.nextDialogue = line.nextScene;
+        
+        // go back to StoryLine class???
+        
     }
 }

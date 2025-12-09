@@ -42296,7 +42296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c23f8e567668b47aca8637e22860d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
-  sceneNameToLoad: HouseScene
+  sceneNameToLoad: GB_HouseScene
   fadeGroup: {fileID: 1344973580}
   fadeTime: 0.2
 --- !u!65 &894306280

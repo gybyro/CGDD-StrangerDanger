@@ -10,11 +10,11 @@ public class DoorEventController : MonoBehaviour
     public string closeAnimationName = "DoorClose";
 
     [Header("Characters")]
-    public string[] characterIDs; // "john", "mary", "leo"
+    public string[] characterIDs;
     public CharacterSpriteController characterSpriteController;
 
     [Header("Dialogue")]
-    public DialogueManager dialogueManager; // your VN dialogue system
+    public DialogueManager dialogueManager; 
     public string dialogueFileName = "dialogue_day1";
 
     public void StartDoorEvent()
