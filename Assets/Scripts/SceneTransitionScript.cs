@@ -14,6 +14,7 @@ public class SceneTransition : MonoBehaviour
         Debug.Log($"Scene {sceneNameToLoad} loaded");
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         // Check if the thing entering is the player

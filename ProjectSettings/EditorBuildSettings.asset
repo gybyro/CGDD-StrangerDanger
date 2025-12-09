@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameManager.unity
-    guid: f0bfcfb107ca1e542aaa2c7d5e5b0823
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 905d905fa06b1cb4f93ba8d7975437c3
+  - enabled: 1
+    path: Assets/Scenes/GameManager.unity
+    guid: f0bfcfb107ca1e542aaa2c7d5e5b0823
   - enabled: 1
     path: Assets/Scenes/CarScene.unity
     guid: 470f456831e60b04792c171548f624c3
@@ -18,17 +18,14 @@ EditorBuildSettings:
     path: Assets/Scenes/WalkingScene.unity
     guid: 8b8598245fc01f648a383986106c53f5
   - enabled: 1
-    path: Assets/Scenes/HouseScene.unity
-    guid: ff28fae8470cfd6448a969d949a1c6ba
+    path: Assets/Scenes/GB_HouseScene.unity
+    guid: 90f8494456186954b91b8ea6947fb1ee
   - enabled: 1
     path: Assets/Scenes/deathScene.unity
     guid: f4bc97e53067604478be66e02a6a049f
   - enabled: 1
     path: Assets/Scenes/Win_Screen.unity
     guid: 103528542d9914baa8a9195f2cbef238
-  - enabled: 1
-    path: Assets/Scenes/JokullWalkingScene.unity
-    guid: e6258146188edc04eb51d7f3597c5147
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

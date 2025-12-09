@@ -111,26 +111,27 @@ public class Scene1Dialogue : MonoBehaviour
 
     private void LoadCustomerData()
     {
-        int num = GameManager.Instance.currentCustomerNumber;
+        // int num = GameManager.Instance.currentCustomerNumber;
 
-        isCustomer2 = (num == 2);
-        isCustomer3 = (num == 3);
+        // isCustomer2 = (num == 2);
+        // isCustomer3 = (num == 3);
 
-        // Always start from the TRUE data stored in GameManager
-        var a = GameManager.Instance.currentActual;
+        // // Always start from the TRUE data stored in GameManager
+        // var a = GameManager.Instance.currentActual;
 
-        cName = a.name;
-        cAge = a.age;
-        cWork = a.workplace;
+        // cName = a.name;
+        // cAge = a.age;
+        // cWork = a.workplace;
 
-        if (isCustomer3)
-        {
-            string[] parts = a.name.Split(' ');
-            c3FirstName   = parts.Length > 0 ? parts[0] : "Unknown";
-            c3FakeLastName = (parts.Length > 1 ? parts[1] : "Lastname") + "son";
-        }
+        // if (isCustomer3)
+        // {
+        //     string[] parts = a.name.Split(' ');
+        //     c3FirstName   = parts.Length > 0 ? parts[0] : "Unknown";
+        //     c3FakeLastName = (parts.Length > 1 ? parts[1] : "Lastname") + "son";
+        // }
 
-        Debug.Log($"[Scene1Dialogue] Loaded data: name={cName}, age={cAge}, work={cWork}, is2={isCustomer2}, is3={isCustomer3}, num={num}");
+        // Debug.Log($"[Scene1Dialogue] Loaded data: name={cName}, age={cAge}, work={cWork}, is2={isCustomer2}, is3={isCustomer3}, num={num}");
+        Debug.Log($"get a grip");
     }
 
     /// <summary>
@@ -140,26 +141,27 @@ public class Scene1Dialogue : MonoBehaviour
     /// </summary>
     private void UpdateCustomerSprites(bool visible)
     {
-        CaraCustomer.SetActive(false);
-        JohnCustomer.SetActive(false);
-        VictoriaCustomer.SetActive(false);
+        // CaraCustomer.SetActive(false);
+        // JohnCustomer.SetActive(false);
+        // VictoriaCustomer.SetActive(false);
 
-        if (!visible) return;
+        // if (!visible) return;
 
-        int num = GameManager.Instance.currentCustomerNumber;
+        // int num = GameManager.Instance.currentCustomerNumber;
 
-        if (num == 1)
-        {
-            CaraCustomer.SetActive(true);
-        }
-        else if (num == 2)
-        {
-            VictoriaCustomer.SetActive(true);
-        }
-        else if (num == 3)
-        {
-            JohnCustomer.SetActive(true);
-        }
+        // if (num == 1)
+        // {
+        //     CaraCustomer.SetActive(true);
+        // }
+        // else if (num == 2)
+        // {
+        //     VictoriaCustomer.SetActive(true);
+        // }
+        // else if (num == 3)
+        // {
+        //     JohnCustomer.SetActive(true);
+        // }
+        Debug.Log($"get a grip");
     }
 
     // ------------------------------
@@ -167,72 +169,73 @@ public class Scene1Dialogue : MonoBehaviour
     // ------------------------------
     public void Next()
     {
-        // If we just showed an answer, Next should go to question/tip logic
-        if (primeInt == 101 || primeInt == 201 || primeInt == 301)
-        {
-            nextButton.SetActive(false);
-            AfterAnswer();
-            return;
-        }
+        // // If we just showed an answer, Next should go to question/tip logic
+        // if (primeInt == 101 || primeInt == 201 || primeInt == 301)
+        // {
+        //     nextButton.SetActive(false);
+        //     AfterAnswer();
+        //     return;
+        // }
 
-        primeInt++;
+        // primeInt++;
 
-        Char2name.text = "Customer";
-        Char2speech.text = "";
+        // Char2name.text = "Customer";
+        // Char2speech.text = "";
 
-        if (primeInt == 2)
-        {
-            DialogueDisplay.SetActive(true);
+        // if (primeInt == 2)
+        // {
+        //     DialogueDisplay.SetActive(true);
 
-            // Open the door now and show the customer
-            DoorOpen.SetActive(true);
-            DoorClosed.SetActive(false);
-            UpdateCustomerSprites(true);
+        //     // Open the door now and show the customer
+        //     DoorOpen.SetActive(true);
+        //     DoorClosed.SetActive(false);
+        //     UpdateCustomerSprites(true);
 
-            if (!isCustomer2 && !isCustomer3)
-                Char2speech.text = "Hey, you must be the delivery driver.";
-            else if (isCustomer2)
-                Char2speech.text = "Heyyy, pizza is here!";
-            else
-                Char2speech.text = "You're late.";
-        }
-        else if (primeInt == 3)
-        {
-            if (!isCustomer2 && !isCustomer3)
-                Char2speech.text = "Man, I'm so hungry.";
-            else if (isCustomer2)
-                Char2speech.text = "Whoa, you were fast.";
-            else
-                Char2speech.text = "I am an important man, and I require my pizzas on time.";
-        }
-        else if (primeInt == 4)
-        {
-            if (!isCustomer2 && !isCustomer3)
-                Char2speech.text = "Now give me the pizza.";
-            else if (isCustomer2)
-                Char2speech.text = "Now hurry and give me the pizza.";
-            else
-                Char2speech.text = "Give me the pizza now.";
-        }
-        else if (primeInt == 5)
-        {
-            nextButton.SetActive(false);
-            ShowRemainingQuestions();
-        }
-        else if (primeInt == 600)
-        {
-            // TIP LINE AFTER SECOND QUESTION
-            if (!isCustomer2 && !isCustomer3)
-                Char2speech.text = "If you stay a little longer, I can go get a tip for you.";
-            else if (isCustomer2)
-                Char2speech.text = "Wait here while I get a tip for you.";
-            else
-                Char2speech.text = "I will retrieve the money and tip. Stay there.";
+        //     if (!isCustomer2 && !isCustomer3)
+        //         Char2speech.text = "Hey, you must be the delivery driver.";
+        //     else if (isCustomer2)
+        //         Char2speech.text = "Heyyy, pizza is here!";
+        //     else
+        //         Char2speech.text = "You're late.";
+        // }
+        // else if (primeInt == 3)
+        // {
+        //     if (!isCustomer2 && !isCustomer3)
+        //         Char2speech.text = "Man, I'm so hungry.";
+        //     else if (isCustomer2)
+        //         Char2speech.text = "Whoa, you were fast.";
+        //     else
+        //         Char2speech.text = "I am an important man, and I require my pizzas on time.";
+        // }
+        // else if (primeInt == 4)
+        // {
+        //     if (!isCustomer2 && !isCustomer3)
+        //         Char2speech.text = "Now give me the pizza.";
+        //     else if (isCustomer2)
+        //         Char2speech.text = "Now hurry and give me the pizza.";
+        //     else
+        //         Char2speech.text = "Give me the pizza now.";
+        // }
+        // else if (primeInt == 5)
+        // {
+        //     nextButton.SetActive(false);
+        //     ShowRemainingQuestions();
+        // }
+        // else if (primeInt == 600)
+        // {
+        //     // TIP LINE AFTER SECOND QUESTION
+        //     if (!isCustomer2 && !isCustomer3)
+        //         Char2speech.text = "If you stay a little longer, I can go get a tip for you.";
+        //     else if (isCustomer2)
+        //         Char2speech.text = "Wait here while I get a tip for you.";
+        //     else
+        //         Char2speech.text = "I will retrieve the money and tip. Stay there.";
 
-            nextButton.SetActive(false);
-            StayButton.SetActive(true);
-            LeaveButton.SetActive(true);
-        }
+        //     nextButton.SetActive(false);
+        //     StayButton.SetActive(true);
+        //     LeaveButton.SetActive(true);
+        // }
+        Debug.Log($"get a grip");
     }
 
     // ------------------------------
@@ -240,53 +243,58 @@ public class Scene1Dialogue : MonoBehaviour
     // ------------------------------
     private void ShowRemainingQuestions()
     {
-        ChoiceNameButton.SetActive(!askedName);
-        ChoiceWorkButton.SetActive(!askedWork);
-        ChoiceAgeButton.SetActive(!askedAge);
+        // ChoiceNameButton.SetActive(!askedName);
+        // ChoiceWorkButton.SetActive(!askedWork);
+        // ChoiceAgeButton.SetActive(!askedAge);
 
-        ChoiceNameText.text = "What is your name?";
-        ChoiceWorkText.text = "Where do you work?";
-        ChoiceAgeText.text = "How old are you?";
+        // ChoiceNameText.text = "What is your name?";
+        // ChoiceWorkText.text = "Where do you work?";
+        // ChoiceAgeText.text = "How old are you?";
+        Debug.Log($"get a grip");
     }
 
     public void OnAskName()
     {
-        askedName = true;
-        questionsAsked++;
+        // askedName = true;
+        // questionsAsked++;
 
-        DisableQuestions();
-        nextButton.SetActive(true);
+        // DisableQuestions();
+        // nextButton.SetActive(true);
 
-        primeInt = 100;
+        // primeInt = 100;
+        Debug.Log($"get a grip");
     }
 
     public void OnAskWork()
     {
-        askedWork = true;
-        questionsAsked++;
+        // askedWork = true;
+        // questionsAsked++;
 
-        DisableQuestions();
-        nextButton.SetActive(true);
+        // DisableQuestions();
+        // nextButton.SetActive(true);
 
-        primeInt = 200;
+        // primeInt = 200;
+        Debug.Log($"get a grip");
     }
 
     public void OnAskAge()
     {
-        askedAge = true;
-        questionsAsked++;
+        // askedAge = true;
+        // questionsAsked++;
 
-        DisableQuestions();
-        nextButton.SetActive(true);
+        // DisableQuestions();
+        // nextButton.SetActive(true);
 
-        primeInt = 300;
+        // primeInt = 300;
+        Debug.Log($"get a grip");
     }
 
     private void DisableQuestions()
     {
-        ChoiceNameButton.SetActive(false);
-        ChoiceWorkButton.SetActive(false);
-        ChoiceAgeButton.SetActive(false);
+        // ChoiceNameButton.SetActive(false);
+        // ChoiceWorkButton.SetActive(false);
+        // ChoiceAgeButton.SetActive(false);
+        Debug.Log($"get a grip");
     }
 
     // ------------------------------
@@ -433,92 +441,90 @@ public class Scene1Dialogue : MonoBehaviour
     // ------------------------------
     public void OnStay()
     {
-        StayButton.SetActive(false);
-        LeaveButton.SetActive(false);
-        nextButton.SetActive(false);
+        // StayButton.SetActive(false);
+        // LeaveButton.SetActive(false);
+        // nextButton.SetActive(false);
 
-        Char2name.text = "Customer";
+        // Char2name.text = "Customer";
 
-        int num   = GameManager.Instance.currentCustomerNumber;
-        int money = Money_Manager.Instance.money;
+        // int num   = GameManager.Instance.currentCustomerNumber;
+        // int money = Money_Manager.Instance.money;
 
-        Debug.Log($"STAY CLICKED → Customer {num}, Money = ${money}, Truth = {GameManager.Instance.currentTruth}");
+        // Debug.Log($"STAY CLICKED → Customer {num}, Money = ${money}, Truth = {GameManager.Instance.currentTruth}");
 
-        // 1) CUSTOMER 2 → ALWAYS IMPOSTER
-        if (num == 2)
-        {
-            StartCoroutine(HideCustomerForSeconds(customer1, 10f));
-            Char2speech.text = "Customer was BAD.";
-            Sanity_Meter.Instance.Lower_Sanity(25);
-            if (!string.IsNullOrEmpty(deathSceneName))
-                StartCoroutine(WaitAndLoadScene(deathSceneName));
-            return;
-        }
+        // // 1) CUSTOMER 2 → ALWAYS DEATH
+        // if (num == 2)
+        // {
+        //     Char2speech.text = "Customer was BAD.";
+        //     if (!string.IsNullOrEmpty(deathSceneName))
+        //         StartCoroutine(WaitAndLoadScene(deathSceneName));
+        //     return;
+        // }
 
-        // 2) CUSTOMER 3 → WIN or LOSE based on money
-        if (num == 3)
-        {
-            StartCoroutine(HideCustomerForSeconds(customer1, 10f));
-            if (money >= 35)
-            {
-                Char2speech.text = "Customer was GOOD. You earned enough tips!";
-                if (!string.IsNullOrEmpty(winSceneName))
-                    StartCoroutine(WaitAndLoadScene(winSceneName));
-            }
-            else
-            {
-                Char2speech.text = "Customer was GOOD... but you didn't earn enough money.";
-                if (!string.IsNullOrEmpty(loseSceneName))
-                    StartCoroutine(WaitAndLoadScene(loseSceneName));
-            }
-            return;
-        }
+        // // 2) CUSTOMER 3 → WIN or LOSE based on money
+        // if (num == 3)
+        // {
+        //     if (money >= 35)
+        //     {
+        //         Char2speech.text = "Customer was GOOD. You earned enough tips!";
+        //         if (!string.IsNullOrEmpty(winSceneName))
+        //             StartCoroutine(WaitAndLoadScene(winSceneName));
+        //     }
+        //     else
+        //     {
+        //         Char2speech.text = "Customer was GOOD... but you didn't earn enough money.";
+        //         if (!string.IsNullOrEmpty(loseSceneName))
+        //             StartCoroutine(WaitAndLoadScene(loseSceneName));
+        //     }
+        //     return;
+        // }
 
-        // 3) CUSTOMER 1 → normal continue
-        StartCoroutine(HideCustomerForSeconds(customer1, 10f));
-        Char2speech.text = "Customer was GOOD.";
-        if (!string.IsNullOrEmpty(BackToWalkingScene))
-            StartCoroutine(WaitAndLoadScene(BackToWalkingScene));
+        // // 3) CUSTOMER 1 → normal continue
+        // Char2speech.text = "Customer was GOOD.";
+        // if (!string.IsNullOrEmpty(BackToWalkingScene))
+        //     StartCoroutine(WaitAndLoadScene(BackToWalkingScene));
+        Debug.Log($"get a grip");
     }
 
 
 
     public void OnLeave()
     {
-        StayButton.SetActive(false);
-        LeaveButton.SetActive(false);
-        nextButton.SetActive(false);
+        // StayButton.SetActive(false);
+        // LeaveButton.SetActive(false);
+        // nextButton.SetActive(false);
 
-        Char2name.text = "Customer";
-        Char2speech.text = "You left.";
+        // Char2name.text = "Customer";
+        // Char2speech.text = "You left.";
 
-        int num   = GameManager.Instance.currentCustomerNumber;
-        int money = Money_Manager.Instance.money;
+        // int num   = GameManager.Instance.currentCustomerNumber;
+        // int money = Money_Manager.Instance.money;
 
-        Debug.Log($"LEAVE CLICKED → Customer {num}, Money = ${money}");
+        // Debug.Log($"LEAVE CLICKED → Customer {num}, Money = ${money}");
 
-        // If this is CUSTOMER 3, we should still check win/lose,
-        // because the day is essentially over after this one.
-        if (num == 3)
-        {
-            if (money >= 35)
-            {
-                Char2speech.text = "You left... but you earned enough money!";
-                if (!string.IsNullOrEmpty(winSceneName))
-                    StartCoroutine(WaitAndLoadScene(winSceneName));
-            }
-            else
-            {
-                Char2speech.text = "You left... and you didn't earn enough money.";
-                if (!string.IsNullOrEmpty(loseSceneName))
-                    StartCoroutine(WaitAndLoadScene(loseSceneName));
-            }
-            return;
-        }
+        // // If this is CUSTOMER 3, we should still check win/lose,
+        // // because the day is essentially over after this one.
+        // if (num == 3)
+        // {
+        //     if (money >= 35)
+        //     {
+        //         Char2speech.text = "You left... but you earned enough money!";
+        //         if (!string.IsNullOrEmpty(winSceneName))
+        //             StartCoroutine(WaitAndLoadScene(winSceneName));
+        //     }
+        //     else
+        //     {
+        //         Char2speech.text = "You left... and you didn't earn enough money.";
+        //         if (!string.IsNullOrEmpty(loseSceneName))
+        //             StartCoroutine(WaitAndLoadScene(loseSceneName));
+        //     }
+        //     return;
+        // }
 
-        // For customer 1 and 2, leaving just sends you back to the walking/car scene
-        if (!string.IsNullOrEmpty(leaveSceneName))
-            StartCoroutine(WaitAndLoadScene(leaveSceneName));
+        // // For customer 1 and 2, leaving just sends you back to the walking/car scene
+        // if (!string.IsNullOrEmpty(leaveSceneName))
+        //     StartCoroutine(WaitAndLoadScene(leaveSceneName));
+        Debug.Log($"get a grip");
     }
 
 

@@ -1,0 +1,131 @@
+{
+    "scene": "start",
+    "lines": [
+        {
+        "id": "test01",
+        "speaker": "npc01",
+        "portrait": "01",
+        "text": "Hi thre pizza sir!",
+        "animationTriggerDoor": "DoorOpenWide",
+        "showChar": "true",
+        "next": "test02"
+        },
+        {
+        "id": "test02",
+        "speaker": "you",
+        "text": "hey",
+        "next": "test03"
+        },
+        {
+        "id": "test03",
+        "speaker": "npc01",
+        "portrait": "03",
+        "text": "Aw sick! Pizza time!",
+        "next": "test04"
+        },
+        {
+        "id": "test04",
+        "speaker": "you",
+        "text": "Thats right, the last time im delivering to you for now.",
+        "next": "test05"
+        },
+        {
+        "id": "test05",
+        "speaker": "npc01",
+        "portrait": "04",
+        "text": "... HUH??",
+        "next": "test06"
+        },
+        {
+        "id": "test06",
+        "speaker": "you",
+        "text": "Yeah, they're sending me over to this small ass town called 'whitetail hollow' I think? Guy working there quit all of a sudden so I'm filling in for the week.",
+        "next": "test07"
+        },
+        {
+        "id": "test07",
+        "speaker": "npc01",
+        "portrait": "02",
+        "text": "Ive heard of it, the one in the walley right?",
+        "next": "test08"
+        },
+        {
+        "id": "test08",
+        "speaker": "npc01",
+        "portrait": "02",
+        "text": "You gotta be careful man, Ive heards some spooky shit round those parts.",
+        "next": "test09"
+        },
+        {
+        "id": "test09",
+        "speaker": "you",
+        "text": "I will try to come back in one piece, then ill beat you in wario cart again!",
+        "next": "test10"
+        },
+        {
+        "id": "test10",
+        "speaker": "npc01",
+        "portrait": "05",
+        "typeSpeed": 0.12,
+        "text": "Bet.",
+        "next": "test11"
+        },
+        {
+        "id": "test11",
+        "speaker": "npc01",
+        "portrait": "01",
+        "text": "Ok then, Ill see you later man!",
+        "next": "test12"
+        },
+        {
+        "id": "test12",
+        "speaker": "npc01",
+        "waitSeconds": 1,
+        "animationTriggerDoor": "DoorClose",
+        "showChar": "false",
+        "next": "test13"
+        },
+        {
+        "id": "test13",
+        "speaker": "you",
+        "text": "hmmmmmmmmm...",
+        "next": "test14"
+        },
+        {
+        "id": "test14",
+        "speaker": "npc01",
+        "animationTriggerDoor": "DoorOpenWide",
+        "showChar": "true",
+        "next": "test15"
+        },
+        {
+        "id": "test15",
+        "speaker": "you",
+        "text": "!",
+        "next": "test16"
+        },
+        {
+        "id": "test16",
+        "speaker": "npc01",
+        "text": "Teehee I forgor your tip!",
+        "tips": 15,
+        "next": "test17"
+        },
+        {
+        "id": "test17",
+        "speaker": "npc01",
+        "waitSeconds": 1,
+        "text": "Toodles.",
+        "animationTriggerDoor": "DoorClose",
+        "showChar": "false",
+        "next": "end"
+        },
+        {
+        "id": "end",
+        "speaker": "you",
+        "text": "",
+        "nextScene": "ProxyVis01",
+        "finished": true
+        }
+    ]
+}

@@ -1,10 +1,30 @@
 using UnityEngine;
+using TMPro;   // ← ADD THIS
 
 public class deathScrean : MonoBehaviour
 {
+    public TextMeshProUGUI totalMoneyText;
+
+    private void OnEnable()
+    {
+        UpdateMoneyDisplay();
+    }
+
+    private void UpdateMoneyDisplay()
+    {
+        if (Money_Manager.Instance != null)
+        {
+            int money = Money_Manager.Instance.money;
+            totalMoneyText.text = "Total Money: " + money;
+        }
+        else
+        {
+            totalMoneyText.text = "Total Money: 0";
+        }
+    }
+
     public void RestartGame()
     {
-        // Reset game data before returning to the main menu
         if (GameManager.Instance != null)
             GameManager.Instance.ResetAllData();
 
