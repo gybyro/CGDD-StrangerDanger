@@ -18,7 +18,7 @@ public class RoadScript : MonoBehaviour
     [Header("Stop Behavior")]
     public float stopDuration = 3f;       // Time to slowly stop after hitting MainCamera
 
-    // Shared between ALL RoadPieceLooper instances
+    // Shared between ALL RoadScript instances
     private static bool globalStop = false;
 
     // Acceleration state
@@ -30,9 +30,6 @@ public class RoadScript : MonoBehaviour
     private float stopTimer = 0f;
     private float startStopSpeed = 0f;
 
-    [Header("Objects for each Car Phase")]
-    public GameObject[] phaseObjects;
-
     private void Start()
     {
         // Reset stop state each time scene starts
@@ -40,75 +37,50 @@ public class RoadScript : MonoBehaviour
         isStopping = false;
         stopTimer = 0f;
 
-        // -------------------------
         // Get carPhase from GameManager
-        // -------------------------
         int phase = 0;
         if (GameManager.Instance != null)
         {
             phase = GameManager.Instance.carPhase;
         }
+        Debug.Log("[RoadScript] " + name + " using carPhase = " + phase);
 
-        // -------------------------
-        // Enable correct phase object
-        // -------------------------
-        if (phaseObjects != null && phaseObjects.Length > 0)
-        {
-            // Clamp so we don’t go outside the array
-            phase = Mathf.Clamp(phase, 0, phaseObjects.Length - 1);
-
-            // Disable all
-            for (int i = 0; i < phaseObjects.Length; i++)
-            {
-                if (phaseObjects[i] != null)
-                    phaseObjects[i].SetActive(false);
-            }
-
-            // Enable the correct phase object
-            if (phaseObjects[phase] != null)
-                phaseObjects[phase].SetActive(true);
-
-            Debug.Log("Enabled Car Phase Object: " + phase);
-        }
-
-        // -------------------------
         // Start movement behavior based on carPhase
-        // -------------------------
         if (phase == 0)
         {
-            // First car scene → start moving immediately
             currentSpeed = speed;
             isAccelerating = false;
+            Debug.Log("[RoadScript] " + name + " Phase 0: start at speed " + speed);
         }
         else
         {
-            // Later car scenes → wait, then accelerate
             currentSpeed = 0f;
             isAccelerating = false;
+            Debug.Log("[RoadScript] " + name + " Phase > 0: waiting " + delayBeforeStart + "s");
             StartCoroutine(StartAfterDelay());
         }
     }
 
     private IEnumerator StartAfterDelay()
     {
-        // Wait before starting motion (for carPhase > 0)
         yield return new WaitForSeconds(delayBeforeStart);
 
         accelerationTimer = 0f;
         isAccelerating = true;
+        Debug.Log("[RoadScript] " + name + " acceleration started");
     }
 
     private void Update()
     {
-        // If global stop triggered by MainCamera collision
         if (globalStop)
         {
             if (!isStopping)
             {
                 isStopping = true;
-                isAccelerating = false;     // Cancel any acceleration
+                isAccelerating = false;
                 stopTimer = 0f;
                 startStopSpeed = currentSpeed;
+                Debug.Log("[RoadScript] " + name + " global stop triggered");
             }
 
             stopTimer += Time.deltaTime;
@@ -118,12 +90,10 @@ public class RoadScript : MonoBehaviour
             if (t >= 1f)
             {
                 currentSpeed = 0f;
-                // We stay stopped; globalStop remains true
             }
         }
         else
         {
-            // Only accelerate if we're not in stop mode
             if (isAccelerating)
             {
                 accelerationTimer += Time.deltaTime;
@@ -134,33 +104,35 @@ public class RoadScript : MonoBehaviour
                 {
                     currentSpeed = speed;
                     isAccelerating = false;
+                    Debug.Log("[RoadScript] " + name + " reached full speed: " + speed);
                 }
             }
         }
 
-        // Move road using currentSpeed
-        transform.Translate(Vector3.back * currentSpeed * Time.deltaTime);
+        // Move road using currentSpeed in WORLD space
+        transform.Translate(Vector3.back * currentSpeed * Time.deltaTime, Space.World);
 
-        // Loop road piece
+        // Loop road piece along Z
         if (transform.position.z <= resetZ)
         {
             Vector3 pos = transform.position;
             pos.z = startZ;
             transform.position = pos;
+            Debug.Log("[RoadScript] " + name + " looped to z=" + startZ);
         }
     }
 
     private void OnTriggerEnter(Collider other)
-{
-    if (other.CompareTag("MainCamera"))
     {
-        globalStop = true;
-
-        if (GameManager.Instance != null)
+        if (other.CompareTag("MainCamera"))
         {
-            GameManager.Instance.AdvanceCarPhase();
+            Debug.Log("[RoadScript] " + name + " hit MainCamera → stop + AdvanceCarPhase");
+            globalStop = true;
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.AdvanceCarPhase();
+            }
         }
     }
-}
-
 }
