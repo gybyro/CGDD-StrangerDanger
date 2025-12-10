@@ -1,0 +1,56 @@
+{
+    "scene": "dial_grumpy_01",
+    "lines": [
+        {
+        "id": "test01",
+        "speaker": "grumpy",
+        "portrait": "normal",
+        "text": "hi! (dial_grumpy_01)",
+        "animationTriggerDoor": "DoorOpen",
+        "showChar": "true",
+        "next": "test02"
+        },
+        {
+        "id": "test02",
+        "speaker": "grumpy",
+        "text": "I want Pizza!",
+        "next": "test03"
+        },
+        {
+        "id": "test03",
+        "speaker": "you",
+        "text": "Here you go",
+        "portrait": "pizza",
+        "next": "test04"
+        },
+        {
+        "id": "test04",
+        "speaker": "grumpy",
+        "portrait": "pizza",
+        "typeSpeed": 1.12,
+        "text": "THANK YOU!!11!",
+        "next": "test05"
+        },
+        {
+        "id": "test05",
+        "speaker": "you",
+        "text": "you are welcome",
+        "next": "test06"
+        },
+        {
+        "id": "test06",
+        "speaker": "you",
+        "animationTriggerDoor": "DoorClose",
+        "showChar": "false",
+        "waitSeconds": 0.2,
+        "next": "end"
+        },
+        {
+        "id": "end",
+        "speaker": "you",
+        "text": "",
+        "nextDialFile": "dial_grumpy_01",
+        "finished": true
+        }
+    ]
+}

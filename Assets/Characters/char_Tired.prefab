@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
   ID: 1
-  characterID: npc01
-  displayName: npc01
+  characterID: tired
+  displayName: Tired
   houseColorGood: Brown
   houseColorBad: Brown
   animator: {fileID: 62286867094759595}
@@ -59,7 +59,7 @@ MonoBehaviour:
   voicePitchMin: 0.8
   voicePitchMax: 0.9
   audioSource: {fileID: -8079158275568158221}
-  defaultTextColor: {r: 1, g: 0.9772984, b: 0.7150943, a: 1}
+  defaultTextColor: {r: 0.42734775, g: 0.645283, b: 0.42734775, a: 1}
   spriteRenderer: {fileID: 7718615900848793663}
   expressions:
   - name: 01

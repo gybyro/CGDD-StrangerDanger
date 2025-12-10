@@ -1,11 +1,11 @@
 {
-    "scene": "dial_tired_01",
+    "scene": "dial_tired_02",
     "lines": [
         {
         "id": "test01",
-        "speaker": "npc01",
+        "speaker": "tired",
         "portrait": "01",
-        "text": "THIS FILE IS dial_tired_02!!!!!!!!!!!",
+        "text": "THIS IS dial_tired_02 !!!!!!!!!",
         "animationTriggerDoor": "DoorOpenWide",
         "showChar": "true",
         "next": "test02"
@@ -18,7 +18,7 @@
         },
         {
         "id": "test03",
-        "speaker": "npc01",
+        "speaker": "tired",
         "portrait": "03",
         "text": "Aw sick! Pizza time!",
         "next": "test04"
@@ -31,7 +31,7 @@
         },
         {
         "id": "test05",
-        "speaker": "npc01",
+        "speaker": "tired",
         "portrait": "04",
         "text": "... HUH??",
         "next": "test06"
@@ -44,14 +44,14 @@
         },
         {
         "id": "test07",
-        "speaker": "npc01",
+        "speaker": "tired",
         "portrait": "02",
         "text": "Ive heard of it, the one in the walley right?",
         "next": "test08"
         },
         {
         "id": "test08",
-        "speaker": "npc01",
+        "speaker": "tired",
         "portrait": "02",
         "text": "You gotta be careful man, Ive heards some spooky shit round those parts.",
         "next": "test09"
@@ -64,7 +64,7 @@
         },
         {
         "id": "test10",
-        "speaker": "npc01",
+        "speaker": "tired",
         "portrait": "05",
         "typeSpeed": 0.12,
         "text": "Bet.",
@@ -72,14 +72,14 @@
         },
         {
         "id": "test11",
-        "speaker": "npc01",
+        "speaker": "tired",
         "portrait": "01",
         "text": "Ok then, Ill see you later man!",
         "next": "test12"
         },
         {
         "id": "test12",
-        "speaker": "npc01",
+        "speaker": "tired",
         "waitSeconds": 1,
         "animationTriggerDoor": "DoorClose",
         "showChar": "false",
@@ -93,7 +93,7 @@
         },
         {
         "id": "test14",
-        "speaker": "npc01",
+        "speaker": "tired",
         "animationTriggerDoor": "DoorOpenWide",
         "showChar": "true",
         "next": "test15"
@@ -106,14 +106,14 @@
         },
         {
         "id": "test16",
-        "speaker": "npc01",
+        "speaker": "tired",
         "text": "Teehee I forgor your tip!",
         "tips": 15,
         "next": "test17"
         },
         {
         "id": "test17",
-        "speaker": "npc01",
+        "speaker": "tired",
         "waitSeconds": 1,
         "text": "Toodles.",
         "animationTriggerDoor": "DoorClose",
