@@ -49,14 +49,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f697fcd10346d4f9c542b1e29a9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
+  ID: 3
   characterID: face
   displayName: '[]'
+  houseColorGood: Gray
+  houseColorBad: Gray
   animator: {fileID: 62286867094759595}
   voiceSounds:
   - {fileID: 8300000, guid: 40eba9dc3082aef48b2b1a2430e70096, type: 3}
   voicePitchMin: 0.1
   voicePitchMax: 0.1
   audioSource: {fileID: -8079158275568158221}
+  defaultTextColor: {r: 1, g: 1, b: 1, a: 1}
   spriteRenderer: {fileID: 7718615900848793663}
   expressions:
   - name: 1

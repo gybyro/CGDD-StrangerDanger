@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: fe4e130f9947345a2b213cb5038851a2, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -286,11 +286,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1739038757}
-  - {fileID: 982186708}
-  - {fileID: 1057485029}
-  - {fileID: 1959764470}
-  - {fileID: 637218777}
   - {fileID: 1352443261}
+  - {fileID: 619711832}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &52831196
@@ -708,6 +705,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505930341}
   m_CullTransparentMesh: 1
+--- !u!1 &619711831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 619711832}
+  - component: {fileID: 619711833}
+  m_Layer: 0
+  m_Name: House_BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &619711832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619711831}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 637218777}
+  - {fileID: 1959764470}
+  - {fileID: 1057485029}
+  - {fileID: 982186708}
+  m_Father: {fileID: 52831195}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &619711833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619711831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ae20604684b204d90e39695f7ffb1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpritePaletteController
+  doorSR: {fileID: 637218778}
+  outerWallSR: {fileID: 1959764471}
+  innerWallSR: {fileID: 1057485028}
+  floorSR: {fileID: 982186710}
+  colorSets:
+  - setName: Gray
+    doorS: {fileID: 21300000, guid: 402034c1c0d211944b3bb4db189f1155, type: 3}
+    outerWallS: {fileID: 21300000, guid: f35e27d9af86e9442a90eec42d9a5a04, type: 3}
+    innerWallS: {fileID: 21300000, guid: c91749753c247c549b386c3454bc57aa, type: 3}
+    floorS: {fileID: 21300000, guid: b341fb8fafe911741a5343704cd36e74, type: 3}
+  - setName: Brown
+    doorS: {fileID: 21300000, guid: 5a30e5043bf238743824701b4bc5e680, type: 3}
+    outerWallS: {fileID: 21300000, guid: 9c457de98d8221f468b828d34c7a5a70, type: 3}
+    innerWallS: {fileID: 21300000, guid: a925929ae82083a4f9497e7252d75662, type: 3}
+    floorS: {fileID: 21300000, guid: 3beb8ff25a0b40d44841922ae0e32f89, type: 3}
 --- !u!1 &637218776
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,12 +794,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637218776}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.25, y: 0.81, z: 16}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.25, y: 0.80999994, z: 16}
   m_LocalScale: {x: 16, y: 16, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 52831195}
+  m_Father: {fileID: 619711832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &637218778
 SpriteRenderer:
@@ -981,12 +1041,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982186707}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -9.2, z: 9.22}
   m_LocalScale: {x: 16, y: 16, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 52831195}
+  m_Father: {fileID: 619711832}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &982186710
 SpriteRenderer:
@@ -1134,7 +1194,7 @@ Transform:
   m_LocalScale: {x: 18, y: 18, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 52831195}
+  m_Father: {fileID: 619711832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1070251616
 GameObject:
@@ -1502,6 +1562,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StoryLine
   dialogueManager: {fileID: 362345138}
+  testDialogue: 0
+  ifTestDialogueFileName: start
 --- !u!4 &1266667920
 Transform:
   m_ObjectHideFlags: 0
@@ -2406,7 +2468,7 @@ Transform:
   m_LocalScale: {x: 16, y: 16, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 52831195}
+  m_Father: {fileID: 619711832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1959764471
 SpriteRenderer:

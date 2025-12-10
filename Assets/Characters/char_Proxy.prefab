@@ -48,8 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f697fcd10346d4f9c542b1e29a9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
+  ID: 2
   characterID: proxy
   displayName: Proxy
+  houseColorGood: Brown
+  houseColorBad: Brown
   animator: {fileID: 62286867094759595}
   voiceSounds:
   - {fileID: 8300000, guid: 40eba9dc3082aef48b2b1a2430e70096, type: 3}
