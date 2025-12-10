@@ -686,6 +686,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
   sceneNameToLoad: CarScene
+  fadeGroup: {fileID: 0}
+  fadeTime: 1
 --- !u!114 &828142876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,6 +971,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
   sceneNameToLoad: WalkingScene
+  fadeGroup: {fileID: 0}
+  fadeTime: 1
 --- !u!114 &1812597016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,6 +1335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
   sceneNameToLoad: 
+  fadeGroup: {fileID: 0}
+  fadeTime: 1
 --- !u!114 &2044172414
 MonoBehaviour:
   m_ObjectHideFlags: 0

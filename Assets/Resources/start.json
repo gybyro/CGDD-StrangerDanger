@@ -124,7 +124,7 @@
         "id": "end",
         "speaker": "you",
         "text": "",
-        "nextScene": "ProxyVis01",
+        "nextDialFile": "dial_tired_01",
         "finished": true
         }
     ]

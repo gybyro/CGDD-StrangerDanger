@@ -7,8 +7,6 @@ public enum CustomerTruthState { Good, Bad }
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public string nextDialogue = "dial_test2";
-    public string lastDialoguePlayed;
     
     // car stuff
     public int carPhase = 0;
@@ -16,9 +14,27 @@ public class GameManager : MonoBehaviour
     public int currentCustomerNumber = 0;
     public int nextCustomerNumber = 1;
 
-    private int day = 1;
+    // DAY STUFF
+    [Header("Skyboxes")]
+    public Material skyEvening;   // time = 1
+    public Material skyDusk;      // time = 2
+    public Material skyMidnight;  // time = 3
+    public Material skyMorning;   // time = 0
 
-    
+    [HideInInspector]
+    public int currentDay;
+    [HideInInspector]
+    public int currentTime;
+
+    private string char_00_nextDialogue = "start"; // le test
+    private string char_01_nextDialogue = "dial_tired_01"; // tiered is first character
+    private string char_02_nextDialogue = "dial_proxy_01"; // proxy is seconf 
+    private string char_03_nextDialogue = "dial_visitor_01"; // last of day 1 is visitor
+    private string char_04_nextDialogue = "dial_hippie_01"; //
+    private string char_05_nextDialogue = "dial_grumpy_01"; //
+    private string char_06_nextDialogue = "dial_mary_01"; //
+    private string char_07_nextDialogue = "dial_concerned_01"; //
+
 
     private void Awake()
     {
@@ -33,15 +49,22 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-
-
-
-        // Start from scratch
+        // Start from scratch // delete later
             currentCustomerNumber = 0;
             nextCustomerNumber = 1;
+
+        // to control daytime skyboxes
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        currentDay = 1;
+        currentTime = -1;
     }
 
-    // CAR STUFF =====================================
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ApplySkybox();
+    }
+
+    // CAR STUFF ==========================================
     public void AdvanceCarPhase()
     {
         carPhase++;
@@ -55,17 +78,85 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // DAY STUFF =====================================
-    public void AdvanceDay()
+    // DAY STUFF ==========================================
+    public void SetTime(int index) {
+        currentTime = index;
+        Debug.Log("Current time set to: " + currentTime);
+    }
+
+    public void AdvanceTime()
     {
-        day = 1;
+        // 0 = day
+        // 1 = evening
+        // 2 = dusk
+        // 3 = midnight
+
+        if (currentTime >= 3) {
+            currentDay++;
+            currentTime = 1; // skip over day
+        }
+        else { currentTime++; }
         
+
+        ApplySkybox();
+        Debug.Log("AdvanceTime - Day: " + currentDay + ", time: " + currentTime);
+    }
+
+    private void ApplySkybox()
+    {
+        Material targetSky = null;
+
+        switch (currentTime) {
+            case 0: // day ish
+                targetSky = skyMorning;
+                break;
+            case 1: // Evening
+                targetSky = skyEvening;
+                break;
+            case 2: // Dusk
+                targetSky = skyDusk;
+                break;
+            case 3: // Midnight
+                targetSky = skyMidnight;
+                break;
+        }
+
+        if (targetSky != null) {
+            RenderSettings.skybox = targetSky;
+            DynamicGI.UpdateEnvironment();
+        }
+        Debug.Log("ApplySkybox - Day: " + currentDay + ", time: " + currentTime);
+    }
+
+    // CHARACTER STUFF =====================================
+    public void AdvanceCharDial(int charID, string nextDialogue)
+    {
+        Debug.Log("AdvanceCharDial Called! index: " + charID + ", nextDialogue: " + nextDialogue);
+
+        if (charID == 0) {char_00_nextDialogue = nextDialogue; }
+        else if (charID == 1) {char_01_nextDialogue = nextDialogue; }
+        else if (charID == 2) {char_02_nextDialogue = nextDialogue; }
+        else if (charID == 3) {char_03_nextDialogue = nextDialogue; }
+        else if (charID == 4) {char_04_nextDialogue = nextDialogue; }
+        else if (charID == 5) {char_05_nextDialogue = nextDialogue; }
+        else if (charID == 6) {char_06_nextDialogue = nextDialogue; }
+        else if (charID == 7) {char_07_nextDialogue = nextDialogue; }
+    }
+    public string GetNextDialogue(int index)
+    {
+        if (index == 0) return char_00_nextDialogue;
+        else if (index == 1) return char_01_nextDialogue;
+        else if (index == 2) return char_02_nextDialogue;
+        else if (index == 3) return char_03_nextDialogue;
+        else if (index == 4) return char_04_nextDialogue;
+        else if (index == 5) return char_05_nextDialogue;
+        else if (index == 6) return char_06_nextDialogue;
+        else if (index == 7) return char_07_nextDialogue;
+        else return char_00_nextDialogue;
     }
 
 
-
-
-    public void ResetAllData()
+    public void ResetAllData() // delete later I think
     {
 
         Debug.Log("GAME MANAGER RESET");
@@ -73,3 +164,5 @@ public class GameManager : MonoBehaviour
     public void GenerateNextCustomer() {}
     public string GetPhoneDescription() { return ""; }
 }
+
+

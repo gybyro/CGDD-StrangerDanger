@@ -4,6 +4,7 @@ public class Trigger_Scene_Button : MonoBehaviour
 {
     [SerializeField] private GameObject nextSceneButton;     // UI button
     [SerializeField] private SceneTransition sceneTransition; // reference to your fade script
+    [SerializeField] private AudioSource knockAudio;
 
     private bool playerInside = false;
 
@@ -35,11 +36,30 @@ public class Trigger_Scene_Button : MonoBehaviour
 
     private void Update()
     {
-        // If player is inside trigger and presses E, do same as clicking the button
+        // If player is inside trigger and presses E
         if (playerInside && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E pressed inside trigger - loading scene");
-            sceneTransition.LoadSceneWithFade();   // or sceneTransition.LoadScene();
+            Debug.Log("E pressed inside trigger - knocking + loading scene");
+            PlayKnockAndLoad();   // <-- new function to handle audio + load
         }
     }
+
+    public void PlayKnockAndLoad()
+    {
+        if (knockAudio != null)
+            knockAudio.Play();
+
+        // Wait for audio to finish, then fade + load
+        float delay = knockAudio != null && knockAudio.clip != null
+            ? knockAudio.clip.length
+            : 0f;
+
+        Invoke(nameof(LoadSceneFade), delay);
+    }
+
+    private void LoadSceneFade()
+    {
+        sceneTransition.LoadSceneWithFade();
+    }
+
 }

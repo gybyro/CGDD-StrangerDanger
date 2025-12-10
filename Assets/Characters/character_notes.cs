@@ -55,6 +55,7 @@
 // visitor2
 // visitor3
 
+using UnityEngine;
 using System;
 
 [Serializable]
@@ -80,7 +81,7 @@ public class DialogueLine
     public float typeSpeed;
     public string next;
     public int tips;
-    public string nextScene;
+    public string nextDialFile;
     public bool finished;
 
     public string type;      // "choice", "random", or null
@@ -97,4 +98,16 @@ public class ChoiceOption {
 public class RandomChoice {
     public int weight;
     public string next;
+}
+
+
+//// for door bg
+[Serializable]
+public class SpriteColorSet
+{
+    public string setName;
+    public Sprite doorS;
+    public Sprite outerWallS;
+    public Sprite innerWallS;
+    public Sprite floorS;
 }

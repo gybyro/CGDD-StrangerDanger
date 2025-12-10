@@ -48,13 +48,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f697fcd10346d4f9c542b1e29a9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
+  ID: 0
   characterID: npc01
   displayName: npc01
+  houseColorGood: Brown
+  houseColorBad: Brown
   animator: {fileID: 62286867094759595}
   voiceSounds:
-  - {fileID: 8300000, guid: 40eba9dc3082aef48b2b1a2430e70096, type: 3}
-  voicePitchMin: 0.8
-  voicePitchMax: 0.9
+  - {fileID: 8300000, guid: 32070317eb5aadc4cbe79c84b9c28c78, type: 3}
+  voicePitchMin: 0.95
+  voicePitchMax: 1.05
   audioSource: {fileID: -8079158275568158221}
   defaultTextColor: {r: 1, g: 0.9772984, b: 0.7150943, a: 1}
   spriteRenderer: {fileID: 7718615900848793663}
