@@ -2,6 +2,13 @@
     "scene": "start",
     "lines": [
         {
+        "id": "test00",
+        "speaker": "npc01",
+        "portrait": "01",
+        "text": "WELCOME TO 'start.json' !!!!!!!!!!!!",
+        "next": "test01"
+        },
+        {
         "id": "test01",
         "speaker": "npc01",
         "portrait": "01",
@@ -124,7 +131,7 @@
         "id": "end",
         "speaker": "you",
         "text": "",
-        "nextDialFile": "dial_tired_01",
+        "nextDialFile": "start_01",
         "finished": true
         }
     ]

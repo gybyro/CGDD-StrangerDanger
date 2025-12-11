@@ -73,7 +73,7 @@ public class ChoiceUI : MonoBehaviour
                 optionButtons[i].onClick.RemoveAllListeners();
                 optionButtons[i].onClick.AddListener(() => SelectOption(index));
 
-                // ✅ Mouse hover sync
+                //  Mouse hover sync
                 AddHoverSync(optionButtons[i], index);
             }
             else
@@ -129,7 +129,7 @@ public class ChoiceUI : MonoBehaviour
                 colors.highlightedColor = colors.normalColor;
                 colors.selectedColor = colors.normalColor;
 
-                // ✅ Force Unity's EventSystem to match our selection
+                //  Force Unity's EventSystem to match our selection
                 EventSystem.current.SetSelectedGameObject(optionButtons[i].gameObject);
             }
             else

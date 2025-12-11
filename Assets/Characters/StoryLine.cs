@@ -61,12 +61,22 @@ public class StoryLine : MonoBehaviour
 
         if (currentDay == 1 || currentDay == 2) // DAY 1 & 2
         {
-            charIndex = currentTime;
+            // charIndex = currentTime;
+
+            // ID: 0  –  char_Placeholder
+            // ID: 1  –  char_Tired
+            // ID: 2  –  char_Proxy
+            // ID: 3  –  char_Hippie
+            // ID: 4  –  char_Grumpy
+            // ID: 5  –  char_Mary
+            // ID: 6  –  char_Visitor
+
             
-            // if (currentTime == 0) charIndex = 0;
-            // else if (currentTime == 1) charIndex = 1;
-            // else if (currentTime == 2) charIndex = 2;
-            // else if (currentTime == 3) charIndex = 3;   
+            if (currentTime == 0) charIndex = 0; // Start
+
+            else if (currentTime == 1) charIndex = 3;
+            else if (currentTime == 2) charIndex = 4;
+            else if (currentTime == 3) charIndex = 5;   
         }
             
         

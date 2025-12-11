@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f697fcd10346d4f9c542b1e29a9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
-  ID: 4
-  characterID: proxy
-  displayName: Proxy
+  ID: 3
+  characterID: hippie
+  displayName: Hippie
   houseColorGood: Brown
   houseColorBad: Brown
   animator: {fileID: 62286867094759595}
@@ -59,7 +59,7 @@ MonoBehaviour:
   voicePitchMin: 0.8
   voicePitchMax: 0.9
   audioSource: {fileID: -8079158275568158221}
-  defaultTextColor: {r: 0.2784314, g: 0.3019608, b: 0.78431374, a: 1}
+  defaultTextColor: {r: 0.9169811, g: 0.4905232, b: 0.3027767, a: 1}
   spriteRenderer: {fileID: 7718615900848793663}
   expressions:
   - name: normal
