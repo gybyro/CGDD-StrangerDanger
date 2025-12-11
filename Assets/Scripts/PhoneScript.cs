@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -19,15 +20,28 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public float moveX = -100f;            // -100 X movement
     public float animDuration = 0.5f;
 
-    [Header("Screen Change After Click")]
-    public Sprite newScreenSprite;
+    [Header("Screen Change After Phone Click")]
+    public Sprite newScreenSprite;         // first screen (after opening phone)
+
+    [Header("Second Screen After Button Click")]
+    public Sprite secondScreenSprite;      // second screen (after order button)
 
     [Header("Sound")]
-    public AudioClip screenChangeSound;
+    public AudioClip screenChangeSound;    // plays on screen changes
     private AudioSource audioSource;
 
-    [Header("Objects That Appear After Click")]
-    public GameObject objectToShow;   // SetActive(true) after the click animation
+    [Header("Objects That Appear After Phone Click")]
+    public GameObject firstOrderButton;    // the first button shown after phone opens
+
+    [Header("Text Revealed After Order Button Click")]
+    public GameObject textToShow;          // text/panel shown after clicking firstOrderButton
+
+    [Header("Buttons After Text")]
+    public GameObject acceptButton;        // appears after firstOrderButton click
+    public GameObject declineButton;       // appears after firstOrderButton click
+
+    [Header("Accept Order Scene")]
+    public string acceptSceneName;         // name of scene to load on Accept
 
     private Image img;
     private Color originalColor;
@@ -48,16 +62,52 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         originalPos = rect.anchoredPosition;
         originalRot = transform.rotation;
 
-        // Create audio source
+        // Audio setup
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
 
-        // Start darker for hover
+        // Start slightly darker for hover contrast
         SetBrightness(normalBrightness);
 
-        // Hide button/object until phone is clicked
-        if (objectToShow != null)
-            objectToShow.SetActive(false);
+        // Hide / wire first order button
+        if (firstOrderButton != null)
+        {
+            firstOrderButton.SetActive(false);
+
+            Button btn = firstOrderButton.GetComponent<Button>();
+            if (btn != null)
+            {
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(OnFirstOrderButtonClicked);
+            }
+        }
+
+        // Hide text
+        if (textToShow != null)
+            textToShow.SetActive(false);
+
+        // Hide / wire accept & decline buttons
+        if (acceptButton != null)
+        {
+            acceptButton.SetActive(false);
+            Button btn = acceptButton.GetComponent<Button>();
+            if (btn != null)
+            {
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(OnAcceptOrderClicked);
+            }
+        }
+
+        if (declineButton != null)
+        {
+            declineButton.SetActive(false);
+            Button btn = declineButton.GetComponent<Button>();
+            if (btn != null)
+            {
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(OnDeclineOrderClicked);
+            }
+        }
 
         // Start vibration loop
         InvokeRepeating(nameof(StartVibration), startDelay, loopTime);
@@ -111,7 +161,7 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     }
 
     // -------------------------
-    // CLICK HANDLER
+    // PHONE CLICK
     // -------------------------
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -126,7 +176,7 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     }
 
     // -------------------------
-    // CLICK ANIMATION
+    // PHONE CLICK ANIMATION
     // -------------------------
     System.Collections.IEnumerator ClickAnimation()
     {
@@ -149,11 +199,11 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
             yield return null;
         }
 
-        // Final positions
+        // Final pose
         rect.localScale = endScale;
         rect.anchoredPosition = endPos;
 
-        // Change screen image
+        // First screen change (phone opened)
         if (newScreenSprite != null)
             img.sprite = newScreenSprite;
 
@@ -169,8 +219,85 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         if (screenChangeSound != null)
             audioSource.PlayOneShot(screenChangeSound);
 
-        // Show the button/object
-        if (objectToShow != null)
-            objectToShow.SetActive(true);
+        // Show the first order button
+        if (firstOrderButton != null)
+            firstOrderButton.SetActive(true);
+    }
+
+    // -------------------------
+    // FIRST ORDER BUTTON CLICK
+    // -------------------------
+    private void OnFirstOrderButtonClicked()
+    {
+        // Hide the first button
+        if (firstOrderButton != null)
+            firstOrderButton.SetActive(false);
+
+        // Show the text
+        if (textToShow != null)
+            textToShow.SetActive(true);
+
+        // Change to second screen image
+        if (secondScreenSprite != null)
+            img.sprite = secondScreenSprite;
+
+        // Optional: play same sound again
+        if (screenChangeSound != null)
+            audioSource.PlayOneShot(screenChangeSound);
+
+        // Show accept/decline buttons
+        if (acceptButton != null)
+            acceptButton.SetActive(true);
+
+        if (declineButton != null)
+            declineButton.SetActive(true);
+    }
+
+    // -------------------------
+    // ACCEPT ORDER
+    // -------------------------
+    private void OnAcceptOrderClicked()
+    {
+        if (!string.IsNullOrEmpty(acceptSceneName))
+        {
+            SceneManager.LoadScene(acceptSceneName);
+        }
+        else
+        {
+            Debug.LogWarning("PhoneScript: acceptSceneName is empty, cannot load scene.");
+        }
+    }
+
+    // -------------------------
+    // DECLINE ORDER
+    // -------------------------
+    private void OnDeclineOrderClicked()
+    {
+        // Hide text
+        if (textToShow != null)
+            textToShow.SetActive(false);
+
+        // Hide accept/decline buttons
+        if (acceptButton != null)
+            acceptButton.SetActive(false);
+
+        if (declineButton != null)
+            declineButton.SetActive(false);
+
+        // Show the first order button again
+        if (firstOrderButton != null)
+            firstOrderButton.SetActive(true);
+
+        // Return phone to "menu" state (first opened screen)
+        if (newScreenSprite != null)
+            img.sprite = newScreenSprite;
+
+        // Keep brightness at 2 (since phone is still open)
+        img.color = new Color(
+            Mathf.Clamp01(originalColor.r * 2f),
+            Mathf.Clamp01(originalColor.g * 2f),
+            Mathf.Clamp01(originalColor.b * 2f),
+            originalColor.a
+        );
     }
 }
