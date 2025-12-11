@@ -199,6 +199,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NewDayAnimation
   datesAnimator: {fileID: 833973534}
   highlightAnimator: {fileID: 1467191458}
+  monToTueTrigger: MonToTue
+  fadeTextTrigger: fadeText
+  highlightFadeTrigger: fade
   waitBeforeMonToTue: 1
   waitBeforeFade: 2
   autoPlayOnStart: 1
@@ -1310,7 +1313,7 @@ RectTransform:
   m_GameObject: {fileID: 1467191452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 41.6}
-  m_LocalScale: {x: 132, y: 800, z: 1}
+  m_LocalScale: {x: 132, y: 1000, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 249863090}
