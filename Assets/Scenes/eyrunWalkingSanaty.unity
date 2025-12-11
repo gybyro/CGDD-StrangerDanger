@@ -86986,6 +86986,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2545454276374066478, guid: 8874cf39c18d69e4283d2c80efdc61f1, type: 3}
   m_PrefabInstance: {fileID: 1825147974}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1826132851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+  m_PrefabInstance: {fileID: 1991057467}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1826132855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826132851}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7efdcbe7789e92d4ebcf96260768e97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::camra_shake
+  shakeDuration: 10
+  shakeAmount: 0.1
+  decreaseFactor: 1
+--- !u!114 &1826132856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826132851}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c4b0858d9fe2b459d908b3d3e497ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InsanityCameraShake
+  duration: 40
+  intensity: 0.2
+  rotationIntensity: 15
+  decay: 1
+--- !u!114 &1826132857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826132851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba97cab35ffbb542a20524394c7c2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColdShiverCamera
+  shiverIntensity: 0.02
+  shiverSpeed: 30
 --- !u!4 &1827189823 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2545454276374066478, guid: 8874cf39c18d69e4283d2c80efdc61f1, type: 3}
@@ -93603,7 +93653,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1826132855}
+    - targetCorrespondingSourceObject: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1826132856}
+    - targetCorrespondingSourceObject: {fileID: 9005220659476430823, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1826132857}
   m_SourcePrefab: {fileID: 100100000, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
 --- !u!1001 &1991210257
 PrefabInstance:
