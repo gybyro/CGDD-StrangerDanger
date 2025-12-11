@@ -7,6 +7,7 @@ public enum CustomerTruthState { Good, Bad }
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public CursorAnimation hoverCursor;
     
     // car stuff
     public int carPhase = 0;
@@ -163,6 +164,16 @@ public class GameManager : MonoBehaviour
     }
     public void GenerateNextCustomer() {}
     public string GetPhoneDescription() { return ""; }
+
+    // void OnMouseEnter()
+    // {
+    //     CursorAnimator.Instance.Play(Instance.hoverCursor);
+    // }
+
+    // void OnMouseExit()
+    // {
+    //     CursorAnimator.Instance.Stop();
+    // }
 }
 
 

@@ -62,7 +62,7 @@ public class SceneTransition : MonoBehaviour
         yield return StartCoroutine(FadeOut());
     }
 
-    IEnumerator FadeOut()
+    public IEnumerator FadeOut()
     {
         float t = 0;
 

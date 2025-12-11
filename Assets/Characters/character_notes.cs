@@ -113,13 +113,48 @@ public class SpriteColorSet
 }
 
 
+
+
 [Serializable]
-public class PlayerDialogueLine 
+public class InGameWeek
+{
+    public DayInWeek monday;
+    public DayInWeek tuesday;
+    public DayInWeek wednsday;
+    public DayInWeek thursday;
+    public DayInWeek friday;
+    public DayInWeek saturday;
+    public DayInWeek sunday;
+}
+
+[Serializable]
+public class DayInWeek
+{
+    public TimeOfDay morning;
+    public TimeOfDay eve;
+    public TimeOfDay dusk;
+    public TimeOfDay midnight;
+    public TimeOfDay deep;
+}
+
+[Serializable]
+public class TimeOfDay
+{
+    public PlayerDialogueLine[] currentLinesToPlay;
+    // more to be added maybe
+}
+
+[Serializable]
+public class PlayerDialogueLine
 {
     public string id;
-    public string color;
+    public Color color = Color.white;
+    [TextArea(2, 5)]
     public string text;
-    public string sound;
+    public AudioClip sound;
     public float waitSeconds;
     public float typeSpeed;
+    public bool next;
+    public bool end;
 }
+

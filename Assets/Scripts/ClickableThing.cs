@@ -15,6 +15,18 @@ public class ClickableThing : MonoBehaviour
         }
     }
 
+    void OnMouseEnter()
+    {
+        CursorAnimator.Instance.Play(GameManager.Instance.hoverCursor);
+    }
+
+    void OnMouseExit()
+    {
+
+        Debug.Log("STOP CALLED from: " + gameObject.name);
+        CursorAnimator.Instance.Stop();
+    }
+
 
     void OnMouseDown()
     {   
