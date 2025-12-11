@@ -111,3 +111,15 @@ public class SpriteColorSet
     public Sprite innerWallS;
     public Sprite floorS;
 }
+
+
+[Serializable]
+public class PlayerDialogueLine 
+{
+    public string id;
+    public string color;
+    public string text;
+    public string sound;
+    public float waitSeconds;
+    public float typeSpeed;
+}
