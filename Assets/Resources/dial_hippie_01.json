@@ -13,44 +13,84 @@
         {
         "id": "test02",
         "speaker": "hippie",
-        "text": "I want Pizza!",
+        "text": "Hello darlin",
         "next": "test03"
         },
         {
         "id": "test03",
         "speaker": "you",
-        "text": "Here you go",
+        "text": "Hey there....",
         "portrait": "pizza",
         "next": "test04"
         },
         {
         "id": "test04",
-        "speaker": "hippie",
+        "speaker": "you",
         "portrait": "pizza",
         "typeSpeed": 1.12,
-        "text": "THANK YOU!!11!",
-        "next": "test05"
+        "text": "Your choice",
+                "options": [
+            {"text": "What does that necklace mean?", "next": "player_ask1"},
+            {"text": "You owe me 30 bucks", "next": "money_exchange"},
+            {"text": "'Say nothing'", "next": "player_ask2"}
+        ]
         },
+
+        
         {
-        "id": "test05",
-        "speaker": "you",
-        "text": "you are welcome",
-        "next": "test06"
+        "id": "player_ask1",
+        "speaker": "hippie",
+        "text": "ohh thanks for asking, the purple color signifies peace and wards off bad people, if it turns then I know that I should be careful",
+        "next": "player_ask1_01"
         },
+
         {
-        "id": "test06",
+        "id": "player_ask2",
+        "speaker": "hippie",
+        "text": "You don't say much do you darlin, you know what the best thing that goes with a pizza is? A good weed joint, that's what 1 year of sobriety gets you...",
+        "next": "how_much_money"
+        },
+
+        {
+        "id": "player_ask1_01",
         "speaker": "you",
-        "animationTriggerDoor": "DoorClose",
         "showChar": "false",
         "waitSeconds": 0.2,
-        "next": "end"
+        "text": "Your choice",
+            "options": [
+            {"text": "Congratulations on your sobriety", "next": "player_ask1_02"},
+            {"text": "I could never", "next": "player_ask1_03"}
+            ]
         },
+
         {
-        "id": "end",
-        "speaker": "you",
-        "text": "",
-        "nextDialFile": "dial_hippie_02",
-        "finished": true
+        "id": "player_ask1_03",
+        "speaker": "hippie",
+        "text": "To each their own, so how much do I owe you?",
+        "next": "how_much_money"
+        },
+
+        {
+        "id": "player_ask1_02",
+        "speaker": "hippie",
+        "text": "Thanks a lot my life has truly changed for the better, so how much do I owe you",
+        "next": "how_much_money"
+        },
+
+        {
+        "id": "how_much_money",
+        "speaker": "player",
+        "text": "You owe me 30 bucks",
+        "next": "money_exchange"
+        },
+
+        {
+        "id": "money_exchange",
+        "speaker": "hippie",
+        "text": "Ye no problem, here you go let me get you your tip",
+        "portrait": "pizza",
+        "next": "how_much_money"
         }
+        
     ]
 }
