@@ -144,16 +144,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342274857}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1963.8094}
+  m_LocalScale: {x: 1.3525, y: 1.3525, z: 1.3525}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 431714891}
+  m_Father: {fileID: 2126703943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: 160}
+  m_AnchoredPosition: {x: 72.65173, y: 622.4}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &342274859
@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Game\n    Title"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 724ca3fe03a2aa74aa372de5152737e7, type: 2}
+  m_sharedMaterial: {fileID: 2893663674996424025, guid: 724ca3fe03a2aa74aa372de5152737e7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -281,7 +281,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394860985}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &394860987
 Camera:
   m_ObjectHideFlags: 0
@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 431714890}
   - component: {fileID: 431714889}
   - component: {fileID: 431714888}
+  - component: {fileID: 431714892}
   m_Layer: 5
   m_Name: Menu
   m_TagString: MainCamera
@@ -486,10 +487,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 342274858}
-  - {fileID: 828142874}
-  - {fileID: 1812597014}
-  - {fileID: 2044172412}
+  - {fileID: 2126703943}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -497,6 +495,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &431714892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431714887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a4d658582f69d458315ac70ff6f2ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuScript
+  menuSceneName: MainMenu
+  mainMenuPanel: {fileID: 2126703942}
 --- !u!1 &778137556
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,17 +673,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828142873}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1963.8094}
+  m_LocalScale: {x: 1.3525, y: 1.3525, z: 1.3525}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1947025316}
-  m_Father: {fileID: 431714891}
+  m_Father: {fileID: 2126703943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -260, y: -40}
+  m_AnchoredPosition: {x: -346.62326, y: 351.9}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &828142875
@@ -1063,8 +1075,6 @@ GameObject:
   - component: {fileID: 1812597018}
   - component: {fileID: 1812597017}
   - component: {fileID: 1812597016}
-  - component: {fileID: 1812597015}
-  - component: {fileID: 1812597019}
   m_Layer: 5
   m_Name: btn_settings
   m_TagString: Untagged
@@ -1079,34 +1089,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812597013}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1963.8094}
+  m_LocalScale: {x: 1.3525, y: 1.3525, z: 1.3525}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 778137557}
-  m_Father: {fileID: 431714891}
+  m_Father: {fileID: 2126703943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -260, y: -100}
+  m_AnchoredPosition: {x: -346.62326, y: 270.75}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1812597015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812597013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11c23f8e567668b47aca8637e22860d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
-  sceneNameToLoad: WalkingScene
-  fadeGroup: {fileID: 1592962179}
-  fadeTime: 1
 --- !u!114 &1812597016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,10 +1146,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1812597015}
-        m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
-        m_MethodName: LoadSceneWithFade
-        m_Mode: 5
+      - m_Target: {fileID: 431714892}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: OpenSettings
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1459,17 +1454,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044172411}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1963.8094}
+  m_LocalScale: {x: 1.3525, y: 1.3525, z: 1.3525}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1098595476}
-  m_Father: {fileID: 431714891}
+  m_Father: {fileID: 2126703943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -260, y: -160}
+  m_AnchoredPosition: {x: -346.62326, y: 189.6}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2044172413
@@ -1581,21 +1576,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044172411}
   m_CullTransparentMesh: 1
---- !u!114 &2044172417
-MonoBehaviour:
+--- !u!1 &2126703942
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044172411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db32565c6e0c3734393e7642940e3e6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
-  normalBrightness: 1
-  hoverBrightness: 1.2
-  hoverSound: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2126703943}
+  m_Layer: 0
+  m_Name: MainManuPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2126703943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126703942}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.7166235, y: -300.18484, z: 1451.9849}
+  m_LocalScale: {x: 0.73937154, y: 0.73937154, z: 0.73937154}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 342274858}
+  - {fileID: 828142874}
+  - {fileID: 1812597014}
+  - {fileID: 2044172412}
+  m_Father: {fileID: 431714891}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
