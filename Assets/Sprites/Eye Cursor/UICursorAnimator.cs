@@ -24,8 +24,23 @@ public class UICursorAnimator : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
-        Cursor.visible = true;  // keep system cursor visible
+        DontDestroyOnLoad(gameObject);
+        Cursor.visible = true;
+    }
+
+    void OnDestroy()
+    {
+        Debug.Log("Cursor Animator Destroyed: " + gameObject.name);
+        
+        if (Instance == this)
+            Instance = null;
     }
 
     void Update()

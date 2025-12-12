@@ -9,7 +9,7 @@ public class CRTController : MonoBehaviour
 {
     public Volume volume;  // Assign Global Volume here
     private CRTSettings crt;  // The override from Retro Shaders Pro
-    private CRTPreset currentPreset;
+    // private CRTPreset currentPreset;
 
     void Start()
     {
@@ -101,7 +101,7 @@ public class CRTController : MonoBehaviour
 
             yield return null;
         }
-        currentPreset = to;
+        // currentPreset = to;
     }
 
     public Coroutine FadeInCRT(float duration) { return StartCoroutine(FadeCRT(lowPreset, highPreset, duration)); }
