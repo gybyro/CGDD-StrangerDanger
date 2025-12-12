@@ -646,6 +646,7 @@ GameObject:
   - component: {fileID: 828142877}
   - component: {fileID: 828142876}
   - component: {fileID: 828142875}
+  - component: {fileID: 828142879}
   m_Layer: 5
   m_Name: btn_start
   m_TagString: Untagged
@@ -686,7 +687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
   sceneNameToLoad: CarScene
-  fadeGroup: {fileID: 0}
+  fadeGroup: {fileID: 1592962179}
   fadeTime: 1
 --- !u!114 &828142876
 MonoBehaviour:
@@ -733,15 +734,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 828142875}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 1
+        m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
+        m_MethodName: LoadSceneWithFade
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: CarScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &828142877
@@ -782,6 +783,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828142873}
   m_CullTransparentMesh: 1
+--- !u!114 &828142879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828142873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db32565c6e0c3734393e7642940e3e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
+  normalBrightness: 1
+  hoverBrightness: 1.2
+  hoverSound: {fileID: 0}
 --- !u!1 &1098595475
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,6 +934,123 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098595475}
   m_CullTransparentMesh: 1
+--- !u!1 &1592962176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592962182}
+  - component: {fileID: 1592962181}
+  - component: {fileID: 1592962180}
+  - component: {fileID: 1592962179}
+  - component: {fileID: 1592962178}
+  - component: {fileID: 1592962177}
+  m_Layer: 5
+  m_Name: FadeBlackSceneTransission
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1592962177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592962176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1da8f1684888374d88ace7f7ff8a568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersistentObject
+--- !u!114 &1592962178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592962176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c23f8e567668b47aca8637e22860d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneTransition
+  sceneNameToLoad: 
+  fadeGroup: {fileID: 1592962179}
+  fadeTime: 1
+--- !u!225 &1592962179
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592962176}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &1592962180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592962176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1592962181
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592962176}
+  m_CullTransparentMesh: 1
+--- !u!224 &1592962182
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592962176}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 559, y: 419.125}
+  m_SizeDelta: {x: 1118, y: 838.25}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1812597013
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +1064,7 @@ GameObject:
   - component: {fileID: 1812597017}
   - component: {fileID: 1812597016}
   - component: {fileID: 1812597015}
+  - component: {fileID: 1812597019}
   m_Layer: 5
   m_Name: btn_settings
   m_TagString: Untagged
@@ -971,7 +1105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
   sceneNameToLoad: WalkingScene
-  fadeGroup: {fileID: 0}
+  fadeGroup: {fileID: 1592962179}
   fadeTime: 1
 --- !u!114 &1812597016
 MonoBehaviour:
@@ -1018,15 +1152,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1812597015}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 1
+        m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
+        m_MethodName: LoadSceneWithFade
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: CarScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1812597017
@@ -1067,6 +1201,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812597013}
   m_CullTransparentMesh: 1
+--- !u!114 &1812597019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812597013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db32565c6e0c3734393e7642940e3e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
+  normalBrightness: 1
+  hoverBrightness: 1.2
+  hoverSound: {fileID: 0}
 --- !u!1 &1947025315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,6 +1444,7 @@ GameObject:
   - component: {fileID: 2044172415}
   - component: {fileID: 2044172414}
   - component: {fileID: 2044172413}
+  - component: {fileID: 2044172417}
   m_Layer: 5
   m_Name: btn_quit
   m_TagString: Untagged
@@ -1431,6 +1581,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044172411}
   m_CullTransparentMesh: 1
+--- !u!114 &2044172417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044172411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db32565c6e0c3734393e7642940e3e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHover
+  normalBrightness: 1
+  hoverBrightness: 1.2
+  hoverSound: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1438,3 +1603,4 @@ SceneRoots:
   - {fileID: 394860988}
   - {fileID: 431714891}
   - {fileID: 1991520289}
+  - {fileID: 1592962182}
