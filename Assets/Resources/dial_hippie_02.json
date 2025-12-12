@@ -19,6 +19,7 @@
 
         {
         "id": "test03",
+        "type": "choice",
         "speaker": "you",
         "text": "",
         "options": [
@@ -39,6 +40,7 @@
 
         {
         "id": "player_ask2",
+        "type": "choice",
         "speaker": "hippie",
         "portrait": "unkown",
         "typeSpeed": 1.12,
@@ -93,7 +95,30 @@
         "typeSpeed": 1.12,
         "text": "Here you go, wait here while I get your tip!",
         "animationTriggerDoor": "DoorClose",
-        "showChar": "false"
+        "showChar": "false",
+        "next": "waiting_game"
+        },
+
+        {
+        "id": "waiting_game",
+        "speaker": "you",
+        "type": "countdown",
+        "countDownSeconds": 10,
+        "timeOutNext": "tip_arrives",
+        "options": [
+            { "text": "Leave", "next": "end" }
+        ]
+        },
+
+        
+        {
+        "id": "end",
+        "speaker": "you",
+        "text": "",
+        "nextDialFile": "dial_hippie_01",
+        "finished": true
         }
+
+
     ]
 }

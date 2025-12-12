@@ -1563,7 +1563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StoryLine
   dialogueManager: {fileID: 362345138}
   testDialogue: 0
-  ifTestDialogueFileName: start
+  ifTestDialogueFileName: dial_hippie_02
 --- !u!4 &1266667920
 Transform:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@
         },
         {
         "id": "test04",
+        "type": "choice",
         "speaker": "you",
         "portrait": "pizza",
         "typeSpeed": 1.12,
@@ -53,6 +54,7 @@
 
         {
         "id": "player_ask1_01",
+        "type": "choice",
         "speaker": "you",
         "showChar": "false",
         "waitSeconds": 0.2,
@@ -89,7 +91,15 @@
         "speaker": "hippie",
         "text": "Ye no problem, here you go let me get you your tip",
         "portrait": "pizza",
-        "next": "how_much_money"
+        "next": "end"
+        },
+
+         {
+        "id": "end",
+        "speaker": "you",
+        "text": "",
+        "nextDialFile": "dial_hippie_02",
+        "finished": true
         }
         
     ]

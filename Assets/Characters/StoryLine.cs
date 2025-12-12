@@ -75,7 +75,7 @@ public class StoryLine : MonoBehaviour
             if (currentTime == 0) charIndex = 0; // Start
 
             else if (currentTime == 1) charIndex = 3;
-            else if (currentTime == 2) charIndex = 4;
+            else if (currentTime == 2) charIndex = 3;
             else if (currentTime == 3) charIndex = 5;   
         }
             

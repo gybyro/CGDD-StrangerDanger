@@ -83,7 +83,11 @@ public class DialogueLine
     public int tips;
     public string nextDialFile;
     public bool finished;
-
+    public bool timerStart;
+    public float countDownSeconds;   // e.g. 10
+    public string timeOutNext;       // default path when time ends (wait happens)
+    public string escapeNext;        // where to go if player chooses to leave
+    public string escapeText;        // optional UI label e.g "leave" (nice to have) 
     public string type;      // "choice", "random", or null
     public string prompt;
     public ChoiceOption[] options;
