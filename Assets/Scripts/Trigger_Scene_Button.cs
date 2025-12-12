@@ -59,7 +59,7 @@ public class Trigger_Scene_Button : MonoBehaviour
 
     private void LoadSceneFade()
     {
-        sceneTransition.LoadSceneWithFade();
+        // sceneTransition.LoadSceneWithFade();
     }
 
 }

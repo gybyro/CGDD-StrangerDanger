@@ -65,7 +65,11 @@ public class DialogueManager : MonoBehaviour
     {
         advanceAction = playerInput.actions["Next"];
         nameBox.alpha = 0;
+        nameBox.interactable = false;
         textBox.alpha = 0;
+        textBox.interactable = false;
+        
+    
         defaultTypeSpeed = typewriter.typeSpeed;
     }
 
@@ -163,6 +167,7 @@ public class DialogueManager : MonoBehaviour
         }
         else { 
             nameBox.alpha = 0;
+            nameBox.interactable = false;
             Debug.Log("Character speaker is NULL");
             }
 
@@ -221,7 +226,11 @@ public class DialogueManager : MonoBehaviour
         if (hasText)
         {
             textBox.alpha = 1;
+            textBox.interactable = true;
             nameBox.alpha = 1;
+            nameBox.interactable = true;
+
+            
             typewriter.StartTyping(line.text);
 
             // WAIT FOR TYPEWRITER OR SKIP
@@ -237,7 +246,7 @@ public class DialogueManager : MonoBehaviour
             }
             if (line.tips != 0) Money_Manager.Instance.AddMoney(line.tips);
         }
-        else { textBox.alpha = 0; }
+        else { textBox.alpha = 0; textBox.interactable = false; }
       
 
 
@@ -298,6 +307,7 @@ public class DialogueManager : MonoBehaviour
         if (hasText)
         {
             textBox.alpha = 1;
+            textBox.interactable = true;
             typewriter.StartTyping(line.text);
 
             while (!typewriter.lineComplete)
