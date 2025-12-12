@@ -4,28 +4,12 @@ using RetroShadersPro.URP;
 using System.Collections;
 
 
-[System.Serializable]
-public struct CRTPreset
-{
-    public float pixelSize;
-    public float distortionStrength;
-    public float distortionSmoothing;
-    public float rgbStrength;
-    public float scanlineStrength;
-    public float scanlineSize;
-    public float randomWear;
-    public float aberrationStrength;
-    public float trackingJitter;
-    public float trackingStrength;
-    public float trackingColorDamage;
-    public float contrast;
-    public float brightness;
-}
 
 public class CRTController : MonoBehaviour
 {
     public Volume volume;  // Assign Global Volume here
     private CRTSettings crt;  // The override from Retro Shaders Pro
+    private CRTPreset currentPreset;
 
     void Start()
     {
@@ -38,6 +22,8 @@ public class CRTController : MonoBehaviour
         if (on) crt.active = true;  // turn on
         else crt.active = false;    // turn off
     }
+
+    public void FadePixelSize() {}
 
     public CRTPreset lowPreset = new CRTPreset
     {
@@ -76,16 +62,16 @@ public class CRTController : MonoBehaviour
     public CRTPreset goodPreset = new CRTPreset
     {
         pixelSize = 2,
-        distortionStrength = 0.4f,
-        distortionSmoothing = 0.02f,
-        rgbStrength = 0.02f,
+        distortionStrength = 1,
+        distortionSmoothing = 0.01f,
+        rgbStrength = 0.25f,
         scanlineStrength = 0.2f,
         scanlineSize = 8,
         randomWear = 3,
         aberrationStrength = 10,
-        trackingJitter = 0.1f,
-        trackingStrength = 20,
-        trackingColorDamage = 0.7f,
+        trackingJitter = 0.001f,
+        trackingStrength = 10,
+        trackingColorDamage = 1,
         contrast = 0,
         brightness = 2
     };
@@ -115,11 +101,13 @@ public class CRTController : MonoBehaviour
 
             yield return null;
         }
+        currentPreset = to;
     }
 
-    public void FadeInCRT(float duration) { StartCoroutine(FadeCRT(lowPreset, highPreset, duration)); }
-    public void FadeOutCRT(float duration) { StartCoroutine(FadeCRT(highPreset, lowPreset, duration)); }
-    public void FadeLowToGood(float duration) { StartCoroutine(FadeCRT(lowPreset, goodPreset, duration)); }
-
+    public Coroutine FadeInCRT(float duration) { return StartCoroutine(FadeCRT(lowPreset, highPreset, duration)); }
+    public Coroutine FadeOutCRT(float duration) { return StartCoroutine(FadeCRT(highPreset, lowPreset, duration)); }
+    public Coroutine FadeLowToGood(float duration) { return StartCoroutine(FadeCRT(lowPreset, goodPreset, duration)); }
+    public Coroutine FadeGoodToHigh(float duration) { return StartCoroutine(FadeCRT(goodPreset, highPreset, duration)); }
+    
 
 }

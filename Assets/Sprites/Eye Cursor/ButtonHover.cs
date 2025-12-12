@@ -33,12 +33,18 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // Play hover sound once
         if (hoverSound != null)
             audioSource.PlayOneShot(hoverSound);
+
+        UICursorAnimator.Instance.OnHoverStart();
+        CursorFadeController.Instance.OnHoverStart();
     }
 
     // ---------------- HOVER EXIT ----------------
     public void OnPointerExit(PointerEventData eventData)
     {
         SetBrightness(normalBrightness);
+
+        UICursorAnimator.Instance.OnHoverEnd();
+        CursorFadeController.Instance.OnHoverEnd();
     }
 
     // ---------------- BRIGHTNESS ----------------

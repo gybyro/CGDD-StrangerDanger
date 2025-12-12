@@ -18,6 +18,8 @@ public class PlayerCharDialogueInCar : MonoBehaviour
     public PlayerInput playerInput;
     public AudioSource sfxSource;
 
+    public enum DialogueStopReason { Ended, Paused }
+
 
     private InputAction advanceAction;
     private bool advanceRequested;
@@ -32,13 +34,7 @@ public class PlayerCharDialogueInCar : MonoBehaviour
     private bool returning;
 
     [Header("Dialogue Days")]
-    public DayInWeek day1;
-    public DayInWeek day2;
-    public DayInWeek day3;
-    public DayInWeek day4;
-    public DayInWeek day5;
-    public DayInWeek day6;
-    public DayInWeek day7;
+    public List<DayInWeek> week = new List<DayInWeek>();
 
     void Awake()
     {
@@ -55,55 +51,62 @@ public class PlayerCharDialogueInCar : MonoBehaviour
     }
 
 
+    /// Get get the current day and time 
     private PlayerDialogueLine[] GetDialogue()
     {
-        currentDay = GameManager.Instance.currentDay;
-        switch (currentDay)
-        {
-            case 1: return GetDaTime(day1);
-            case 2: return GetDaTime(day2);
-            case 3: return GetDaTime(day3);
-            case 4: return GetDaTime(day4);
-            case 5: return GetDaTime(day5);
-            case 6: return GetDaTime(day6);
-            case 7: return GetDaTime(day7);
-        }
-        return day1.deep.currentLinesToPlay; // fallback
+        int dayIndex = GameManager.Instance.currentDay - 1;
+        int timeIndex = GameManager.Instance.currentTime;
+
+        if (dayIndex < 0 || dayIndex >= week.Count)
+            return null;
+
+        return GetTimeSlot(week[dayIndex], timeIndex);
     }
-    private PlayerDialogueLine[] GetDaTime(DayInWeek currentDay)
+    private PlayerDialogueLine[] GetTimeSlot(DayInWeek day, int timeIndex)
     {
-        currentTime = GameManager.Instance.currentTime;
-        switch (currentTime)
-        {
-            case 0: return currentDay.morning.currentLinesToPlay;
-            case 1: return currentDay.eve.currentLinesToPlay;
-            case 2: return currentDay.dusk.currentLinesToPlay;
-            case 3: return currentDay.midnight.currentLinesToPlay;
-            case 4: return currentDay.deep.currentLinesToPlay;
-        }
-        return currentDay.deep.currentLinesToPlay; // fallback
-        
+        if (timeIndex < 0 || timeIndex >= day.timeSlots.Length)
+            return null;
+
+        return day.timeSlots[timeIndex].currentLinesToPlay;
     }
 
-    public IEnumerator RunDialogue()
-    {
-        if (!returning) dialogue = GetDialogue();
 
-        while (dialogue[currentLineIndex] != null)
+
+
+
+    public IEnumerator RunDialogue(System.Action<DialogueStopReason> onStop)
+    {
+        if (!returning) {
+            dialogue = GetDialogue();
+            currentLineIndex = 0;
+        }
+
+        if (dialogue == null || dialogue.Length == 0)
         {
-            yield return RunLine(dialogue[currentLineIndex]);
-            currentLineIndex++;
-            if (dialogue[currentLineIndex].end)
-            {
+            onStop?.Invoke(DialogueStopReason.Ended);
+            yield break;
+        }
+
+        while (currentLineIndex < dialogue.Length)
+        {
+            PlayerDialogueLine line = dialogue[currentLineIndex];
+            yield return RunLine(line);
+
+            if (line.end) {
                 returning = false;
-                break;
+                onStop?.Invoke(DialogueStopReason.Ended);
+                yield break;
             }
-            if (dialogue[currentLineIndex].next)
-            {
+            if (line.next) {
+                currentLineIndex++;  // resume on the NEXT line
                 returning = true;
-                break;
+                onStop?.Invoke(DialogueStopReason.Paused);
+                yield break;
             }
+            currentLineIndex++;
         }
+        returning = false;
+        onStop?.Invoke(DialogueStopReason.Ended);
     }
     
     

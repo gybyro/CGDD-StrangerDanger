@@ -40,8 +40,10 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public GameObject acceptButton;        // appears after firstOrderButton click
     public GameObject declineButton;       // appears after firstOrderButton click
 
-    [Header("Accept Order Scene")]
-    public string acceptSceneName;         // name of scene to load on Accept
+    // [Header("Accept Order Scene")]
+    // public string acceptSceneName;         // name of scene to load on Accept
+
+    public System.Action OnPhoneCompleted;
 
     private Image img;
     private Color originalColor;
@@ -258,14 +260,7 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     // -------------------------
     private void OnAcceptOrderClicked()
     {
-        if (!string.IsNullOrEmpty(acceptSceneName))
-        {
-            SceneManager.LoadScene(acceptSceneName);
-        }
-        else
-        {
-            Debug.LogWarning("PhoneScript: acceptSceneName is empty, cannot load scene.");
-        }
+        OnPhoneCompleted?.Invoke();
     }
 
     // -------------------------

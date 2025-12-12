@@ -128,20 +128,15 @@ public class InGameWeek
 }
 
 [Serializable]
-public class DayInWeek
+public class DayInWeek : ScriptableObject
 {
-    public TimeOfDay morning;
-    public TimeOfDay eve;
-    public TimeOfDay dusk;
-    public TimeOfDay midnight;
-    public TimeOfDay deep;
+    public TimeSlot[] timeSlots;
 }
 
 [Serializable]
-public class TimeOfDay
+public class TimeSlot
 {
     public PlayerDialogueLine[] currentLinesToPlay;
-    // more to be added maybe
 }
 
 [Serializable]
@@ -158,3 +153,22 @@ public class PlayerDialogueLine
     public bool end;
 }
 
+
+
+[Serializable]
+public struct CRTPreset
+{
+    public float pixelSize;
+    public float distortionStrength;
+    public float distortionSmoothing;
+    public float rgbStrength;
+    public float scanlineStrength;
+    public float scanlineSize;
+    public float randomWear;
+    public float aberrationStrength;
+    public float trackingJitter;
+    public float trackingStrength;
+    public float trackingColorDamage;
+    public float contrast;
+    public float brightness;
+}
