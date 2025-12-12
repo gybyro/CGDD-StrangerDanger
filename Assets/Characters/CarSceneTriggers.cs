@@ -6,6 +6,14 @@ using System.Collections.Generic;
 
 public class CarSceneTriggers : MonoBehaviour
 {
+
+    [Header("UI")]
+    public CanvasGroup textBox;
+    public CanvasGroup nameBox;
+    public TMP_Text nameBoxText;
+    public Typewriter typewriter;
+
+
     [Header("References")]
     public PlayerCharDialogueInCar dialogueManager;
     public PlayerInput playerInput;
@@ -13,6 +21,19 @@ public class CarSceneTriggers : MonoBehaviour
 
     private int currentDay;
     private int currentTime;
+
+
+
+    private InputAction advanceAction;
+    private bool advanceRequested;
+    private bool waitingForPlayerInput = false;
+    private float defaultTypeSpeed;
+
+
+
+    private PlayerDialogueLine[] dialogue;
+    private int currentLineIndex = 0;
+    private bool returning;
 
     void Awake()
     {
@@ -55,6 +76,7 @@ public class CarSceneTriggers : MonoBehaviour
         {
             case 0: // INTROOO
                 {
+
 
                     break;
                 } 

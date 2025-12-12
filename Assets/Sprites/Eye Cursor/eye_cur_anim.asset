@@ -22,6 +22,6 @@ MonoBehaviour:
   - {fileID: 2800000, guid: f228b2014794a2640b051371e9a35bcf, type: 3}
   - {fileID: 2800000, guid: 8ab26a7342007844fba728a1ef2e7ca0, type: 3}
   frameRate: 3
-  minBlinkDelay: 10
-  maxBlinkDelay: 20
+  minBlinkDelay: 3
+  maxBlinkDelay: 5
   hotspot: {x: 0, y: 0}
