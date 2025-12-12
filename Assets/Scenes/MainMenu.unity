@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Game\n    Title"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 724ca3fe03a2aa74aa372de5152737e7, type: 2}
+  m_sharedMaterial: {fileID: 2893663674996424025, guid: 724ca3fe03a2aa74aa372de5152737e7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -281,7 +281,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394860985}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &394860987
 Camera:
   m_ObjectHideFlags: 0

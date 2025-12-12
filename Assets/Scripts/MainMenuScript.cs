@@ -6,11 +6,17 @@ public class MainMenuScript : MonoBehaviour
     public string menuSceneName = "MainMenu";
     public GameObject mainMenuPanel;
 
-    void Start()
+    private void Start()
     {
-        // Tell SettingsUIManager which panel is the main menu
         if (SettingsUIManager.Instance != null)
+        {
             SettingsUIManager.Instance.mainMenuPanel = mainMenuPanel;
+            Debug.Log("MainMenuScript: Registered mainMenuPanel with SettingsUIManager");
+        }
+        else
+        {
+            Debug.LogWarning("MainMenuScript: SettingsUIManager.Instance is NULL in Start");
+        }
     }
 
     public void OnMainMenuClicked()
@@ -26,10 +32,14 @@ public class MainMenuScript : MonoBehaviour
 
     public void OpenSettings()
     {
-        Debug.Log("Open settings from main menu");
+        Debug.Log("MainMenuScript: OpenSettings called");
         if (SettingsUIManager.Instance != null)
         {
             SettingsUIManager.Instance.OpenFromMainMenu();
+        }
+        else
+        {
+            Debug.LogWarning("MainMenuScript: SettingsUIManager.Instance is NULL in OpenSettings");
         }
     }
 }
