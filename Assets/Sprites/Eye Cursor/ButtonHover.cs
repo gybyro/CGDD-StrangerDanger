@@ -35,7 +35,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             audioSource.PlayOneShot(hoverSound);
 
         UICursorAnimator.Instance.OnHoverStart();
-        CursorFadeController.Instance.OnHoverStart();
+        // CursorFadeController.Instance.OnHoverStart();
     }
 
     // ---------------- HOVER EXIT ----------------
@@ -44,7 +44,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         SetBrightness(normalBrightness);
 
         UICursorAnimator.Instance.OnHoverEnd();
-        CursorFadeController.Instance.OnHoverEnd();
+        // CursorFadeController.Instance.OnHoverEnd();
     }
 
     // ---------------- BRIGHTNESS ----------------

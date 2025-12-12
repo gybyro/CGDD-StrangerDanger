@@ -5,44 +5,53 @@ using UnityEngine.UI;
 public class UICursorAnimator : MonoBehaviour
 {
     public static UICursorAnimator Instance;
+
+    [Header("Cursor UI")]
     public Image cursorImage;
 
-    public Sprite[] idleFrames;
-    public Sprite[] blinkFrames;
+    [Header("Animation Frames")]
+    public Sprite[] idleFrames;     // looping frames
+    public Sprite[] blinkFrames;    // blink sequence
 
+    [Header("Settings")]
     public float frameRate = 12f;
     public float fadeSpeed = 6f;
     public float visibleAlpha = 0.9f;
 
     private Coroutine animRoutine;
     private bool hovering;
+    private bool animating;
 
     void Awake()
     {
         Instance = this;
-        Cursor.visible = false; // hide system cursor
+        Cursor.visible = true;  // keep system cursor visible
     }
-
-
 
     void Update()
     {
-        // Follow mouse
+        // Follow mouse position
         transform.position = Input.mousePosition;
 
-        // Smooth fade
+        // Fade in/out smoothly
         Color c = cursorImage.color;
-        float target = hovering ? visibleAlpha : 0f;
-        c.a = Mathf.Lerp(c.a, target, Time.deltaTime * fadeSpeed);
+        float targetAlpha = hovering ? visibleAlpha : 0f;
+        c.a = Mathf.Lerp(c.a, targetAlpha, Time.deltaTime * fadeSpeed);
         cursorImage.color = c;
     }
+
+    //------------------------------------------------------
+    // Called by interactables
+    //------------------------------------------------------
 
     public void OnHoverStart()
     {
         hovering = true;
 
-        if (animRoutine == null)
+        if (!animating)
+        {
             animRoutine = StartCoroutine(Animate());
+        }
     }
 
     public void OnHoverEnd()
@@ -50,29 +59,39 @@ public class UICursorAnimator : MonoBehaviour
         hovering = false;
     }
 
+    //------------------------------------------------------
+    // Animation Logic
+    //------------------------------------------------------
+
     private IEnumerator Animate()
     {
-        int index = 0;
+        animating = true;
+
+        float frameDelay = 1f / frameRate;
+        int idleIndex = 0;
         float nextBlink = Time.time + Random.Range(3f, 7f);
 
-        while (true)
+        while (hovering) // <-- stops immediately when hover ends
         {
-            // Idle loop
-            cursorImage.sprite = idleFrames[index];
-            index = (index + 1) % idleFrames.Length;
-            yield return new WaitForSeconds(1f / frameRate);
+            // ----- Idle Frame -----
+            cursorImage.sprite = idleFrames[idleIndex];
+            idleIndex = (idleIndex + 1) % idleFrames.Length;
 
-            // Blink
-            if (Time.time > nextBlink)
+            yield return new WaitForSeconds(frameDelay);
+
+            // ----- Blink Trigger -----
+            if (Time.time >= nextBlink)
             {
-                foreach (var s in blinkFrames)
+                foreach (Sprite s in blinkFrames)
                 {
                     cursorImage.sprite = s;
-                    yield return new WaitForSeconds(1f / frameRate);
+                    yield return new WaitForSeconds(frameDelay);
                 }
 
                 nextBlink = Time.time + Random.Range(3f, 7f);
             }
         }
+
+        animating = false;
     }
 }

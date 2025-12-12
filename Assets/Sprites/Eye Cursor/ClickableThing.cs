@@ -17,7 +17,7 @@ public class ClickableThing : MonoBehaviour
 
     void OnMouseEnter()
     {
-        UICursorAnimator.Instance.OnHoverEnd();
+        UICursorAnimator.Instance.OnHoverStart();
     }
 
     void OnMouseExit()
