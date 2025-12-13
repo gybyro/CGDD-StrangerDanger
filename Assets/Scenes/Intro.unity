@@ -167,7 +167,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &31683328
 MonoBehaviour:
@@ -448,6 +448,7 @@ MonoBehaviour:
   fadeGroup: {fileID: 31683327}
   fadeTime: 1
   bgPannel: {fileID: 630856187}
+  btn: {fileID: 365922184}
   crtController: {fileID: 1085502284}
 --- !u!1 &630856183
 GameObject:
@@ -1052,8 +1053,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 630856184}
-  - {fileID: 31683326}
   - {fileID: 1083800408}
+  - {fileID: 31683326}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -34.102, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

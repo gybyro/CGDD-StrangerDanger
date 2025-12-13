@@ -15,6 +15,7 @@ public class CRTController : MonoBehaviour
     {
         // Get your CRT override from the volume profile
         volume.profile.TryGet(out crt);
+        Debug.Log("Crt: " + crt.IsActive());
     }
 
     public void ToggleCRT(bool on)

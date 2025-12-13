@@ -6,6 +6,9 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Slider sensitivitySlider;
 
+    // public Button goBackBtn;
+    public CanvasGroup self;
+
     private bool isInitializing;
 
     private void Awake()

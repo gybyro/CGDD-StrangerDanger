@@ -33,9 +33,11 @@ public class MainMenuScript : MonoBehaviour
     public void OpenSettings()
     {
         Debug.Log("MainMenuScript: OpenSettings called");
-        if (SettingsUIManager.Instance != null)
+        if (GameManager.Instance != null)
         {
-            SettingsUIManager.Instance.OpenFromMainMenu();
+            GameManager.Instance.OpenSettingsPanel();
+            
+
         }
         else
         {

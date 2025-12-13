@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class CarSceneTriggers : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class CarSceneTriggers : MonoBehaviour
     public PlayerCharDialogueInCar dialogueManager;
     public PlayerInput playerInput;
     public PhoneScript phone;
-    private bool phoneInteracted;
+    
+    public Button phoneBtn;
+    private int phoneInteracted = 0;
 
     [Header("CRT")]
     public CRTController crtController;
@@ -38,7 +41,7 @@ public class CarSceneTriggers : MonoBehaviour
     }
     private void HandlePhoneCompleted()
     {
-        phoneInteracted = true;
+        // phoneInteracted = true;
     }
 
     void Start()
@@ -133,7 +136,35 @@ public class CarSceneTriggers : MonoBehaviour
             case 3:  yield return PlayMon04(); break; // midnight
             case 4:  yield return PlayMon05(); break; // creepy
         }
+        Debug.Log("PLAYed through to     MONDAY IN CARR");
         GameManager.Instance.AdvanceCarTick();
+
+    }
+
+    public void ClickedOnPhone()
+    {
+        if (carTick == 0)
+        {
+            switch (phoneInteracted)
+            {
+                case 0:
+                    PlayFromResources(mainCamSound, "boss_call"); 
+                    break; 
+                case 1:
+                    mainCamSound.Stop();
+                    break;
+                case 2:
+                    mainCamSound.Stop();
+                    break;
+                case 3:
+                    StartCoroutine(dialogueManager.RunDialogue(1));
+                    break;
+                case 4:
+                    GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
+                    break;
+            }
+            phoneInteracted++;
+        }
 
     }
     IEnumerator PlayMon01()
@@ -146,18 +177,18 @@ public class CarSceneTriggers : MonoBehaviour
 
         Debug.Log("PLAYING MONDAY  0000000000000000001 IN CARR");
         
-        PlayFromResources(mainCamSound, "boss_call");
-        yield return new WaitForSeconds(60.3f);
+        // PlayFromResources(mainCamSound, "boss_call");
+        // yield return new WaitForSeconds(60.3f);
 
 
 
         // wait for 10s
         // play phone animation
 
-        StartCoroutine(dialogueManager.RunDialogue(1));
-        StartCoroutine(dialogueManager.RunDialogue(2));
-        StartCoroutine(dialogueManager.RunDialogue(3));
-        GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
+        // StartCoroutine(dialogueManager.RunDialogue(1));
+        // StartCoroutine(dialogueManager.RunDialogue(2));
+        // StartCoroutine(dialogueManager.RunDialogue(3));
+        // GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
 
         // ---- FIRST DIALOGUE RUN ----
         // PlayerCharDialogueInCar.DialogueStopReason stopReason =

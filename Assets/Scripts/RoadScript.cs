@@ -104,7 +104,7 @@ public class RoadScript : MonoBehaviour
                 {
                     currentSpeed = speed;
                     isAccelerating = false;
-                    Debug.Log("[RoadScript] " + name + " reached full speed: " + speed);
+                    // Debug.Log("[RoadScript] " + name + " reached full speed: " + speed);
                 }
             }
         }
@@ -118,7 +118,7 @@ public class RoadScript : MonoBehaviour
             Vector3 pos = transform.position;
             pos.z = startZ;
             transform.position = pos;
-            Debug.Log("[RoadScript] " + name + " looped to z=" + startZ);
+            // Debug.Log("[RoadScript] " + name + " looped to z=" + startZ);
         }
     }
 
@@ -126,7 +126,7 @@ public class RoadScript : MonoBehaviour
     {
         if (other.CompareTag("MainCamera"))
         {
-            Debug.Log("[RoadScript] " + name + " hit MainCamera → stop + AdvanceCarPhase");
+            // Debug.Log("[RoadScript] " + name + " hit MainCamera → stop + AdvanceCarPhase");
             globalStop = true;
 
             if (GameManager.Instance != null)

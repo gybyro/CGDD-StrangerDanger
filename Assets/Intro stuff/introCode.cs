@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class IntroCode : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class IntroCode : MonoBehaviour
     public CanvasGroup fadeGroup;
     public float fadeTime = 1f;
     public Animator bgPannel;
+    public Button btn;
 
 
     [Header("CRT")]
@@ -30,6 +32,7 @@ public class IntroCode : MonoBehaviour
         fadeGroup.alpha = 1f;                // IMPORTANT: start fully visible
         fadeGroup.blocksRaycasts = true;
         // crtController.ToggleCRT(true);
+        btn.gameObject.SetActive(false);
     }
 
     void Start()
@@ -61,11 +64,11 @@ public class IntroCode : MonoBehaviour
             yield return null;
         }
         fadeGroup.alpha = 0f;
+
+        yield return new WaitForSeconds(3f);
         fadeGroup.blocksRaycasts = false;
         isTransitioning = false;
-
-        //yield return new WaitForSeconds(0.1f);
-        
+        btn.gameObject.SetActive(true);
     }
 
 

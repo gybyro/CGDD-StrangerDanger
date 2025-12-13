@@ -282,7 +282,7 @@ MonoBehaviour:
   Smooth: 10
   rotationSpeed: 180
   speed: 0
-  playerIsWalking: 0
+  playerIsWalking: 1
   playerInput: {fileID: 1971400056734453671}
 --- !u!82 &6269663839824790837
 AudioSource:
@@ -551,13 +551,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6137971741040874488}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000029802315, y: 0.96418065, z: -0.2652464, w: 0}
-  m_LocalPosition: {x: 0, y: 2.39, z: 1.66}
+  m_LocalRotation: {x: 0.000000022351736, y: 0.982442, z: -0.18656798, w: 0}
+  m_LocalPosition: {x: 0, y: 2.12, z: 1.151}
   m_LocalScale: {x: 0.3, y: 1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3014966067367713410}
-  m_LocalEulerAnglesHint: {x: 30.763, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.505, y: 180, z: 0}
 --- !u!33 &5982797970818387397
 MeshFilter:
   m_ObjectHideFlags: 0

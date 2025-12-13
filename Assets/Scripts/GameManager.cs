@@ -7,6 +7,10 @@ public enum CustomerTruthState { Good, Bad }
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    [Header("Settings")]
+    public CanvasGroup settingsPanel;
+
     
     // car stuff
     public int carPhase = 0;
@@ -20,7 +24,7 @@ public class GameManager : MonoBehaviour
     public Material skyMorning;   // time = 0
 
     private int currentDay;
-    private int currentTime;
+    private int currentTime = 3;
 
     private string char_00_nextDialogue = "start"; // le test
     private string char_01_nextDialogue = "dial_tired_01"; // tiered is first character
@@ -172,7 +176,20 @@ public class GameManager : MonoBehaviour
 
 
 
-
+    // SETTINGS  ====================================================
+    public void SettingsGoBackBtn()
+    {
+        settingsPanel.alpha = 0;
+        settingsPanel.interactable = false;
+        settingsPanel.blocksRaycasts = false;
+    }
+    public void OpenSettingsPanel()
+    {
+        settingsPanel.gameObject.SetActive(true);
+        settingsPanel.alpha = 1;
+        settingsPanel.interactable = true;
+        settingsPanel.blocksRaycasts = true;
+    }
 
 
 

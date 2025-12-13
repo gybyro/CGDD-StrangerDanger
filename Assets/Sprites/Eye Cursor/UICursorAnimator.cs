@@ -14,9 +14,10 @@ public class UICursorAnimator : MonoBehaviour
     public Sprite[] blinkFrames;    // blink sequence
 
     [Header("Settings")]
-    public float frameRate = 12f;
+    public float frameRate = 3f;
     public float fadeSpeed = 6f;
-    public float visibleAlpha = 0.9f;
+    public float visibleAlpha = 1f;
+
 
     private Coroutine animRoutine;
     private bool hovering;
@@ -45,7 +46,6 @@ public class UICursorAnimator : MonoBehaviour
 
     void Update()
     {
-        // Follow mouse position
         transform.position = Input.mousePosition;
 
         // Fade in/out smoothly

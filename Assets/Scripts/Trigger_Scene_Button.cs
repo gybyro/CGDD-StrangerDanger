@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class Trigger_Scene_Button : MonoBehaviour
 {
+    public string sceneToLoad;
+    
     [SerializeField] private GameObject nextSceneButton;     // UI button
     [SerializeField] private SceneTransition sceneTransition; // reference to your fade script
     [SerializeField] private AudioSource knockAudio;
+
 
     private bool playerInside = false;
 
@@ -59,7 +62,7 @@ public class Trigger_Scene_Button : MonoBehaviour
 
     private void LoadSceneFade()
     {
-        // sceneTransition.LoadSceneWithFade();
+        sceneTransition.LoadSceneWithFade(sceneToLoad);
     }
 
 }

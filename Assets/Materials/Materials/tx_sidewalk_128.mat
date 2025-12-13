@@ -8,17 +8,21 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: tx_sidewalk_128
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 71a090e9b5b488349913abe716bb7bc6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - _DITHERMODE_SCREEN
+  - _FILTERMODE_POINT
+  - _LIGHTMODE_TEXELLIT
+  - _SNAPMODE_VIEW
+  m_InvalidKeywords:
+  - _USE_VERTEX_COLORS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -92,10 +96,10 @@ Material:
     - _LightMode: 1
     - _ResolutionLimit: 64
     - _SnapMode: 2
-    - _SnapsPerUnit: 64
+    - _SnapsPerUnit: 20
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _AffineTextureStrength: 1
+    - _AffineTextureStrength: 0.026
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _AmbientLight: 0.02
