@@ -18,20 +18,14 @@ public class PlayerCharDialogueInCar : MonoBehaviour
     public PlayerInput playerInput;
     public AudioSource sfxSource;
 
-    public enum DialogueStopReason { Ended, Paused }
-
 
     private InputAction advanceAction;
     private bool advanceRequested;
     private bool waitingForPlayerInput = false;
     private float defaultTypeSpeed;
 
-    private int currentDay;
-    private int currentTime;
-
     private PlayerDialogueLine[] dialogue;
-    private int currentLineIndex = 0;
-    private bool returning;
+
 
     [Header("Dialogue Days")]
     public List<DayInWeek> week = new List<DayInWeek>();
@@ -42,8 +36,6 @@ public class PlayerCharDialogueInCar : MonoBehaviour
         nameBox.alpha = 0;
         textBox.alpha = 0;
         defaultTypeSpeed = typewriter.typeSpeed;
-        returning  = false;
-
     }
     public void OnAdvancePressed()
     {
@@ -54,13 +46,13 @@ public class PlayerCharDialogueInCar : MonoBehaviour
     /// Get get the current day and time 
     private PlayerDialogueLine[] GetDialogue()
     {
-        int dayIndex = GameManager.Instance.currentDay - 1;
-        int timeIndex = GameManager.Instance.currentTime;
+        int dayIndex = GameManager.Instance.GetDay();
+        int timeIndex = GameManager.Instance.GetTime();
 
         if (dayIndex < 0 || dayIndex >= week.Count)
             return null;
 
-        return GetTimeSlot(week[dayIndex], timeIndex);
+        return GetTimeSlot(week[dayIndex -1], timeIndex);
     }
     private PlayerDialogueLine[] GetTimeSlot(DayInWeek day, int timeIndex)
     {
@@ -71,43 +63,56 @@ public class PlayerCharDialogueInCar : MonoBehaviour
     }
 
 
-
-
-
-    public IEnumerator RunDialogue(System.Action<DialogueStopReason> onStop)
+    public IEnumerator RunDialogue(int currentLineIndex)
     {
-        if (!returning) {
-            dialogue = GetDialogue();
-            currentLineIndex = 0;
-        }
+        dialogue = GetDialogue();
 
         if (dialogue == null || dialogue.Length == 0)
         {
-            onStop?.Invoke(DialogueStopReason.Ended);
             yield break;
         }
-
-        while (currentLineIndex < dialogue.Length)
+        else
         {
             PlayerDialogueLine line = dialogue[currentLineIndex];
             yield return RunLine(line);
-
-            if (line.end) {
-                returning = false;
-                onStop?.Invoke(DialogueStopReason.Ended);
-                yield break;
-            }
-            if (line.next) {
-                currentLineIndex++;  // resume on the NEXT line
-                returning = true;
-                onStop?.Invoke(DialogueStopReason.Paused);
-                yield break;
-            }
-            currentLineIndex++;
         }
-        returning = false;
-        onStop?.Invoke(DialogueStopReason.Ended);
     }
+
+
+    // public IEnumerator RunDialogue(System.Action<DialogueStopReason> onStop)
+    // {
+    //     if (!returning) {
+    //         dialogue = GetDialogue();
+    //         currentLineIndex = 0;
+    //     }
+
+    //     if (dialogue == null || dialogue.Length == 0)
+    //     {
+    //         onStop?.Invoke(DialogueStopReason.Ended);
+    //         yield break;
+    //     }
+
+    //     while (currentLineIndex < dialogue.Length)
+    //     {
+    //         PlayerDialogueLine line = dialogue[currentLineIndex];
+    //         yield return RunLine(line);
+
+    //         if (line.end) {
+    //             returning = false;
+    //             onStop?.Invoke(DialogueStopReason.Ended);
+    //             yield break;
+    //         }
+    //         if (line.next) {
+    //             currentLineIndex++;  // resume on the NEXT line
+    //             returning = true;
+    //             onStop?.Invoke(DialogueStopReason.Paused);
+    //             yield break;
+    //         }
+    //         currentLineIndex++;
+    //     }
+    //     returning = false;
+    //     onStop?.Invoke(DialogueStopReason.Ended);
+    // }
     
     
     private IEnumerator RunLine(PlayerDialogueLine line)

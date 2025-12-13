@@ -54,8 +54,8 @@ public class StoryLine : MonoBehaviour
         // next time slot    // REMEMBER TO MOVE THIS TO THE CAR
         GameManager.Instance.AdvanceTime();
         
-        currentDay = GameManager.Instance.currentDay;
-        currentTime = GameManager.Instance.currentTime;
+        currentDay  = GameManager.Instance.GetDay();
+        currentTime = GameManager.Instance.GetTime();
         
         Debug.Log("Current Day: " + currentDay + "Current Time: " + currentTime);
 

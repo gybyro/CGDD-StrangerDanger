@@ -1,221 +1,289 @@
-// using System.Collections;
-// using UnityEngine;
-// using TMPro;
-// using UnityEngine.InputSystem;
-// using System.Collections.Generic;
+using System.Collections;
+using UnityEngine;
+using TMPro;
+using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
-// public class CarSceneTriggers : MonoBehaviour
-// {
+public class CarSceneTriggers : MonoBehaviour
+{
 
-//     [Header("CAMERAS")]
-//     public Camera mainCamera;
-//     public AudioSource mainCamSound; // drag same as cam
-//     public Camera uiCamera;
-//     public AudioSource uiCamSound;
+    [Header("CAMERAS")]
+    public Camera mainCamera;
+    public AudioSource mainCamSound; // drag same as cam
 
-//     [Header("UI")]
-//     public Canvas introPanel;
-
-//     [Header("References")]
-//     public PlayerCharDialogueInCar dialogueManager;
-//     public PlayerInput playerInput;
-//     public PhoneScript phone;
-//     private bool phoneInteracted;
-
-//     [Header("CRT")]
-//     public CRTController crtController;
+    [Header("UI")]
 
 
-//     private int currentDay;
-//     private int currentTime;
+    [Header("References")]
+    public PlayerCharDialogueInCar dialogueManager;
+    public PlayerInput playerInput;
+    public PhoneScript phone;
+    private bool phoneInteracted;
 
-//     void Awake()
-//     {
-//         currentDay = GameManager.Instance.currentDay;
-//         currentTime = GameManager.Instance.currentTime;
+    [Header("CRT")]
+    public CRTController crtController;
+    private bool isTransitioning = false;
 
-//         introPanel.enabled = false;
-//         UseMainCamera();
+    private int currentDay;
+    private int carTick;
+
+    void Awake()
+    {
+        if (phone != null) phone.OnPhoneCompleted += HandlePhoneCompleted;
+    }
+    void OnDestroy()
+    {
+        if (phone != null)
+            phone.OnPhoneCompleted -= HandlePhoneCompleted;
+    }
+    private void HandlePhoneCompleted()
+    {
+        phoneInteracted = true;
+    }
+
+    void Start()
+    {
+        StartCoroutine(RunCarScene());
+    }
+
+    private IEnumerator RunCarScene()
+    {
+        // Wait until GameManager exists
+        yield return new WaitUntil(() => GameManager.Instance != null);
+
+        // Now it's safe
+        currentDay  = GameManager.Instance.GetDay();
+        carTick = GameManager.Instance.GetCarTick();
+
+        switch (currentDay)
+        {
+            case 1:  yield return PlayMon(); break;
+            case 2:  yield return PlayTue(); break;
+            case 3:  yield return PlayWed(); break;
+            case 4:  yield return PlayThu(); break;
+            case 5:  yield return PlayFri(); break;
+            case 6:  yield return PlaySat(); break;
+            case 7:  yield return PlaySun(); break;
+        }
+    }
 
 
-//         if (phone != null) phone.OnPhoneCompleted += HandlePhoneCompleted;
-//     }
-//     void OnDestroy()
-//     {
-//         if (phone != null)
-//             phone.OnPhoneCompleted -= HandlePhoneCompleted;
-//     }
-
-
-//     private void HandlePhoneCompleted()
-//     {
-//         phoneInteracted = true;
-//     }
-
-//     // void Start()
-//     // {
-//     //     StartCoroutine(RunCarScene());
-//     // }
-
-//     // private IEnumerator RunCarScene()
-//     // {
-//     //     switch (currentDay)
-//     //     {
-//     //         case 1:  yield return PlayDay01(); break;
-//     //         case 2:  GetDaTime(2); break;
-//     //         case 3:  GetDaTime(3); break;
-//     //         case 4:  GetDaTime(4); break;
-//     //         case 5:  GetDaTime(5); break;
-//     //         case 6:  GetDaTime(6); break;
-//     //         case 7:  GetDaTime(7); break;
-//     //     }
-//     // }
-//     private void GetDaTime(int currentDay)
-//     {
-//         currentTime = GameManager.Instance.currentTime;
-//         // switch (currentTime)
-//         // {
-//         //     case 0: return currentDay.morning.currentLinesToPlay;
-//         //     case 1: return currentDay.eve.currentLinesToPlay;
-//         //     case 2: return currentDay.dusk.currentLinesToPlay;
-//         //     case 3: return currentDay.midnight.currentLinesToPlay;
-//         //     case 4: return currentDay.deep.currentLinesToPlay;
-//         // }
+    // private void GetDaTime(int currentDay)
+    // {
+    //     currentTime = GameManager.Instance.currentTime;
+    //     // switch (currentTime)
+    //     // {
+    //     //     case 0: return currentDay.morning.currentLinesToPlay;
+    //     //     case 1: return currentDay.eve.currentLinesToPlay;
+    //     //     case 2: return currentDay.dusk.currentLinesToPlay;
+    //     //     case 3: return currentDay.midnight.currentLinesToPlay;
+    //     //     case 4: return currentDay.deep.currentLinesToPlay;
+    //     // }
         
-//     }
+    // }
 
-//     // ===================== CAMERA =====================
-//     public void UseMainCamera()
-//     {
-//         mainCamera.enabled = true;
-//         uiCamera.enabled = false;
-//     }
+    // ===================== CAMERA =====================
+    // public void UseMainCamera()
+    // {
+    //     mainCamera.enabled = true;
+    //     uiCamera.enabled = false;
+    // }
 
-//     public void UseUICamera()
-//     {
-//         mainCamera.enabled = false;
-//         uiCamera.enabled = true;
-//     }
+    // public void UseUICamera()
+    // {
+    //     mainCamera.enabled = false;
+    //     uiCamera.enabled = true;
+    // }
 
-//     // ===================== AUDIO =====================
-//     private void PlayFromResources(AudioSource cam, string soundName)
-//     {
-//         if (string.IsNullOrEmpty(soundName)) return;
+    // ===================== AUDIO =====================
+    private void PlayFromResources(AudioSource cam, string soundName)
+    {
+        if (string.IsNullOrEmpty(soundName)) return;
 
-//         AudioClip clip = Resources.Load<AudioClip>("Sounds/" + soundName);
-//         if (clip != null)
-//             cam.PlayOneShot(clip);
-//     }
+        AudioClip clip = Resources.Load<AudioClip>("Sounds/" + soundName);
+        if (clip != null)
+            cam.PlayOneShot(clip);
+    }
+    private void PlayLoop(AudioSource source, string soundName)
+    {
+        if (string.IsNullOrEmpty(soundName)) return;
+
+        AudioClip clip = Resources.Load<AudioClip>("Sounds/" + soundName);
+        if (clip != null)
+        {
+            source.clip = clip;
+            source.loop = true;
+            source.Play();
+        }
+    }
 
 
 
-//     // ===================== OPENING =====================
-//     public void AcceptWarning() { StartCoroutine(AcceptWarningSequence()); }
-//     public IEnumerator AcceptWarningSequence()
-//     {
-//         PlayFromResources(uiCamSound, "tv-shutdown");
+    // ===================== DAYSSS =====================
+    // 
+    // MONDAY
+    IEnumerator PlayMon()
+    {
+        Debug.Log("PLAYING MONDAY IN CARR");
+        switch (carTick)
+        {
+            case 0:  yield return PlayMon01(); break; // morning
+            case 1:  yield return PlayMon02(); break; // evening
+            case 2:  yield return PlayMon03(); break; // dusk
+            case 3:  yield return PlayMon04(); break; // midnight
+            case 4:  yield return PlayMon05(); break; // creepy
+        }
+        GameManager.Instance.AdvanceCarTick();
+
+    }
+    IEnumerator PlayMon01()
+    {
+        // CRTController.ToggleCRT(true);
+        // useing CRTPreset goodPreset
+        crtController.FadeOutCRT(2f);
+        yield return new WaitForSeconds(2f);
+        crtController.ToggleCRT(false);
+
+        Debug.Log("PLAYING MONDAY  0000000000000000001 IN CARR");
         
-//         // wait for 1:20 seconds anim
-//         yield return new WaitForSeconds(1.2f);
+        PlayFromResources(mainCamSound, "boss_call");
+        yield return new WaitForSeconds(60.3f);
 
 
-//         crtController.FadeGoodToHigh(2f);
-//         yield return new WaitForSeconds(2f);
 
-//         // Switch camera while you cant see because of the CRT
-//         UseMainCamera();
-//         introPanel.enabled = false;
+        // wait for 10s
+        // play phone animation
 
-//         // see again
-//         crtController.FadeOutCRT(2f);
-//         yield return new WaitForSeconds(2f); 
-//         crtController.ToggleCRT(false);
+        StartCoroutine(dialogueManager.RunDialogue(1));
+        StartCoroutine(dialogueManager.RunDialogue(2));
+        StartCoroutine(dialogueManager.RunDialogue(3));
+        GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
 
+        // ---- FIRST DIALOGUE RUN ----
+        // PlayerCharDialogueInCar.DialogueStopReason stopReason =
+        //     PlayerCharDialogueInCar.DialogueStopReason.Ended;
 
-//         // wait for 10s
-//         // play phone animation
-//         PlayFromResources(mainCamSound, "boss_call");
-//         yield return new WaitForSeconds(0.5f);
-//         // show phone call close
+        // yield return StartCoroutine(
+        //     dialogueManager.RunDialogue(r => stopReason = r)
+        // );
+        // // ---- PAUSE POINT ----
+        // if (stopReason == PlayerCharDialogueInCar.DialogueStopReason.Paused)
+        // {
+        //     phoneInteracted = false;
+        //     phone.gameObject.SetActive(true);
 
-//         // ---- FIRST DIALOGUE RUN ----
-//         PlayerCharDialogueInCar.DialogueStopReason stopReason =
-//             PlayerCharDialogueInCar.DialogueStopReason.Ended;
+        //     // // Wait until player presses phone UI button
+        //     yield return new WaitUntil(() => phoneInteracted);
 
-//         yield return StartCoroutine(
-//             dialogueManager.RunDialogue(r => stopReason = r)
-//         );
-//         // ---- PAUSE POINT ----
-//         if (stopReason == PlayerCharDialogueInCar.DialogueStopReason.Paused)
-//         {
-//             phoneInteracted = false;
-//             phone.gameObject.SetActive(true);
+        //     phone.gameObject.SetActive(false);
 
-//             // // Wait until player presses phone UI button
-//             yield return new WaitUntil(() => phoneInteracted);
-
-//             phone.gameObject.SetActive(false);
-
-//             // ---- RESUME DIALOGUE ----
-//             yield return StartCoroutine(
-//                 dialogueManager.RunDialogue(r => stopReason = r)
-//             );
-//         }
+        //     // ---- RESUME DIALOGUE ----
+        //     yield return StartCoroutine(
+        //         dialogueManager.RunDialogue(r => stopReason = r)
+        //     );
+        // }
 
 
-//         // sceneTransition.LoadSceneWithFade("StartingHouseScene");
-        
-//     }
+        // sceneTransition.LoadSceneWithFade("StartingHouseScene");
+    }
+    IEnumerator PlayMon02()
+    {
+        yield return new WaitForSeconds(0.5f);
+    }
+    IEnumerator PlayMon03()
+    {
+        yield return new WaitForSeconds(0.5f);
+    }
+    IEnumerator PlayMon04()
+    {
+        yield return new WaitForSeconds(0.5f);
+    }
+    IEnumerator PlayMon05()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.ResetCarTick();
+    }
 
 
-//     // MONDAY
-//     private void PlayDay01()
-//     {
-        
-//         if (currentTime == 0) // day
-//         {
-//             // CRTController.ToggleCRT(true);
-//             // useing CRTPreset goodPreset
-//             UseUICamera();
-//             introPanel.enabled = true;// Wait for player to press AcceptWarning
-//                 // yield return new WaitUntil(() => warningAccepted);
-//                 // rest play out on pressing the AcceptWarning button
-            
-//         }
-//             {
-                
-
-                
-                
-//         } 
-// }
 
 
-//     private IEnumerator  PlayDay01()
-//     {
-//         switch (currentTime)
-//         {
-//             case 0: // morning of day 01
-//                 {
-//                     // CRTController.ToggleCRT(true);
-//                     // useing CRTPreset goodPreset
-//                     UseUICamera();
-//                     introPanel.enabled = true;
+    
+    IEnumerator PlayTue()
+    {
+        switch (carTick)
+        {
+            case 0:  yield return PlayMon01(); break; // morning
+            case 1:  yield return PlayMon02(); break; // evening
+            case 2:  yield return PlayMon03(); break; // dusk
+            case 3:  yield return PlayMon04(); break; // midnight
+            case 4:  yield return PlayMon05(); break; // creepy
+        }
+    }
 
-//                     // Wait for player to press AcceptWarning
-//                     // yield return new WaitUntil(() => warningAccepted);
-//                     // rest play out on pressing the AcceptWarning button
-                    
-//                 } 
-//             // case 1: return currentDay.eve.currentLinesToPlay;
-//             // case 2: return currentDay.dusk.currentLinesToPlay;
-//             // case 3: return currentDay.midnight.currentLinesToPlay;
-//             // case 4: return currentDay.deep.currentLinesToPlay;
-//         }
-        
-//     }
+    IEnumerator PlayWed()
+    {
+        switch (carTick)
+        {
+            case 0:  yield return PlayMon01(); break; // morning
+            case 1:  yield return PlayMon02(); break; // evening
+            case 2:  yield return PlayMon03(); break; // dusk
+            case 3:  yield return PlayMon04(); break; // midnight
+            case 4:  yield return PlayMon05(); break; // creepy
+        }
+
+    }
+    IEnumerator PlayThu()
+    {
+        switch (carTick)
+        {
+            case 0:  yield return PlayMon01(); break; // morning
+            case 1:  yield return PlayMon02(); break; // evening
+            case 2:  yield return PlayMon03(); break; // dusk
+            case 3:  yield return PlayMon04(); break; // midnight
+            case 4:  yield return PlayMon05(); break; // creepy
+        }
+
+    }
+    
+    
+    IEnumerator PlayFri()
+    {
+        switch (carTick)
+        {
+            case 0:  yield return PlayMon01(); break; // morning
+            case 1:  yield return PlayMon02(); break; // evening
+            case 2:  yield return PlayMon03(); break; // dusk
+            case 3:  yield return PlayMon04(); break; // midnight
+            case 4:  yield return PlayMon05(); break; // creepy
+        }
+
+    }
+    IEnumerator PlaySat()
+    {
+        switch (carTick)
+        {
+            case 0:  yield return PlayMon01(); break; // morning
+            case 1:  yield return PlayMon02(); break; // evening
+            case 2:  yield return PlayMon03(); break; // dusk
+            case 3:  yield return PlayMon04(); break; // midnight
+            case 4:  yield return PlayMon05(); break; // creepy
+        }
+
+    }
+    IEnumerator PlaySun()
+    {
+        switch (carTick)
+        {
+            case 0:  yield return PlayMon01(); break; // morning
+            case 1:  yield return PlayMon02(); break; // evening
+            case 2:  yield return PlayMon03(); break; // dusk
+            case 3:  yield return PlayMon04(); break; // midnight
+            case 4:  yield return PlayMon05(); break; // creepy
+        }
+
+    }
 
     
 
-// }
+}
 

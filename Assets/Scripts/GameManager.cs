@@ -10,9 +10,7 @@ public class GameManager : MonoBehaviour
     
     // car stuff
     public int carPhase = 0;
-
-    public int currentCustomerNumber = 0;
-    public int nextCustomerNumber = 1;
+    private int carTick = 0;
 
     // DAY STUFF
     [Header("Skyboxes")]
@@ -21,10 +19,8 @@ public class GameManager : MonoBehaviour
     public Material skyMidnight;  // time = 3
     public Material skyMorning;   // time = 0
 
-    [HideInInspector]
-    public int currentDay;
-    [HideInInspector]
-    public int currentTime;
+    private int currentDay;
+    private int currentTime;
 
     private string char_00_nextDialogue = "start"; // le test
     private string char_01_nextDialogue = "dial_tired_01"; // tiered is first character
@@ -48,9 +44,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
-        currentDay = 1;
-        currentTime = -1;
 
         // to control daytime skyboxes
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -66,20 +59,34 @@ public class GameManager : MonoBehaviour
     public void AdvanceCarPhase()
     {
         carPhase++;
-        Debug.Log("[GM] Car phase is now: " + carPhase);
+        // Debug.Log("[GM] Car phase is now: " + carPhase);
     }
 
     public void ResetCarPhase()
     {
         carPhase = 0;
-        Debug.Log("[GM] Car phase reset to 0");
+        // Debug.Log("[GM] Car phase reset to 0");
     }
+    public int GetCarTick() { return carTick; }
+    public void AdvanceCarTick() { carTick++; }
+    public void ResetCarTick() { carTick = 0; }
 
 
     // DAY STUFF ==========================================
+    public void SetDay(int index) {
+        currentDay = index;
+        Debug.Log("Current Day set to: " + currentDay);
+    }
     public void SetTime(int index) {
         currentTime = index;
+        ApplySkybox();
         Debug.Log("Current time set to: " + currentTime);
+    }
+    public int GetDay() {
+        return currentDay;
+    }
+    public int GetTime() {
+        return currentTime;
     }
 
     public void AdvanceTime()

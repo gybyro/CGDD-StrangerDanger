@@ -29,7 +29,7 @@ public class ShadowPersonController : MonoBehaviour
             return;
         }
 
-        int customersVisited = GameManager.Instance.currentCustomerNumber;
+        int customersVisited = GameManager.Instance.GetTime();
         int money = Money_Manager.Instance.money;
 
         Debug.Log($"[Shadow] Customers visited = {customersVisited}, Money = {money}");

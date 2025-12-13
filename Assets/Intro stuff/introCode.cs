@@ -36,6 +36,14 @@ public class IntroCode : MonoBehaviour
     {
         PlayLoop(mainCamSound, "CRTTV_static_delay");
         StartCoroutine(FadeOutRoutine());
+        StartCoroutine(SetTimes());
+    }
+
+    IEnumerator SetTimes()
+    {
+        yield return new WaitUntil(() => GameManager.Instance != null);
+        GameManager.Instance.SetDay(1);
+        GameManager.Instance.SetTime(0);
     }
 
 
@@ -114,7 +122,7 @@ public class IntroCode : MonoBehaviour
 
 
 
-        GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
+        GameManager.Instance.LoadScene("CarScene");
     }
 
 

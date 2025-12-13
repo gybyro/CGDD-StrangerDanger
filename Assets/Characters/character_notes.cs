@@ -115,20 +115,26 @@ public class SpriteColorSet
 
 
 
+// [Serializable]
+// public class InGameWeek
+// {
+//     public DayInWeek monday;
+//     public DayInWeek tuesday;
+//     public DayInWeek wednsday;
+//     public DayInWeek thursday;
+//     public DayInWeek friday;
+//     public DayInWeek saturday;
+//     public DayInWeek sunday;
+// }
+
 [Serializable]
 public class InGameWeek
 {
-    public DayInWeek monday;
-    public DayInWeek tuesday;
-    public DayInWeek wednsday;
-    public DayInWeek thursday;
-    public DayInWeek friday;
-    public DayInWeek saturday;
-    public DayInWeek sunday;
+    public DayInWeek[] dayInWeek;
 }
 
 [Serializable]
-public class DayInWeek : ScriptableObject
+public class DayInWeek
 {
     public TimeSlot[] timeSlots;
 }
@@ -142,15 +148,12 @@ public class TimeSlot
 [Serializable]
 public class PlayerDialogueLine
 {
-    public string id;
     public Color color = Color.white;
     [TextArea(2, 5)]
     public string text;
     public AudioClip sound;
     public float waitSeconds;
     public float typeSpeed;
-    public bool next;
-    public bool end;
 }
 
 
