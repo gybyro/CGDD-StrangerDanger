@@ -1,64 +1,158 @@
 {
-"scene": "dial_proxy_01",
+"scene": "dial_proxy_03",
 "lines": 
     [
         {
-        "id": "start",
-        "speaker": "you",
-        "text": "...",
-        "waitSeconds": 2,
-        "next": "01_01"
+        "id": "01",
+        "speaker": "proxy",
+        "portrait": "openDoor2",
+        "text": "wahaha..",
+        "animationTriggerDoor": "DoorOpen",
+        "showChar": true,
+        "next": "02"
         },
         {
-        "id": "01_01",
+        "id": "02",
+        "speaker": "you",
+        "text": "...",
+        "next": "03"
+        },
+        {
+        "id": "03",
         "speaker": "proxy",
         "portrait": "openDoor1",
-        "text": "Who's there?",
-        "animationTriggerDoor": "DoorHalfOpen",
-        "showChar": true,
-        "next": "01_02"
-        },
-        {
-        "id": "01_02",
-        "speaker": "you",
         "text": "...",
-        "next": "01_03"
+        "next": "04"
         },
         {
-        "id": "01_03",
+        "id": "04",
         "speaker": "proxy",
-        "text": "...",
-        "next": "01_04"
+        "portrait": "openDoor2",
+        "text": "eh-hem, sorry, I ... i just missed junkfood...",
+        "next": "05"
         },
         {
-        "id": "01_04",
+        "id": "05",
         "speaker": "proxy",
-        "text": "You aren't the usual delivery guy...",
-        "next": "01_05"
+        "text": "my grand-aunt dragged me out on a 3 day long hike...",
+        "next": "06"
         },
         {
-        "id": "01_05",
+        "id": "06",
         "speaker": "you",
-        "text": "yeah, he uh... quit.",
-        "next": "01_06"
+        "text": "!?",
+        "next": "07"
         },
         {
-        "id": "01_06",
+        "id": "07",
         "speaker": "proxy",
-        "text": "riiiiight.",
-        "next": "01_07"
+        "portrait": "openDoor1",
+        "text": "oh uh, sorry for overshereing??",
+        "next": "08"
         },
         {
-        "id": "01_07",
+        "id": "08",
         "speaker": "you",
-        "text": "You did order    uh...",
+        "text": "NonOT that... you mean, YOU WEREN'T HERE TWO DAYS AGO??",
+        "next": "09"
+        },
+        {
+        "id": "09",
+        "speaker": "proxy",
+        "portrait": "openDoor1",
+        "text": "yeah.. why??;;",
+        "next": "10"
+        },
+        {
+        "id": "10",
+        "speaker": "you",
+        "color": "#657385",
+        "text": "** sh-should I tell them there was someone else here two days ago? **",
         "type": "choice",
         "options": [
-            {"text": "a large greek style?", "next": "pizza01_wrong1"},
-            {"text": "a large mexican style?", "next": "pizza01_correct1"},
-            {"text": "a medium ham n'cheese?", "next": "pizza01_wrong1"}
-        ]
+            {"text": "Change the subject", "next": "option_1"},
+            {"text": "ESCAPE", "next": "option_2"},
+            {"text": "tell them the truth", "next": "option_3"}
+            ]
         },
+
+
+
+
+
+        {
+        "id": "option_2",
+        "speaker": "you",
+        "text": "ANYWAY HERE IS YOUR PIZZA VALUED CUSTOMER!!",
+        "typeSpeed": 0.01,
+        
+        "next": "huh"
+        },
+        {
+        "id": "huh",
+        "speaker": "proxy",
+        "text": "HUUH?? Ayo wait a minute!!",
+        "typeSpeed": 0.01,
+        "waitSeconds": 0.1,
+        "next": "huh2"
+        },
+        {
+        "id": "huh2",
+        "speaker": "you",
+        "text": "-_-;...",
+        "animationTriggerDoor": "DoorSlam",
+        "waitSeconds": 0.1,
+        "next": "end"
+        },
+        
+
+
+
+
+
+
+
+
+
+        {
+        "id": "option_3",
+        "speaker": "you",
+        "text": "SoYouActuallyOrderedAPizza2DaysAgoButItWasntYouButSomethingThatLookedVerySymilarAndForSomeReasonIGotTheFeelingItDoesntLikeYouVeryMuch???",
+        "typeSpeed": 0.01,
+        "next": "end"
+        },
+
+        
+
+
+
+
+
+
+
+        {
+        "id": "option_1",
+        "speaker": "you",
+        "text": "Oh, nothing just thought I saw you during my delivery..",
+        "next": "next1"
+        },
+        {
+        "id": "next1",
+        "speaker": "you",
+        "text": "....   So are you close with your, uh, grand-aunt?",
+        "next": "next2"
+        },
+        {
+        "id": "next2",
+        "speaker": "proxy",
+        "typeSpeed": 0.1,
+        "text": "yes",
+        "next": "end"
+        },
+
+
+
+
         {
         "id": "pizza01_correct1",
         "speaker": "you",
@@ -121,7 +215,7 @@
         "id": "01_08",
         "speaker": "you",
         "color": "#657385",
-        "text": "** should I ask about the previous delivery guy? **",
+        "text": "should I ask about the previous delivery guy?",
         "type": "choice",
         "options": [
             {"text": "couldn't hurt to try right?", "next": "pizza01_ask1"},
