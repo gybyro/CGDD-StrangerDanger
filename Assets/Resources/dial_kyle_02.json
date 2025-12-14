@@ -1,0 +1,21 @@
+{
+    "scene": "dial_kyle_02",
+    "lines": [
+        {
+        "id": "test01",
+        "speaker": "kyle",
+        "portrait": "01",
+        "text": "Hi thre pizza sir!",
+        "animationTriggerDoor": "DoorOpenWide",
+        "showChar": "true",
+        "next": "test02"
+        },
+        {
+        "id": "end",
+        "speaker": "you",
+        "text": "",
+        "nextDialFile": "dial_kyle_02",
+        "finished": true
+        }
+    ]
+}

@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
 
         if (currentTime >= 3) {
             currentDay++;
-            currentTime = 1; // skip over day
+            currentTime = 0; // skip over day
         }
         else { currentTime++; }
         

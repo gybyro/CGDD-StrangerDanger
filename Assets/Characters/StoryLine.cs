@@ -66,11 +66,13 @@ public class StoryLine : MonoBehaviour
         currentTime = GameManager.Instance.GetTime();
         
         Debug.Log("Current Day: " + currentDay + "Current Time: " + currentTime);
+        Debug.Log("Current CSRRRRRRR: " + GameManager.Instance.GetCarTick());
 
-        if (currentDay == 1 && currentTime == 0) // START
+        if (GameManager.Instance.GetCarTick() == 1 && currentTime == 0) // START
                 StartCoroutine(RunStart());
 
         else {
+            // charIndex = 0;
             if(currentDay == 1) // DAY 1 Monday
             {
                 if (currentTime == 1) charIndex = 3;

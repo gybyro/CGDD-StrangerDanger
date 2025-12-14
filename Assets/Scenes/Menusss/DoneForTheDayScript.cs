@@ -71,7 +71,10 @@ public class DoneForTheDayScript : MonoBehaviour
         yield return new WaitForSeconds(1f);
         nextSceneButton.gameObject.SetActive(true);
         PlayFromResources(audioSource, "snd_curtgunshot");
+
+
         
+        Money_Manager.Instance.resetCurrentDayMoney();
 
     }
 

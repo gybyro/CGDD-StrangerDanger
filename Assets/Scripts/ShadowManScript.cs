@@ -35,7 +35,7 @@ public class ShadowPersonController : MonoBehaviour
         // }
 
         // int customersVisited = GameManager.Instance.GetTime();
-        int money = Money_Manager.Instance.money;
+        int money = Money_Manager.Instance.currentDayMoney;
 
         // Debug.Log($"[Shadow] Customers visited = {customersVisited}, Money = {money}");
 
@@ -46,16 +46,16 @@ public class ShadowPersonController : MonoBehaviour
 
 
 
-        if (currentTime < 2)
+        if (currentTime > 2)
         {   shadowMan_Stage1.SetActive(true);
-            if (money == 10)
+            if (money < 16)
             {
                 // Player is doing badly → shadow appears
                 if (shadowPerson != null)
                     shadowMan_Stage1.SetActive(false);
                     shadowMan_Stage2.SetActive(true);
             }
-            else if (money == 15)
+            else if (money > 16)
             {
                 // Doing okay → shadow hidden
                 if (shadowPerson != null)

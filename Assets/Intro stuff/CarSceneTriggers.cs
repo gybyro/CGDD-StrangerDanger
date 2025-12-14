@@ -64,7 +64,7 @@ public class CarSceneTriggers : MonoBehaviour
 
 
         Debug.Log("It is  CarTick:  " + GameManager.Instance.GetCarTick() + ",  curr Time: " + currentTime);
-        if (carTick == 4) {
+        if (carTick == 4 || carTick == 8 || carTick == 12 || carTick == 16 || carTick == 20) {
             
 
             GameManager.Instance.AdvanceCarTick();
@@ -295,36 +295,33 @@ public class CarSceneTriggers : MonoBehaviour
     {
         switch (carTick)
         {
-            case 0:  yield return PlayMon01(); break; // morning
-            case 1:  yield return PlayMon02(); break; // evening
-            case 2:  yield return PlayMon03(); break; // dusk
-            case 3:  yield return PlayMon04(); break; // midnight
-            case 4:  yield return PlayMon05(); break; // creepy
+            case 5:  yield return PlayMon02(); break; // evening
+            case 6:  yield return PlayMon03(); break; // dusk
+            case 7:  yield return PlayMon04(); break; // midnight
         }
+        GameManager.Instance.AdvanceCarTick();
     }
 
     IEnumerator PlayWed()
     {
         switch (carTick)
         {
-            case 0:  yield return PlayMon01(); break; // morning
-            case 1:  yield return PlayMon02(); break; // evening
-            case 2:  yield return PlayMon03(); break; // dusk
-            case 3:  yield return PlayMon04(); break; // midnight
-            case 4:  yield return PlayMon05(); break; // creepy
+            case 8:  yield return PlayMon02(); break; // evening
+            case 9:  yield return PlayMon03(); break; // dusk
+            case 10:  yield return PlayMon04(); break; // midnight
         }
+        GameManager.Instance.AdvanceCarTick();
 
     }
     IEnumerator PlayThu()
     {
         switch (carTick)
         {
-            case 0:  yield return PlayMon01(); break; // morning
-            case 1:  yield return PlayMon02(); break; // evening
-            case 2:  yield return PlayMon03(); break; // dusk
-            case 3:  yield return PlayMon04(); break; // midnight
-            case 4:  yield return PlayMon05(); break; // creepy
+            case 11:  yield return PlayMon02(); break; // evening
+            case 12:  yield return PlayMon03(); break; // dusk
+            case 13:  yield return PlayMon04(); break; // midnight
         }
+        GameManager.Instance.AdvanceCarTick();
 
     }
     
@@ -333,36 +330,35 @@ public class CarSceneTriggers : MonoBehaviour
     {
         switch (carTick)
         {
-            case 0:  yield return PlayMon01(); break; // morning
-            case 1:  yield return PlayMon02(); break; // evening
-            case 2:  yield return PlayMon03(); break; // dusk
-            case 3:  yield return PlayMon04(); break; // midnight
-            case 4:  yield return PlayMon05(); break; // creepy
+            case 14:  yield return PlayMon02(); break; // evening
+            case 15:  yield return PlayMon03(); break; // dusk
+            case 16:  yield return PlayMon04(); break; // midnight
         }
+        GameManager.Instance.AdvanceCarTick();
 
     }
     IEnumerator PlaySat()
     {
         switch (carTick)
         {
-            case 0:  yield return PlayMon01(); break; // morning
             case 1:  yield return PlayMon02(); break; // evening
             case 2:  yield return PlayMon03(); break; // dusk
             case 3:  yield return PlayMon04(); break; // midnight
             case 4:  yield return PlayMon05(); break; // creepy
         }
+        GameManager.Instance.AdvanceCarTick();
 
     }
     IEnumerator PlaySun()
     {
         switch (carTick)
         {
-            case 0:  yield return PlayMon01(); break; // morning
             case 1:  yield return PlayMon02(); break; // evening
             case 2:  yield return PlayMon03(); break; // dusk
             case 3:  yield return PlayMon04(); break; // midnight
             case 4:  yield return PlayMon05(); break; // creepy
         }
+        GameManager.Instance.AdvanceCarTick();
 
     }
 
