@@ -240,20 +240,30 @@
         "id": "next7",
         "speaker": "proxy",
         "portrait": "pizzaScared",
+        "waitSeconds": 0.1,
         "next": "next8"
         },
         {
-        "id": "next7",
+        "id": "next8",
         "speaker": "proxy",
         "portrait": "pizzaScared",
         "text": "Right...",
-        "next": "next8"
+        "next": "next9"
         },
         {
         "id": "next9",
         "speaker": "proxy",
         "portrait": "pizzaSide1",
         "text": "Ill consider it, thanks.",
+        "next": "next10"
+        },
+        {
+        "id": "next10",
+        "speaker": "proxy",
+        "portrait": "pizzaSide1",
+        "animationTriggerDoor": "DoorClose",
+        "showChar": false,
+        "waitSeconds": 0.1,
         "next": "end3"
         },
 
