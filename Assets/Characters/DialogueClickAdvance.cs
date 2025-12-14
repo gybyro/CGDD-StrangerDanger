@@ -4,12 +4,14 @@ using UnityEngine.UI;
 public class DialogueClickAdvance : MonoBehaviour
 {
     public DialogueManager dialogueManager;
+    public PlayerCharDialogueInCar playerDialogueManager;
 
     void Awake()
     {
         GetComponent<Button>().onClick.AddListener(() =>
         {
-            dialogueManager.OnAdvancePressed();
+            if (!dialogueManager) playerDialogueManager.OnAdvancePressed();
+            else dialogueManager.OnAdvancePressed();
         });
     }
 }

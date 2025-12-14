@@ -13,44 +13,112 @@
         {
         "id": "test02",
         "speaker": "hippie",
-        "text": "I want Pizza!",
+        "text": "Hello stranger",
         "next": "test03"
         },
+
         {
         "id": "test03",
+        "type": "choice",
         "speaker": "you",
-        "text": "Here you go",
-        "portrait": "pizza",
-        "next": "test04"
+        "text": "",
+        "options": [
+            {"text": "You don't remember me?", "next": "player_ask1"},
+            {"text": "Did anything happen to your eyes?", "next": "player_ask2"},
+            {"text": "Hey, here is your pizza, you owe me 25$", "next": "money_exchange"}
+            ]
         },
+
         {
-        "id": "test04",
+        "id": "player_ask1",
         "speaker": "hippie",
-        "portrait": "pizza",
+        "portrait": "unkown",
         "typeSpeed": 1.12,
-        "text": "THANK YOU!!11!",
-        "next": "test05"
+        "text": "No clue who you are pizza driver, how much for the pizza?",
+        "next": "how_much_money"
         },
+
         {
-        "id": "test05",
-        "speaker": "you",
-        "text": "you are welcome",
-        "next": "test06"
+        "id": "player_ask2",
+        "type": "choice",
+        "speaker": "hippie",
+        "portrait": "unkown",
+        "typeSpeed": 1.12,
+        "text": "Ohh yea my eyes, they get very red when I smoke weed, I need those munchies to add an extra spice to my pizza",
+        "options": [
+            {"text": "I thought you were staying sober?", "next": ""},
+            {"text": "Alright fair enough, here is your pizza, that will be 21$", "next": "money_exchange"}
+            ]
         },
+
         {
-        "id": "test06",
+        "id": "player_ask1",
+        "speaker": "hippie",
+        "portrait": "unkown",
+        "typeSpeed": 1.12,
+        "text": "I never said that you disciple of a human, give me the damn pizza before I get angry",
+        "next": "how_much_money_scared"
+        },
+
+        {
+        "id": "how_much_money_scared",
         "speaker": "you",
+        "portrait": "unkown",
+        "typeSpeed": 1.12,
+        "text": "I am sorry didn't mean to push your buttons, that will be 25$",
+        "next": "money_exchange_angry"
+        },
+        
+        {
+        "id": "money_exchange_angry",
+        "speaker": "you",
+        "portrait": "unkown",
+        "typeSpeed": 1.12,
+        "text": "Here you go you little shit, your lucky I was raised to tip everyone, wait here and don't move or I will get very angry!",
+        "animationTriggerDoor": "DoorClose",
+        "showChar": "false"
+        },
+
+        {
+        "id": "how_much_money",
+        "speaker": "you",
+        "portrait": "unkown",
+        "typeSpeed": 1.12,
+        "text": "Alrighty, that will be a total of 25$",
+        "next": "money_exchange"
+        },
+
+        {
+        "id": "money_exchange",
+        "speaker": "you",
+        "portrait": "unkown",
+        "typeSpeed": 1.12,
+        "text": "Here you go, wait here while I get your tip!",
         "animationTriggerDoor": "DoorClose",
         "showChar": "false",
-        "waitSeconds": 0.2,
-        "next": "end"
+        "next": "waiting_game"
         },
+
+        {
+        "id": "waiting_game",
+        "speaker": "you",
+        "type": "countdown",
+        "countDownSeconds": 10,
+        "timeOutNext": "tip_arrives",
+        "options": [
+            { "text": "Leave", "next": "end" }
+        ]
+        },
+
+        
         {
         "id": "end",
         "speaker": "you",
         "text": "",
-        "nextDialFile": "dial_hippie_03",
+        "nextDialFile": "dial_hippie_01",
         "finished": true
         }
+
+
     ]
 }

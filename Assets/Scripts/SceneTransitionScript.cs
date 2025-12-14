@@ -4,31 +4,29 @@ using System.Collections;
 
 public class SceneTransition : MonoBehaviour
 {
-    public string sceneNameToLoad;
+    public string sceneNameToLoad = "MainMenu";
     public CanvasGroup fadeGroup;
     public float fadeTime = 1f;
+
+    private bool isTransitioning;
     
-    public void LoadScene()
+    public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneNameToLoad);
-        Debug.Log($"Scene {sceneNameToLoad} loaded");
+        SceneManager.LoadScene(
+            string.IsNullOrEmpty(sceneName) ? sceneNameToLoad : sceneName
+        );
     }
 
-    public void LoadSceneWithFade() 
+    public void LoadSceneWithFade(string sceneName) 
     {
-        FadeToScene(sceneNameToLoad);
+        if (isTransitioning) return;
+
+        string target = string.IsNullOrEmpty(sceneName)
+            ? sceneNameToLoad
+            : sceneName;
+
+        FadeToScene(target);
     }
-
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     // Check if the thing entering is the player
-    //     if (other.CompareTag("Player"))
-    //     {
-    //         FadeToScene(sceneNameToLoad);
-    //         // SceneManager.LoadScene(sceneNameToLoad);
-    //     }
-    // }
 
     public void Quit()
     {
@@ -47,6 +45,9 @@ public class SceneTransition : MonoBehaviour
 
     IEnumerator FadeIn(string sceneName)
     {
+        isTransitioning = true;
+        fadeGroup.blocksRaycasts = true;
+
         float t = 0;
 
         while (t < fadeTime)
@@ -55,6 +56,7 @@ public class SceneTransition : MonoBehaviour
             fadeGroup.alpha = t / fadeTime;
             yield return null;
         }
+        fadeGroup.alpha = 1f;
 
         SceneManager.LoadScene(sceneName);
 
@@ -69,8 +71,11 @@ public class SceneTransition : MonoBehaviour
         while (t < fadeTime)
         {
             t += Time.deltaTime;
-            fadeGroup.alpha = 1 - (t / fadeTime);
+            fadeGroup.alpha = 1f - (t / fadeTime);
             yield return null;
         }
+        fadeGroup.alpha = 0f;
+        fadeGroup.blocksRaycasts = false;
+        isTransitioning = false;
     }
 }

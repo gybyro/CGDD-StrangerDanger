@@ -138,10 +138,16 @@ namespace StarterAssets
 			string sceneName = SceneManager.GetActiveScene().name;
 
 			// Only handle cursor & movement in the gameplay scene
-			bool inGameplay = sceneName == "WalkingScene" || sceneName == "eyrunWalkingSanaty";   // <- change name if needed
+			bool inGameplay = sceneName == "WalkingScene" 
+            || sceneName == "eyrunWalkingSanaty"
+            // || sceneName == "GameManager"
+            || sceneName == "StartingHouseScene"
+            
+            ;   // <- change name if needed
 
 			if (!inGameplay)
 			{
+                Debug.Log("Current scene name: " + sceneName + " Is not gamePLAY..");
 				// In any non-gameplay scene (MainMenu, GB_HouseScene, etc.)
 				// → always free the cursor
 				Cursor.lockState = CursorLockMode.None;
