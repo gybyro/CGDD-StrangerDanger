@@ -1,0 +1,156 @@
+using System.Collections;
+using UnityEngine;
+using TMPro;
+using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
+
+
+public class WalkingSceneScript : MonoBehaviour
+{
+
+    [Header("CAMERAS")]
+    public Camera mainCamera;
+    public AudioSource sfx;
+    public CRTController crtController;
+
+    public GameObject playerWpizza;
+    public GameObject playerNOpizza;
+
+    // [Header("UI")]
+    // public Canvas introPanel;
+    // public CanvasGroup fadeGroup;
+    // public float fadeTime = 1f;
+    // public Animator bgPannel;
+    // public Button btn;
+
+
+    // [Header("CRT")]
+    // public CRTController crtController;
+    // private bool isTransitioning = false;
+
+
+    void Awake()
+    {
+        // introPanel.gameObject.SetActive(true);
+        // fadeGroup.gameObject.SetActive(true);
+        // fadeGroup.alpha = 1f;                // IMPORTANT: start fully visible
+        // fadeGroup.blocksRaycasts = true;
+        // // crtController.ToggleCRT(true);
+        // btn.gameObject.SetActive(false);
+        // crtController.ToggleCRT(false);
+    }
+
+    void Start()
+    {
+        // crtController.ToggleCRT(false);
+      
+
+        
+        // PlayLoop(sfx, "Bird_Singing");
+        StartCoroutine(GetGameManager());
+    }
+
+    IEnumerator GetGameManager()
+    {
+        yield return new WaitUntil(() => GameManager.Instance != null);
+        crtController.ToggleCRT(false);
+        yield return new WaitUntil(() => GameManager.Instance != null);
+        if (GameManager.Instance.walkingSceneSpawnByDoor)
+        {
+            playerWpizza.SetActive(false);
+            playerNOpizza.SetActive(true);
+        } else
+        {
+            playerWpizza.SetActive(true);
+            playerNOpizza.SetActive(false);
+        }
+
+        GameManager.Instance.TogglePlayerSpawn();
+
+        // GameManager.Instance.SetDay(1);
+        // GameManager.Instance.SetTime(0);
+    }
+
+
+    // im fadeeed
+    // IEnumerator FadeOutRoutine()
+    // {
+    //     isTransitioning = true;
+
+    //     float t = 0f;
+
+    //     while (t < fadeTime)
+    //     {
+    //         t += Time.deltaTime;
+    //         fadeGroup.alpha = 1f - (t / fadeTime);
+    //         yield return null;
+    //     }
+    //     fadeGroup.alpha = 0f;
+
+    //     yield return new WaitForSeconds(3f);
+    //     fadeGroup.blocksRaycasts = false;
+    //     isTransitioning = false;
+    //     btn.gameObject.SetActive(true);
+    // }
+
+
+    // ===================== AUDIO =====================
+    private void PlayFromResources(AudioSource cam, string soundName)
+    {
+        if (string.IsNullOrEmpty(soundName)) return;
+
+        AudioClip clip = Resources.Load<AudioClip>("Sounds/" + soundName);
+        if (clip != null)
+            cam.PlayOneShot(clip);
+    }
+    private void PlayLoop(AudioSource source, string soundName)
+    {
+        if (string.IsNullOrEmpty(soundName)) return;
+
+        AudioClip clip = Resources.Load<AudioClip>("Sounds/" + soundName);
+        if (clip != null)
+        {
+            source.clip = clip;
+            source.loop = true;
+            source.Play();
+        }
+    }
+
+
+
+    // ===================== OPENING =====================
+    // public void AcceptWarning() { 
+    //     if (!isTransitioning) StartCoroutine(AcceptWarningSequence()); }
+
+    // public IEnumerator AcceptWarningSequence()
+    // {
+
+    //     isTransitioning = true;
+        
+    //     mainCamSound.Stop();
+    //     PlayFromResources(mainCamSound, "tv-shutdown");
+        
+    //     // wait for 1:20 seconds anim
+    //     yield return new WaitForSeconds(1.2f);
+    //     bgPannel.SetTrigger("moreFades");
+
+
+    //     crtController.FadeGoodToHigh(2f);
+    //     //yield return new WaitForSeconds(2f);
+
+    //     introPanel.gameObject.SetActive(false);
+
+    //     // see again
+    //     // crtController.FadeOutCRT(2f);
+    //     yield return new WaitForSeconds(2f); 
+    //     // crtController.ToggleCRT(false);
+
+
+
+    //     GameManager.Instance.LoadScene("CarScene");
+    // }
+
+
+}

@@ -1,0 +1,169 @@
+{
+  "scene": "dial_nervous_02",
+  "lines": [
+    {
+      "id": "n02_start",
+      "speaker": "you",
+      "text": "",
+      "waitSeconds": 0.5,
+      "next": "n02_01"
+    },
+    {
+      "id": "n02_01",
+      "speaker": "you",
+      "text": "[Knock knock]",
+      "waitSeconds": 0.6,
+      "next": "n02_02"
+    },
+    {
+      "id": "n02_02",
+      "speaker": "nervous",
+      "portrait": "01",
+      "text": "Whose there?",
+      "animationTriggerDoor": "DoorClosed",
+      "showChar": "false",
+      "next": "n02_03"
+    },
+    {
+      "id": "n02_03",
+      "speaker": "you",
+      "text": "It's the pizza delivery guy.",
+      "next": "n02_04"
+    },
+    {
+      "id": "n02_04",
+      "speaker": "nervous",
+      "portrait": "02",
+      "text": "",
+      "animationTriggerDoor": "DoorHalfOpen",
+      "showChar": "true",
+      "next": "n02_05"
+    },
+    {
+      "id": "n02_05",
+      "speaker": "nervous",
+      "portrait": "02",
+      "text": "So you haven't quit.",
+      "next": "n02_06"
+    },
+    {
+      "id": "n02_06",
+      "speaker": "you",
+      "text": "No, I have not.",
+      "next": "n02_07"
+    },
+    {
+      "id": "n02_07",
+      "speaker": "nervous",
+      "portrait": "03",
+      "text": "You're wearing different shoes. Why?",
+      "next": "n02_choice_shoes"
+    },
+
+    {
+      "id": "n02_choice_shoes",
+      "speaker": "you",
+      "type": "choice",
+      "text": "",
+      "options": [
+        { "text": "Why does that matter?", "next": "n02_why_01" },
+        { "text": "No I'm not.", "next": "n02_no_01" },
+        { "text": "My other shoes got dirty.", "next": "n02_dirty_01" }
+      ]
+    },
+
+    {
+      "id": "n02_why_01",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "It matters. Trust me.",
+      "next": "n02_why_02"
+    },
+    {
+      "id": "n02_why_02",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "Now tell me—why different shoes?",
+      "next": "n02_choice_shoes_repeat"
+    },
+    {
+      "id": "n02_choice_shoes_repeat",
+      "speaker": "you",
+      "type": "choice",
+      "text": "",
+      "options": [
+        { "text": "No I'm not.", "next": "n02_no_01" },
+        { "text": "My other shoes got dirty.", "next": "n02_dirty_01" }
+      ]
+    },
+
+    {
+      "id": "n02_no_01",
+      "speaker": "nervous",
+      "portrait": "03",
+      "text": "Hmmm… maybe.",
+      "next": "n02_open_01"
+    },
+
+    {
+      "id": "n02_dirty_01",
+      "speaker": "nervous",
+      "portrait": "03",
+      "text": "I guess that's a reasonable answer.",
+      "next": "n02_open_01"
+    },
+
+    {
+      "id": "n02_open_01",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "",
+      "animationTriggerDoor": "DoorOpen",
+      "showChar": "true",
+      "next": "n02_open_02"
+    },
+    {
+      "id": "n02_open_02",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "Thank you. I gotta go get the tip. Wait here.",
+      "next": "n02_wait"
+    },
+
+    {
+      "id": "n02_wait",
+      "speaker": "you",
+      "color": "#657385",
+      "text": "(Wait here.)",
+      "type": "choice",
+      "options": [
+        { "text": "Wait", "next": "n02_tip_01" },
+        { "text": "Leave", "next": "n02_end" }
+      ]
+    },
+    {
+      "id": "n02_tip_01",
+      "speaker": "nervous",
+      "portrait": "06",
+      "waitSeconds": 1.2,
+      "text": "(He comes back.)",
+      "next": "n02_tip_02"
+    },
+    {
+      "id": "n02_tip_02",
+      "speaker": "nervous",
+      "portrait": "06",
+      "text": "Stay safe.",
+      "tips": 10,
+      "next": "n02_end"
+    },
+
+    {
+      "id": "n02_end",
+      "speaker": "you",
+      "text": "",
+      "nextDialFile": "dial_nervous_03",
+      "finished": true
+    }
+  ]
+}

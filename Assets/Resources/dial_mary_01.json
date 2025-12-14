@@ -42,7 +42,7 @@
         "speaker": "you",
         "animationTriggerDoor": "DoorClose",
         "showChar": "false",
-        "waitSeconds": 0.,
+        "waitSeconds": 0.1,
         "next": "end"
         },
         {

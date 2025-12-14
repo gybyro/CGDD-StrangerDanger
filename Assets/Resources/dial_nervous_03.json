@@ -1,0 +1,101 @@
+{
+  "scene": "dial_nervous_03",
+  "lines": [
+    {
+      "id": "n03_start",
+      "speaker": "you",
+      "text": "[KNOCK KNOCK]",
+      "waitSeconds": 0.6,
+      "next": "n03_01"
+    },
+    {
+      "id": "n03_01",
+      "speaker": "nervous",
+      "portrait": "02",
+      "text": "",
+      "animationTriggerDoor": "DoorHalfOpen",
+      "showChar": "true",
+      "next": "n03_02"
+    },
+    {
+      "id": "n03_02",
+      "speaker": "nervous",
+      "portrait": "02",
+      "text": "Well hello there.",
+      "next": "n03_03"
+    },
+    {
+      "id": "n03_03",
+      "speaker": "you",
+      "text": "I have the pizza you ordered.",
+      "next": "n03_04"
+    },
+    {
+      "id": "n03_04",
+      "speaker": "nervous",
+      "portrait": "02",
+      "text": "Great.",
+      "next": "n03_05"
+    },
+    {
+      "id": "n03_05",
+      "speaker": "you",
+      "text": "……….",
+      "next": "n03_06"
+    },
+    {
+      "id": "n03_06",
+      "speaker": "you",
+      "text": "What? No questions?",
+      "next": "n03_07"
+    },
+    {
+      "id": "n03_07",
+      "speaker": "you",
+      "text": "Nope. No questions.",
+      "next": "n03_08"
+    },
+    {
+      "id": "n03_08",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "",
+      "animationTriggerDoor": "DoorOpen",
+      "showChar": "true",
+      "next": "n03_09"
+    },
+    {
+      "id": "n03_09",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "Thank you for the pizza. I'll go grab your tip.",
+      "next": "n03_choice_final"
+    },
+
+    {
+      "id": "n03_choice_final",
+      "speaker": "you",
+      "type": "choice",
+      "text": "",
+      "options": [
+        { "text": "Leave", "next": "n03_leave" },
+        { "text": "Stay", "next": "n03_stay" }
+      ]
+    },
+
+    {
+      "id": "n03_leave",
+      "speaker": "you",
+      "text": "",
+      "nextDialFile": "dial_nervous_04",
+      "finished": true
+    },
+    {
+      "id": "n03_stay",
+      "speaker": "you",
+      "text": "",
+      "nextDialFile": "dial_nervous_04",
+      "finished": true
+    }
+  ]
+}

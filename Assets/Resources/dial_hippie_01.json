@@ -28,7 +28,7 @@
         "type": "choice",
         "speaker": "you",
         "portrait": "pizza",
-        "typeSpeed": 1.12,
+        "typeSpeed": 0.12,
         "text": "Your choice",
                 "options": [
             {"text": "What does that necklace mean?", "next": "player_ask1"},

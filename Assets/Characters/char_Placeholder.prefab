@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f697fcd10346d4f9c542b1e29a9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
-  ID: 0
+  ID: 100
   characterID: npc01
   displayName: npc01
   houseColorGood: Brown
