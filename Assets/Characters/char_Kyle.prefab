@@ -55,16 +55,16 @@ MonoBehaviour:
   houseColorBad: Brown
   animator: {fileID: 62286867094759595}
   voiceSounds:
-  - {fileID: 8300000, guid: 32070317eb5aadc4cbe79c84b9c28c78, type: 3}
+  - {fileID: 8300000, guid: f689bcd57a5e5fc4aa180810cf93c13e, type: 3}
   voicePitchMin: 0.95
   voicePitchMax: 1.05
   audioSource: {fileID: -8079158275568158221}
   defaultTextColor: {r: 1, g: 0.9772984, b: 0.7150943, a: 1}
   spriteRenderer: {fileID: 7718615900848793663}
   expressions:
-  - name: normal
+  - name: 01
     sprite: {fileID: 21300000, guid: 62ad8f9c69a3c5e46870409b943b6cb7, type: 3}
-  - name: sigma
+  - name: 02
     sprite: {fileID: 21300000, guid: 5224e294f2ab7934e800cb2b9a375078, type: 3}
 --- !u!95 &62286867094759595
 Animator:

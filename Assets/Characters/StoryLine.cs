@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class StoryLine : MonoBehaviour
 {
@@ -51,9 +52,6 @@ public class StoryLine : MonoBehaviour
 
     private void RunDay()
     {
-        // next time slot    // REMEMBER TO MOVE THIS TO THE CAR
-        GameManager.Instance.AdvanceTime();
-        
         currentDay  = GameManager.Instance.GetDay();
         currentTime = GameManager.Instance.GetTime();
         
@@ -72,20 +70,20 @@ public class StoryLine : MonoBehaviour
             // ID: 6  –  char_Visitor
 
             
-            if (currentTime == 0) charIndex = 0; // Start
+            if (currentTime == 0) 
+                StartCoroutine(RunStart());
+            else
+            {
+                if (currentTime == 1) charIndex = 3;
+                else if (currentTime == 2) charIndex = 2;
+                else if (currentTime == 3) charIndex = 5;
 
-            else if (currentTime == 1) charIndex = 3;
-            else if (currentTime == 2) charIndex = 4;
-            else if (currentTime == 3) charIndex = 5;   
+                currentDialogue = GameManager.Instance.GetNextDialogue(charIndex);
+                Debug.Log("GetNextDialogue Called from StoryLine! index: " + charIndex + ", nextDialogue: " + currentDialogue);
+
+                StartCoroutine(RunStory());
+            }   
         }
-            
-        
-        currentDialogue = GameManager.Instance.GetNextDialogue(charIndex);
-        Debug.Log("GetNextDialogue Called from StoryLine! index: " + charIndex + ", nextDialogue: " + currentDialogue);
-
-      
-
-        StartCoroutine(RunStory());
     }
 
     private IEnumerator RunStory()
@@ -96,6 +94,16 @@ public class StoryLine : MonoBehaviour
 
         // needs to be loaded AFTERWARDS >:(
         string sceneNameToLoad = "WalkingScene";
+        SceneManager.LoadScene(sceneNameToLoad);
+        Debug.Log($"Scene {sceneNameToLoad} loaded");
+    }
+
+    private IEnumerator RunStart()
+    {
+        currentDialogue = GameManager.Instance.GetNextDialogue(0);
+        yield return StartCoroutine(dialogueManager.RunDialogue(currentDialogue));
+
+        string sceneNameToLoad = "StartingHouseScene";
         SceneManager.LoadScene(sceneNameToLoad);
         Debug.Log($"Scene {sceneNameToLoad} loaded");
     }

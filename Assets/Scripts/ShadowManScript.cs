@@ -8,6 +8,9 @@ public class ShadowPersonController : MonoBehaviour
     public GameObject shadowMan_Stage1;
     public GameObject shadowMan_Stage2;
 
+    private int currentDay;
+    private int currentTime;
+
     
 
     // Optional: only apply logic once when this scene loads
@@ -15,31 +18,35 @@ public class ShadowPersonController : MonoBehaviour
 
     private void Start()
     {
+        currentDay  = GameManager.Instance.GetDay();
+        currentTime = GameManager.Instance.GetTime();
         UpdateShadow();
     }
 
     // You can also call this from other scripts if needed
     public void UpdateShadow()
     {
-        if (hasUpdatedOnce) return;   // remove this line if you want it to keep reacting
+        if (hasUpdatedOnce) return;
 
-        if (GameManager.Instance == null || Money_Manager.Instance == null)
-        {
-            Debug.LogError("ShadowPersonController: Missing GameManager or Money_Manager!");
-            return;
-        }
+        // if (GameManager.Instance == null || Money_Manager.Instance == null)
+        // {
+        //     Debug.LogError("ShadowPersonController: Missing GameManager or Money_Manager!");
+        //     return;
+        // }
 
-        int customersVisited = GameManager.Instance.GetTime();
+        // int customersVisited = GameManager.Instance.GetTime();
         int money = Money_Manager.Instance.money;
 
-        Debug.Log($"[Shadow] Customers visited = {customersVisited}, Money = {money}");
+        // Debug.Log($"[Shadow] Customers visited = {customersVisited}, Money = {money}");
 
         // --- SIMPLE RULE FOR NOW ---
         // After visiting at least 1 customer:
         // - If money == 15 → do nothing (shadow stays off)
         // - If money == 10 → show shadow
 
-        if (customersVisited >= 1)
+
+
+        if (currentTime < 2)
         {   shadowMan_Stage1.SetActive(true);
             if (money == 10)
             {

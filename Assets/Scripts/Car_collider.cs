@@ -1,20 +1,32 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Trigger_Scene_Button : MonoBehaviour
+public class CarCollider : MonoBehaviour
 {
-    public string sceneToLoad;
+    public string sceneToLoad = "CarScene";
     
-    [SerializeField] private GameObject nextSceneButton;     // UI button
+    [SerializeField] private Button nextSceneButton;     // UI button
+    public TMP_Text btnText;
     [SerializeField] private SceneTransition sceneTransition; // reference to your fade script
-    [SerializeField] private AudioSource knockAudio;
-
 
     private bool playerInside = false;
+    public bool spawnByDoor;
 
     private void Start()
     {
         if (nextSceneButton != null)
-            nextSceneButton.SetActive(false);
+            nextSceneButton.gameObject.SetActive(false);
+
+        spawnByDoor = GameManager.Instance.walkingSceneSpawnByDoor;
+        SetBtnText();
+        
+    }
+
+    private void SetBtnText()
+    {
+        if (spawnByDoor) btnText.text = "Press E to Leave";
+        else btnText.text = "I must finnish what I started...";
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,7 +34,7 @@ public class Trigger_Scene_Button : MonoBehaviour
         if (other.CompareTag("Player") && nextSceneButton != null)
         {
             playerInside = true;
-            nextSceneButton.SetActive(true);
+            nextSceneButton.gameObject.SetActive(true);
             Debug.Log("Player entered trigger, enabling button");
         }
     }
@@ -32,7 +44,7 @@ public class Trigger_Scene_Button : MonoBehaviour
         if (other.CompareTag("Player") && nextSceneButton != null)
         {
             playerInside = false;
-            nextSceneButton.SetActive(false);
+            nextSceneButton.gameObject.SetActive(false);
             Debug.Log("Player left trigger, disabling button");
         }
     }
@@ -43,26 +55,15 @@ public class Trigger_Scene_Button : MonoBehaviour
         if (playerInside && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("E pressed inside trigger - knocking + loading scene");
-            PlayKnockAndLoad();   // <-- new function to handle audio + load
+            LoadSceneFade();
         }
     }
 
-    public void PlayKnockAndLoad()
+
+
+    public void LoadSceneFade()
     {
-        if (knockAudio != null)
-            knockAudio.Play();
-
-        // Wait for audio to finish, then fade + load
-        float delay = knockAudio != null && knockAudio.clip != null
-            ? knockAudio.clip.length
-            : 0f;
-
-        Invoke(nameof(LoadSceneFade), delay);
-    }
-
-    private void LoadSceneFade()
-    {
-        sceneTransition.LoadSceneWithFade(sceneToLoad);
+        if (spawnByDoor) sceneTransition.LoadSceneWithFade(sceneToLoad);
     }
 
 }

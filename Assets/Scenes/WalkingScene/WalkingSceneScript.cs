@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+
+
 public class WalkingSceneScript : MonoBehaviour
 {
 
@@ -12,6 +14,9 @@ public class WalkingSceneScript : MonoBehaviour
     public Camera mainCamera;
     public AudioSource sfx;
     public CRTController crtController;
+
+    public GameObject playerWpizza;
+    public GameObject playerNOpizza;
 
     // [Header("UI")]
     // public Canvas introPanel;
@@ -51,6 +56,18 @@ public class WalkingSceneScript : MonoBehaviour
     {
         yield return new WaitUntil(() => GameManager.Instance != null);
         crtController.ToggleCRT(false);
+        yield return new WaitUntil(() => GameManager.Instance != null);
+        if (GameManager.Instance.walkingSceneSpawnByDoor)
+        {
+            playerWpizza.SetActive(false);
+            playerNOpizza.SetActive(true);
+        } else
+        {
+            playerWpizza.SetActive(true);
+            playerNOpizza.SetActive(false);
+        }
+
+        GameManager.Instance.TogglePlayerSpawn();
 
         // GameManager.Instance.SetDay(1);
         // GameManager.Instance.SetTime(0);

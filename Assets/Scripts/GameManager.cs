@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     // car stuff
     public int carPhase = 0;
     private int carTick = 0;
+    public bool walkingSceneSpawnByDoor = false;
 
     // DAY STUFF
     [Header("Skyboxes")]
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
     private int currentDay;
     private int currentTime = 3;
 
-    private string char_00_nextDialogue = "start"; // le test
+    private string char_00_nextDialogue = "dial_kyle_01"; // le dudebro
     private string char_01_nextDialogue = "dial_tired_01"; // tiered is first character
     private string char_02_nextDialogue = "dial_proxy_01"; // proxy is seconf 
     private string char_03_nextDialogue = "dial_visitor_01"; // last of day 1 is visitor
@@ -176,6 +177,12 @@ public class GameManager : MonoBehaviour
     }
     public void GenerateNextCustomer() {}
     public string GetPhoneDescription() { return ""; }
+
+
+    public void TogglePlayerSpawn()
+    {
+        walkingSceneSpawnByDoor = !walkingSceneSpawnByDoor;
+    }
 
 
 

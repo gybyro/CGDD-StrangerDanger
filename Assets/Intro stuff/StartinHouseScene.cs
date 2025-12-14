@@ -4,12 +4,14 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class StartinHouseSceneCode : MonoBehaviour
 {
 
     [Header("CAMERAS")]
-    public Camera mainCamera;
+    public GameObject playerWpizza;
+    public GameObject playerNOpizza;
     public AudioSource mainCamSound; // drag same as cam
 
     // [Header("UI")]
@@ -49,6 +51,19 @@ public class StartinHouseSceneCode : MonoBehaviour
     IEnumerator GetGameManager()
     {
         yield return new WaitUntil(() => GameManager.Instance != null);
+        if (GameManager.Instance.walkingSceneSpawnByDoor)
+        {
+            playerWpizza.SetActive(false);
+            playerNOpizza.SetActive(true);
+        } else
+        {
+            playerWpizza.SetActive(true);
+            playerNOpizza.SetActive(false);
+        }
+
+        GameManager.Instance.TogglePlayerSpawn();
+
+
         // crtController.ToggleCRT(false);
 
         // GameManager.Instance.SetDay(1);

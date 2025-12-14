@@ -25,7 +25,7 @@ public class CarSceneTriggers : MonoBehaviour
 
     [Header("CRT")]
     public CRTController crtController;
-    private bool isTransitioning = false;
+    // private bool isTransitioning = false;
 
     private int currentDay;
     private int carTick;
@@ -47,6 +47,8 @@ public class CarSceneTriggers : MonoBehaviour
     void Start()
     {
         StartCoroutine(RunCarScene());
+        carTick = GameManager.Instance.GetCarTick();
+        if (carTick != 0) crtController.ToggleCRT(false);
     }
 
     private IEnumerator RunCarScene()
@@ -136,8 +138,8 @@ public class CarSceneTriggers : MonoBehaviour
             case 3:  yield return PlayMon04(); break; // midnight
             case 4:  yield return PlayMon05(); break; // creepy
         }
-        Debug.Log("PLAYed through to     MONDAY IN CARR");
         GameManager.Instance.AdvanceCarTick();
+        Debug.Log("AdvanceD CarTick:  " + GameManager.Instance.GetCarTick());
 
     }
 
@@ -164,6 +166,26 @@ public class CarSceneTriggers : MonoBehaviour
                     break;
             }
             phoneInteracted++;
+        }
+        else if (carTick == 1) { 
+            
+            GameManager.Instance.AdvanceTime();
+            GameManager.Instance.LoadSceneWithFade("WalkingScene");
+        }
+        else if (carTick == 2) { 
+            
+            GameManager.Instance.AdvanceTime();
+            GameManager.Instance.LoadSceneWithFade("WalkingScene");
+        }
+        else if (carTick == 3) { 
+            
+            GameManager.Instance.AdvanceTime();
+            GameManager.Instance.LoadSceneWithFade("WalkingScene");
+        }
+        else if (carTick == 4) { 
+            GameManager.Instance.AdvanceTime();
+            // LOAD END OF DAY SCENE
+            GameManager.Instance.LoadSceneWithFade("WalkingScene");
         }
 
     }
