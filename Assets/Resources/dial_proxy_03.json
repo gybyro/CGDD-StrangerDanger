@@ -1,5 +1,6 @@
 {
 "scene": "dial_proxy_03",
+"houseBgPallet": "Blue01",
 "lines": 
     [
         {
@@ -47,7 +48,7 @@
         "id": "07",
         "speaker": "proxy",
         "portrait": "openDoor1",
-        "text": "oh uh, sorry for overshereing??",
+        "text": "oh uh, sorry for oversharing??",
         "next": "08"
         },
         {
@@ -92,17 +93,16 @@
         "id": "huh",
         "speaker": "proxy",
         "text": "HUUH?? Ayo wait a minute!!",
-        "typeSpeed": 0.01,
+        "typeSpeed": 0.02,
         "waitSeconds": 0.1,
-        "next": "huh2"
+        "next": "end01"
         },
         {
-        "id": "huh2",
+        "id": "end01",
         "speaker": "you",
-        "text": "-_-;...",
-        "animationTriggerDoor": "DoorSlam",
-        "waitSeconds": 0.1,
-        "next": "end"
+        "text": "",
+        "nextDialFile": "dial_proxy_V1",
+        "finished": true
         },
         
 
@@ -118,348 +118,150 @@
         "id": "option_3",
         "speaker": "you",
         "text": "SoYouActuallyOrderedAPizza2DaysAgoButItWasntYouButSomethingThatLookedVerySymilarAndForSomeReasonIGotTheFeelingItDoesntLikeYouVeryMuch???",
-        "typeSpeed": 0.01,
-        "next": "end"
+        "typeSpeed": 0.05,
+        "next": "oh"
+        },
+        {
+        "id": "oh",
+        "speaker": "proxy",
+        "text": "... oh",
+        "portrait": "openDoor3",
+        "typeSpeed": 0.1,
+        "next": "oh2"
+        },
+        {
+        "id": "oh2",
+        "speaker": "proxy",
+        "text": "..... ohhhh",
+        "portrait": "openDoor4",
+        "typeSpeed": 0.2,
+        "next": "oh3"
+        },
+        {
+        "id": "oh3",
+        "speaker": "you",
+        "text": "Are you..",
+        "next": "oh4"
+        },
+        {
+        "id": "oh4",
+        "speaker": "proxy",
+        "text": "I need to go.",
+        "portrait": "openDoor4",
+        "typeSpeed": 0.16,
+        "next": "oh5"
+        },
+        {
+        "id": "oh5",
+        "speaker": "you",
+        "animationTriggerDoor": "DoorSlam",
+        "showChar": false,
+        "text": "wha? but wHAT ABOUT THE PIZZA???",
+        "next": "oh6"
+        },
+        {
+        "id": "oh6",
+        "speaker": "you",
+        "text": "...",
+        "next": "oh7"
+        },
+        {
+        "id": "oh7",
+        "speaker": "you",
+        "text": "I'll just leave it here.",
+        "next": "end02"
+        },
+        {
+        "id": "end02",
+        "speaker": "you",
+        "text": "",
+        "nextDialFile": "dial_proxy_V2",
+        "finished": true
         },
 
         
-
-
-
-
-
 
 
         {
         "id": "option_1",
         "speaker": "you",
         "text": "Oh, nothing just thought I saw you during my delivery..",
+        "next": "p1"
+        },
+        {
+        "id": "p1",
+        "speaker": "you",
+        "portrait": "pizzaSide1",
+        "text": "uh, here you go.",
         "next": "next1"
         },
         {
         "id": "next1",
         "speaker": "you",
+        "portrait": "pizzaUp",
         "text": "....   So are you close with your, uh, grand-aunt?",
         "next": "next2"
         },
         {
         "id": "next2",
         "speaker": "proxy",
+        "portrait": "pizzaUp2",
         "typeSpeed": 0.1,
-        "text": "yes",
-        "next": "end"
-        },
-
-
-
-
-        {
-        "id": "pizza01_correct1",
-        "speaker": "you",
-        "text": "a large mexican style right?",
-        "animationTriggerDoor": "DoorOpen",
-        "next": "pizza01_correct2"
+        "text": "yeah",
+        "next": "next3"
         },
         {
-        "id": "pizza01_correct2",
+        "id": "next3",
         "speaker": "proxy",
-        "portrait": "openDoor2",
-        "text": "Yep",
-        "next": "01_081"
+        "portrait": "pizzaSide1",
+        "text": "I usually live with her but the house is under some renovations.",
+        "next": "next4"
         },
         {
-        "id": "pizza01_wrong1",
-        "speaker": "proxy",
-        "text": "No, Its suposed to be large mexican style",
-        "next": "pizza01_wrong2"
-        },
-        {
-        "id": "pizza01_wrong2",
-        "speaker": "proxy",
-        "text": "PLEASE don't tell me you got my order wrong???",
-        "next": "pizza01_wrong3"
-        },
-        {
-        "id": "pizza01_wrong3",
+        "id": "next4",
         "speaker": "you",
-        "text": "NOpE! juST Reaad iT wRoNg... (oops)",
-        "next": "pizza01_wrong4"
+        "text": "oh. So your not from around here either I take it?",
+        "next": "next5"
         },
         {
-        "id": "pizza01_wrong4",
-        "speaker": "proxy",
-        "portrait": "openDoor2",
-        "text": "ok",
-        "animationTriggerDoor": "DoorOpen",
-        "next": "01_081"
-        },
-        {
-        "id": "01_081",
-        "speaker": "you",
-        "text": "That will be $29.99",
-        "next": "01_082"
-        },
-        {
-        "id": "01_082",
-        "speaker": "proxy",
-        "text": "i-i already paid online",
-        "next": "01_083"
-        },
-        {
-        "id": "01_083",
-        "speaker": "you",
-        "text": "ri-right...",
-        "next": "01_08"
-        },
-        {
-        "id": "01_08",
-        "speaker": "you",
-        "color": "#657385",
-        "text": "should I ask about the previous delivery guy?",
-        "type": "choice",
-        "options": [
-            {"text": "couldn't hurt to try right?", "next": "pizza01_ask1"},
-            {"text": "Pfft naaaah", "next": "pizza01_bad1"}
-        ]
-        },
-        {
-        "id": "pizza01_bad1",
-        "speaker": "you",
-        "text": "Here is your pizza sir!",
-        "trigger": "hidePizzabox",
-        "next": "pizza01_bad2"
-        },
-        {
-        "id": "pizza01_bad2",
+        "id": "next5",
         "speaker": "proxy",
         "portrait": "pizzaUp",
-        "text": "................",
-        "next": "pizza01_bad3"
+        "text": "yeah, Im leaving soon as well.",
+        "next": "next6"
         },
         {
-        "id": "pizza01_bad3",
+        "id": "next6",
+        "speaker": "you",
+        "text": "Maybe you should leave sooner rather then later.",
+        "next": "next7"
+        },
+        {
+        "id": "next7",
+        "speaker": "proxy",
+        "portrait": "pizzaScared",
+        "next": "next8"
+        },
+        {
+        "id": "next7",
+        "speaker": "proxy",
+        "portrait": "pizzaScared",
+        "text": "Right...",
+        "next": "next8"
+        },
+        {
+        "id": "next9",
         "speaker": "proxy",
         "portrait": "pizzaSide1",
-        "text": "Thank   You   Very   Much",
-        "typeSpeed": 0.12,
-        "next": "pizza01_bad4"
-        },
-        {
-        "id": "pizza01_bad4",
-        "speaker": "proxy",
-        "text": "",
-        "waitSeconds": 2,
-        "animationTriggerDoor": "DoorSlam",
-        "showChar": false,
-        "next": "pizza01_bad5"
-        },
-        {
-        "id": "pizza01_bad5",
-        "speaker": "you",
-        "color": "#657385",
-        "text": "(Aaaand thank you too!!  please DO NOT order from us again.)",
-        "next": "end"
+        "text": "Ill consider it, thanks.",
+        "next": "end3"
         },
 
-
-
-
         {
-        "id": "pizza01_ask1",
-        "speaker": "you",
-        "text": "Here is your pizza",
-        "trigger": "hidePizzabox",
-        "next": "pizza01_ask2"
-        },
-        {
-        "id": "pizza01_ask2",
-        "speaker": "proxy",
-        "portrait": "pizzaUp",
-        "text": "thank you",
-        "next": "pizza01_ask3"
-        },
-        {
-        "id": "pizza01_ask3",
-        "speaker": "you",
-        "text": "Soooo, did you know the previous delivery guy?",
-        "next": "pizza01_ask4"
-        },
-        {
-        "id": "pizza01_ask4",
-        "speaker": "proxy",
-        "portrait": "pizzaSide1",
-        "text": "Just a little.",
-        "next": "pizza01_ask5"
-        },
-        {
-        "id": "pizza01_ask5",
-        "speaker": "proxy",
-        "portrait": "pizzaSide1",
-        "text": "Heh, he was probably the only person I actually comunicated with regularly...",
-        "next": "pizza01_ask6"
-        },
-        {
-        "id": "pizza01_ask6",
-        "speaker": "proxy",
-        "portrait": "pizzaSide1",
-        "text": "...",
-        "next": "pizza01_ask7"
-        },
-        {
-        "id": "pizza01_ask7",
-        "speaker": "proxy",
-        "portrait": "pizzaUp",
-        "typeSpeed": 0.1,
-        "text": "Be careful not to 'quit' prematurely as well.",
-        "next": "pizza01_ask8"
-        },
-        {
-        "id": "pizza01_ask8",
-        "speaker": "you",
-        "portrait": "pizzaSide1",
-        "text": "ri-right... *gulp*",
-        "next": "pizza01_ask9"
-        },
-        {
-        "id": "pizza01_ask9",
-        "speaker": "proxy",
-        "portrait": "pizzaSide1",
-        "text": "oh, wait one moment please.",
-        "next": "pizza01_ask10"
-        },
-        {
-        "id": "pizza01_ask10",
-        "speaker": "you",
-        "portrait": "?",
-        "text": "?",
-        "waitSeconds": 2,
-        "animationTriggerDoor": "DoorClose",
-        "showChar": false,
-        "next": "tip01"
-        },
-        {
-        "id": "tip01",
-        "speaker": "proxy",
-        "portrait": "openDoor2",
-        "text": "here, thanks for the trouble",
-        "animationTriggerDoor": "DoorHalfOpen",
-        "showChar": true,
-        "tips": 5,
-        "next": "tip02"
-        },
-        {
-        "id": "tip02",
-        "speaker": "you",
-        "text": "oh! Thank you.  It was no trouble at all.",
-        "waitSeconds": 1,
-        "animationTriggerDoor": "DoorClose",
-        "showChar": false,
-        "next": "tip03"
-        },
-        {
-        "id": "tip03",
-        "speaker": "proxy",
-        "portrait": "pizzaSide1",
-        "text": "...",
-        "next": "tip04"
-        },
-        {
-        "id": "tip04",
-        "speaker": "proxy",
-        "text": "See ya",
-        "waitSeconds": 1,
-        "animationTriggerDoor": "DoorClose",
-        "showChar": false,
-        "next": "end"
-        },
-
-
-
-
-
-
-
-        {
-        "id": "pizza01_name1",
-        "speaker": "you",
-        "portrait": "pizzaUp",
-        "text": "So Why did you leave your name empty?",
-        "trigger": "hidePizzabox",
-        "next": "pizza01_name2"
-        },
-        {
-        "id": "pizza01_name2",
-        "speaker": "proxy",
-        "portrait": "pizzaSide1",
-        "text": "I - I wasn't really sure what to put down tbh... sorry",
-        "next": "pizza01_name3"
-        },
-        {
-        "id": "pizza01_name3",
-        "speaker": "you",
-        "text": "ah no worries! We just want to make sure we deliver to the right person.",
-        "next": "pizza01_name4"
-        },
-        {
-        "id": "pizza01_name4",
-        "speaker": "proxy",
-        "text": "right,,, ill write it out next time...",
-        "next": "pizza01_name5"
-        },
-        {
-        "id": "pizza01_name5",
-        "speaker": "you",
-        "text": "...",
-        "next": "pizza01_name6"
-        },
-        {
-        "id": "pizza01_name6",
-        "speaker": "proxy",
-        "portrait": "pizzaUp",
-        "text": "you can just call me proxy.",
-        "next": "pizza01_name7"
-        },
-        {
-        "id": "pizza01_name7",
-        "speaker": "you",
-        "text": "sure?",
-        "next": "pizza01_name8"
-        },
-
-
-        {
-        "id": "pizza01_name8",
-        "speaker": "proxy",
-        "portrait": "pizzaSide1",
-        "text": "and thanks for the pizza",
-        "next": "pizza01_name9"
-        },
-        {
-        "id": "pizza01_name9",
-        "speaker": "proxy",
-        
-        "showChar": false,
-        "next": "pizza01_name10"
-        },
-        {
-        "id": "pizza01_name10",
-        "speaker": "you",
-        "animationTriggerDoor": "DoorClose",
-        "text": "Thank you for ... ordering with us..",
-        "next": "pizza01_name11"
-        },
-        {
-        "id": "pizza01_name11",
-        "speaker": "you",
-        "color": "#657385",
-        "text": "*sigh*",
-        "next": "end"
-        },
-        {
-        "id": "end",
+        "id": "end3",
         "speaker": "you",
         "text": "",
-        "nextDialFile": "dial_proxy_02",
+        "nextDialFile": "dial_proxy_04",
         "finished": true
         }
     ]

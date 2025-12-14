@@ -1,5 +1,6 @@
 {
     "scene": "dial_proxy_02",
+    "houseBgPallet": "Blue02",
     "lines": [
         {
         "id": "test01",
@@ -26,8 +27,8 @@
         },
         {
         "id": "test04",
-        "speaker": "oh, uh.. I guess I wasn't expecting you to be so much more energetic?",
-        "text": "what?",
+        "speaker": "you",
+        "text": "oh, uh.. I guess I wasn't expecting you to be so much more energetic?",
         "next": "test05"
         },
         {
@@ -59,7 +60,7 @@
         {
         "id": "09",
         "speaker": "proxy",
-        "portrait": "visitor1",
+        "portrait": "V1",
         "text": "You must think I'm a slob, don't you?",
         "next": "10"
         },
@@ -67,11 +68,11 @@
         "id": "10",
         "speaker": "you",
         "color": "#657385",
-        "text": "huh???",
+        "text": "** huh??? **",
         "type": "choice",
         "options": [
             {"text": "No, Of course not!!", "next": "vop_good"},
-            {"text": "I just figured YOU couldn't get enough of this face ˙✦", "next": "vop_bad"}
+            {"text": "I just figured YOU couldn't get enough of this face", "next": "vop_bad"}
             ]
         },
 
@@ -80,13 +81,13 @@
         {
         "id": "vop_good",
         "speaker": "you",
-        "text": "No, Of course not!!",
+        "text": "No, Of course not!! ",
         "next": "g1"
         },
         {
         "id": "g1",
         "speaker": "proxy",
-        "portrait": "visitor2",
+        "portrait": "V2",
         "text": "tch",
         "next": "g2"
         },
@@ -94,32 +95,46 @@
         "id": "g2",
         "speaker": "you",
         "portrait": "visitorUp",
-        "text": "*???*",
+        "text": "?",
         "next": "g3"
         },
         {
         "id": "g3",
         "speaker": "you",
-        "text": "Anyway, thank you again!",
+        "portrait": "V1",
+        "text": "Anyway, thank you again! I'm sure You must be very busy considering the takeout",
         "next": "g4"
         },
         {
         "id": "g4",
         "speaker": "you",
-        "text": "Anyway, thank you again!",
-        "showChar": false,
-        "animationTriggerDoor": "DoorClose",
-        "waitSeconds": 1,
+        "portrait": "V1",
+        "text": "I'll get out of your hair!",
         "next": "g5"
         },
         {
         "id": "g5",
-        "speaker": "you",
-        "text": "............",
+        "speaker": "proxy",
+        "portrait": "visitorUp",
+        "text": "....",
         "next": "g6"
         },
         {
         "id": "g6",
+        "speaker": "proxy",
+        "text": "fine",
+        "showChar": false,
+        "animationTriggerDoor": "DoorClose",
+        "next": "g7"
+        },
+        {
+        "id": "g7",
+        "speaker": "you",
+        "text": "............",
+        "next": "g8"
+        },
+        {
+        "id": "g8",
         "speaker": "you",
         "text": "FEWHHH, I think I dodged a bullet there, they were definitely acting a bit off today.",
         "waitSeconds": 0.2,
@@ -134,7 +149,7 @@
         {
         "id": "vop_bad",
         "speaker": "you",
-        "text": "I just figured YOU couldn't get enough of this face ˙✦",
+        "text": "I just figured YOU couldn't get enough of this face",
         "next": "b1"
         },
         {
@@ -182,7 +197,7 @@
         {
         "id": "bad02",
         "speaker": "proxy",
-        "portrait": "visitor3",
+        "portrait": "V3",
         "text": "You.  Waited.",
         "showChar": true,
         "typeSpeed": 0.2,

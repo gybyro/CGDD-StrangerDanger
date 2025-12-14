@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
     public ChoiceUI choiceUI;
     public Animator doorAnimator;
     public AudioSource sfxSource;
+    public DoorBGPallet houseBG;
     // public SceneTransition sceneTransition; // optional fade system
 
 
@@ -105,6 +106,7 @@ public class DialogueManager : MonoBehaviour
 
         // Start at line 0
         currentLine = dialogue.lines[0];
+        if (houseBG != null) houseBG.ApplyColorSet(dialogue.houseBgPallet);
 
         while (currentLine != null)
         {

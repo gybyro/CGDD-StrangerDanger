@@ -1,5 +1,6 @@
 {
 "scene": "dial_proxy_01",
+"houseBgPallet": "Blue01",
 "lines": 
     [
         {
@@ -257,15 +258,11 @@
         "id": "tip02",
         "speaker": "you",
         "text": "oh! Thank you.  It was no trouble at all.",
-        "waitSeconds": 1,
-        "animationTriggerDoor": "DoorClose",
-        "showChar": false,
         "next": "tip03"
         },
         {
         "id": "tip03",
         "speaker": "proxy",
-        "portrait": "pizzaSide1",
         "text": "...",
         "next": "tip04"
         },
@@ -273,7 +270,6 @@
         "id": "tip04",
         "speaker": "proxy",
         "text": "See ya",
-        "waitSeconds": 1,
         "animationTriggerDoor": "DoorClose",
         "showChar": false,
         "next": "end"
