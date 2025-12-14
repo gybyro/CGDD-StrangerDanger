@@ -2,7 +2,7 @@
   "scene": "dial_nervous_03",
   "lines": [
     {
-      "id": "n03_start",
+      "id": "n03_00",
       "speaker": "you",
       "text": "[KNOCK KNOCK]",
       "waitSeconds": 0.6,
@@ -69,14 +69,14 @@
       "speaker": "nervous",
       "portrait": "04",
       "text": "Thank you for the pizza. I'll go grab your tip.",
-      "next": "n03_choice_final"
+      "next": "n03_choice"
     },
 
     {
-      "id": "n03_choice_final",
+      "id": "n03_choice",
       "speaker": "you",
-      "type": "choice",
       "text": "",
+      "type": "choice",
       "options": [
         { "text": "Leave", "next": "n03_leave" },
         { "text": "Stay", "next": "n03_stay" }

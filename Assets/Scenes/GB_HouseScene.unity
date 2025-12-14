@@ -755,8 +755,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StoryLine
   dialogueManager: {fileID: 362345138}
-  testDialogue: 0
-  ifTestDialogueFileName: start
+  testDialogue: 1
+  ifTestDialogueFileName: dial_nervous_03
 --- !u!4 &1266667920
 Transform:
   m_ObjectHideFlags: 0
