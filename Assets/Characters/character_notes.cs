@@ -62,6 +62,7 @@ using System;
 public class DialogueFile  // json file - called "dial_..."
 {
     public string scene;
+    public string houseBgPallet;
     public DialogueLine[] lines;
 }
 
@@ -83,6 +84,8 @@ public class DialogueLine
     public int tips;
     public string nextDialFile;
     public bool finished;
+
+    public string soorBG;
 
     public bool timerStart;
     public float countDownSeconds;   // e.g. 10

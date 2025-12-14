@@ -51,8 +51,8 @@ MonoBehaviour:
   ID: 2
   characterID: proxy
   displayName: Proxy
-  houseColorGood: Brown
-  houseColorBad: Brown
+  houseColorGood: Blue01
+  houseColorBad: Blue02
   animator: {fileID: 62286867094759595}
   voiceSounds:
   - {fileID: 8300000, guid: 40eba9dc3082aef48b2b1a2430e70096, type: 3}
@@ -66,24 +66,36 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 957b88567ce5f234e960afae735e2773, type: 3}
   - name: openDoor2
     sprite: {fileID: 21300000, guid: d81c617044c05d54c828d1d56e118eba, type: 3}
+  - name: openDoor3
+    sprite: {fileID: 21300000, guid: 1d9db4d6a7ddcd24cb8d3ca491560a43, type: 3}
+  - name: openDoor4
+    sprite: {fileID: 21300000, guid: 0856eabcaa2a8f14d9413787ccc65ac3, type: 3}
   - name: pizzaUp
     sprite: {fileID: 21300000, guid: be2dcb24c6b7bad42b0d3a3756092f4e, type: 3}
+  - name: pizzaUp2
+    sprite: {fileID: 21300000, guid: 062674838d22c0441b4d6fc0703f58b6, type: 3}
   - name: pizzaSide1
     sprite: {fileID: 21300000, guid: 2f20653e7f5ac294c8aca5a928b8c654, type: 3}
   - name: pizzaSide2
     sprite: {fileID: 21300000, guid: 1335c4fe4f2d68c40992929e84973bd4, type: 3}
+  - name: pizzaScared
+    sprite: {fileID: 21300000, guid: 388aa37c9b174f143aa74dc19f6c7d15, type: 3}
   - name: happy
     sprite: {fileID: 21300000, guid: 04900b70ac9be704d84bb8ba0a4c4edf, type: 3}
   - name: visitorOpen
     sprite: {fileID: 21300000, guid: 4bc9c3b0a41657e4db6bafe2a49e165c, type: 3}
   - name: visitorUp
     sprite: {fileID: 21300000, guid: 351f1d92114f71e43b713c933250fd59, type: 3}
-  - name: visitor1
+  - name: V1
     sprite: {fileID: 21300000, guid: 4f19ec85e2f380748bc44508d212a915, type: 3}
-  - name: visitor2
+  - name: V2
     sprite: {fileID: 21300000, guid: 506af8ad3955b5745bedd86d9946283c, type: 3}
-  - name: visitor3
+  - name: V3
     sprite: {fileID: 21300000, guid: 95d6c5354167aec4ab51b4852be3e9a5, type: 3}
+  - name: V4
+    sprite: {fileID: 21300000, guid: e12b78653e07ffb4db1e0c33db4788c3, type: 3}
+  - name: V5
+    sprite: {fileID: 21300000, guid: 37f38a66d94181448a0ab413f0f91058, type: 3}
 --- !u!95 &62286867094759595
 Animator:
   serializedVersion: 7
