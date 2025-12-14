@@ -1,0 +1,202 @@
+{
+  "scene": "dial_nervous_01",
+  "lines": [
+    {
+      "id": "n01_start",
+      "speaker": "you",
+      "text": "",
+      "waitSeconds": 0.5,
+      "next": "n01_01"
+    },
+    {
+      "id": "n01_01",
+      "speaker": "you",
+      "text": "[Knock knock]",
+      "waitSeconds": 0.6,
+      "next": "n01_02"
+    },
+    {
+      "id": "n01_02",
+      "speaker": "nervous",
+      "portrait": "01",
+      "text": "Who's there?",
+      "animationTriggerDoor": "DoorClosed",
+      "showChar": "false",
+      "next": "n01_03"
+    },
+    {
+      "id": "n01_03",
+      "speaker": "you",
+      "text": "Pizza delivery.",
+      "next": "n01_04"
+    },
+    {
+      "id": "n01_04",
+      "speaker": "nervous",
+      "portrait": "02",
+      "text": "…",
+      "animationTriggerDoor": "DoorHalfOpen",
+      "showChar": "true",
+      "next": "n01_05"
+    },
+    {
+      "id": "n01_05",
+      "speaker": "nervous",
+      "portrait": "02",
+      "text": "You're not the usual guy.",
+      "next": "n01_06"
+    },
+    {
+      "id": "n01_06",
+      "speaker": "you",
+      "text": "No sir, I'm not. He quit.",
+      "next": "n01_07"
+    },
+    {
+      "id": "n01_07",
+      "speaker": "nervous",
+      "portrait": "03",
+      "text": "Why?",
+      "next": "n01_08"
+    },
+    {
+      "id": "n01_08",
+      "speaker": "you",
+      "text": "I don't know, sir.",
+      "next": "n01_09"
+    },
+    {
+      "id": "n01_09",
+      "speaker": "nervous",
+      "portrait": "03",
+      "text": "Suspicious.",
+      "next": "n01_10"
+    },
+    {
+      "id": "n01_10",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "What's in the box?",
+      "animationTriggerDoor": "DoorOpen",
+      "showChar": "true",
+      "next": "n01_11"
+    },
+    {
+      "id": "n01_11",
+      "speaker": "you",
+      "text": "...A pizza.",
+      "next": "n01_12"
+    },
+    {
+      "id": "n01_12",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "What type of pizza?",
+      "next": "n01_choice_pizza"
+    },
+
+    {
+      "id": "n01_choice_pizza",
+      "speaker": "you",
+      "type": "choice",
+      "text": "",
+      "options": [
+        { "text": "Wrong", "next": "n01_wrong_01" },
+        { "text": "Correct", "next": "n01_correct_01" },
+        { "text": "Wrong", "next": "n01_wrong_01" }
+      ]
+    },
+
+    {
+      "id": "n01_wrong_01",
+      "speaker": "nervous",
+      "portrait": "05",
+      "text": "Get out of here!! I didn't order that. You must be one of them!",
+      "next": "n01_wrong_02"
+    },
+    {
+      "id": "n01_wrong_02",
+      "speaker": "you",
+      "text": "No sir, I'm sorry. I just forgot.",
+      "next": "n01_wrong_03"
+    },
+    {
+      "id": "n01_wrong_03",
+      "speaker": "nervous",
+      "portrait": "05",
+      "text": "I don't believe you. I'm not paying for that. Now leave my property!",
+      "next": "n01_wrong_04"
+    },
+    {
+      "id": "n01_wrong_04",
+      "speaker": "you",
+      "text": "Please, sir…",
+      "next": "n01_wrong_05"
+    },
+    {
+      "id": "n01_wrong_05",
+      "speaker": "nervous",
+      "waitSeconds": 0.6,
+      "text": "",
+      "animationTriggerDoor": "DoorSlam",
+      "showChar": "false",
+      "next": "n01_wrong_06"
+    },
+    {
+      "id": "n01_wrong_06",
+      "speaker": "nervous",
+      "text": "Leave!",
+      "next": "n01_end"
+    },
+
+    {
+      "id": "n01_correct_01",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "Hmmm… alright. I suppose you are just a delivery driver.",
+      "next": "n01_correct_02"
+    },
+    {
+      "id": "n01_correct_02",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "Leave the pizza on the front porch. I'm going to grab you your… payment.",
+      "next": "n01_correct_wait"
+    },
+    {
+      "id": "n01_correct_wait",
+      "speaker": "you",
+      "color": "#657385",
+      "text": "(Wait here.)",
+      "type": "choice",
+      "options": [
+        { "text": "Wait", "next": "n01_correct_tip_01" },
+        { "text": "Leave", "next": "n01_end" }
+      ]
+    },
+    {
+      "id": "n01_correct_tip_01",
+      "speaker": "nervous",
+      "portrait": "06",
+      "waitSeconds": 1.3,
+      "text": "(He comes back.)",
+      "next": "n01_correct_tip_02"
+    },
+    {
+      "id": "n01_correct_tip_02",
+      "speaker": "nervous",
+      "portrait": "06",
+      "text": "Stay safe out there.",
+      "tips": 10,
+      "next": "n01_end"
+    },
+
+    {
+      "id": "n01_end",
+      "speaker": "you",
+      "text": "",
+      "nextDialFile": "dial_nervous_02",
+      "finished": true
+    }
+  ]
+}
