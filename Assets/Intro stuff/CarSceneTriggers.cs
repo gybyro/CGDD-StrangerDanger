@@ -169,21 +169,17 @@ public class CarSceneTriggers : MonoBehaviour
         }
         else if (carTick == 1) { 
             
-            GameManager.Instance.AdvanceTime();
             GameManager.Instance.LoadSceneWithFade("WalkingScene");
         }
         else if (carTick == 2) { 
             
-            GameManager.Instance.AdvanceTime();
             GameManager.Instance.LoadSceneWithFade("WalkingScene");
         }
         else if (carTick == 3) { 
             
-            GameManager.Instance.AdvanceTime();
             GameManager.Instance.LoadSceneWithFade("WalkingScene");
         }
         else if (carTick == 4) { 
-            GameManager.Instance.AdvanceTime();
             // LOAD END OF DAY SCENE
             GameManager.Instance.LoadSceneWithFade("WalkingScene");
         }
@@ -242,18 +238,30 @@ public class CarSceneTriggers : MonoBehaviour
     IEnumerator PlayMon02()
     {
         yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.AdvanceTime();
+        yield return new WaitForSeconds(5f);
+        GameManager.Instance.LoadSceneWithFade("WalkingScene");
     }
     IEnumerator PlayMon03()
     {
         yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.AdvanceTime();
+        yield return new WaitForSeconds(5f);
+        GameManager.Instance.LoadSceneWithFade("WalkingScene");
     }
     IEnumerator PlayMon04()
     {
         yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.AdvanceTime();
+        yield return new WaitForSeconds(5f);
+        GameManager.Instance.LoadSceneWithFade("WalkingScene");
     }
     IEnumerator PlayMon05()
     {
         yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.AdvanceTime();
+        yield return new WaitForSeconds(5f);
+        GameManager.Instance.LoadSceneWithFade("WalkingScene");
         GameManager.Instance.ResetCarTick();
     }
 

@@ -32,15 +32,34 @@ public class PlayerCharDialogueInCar : MonoBehaviour
 
     void Awake()
     {
+        if (playerInput == null)
+        playerInput = FindAnyObjectByType<PlayerInput>();
+
+        if (playerInput == null)
+        {
+            Debug.LogError("PlayerInput not found!");
+            enabled = false;
+            return;
+        }
+
         advanceAction = playerInput.actions["Next"];
-        nameBox.alpha = 0;
-        textBox.alpha = 0;
-        defaultTypeSpeed = typewriter.typeSpeed;
+        if (nameBox != null) nameBox.alpha = 0;
+        if (textBox != null) textBox.alpha = 0;
+
+        if (typewriter != null)
+            defaultTypeSpeed = typewriter.typeSpeed;
+        else
+            Debug.LogError("Typewriter reference missing!");
     }
     public void OnAdvancePressed()
     {
         advanceRequested = true;
     }
+    // public void OnNext(InputAction.CallbackContext context)
+    // {
+    //     if (context.performed)
+    //         advanceRequested = true;
+    // }
 
 
     /// Get get the current day and time 
