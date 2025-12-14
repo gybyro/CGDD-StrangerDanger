@@ -28,6 +28,7 @@ public class CarSceneTriggers : MonoBehaviour
     // private bool isTransitioning = false;
 
     private int currentDay;
+    private int currentTime;
     private int carTick;
 
     void Awake()
@@ -58,7 +59,18 @@ public class CarSceneTriggers : MonoBehaviour
 
         // Now it's safe
         currentDay  = GameManager.Instance.GetDay();
+        currentTime = GameManager.Instance.GetTime();
         carTick = GameManager.Instance.GetCarTick();
+
+
+        Debug.Log("It is  CarTick:  " + GameManager.Instance.GetCarTick() + ",  curr Time: " + currentTime);
+        if (carTick == 4) {
+            
+
+            GameManager.Instance.AdvanceCarTick();
+            GameManager.Instance.LoadSceneWithFade("DoneForTheDay");
+        }
+        else
 
         switch (currentDay)
         {
@@ -71,7 +83,6 @@ public class CarSceneTriggers : MonoBehaviour
             case 7:  yield return PlaySun(); break;
         }
     }
-
 
     // private void GetDaTime(int currentDay)
     // {
@@ -177,9 +188,7 @@ public class CarSceneTriggers : MonoBehaviour
                 case 1:
                     mainCamSound.Stop();
                     break;
-                case 4:
-                    GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
-                    break;
+                
             }
             phoneInteracted++;
             
@@ -193,8 +202,8 @@ public class CarSceneTriggers : MonoBehaviour
             
             GameManager.Instance.LoadSceneWithFade("WalkingScene");
         }
-        else if (carTick == 4) { 
-            // LOAD END OF DAY SCENE
+        else if (carTick == 5) { 
+            
             GameManager.Instance.LoadSceneWithFade("WalkingScene");
         }
         else GameManager.Instance.LoadSceneWithFade("WalkingScene");
@@ -275,7 +284,7 @@ public class CarSceneTriggers : MonoBehaviour
        
         yield return new WaitForSeconds(5f);
         GameManager.Instance.LoadSceneWithFade("WalkingScene");
-        GameManager.Instance.ResetCarTick();
+        // GameManager.Instance.ResetCarTick();
     }
 
 

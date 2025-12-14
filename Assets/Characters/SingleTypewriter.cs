@@ -56,8 +56,6 @@ public class SingleTypewriter : MonoBehaviour
 
         dialogueText.maxVisibleCharacters = dialogueText.textInfo.characterCount;
 
-        if (continueArrow != null)
-            continueArrow.SetActive(true);
     }
 
     // =========================
@@ -97,7 +95,5 @@ public class SingleTypewriter : MonoBehaviour
         isTyping = false;
         lineComplete = true;
 
-        if (continueArrow != null)
-            continueArrow.SetActive(true);
     }
 }

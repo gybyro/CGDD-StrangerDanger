@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GB_HouseScene.unity
     guid: 90f8494456186954b91b8ea6947fb1ee
   - enabled: 1
+    path: Assets/Scenes/DoneForTheDay.unity
+    guid: 94a22eaa0236eae4497874f134119eee
+  - enabled: 1
     path: Assets/Scenes/deathScene.unity
     guid: f4bc97e53067604478be66e02a6a049f
   - enabled: 1

@@ -38,6 +38,7 @@ public class DoneForTheDayScript : MonoBehaviour
         moneyToday = Money_Manager.Instance.currentDayMoney;
         SetMoneyText();
         setComment();
+        GameManager.Instance.AdvanceTime();
 
         StartCoroutine(TextApyr());
     }
@@ -55,7 +56,7 @@ public class DoneForTheDayScript : MonoBehaviour
 
     private IEnumerator TextApyr()
     {  
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         doneTodayText.gameObject.SetActive(true);
         PlayFromResources(audioSource, "snd_curtgunshot");
 

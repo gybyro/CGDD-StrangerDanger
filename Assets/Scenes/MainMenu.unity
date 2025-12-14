@@ -702,10 +702,18 @@ PrefabInstance:
       propertyPath: m_text
       value: Settings
       objectReference: {fileID: 0}
+    - target: {fileID: 4153529621761947325, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
+      propertyPath: mainMenuPanel
+      value: 
+      objectReference: {fileID: 2126703942}
     - target: {fileID: 4605280259185076132, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
       propertyPath: m_Name
       value: btn_settings
       objectReference: {fileID: 0}
+    - target: {fileID: 4855692269773624507, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
+      propertyPath: fadeGroup
+      value: 
+      objectReference: {fileID: 1592962179}
     - target: {fileID: 6242701438504674332, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -971,10 +979,18 @@ PrefabInstance:
       propertyPath: m_text
       value: Quit
       objectReference: {fileID: 0}
+    - target: {fileID: 4153529621761947325, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
+      propertyPath: mainMenuPanel
+      value: 
+      objectReference: {fileID: 2126703942}
     - target: {fileID: 4605280259185076132, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
       propertyPath: m_Name
       value: btn_quit
       objectReference: {fileID: 0}
+    - target: {fileID: 4855692269773624507, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
+      propertyPath: fadeGroup
+      value: 
+      objectReference: {fileID: 1592962179}
     - target: {fileID: 6242701438504674332, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -1254,6 +1270,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2126703943}
     m_Modifications:
+    - target: {fileID: 4153529621761947325, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
+      propertyPath: mainMenuPanel
+      value: 
+      objectReference: {fileID: 2126703942}
     - target: {fileID: 4605280259185076132, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
       propertyPath: m_Name
       value: btn_start
