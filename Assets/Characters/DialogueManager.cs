@@ -213,7 +213,14 @@ public class DialogueManager : MonoBehaviour
         {
             yield return HandleChoice(line);
             yield break;
-        } 
+        }
+
+        // COUNTDOWN BRANCH ======================
+        if (line.type == "countdown")
+        {
+            yield return HandleCountdown(line);
+            yield break;
+        }
 
         // TYPEWRITER SPEED =======================
         if (line.typeSpeed > 0)
@@ -340,6 +347,101 @@ public class DialogueManager : MonoBehaviour
         currentLine = FindLine(line.options[selectedIndex].next);
         yield return null;
     }
+
+
+
+    // ==============================
+    // COUNTDOWN BRANCH HANDLING
+    // type == "countdown"
+    //
+    // Behaviour:
+    // - Shows a single "escape" option (typically "Leave") using the existing ChoiceUI.
+    // - Starts a countdown that runs until it reaches 0.
+    // - If the player selects the option before time runs out -> follow that option's `next`.
+    // - If time runs out first -> follow `timeoutNext` (or fall back to `next`).
+    //
+    // Note:
+    // - Space/advance input is disabled while isChoosing == true (same as normal choice flow).
+    // ==============================
+    IEnumerator HandleCountdown(DialogueLine line)
+    {
+        // Display text/prompt area (reuse the textbox the same way choices do)
+        textBox.alpha = 1;
+
+        // We reuse ChoiceUI, so countdown lines should have EXACTLY ONE option in JSON:
+        // options[0] = { "text": "Leave", "next": "leave_now" }
+        bool hasEscapeOption = (line.options != null && line.options.Length > 0 && !string.IsNullOrEmpty(line.options[0].next));
+
+        bool escapeChosen = false;
+        int selectedIndex = 0;
+
+        isChoosing = true;
+        lineWasHandledByChoice = true;
+
+        // Show the single escape button (if present)
+        if (hasEscapeOption)
+        {
+            choiceUI.ShowChoices(line, (index) =>
+            {
+                selectedIndex = index;
+                escapeChosen = true;
+                isChoosing = false;
+            });
+        }
+
+        float remaining = Mathf.Max(0f, line.countDownSeconds);
+
+        // Update countdown text every frame; display whole seconds in UI
+        // (Use prompt if provided, otherwise fall back to text)
+        string basePrompt = !string.IsNullOrEmpty(line.prompt) ? line.prompt : line.text;
+
+        int lastShownSeconds = -1;
+
+        while (remaining > 0f && !escapeChosen)
+        {
+            int shownSeconds = Mathf.CeilToInt(remaining);
+
+            // Only rewrite UI when the displayed second changes (reduces flicker/GC).
+            if (shownSeconds != lastShownSeconds)
+            {
+                lastShownSeconds = shownSeconds;
+
+                // If you have a dedicated "prompt" UI in ChoiceUI, update it there instead.
+                // Fallback: show in the dialogue text area.
+                typewriter.dialogueText.text = $"{basePrompt} ({shownSeconds})";
+            }
+
+            remaining -= Time.deltaTime;
+            yield return null;
+        }
+
+        // Stop choice state (in case time runs out)
+        if (isChoosing) isChoosing = false;
+
+        // If the player escaped, follow the escape option's next.
+        if (escapeChosen && hasEscapeOption)
+        {
+            currentLine = FindLine(line.options[selectedIndex].next);
+            yield break;
+        }
+
+        // Otherwise, time ran out -> follow the default path.
+        string timeoutId = !string.IsNullOrEmpty(line.timeOutNext) ? line.timeOutNext : line.next;
+
+        if (string.IsNullOrEmpty(timeoutId))
+        {
+            // Nothing to go to; treat as end.
+            currentLine = null;
+            yield break;
+        }
+
+        currentLine = FindLine(timeoutId);
+        yield break;
+    }
+
+
+
+
 
     // ==============================
     // FIND NEXT DIALOGUE LINE

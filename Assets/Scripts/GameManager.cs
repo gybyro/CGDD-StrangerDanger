@@ -33,11 +33,12 @@ public class GameManager : MonoBehaviour
     private string char_00_nextDialogue = "dial_kyle_01"; // le dudebro
     private string char_01_nextDialogue = "dial_tired_01"; // tiered is first character
     private string char_02_nextDialogue = "dial_proxy_01"; // proxy is seconf 
-    private string char_03_nextDialogue = "dial_visitor_01"; // last of day 1 is visitor
-    private string char_04_nextDialogue = "dial_hippie_01"; //
-    private string char_05_nextDialogue = "dial_grumpy_01"; //
-    private string char_06_nextDialogue = "dial_mary_01"; //
-    private string char_07_nextDialogue = "dial_concerned_01"; //
+    private string char_03_nextDialogue = "dial_hippie_01"; 
+    private string char_04_nextDialogue = "dial_grumpy_01"; //
+    private string char_05_nextDialogue = "dial_mary_01"; //
+    private string char_06_nextDialogue = "dial_concerned_01"; //
+    private string char_07_nextDialogue = "dial_visitor_01"; //
+    // private string char_09_nextDialogue = "dial_placeholder_01"; 
 
 
     private void Awake()

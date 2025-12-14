@@ -5,17 +5,20 @@ public class ClickableThing : MonoBehaviour
     public AudioClip clickSound;
     public AudioSource audioSource;
 
-    void Start()
+
+    void Awake()
     {
-        if (clickSound != null)
-        {
-            if (audioSource == null)
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.playOnAwake = false;   
-        }
+
+        audioSource.playOnAwake = false;
+        audioSource.clip = clickSound;
     }
 
-    void OnMouseEnter()
+void OnMouseEnter()
     {
         UICursorAnimator.Instance.OnHoverStart();
     }
@@ -25,9 +28,15 @@ public class ClickableThing : MonoBehaviour
         UICursorAnimator.Instance.OnHoverEnd();
     }
 
-
     void OnMouseDown()
-    {   
-        audioSource.PlayOneShot(clickSound);
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        else
+        {
+            audioSource.Play();
+        }
     }
 }

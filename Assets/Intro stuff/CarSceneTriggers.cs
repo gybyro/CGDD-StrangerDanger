@@ -145,6 +145,7 @@ public class CarSceneTriggers : MonoBehaviour
 
     public void ClickedOnPhone()
     {
+        if (carTick != 0) GameManager.Instance.AdvanceTime();
         if (carTick == 0)
         {
             switch (phoneInteracted)
@@ -156,10 +157,10 @@ public class CarSceneTriggers : MonoBehaviour
                     mainCamSound.Stop();
                     break;
                 case 2:
-                    mainCamSound.Stop();
+                    StartCoroutine(dialogueManager.RunDialogue(1));
                     break;
                 case 3:
-                    StartCoroutine(dialogueManager.RunDialogue(1));
+                    StartCoroutine(dialogueManager.RunDialogue(2));
                     break;
                 case 4:
                     GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
@@ -168,6 +169,19 @@ public class CarSceneTriggers : MonoBehaviour
             phoneInteracted++;
         }
         else if (carTick == 1) { 
+            switch (phoneInteracted)
+            {
+                case 0:
+                    StartCoroutine(dialogueManager.RunDialogue(2));
+                    break; 
+                case 1:
+                    mainCamSound.Stop();
+                    break;
+                case 4:
+                    GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
+                    break;
+            }
+            phoneInteracted++;
             
             GameManager.Instance.LoadSceneWithFade("WalkingScene");
         }
@@ -183,6 +197,7 @@ public class CarSceneTriggers : MonoBehaviour
             // LOAD END OF DAY SCENE
             GameManager.Instance.LoadSceneWithFade("WalkingScene");
         }
+        else GameManager.Instance.LoadSceneWithFade("WalkingScene");
 
     }
     IEnumerator PlayMon01()
@@ -236,30 +251,28 @@ public class CarSceneTriggers : MonoBehaviour
         // sceneTransition.LoadSceneWithFade("StartingHouseScene");
     }
     IEnumerator PlayMon02()
-    {
+    {  
         yield return new WaitForSeconds(0.5f);
-        GameManager.Instance.AdvanceTime();
-        yield return new WaitForSeconds(5f);
-        GameManager.Instance.LoadSceneWithFade("WalkingScene");
+        StartCoroutine(dialogueManager.RunDialogue(1));
+        
+
     }
     IEnumerator PlayMon03()
     {
-        yield return new WaitForSeconds(0.5f);
-        GameManager.Instance.AdvanceTime();
-        yield return new WaitForSeconds(5f);
-        GameManager.Instance.LoadSceneWithFade("WalkingScene");
+        StartCoroutine(dialogueManager.RunDialogue(1));
+        yield return new WaitForSeconds(0);
+
     }
     IEnumerator PlayMon04()
     {
+       
         yield return new WaitForSeconds(0.5f);
-        GameManager.Instance.AdvanceTime();
-        yield return new WaitForSeconds(5f);
-        GameManager.Instance.LoadSceneWithFade("WalkingScene");
+        
+
     }
     IEnumerator PlayMon05()
     {
-        yield return new WaitForSeconds(0.5f);
-        GameManager.Instance.AdvanceTime();
+       
         yield return new WaitForSeconds(5f);
         GameManager.Instance.LoadSceneWithFade("WalkingScene");
         GameManager.Instance.ResetCarTick();
