@@ -39181,6 +39181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 832575519}
   - component: {fileID: 832575518}
+  - component: {fileID: 832575520}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -39220,6 +39221,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &832575520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832575517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74446cc0ddcd64a46b8a58894c936670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CRTController
+  volume: {fileID: 832575518}
+  lowPreset:
+    pixelSize: 1
+    distortionStrength: 0
+    distortionSmoothing: 0
+    rgbStrength: 0
+    scanlineStrength: 0
+    scanlineSize: 0
+    randomWear: 0
+    aberrationStrength: 0
+    trackingJitter: 0
+    trackingStrength: 0
+    trackingColorDamage: 0
+    contrast: 1
+    brightness: 1
+  highPreset:
+    pixelSize: 108
+    distortionStrength: 1
+    distortionSmoothing: 0.02
+    rgbStrength: 1
+    scanlineStrength: 1
+    scanlineSize: 1
+    randomWear: 5
+    aberrationStrength: 10
+    trackingJitter: 0.1
+    trackingStrength: 50
+    trackingColorDamage: 1
+    contrast: 1
+    brightness: 1
+  goodPreset:
+    pixelSize: 2
+    distortionStrength: 1
+    distortionSmoothing: 0.01
+    rgbStrength: 0.25
+    scanlineStrength: 0.2
+    scanlineSize: 8
+    randomWear: 3
+    aberrationStrength: 10
+    trackingJitter: 0.001
+    trackingStrength: 10
+    trackingColorDamage: 1
+    contrast: 0
+    brightness: 2
 --- !u!4 &832974096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2545454276374066478, guid: 8874cf39c18d69e4283d2c80efdc61f1, type: 3}
@@ -42017,6 +42073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4eafa8b062be477a80854491864890e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trigger_Scene_Button
+  sceneToLoad: 
   nextSceneButton: {fileID: 718994691}
   sceneTransition: {fileID: 894306284}
   knockAudio: {fileID: 36441570}
@@ -69752,6 +69809,8 @@ GameObject:
   - component: {fileID: 1512912936}
   - component: {fileID: 1512912935}
   - component: {fileID: 1512912934}
+  - component: {fileID: 1512912938}
+  - component: {fileID: 1512912937}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -69820,6 +69879,118 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1512912937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512912933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313ff971a850e514fa1679caa5a001d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WalkingSceneScript
+  mainCamera: {fileID: 863406903}
+  sfx: {fileID: 1512912938}
+  crtController: {fileID: 832575520}
+--- !u!82 &1512912938
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512912933}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1512986055
 GameObject:
   m_ObjectHideFlags: 0
@@ -99798,6 +99969,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1512912936}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1327409356}
@@ -99807,7 +99979,6 @@ SceneRoots:
   - {fileID: 1192698348}
   - {fileID: 565130753}
   - {fileID: 1695027155}
-  - {fileID: 1512912936}
   - {fileID: 242876417890810189}
   - {fileID: 5270439618902040172}
   - {fileID: 1004230975}
