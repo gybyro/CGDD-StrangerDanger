@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public enum CustomerTruthState { Good, Bad }
 
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Settings")]
     public CanvasGroup settingsPanel;
+    private bool settingsMenuIsOpen;
+    // public PlayerInput playerInput;
 
     
     // car stuff
@@ -176,20 +179,42 @@ public class GameManager : MonoBehaviour
 
 
 
+
+
     // SETTINGS  ====================================================
-    public void SettingsGoBackBtn()
+    public void OnPause(InputAction.CallbackContext context)
     {
-        settingsPanel.alpha = 0;
-        settingsPanel.interactable = false;
-        settingsPanel.blocksRaycasts = false;
+        if (!context.performed)
+            return;
+        ToggleSettingsPanel();
+     
     }
-    public void OpenSettingsPanel()
+    public void ToggleSettingsPanel()
     {
-        settingsPanel.gameObject.SetActive(true);
-        settingsPanel.alpha = 1;
-        settingsPanel.interactable = true;
-        settingsPanel.blocksRaycasts = true;
+        settingsMenuIsOpen = !settingsMenuIsOpen;
+        if (settingsMenuIsOpen)
+        {
+            // playerInput.SwitchCurrentActionMap("UI");
+            // CursorController.Instance.Apply(CursorMode.Unlocked);
+            // Time.timeScale = 0f;
+
+            settingsPanel.gameObject.SetActive(true);
+            settingsPanel.alpha = 1;
+            settingsPanel.interactable = true;
+            settingsPanel.blocksRaycasts = true;
+        } else
+        {
+            // playerInput.SwitchCurrentActionMap("Player");
+            // CursorController.Instance.ApplySceneCursorMode();
+            // Time.timeScale = 1f;
+
+            settingsPanel.alpha = 0;
+            settingsPanel.interactable = false;
+            settingsPanel.blocksRaycasts = false;
+        }
+        
     }
+
 
 
 

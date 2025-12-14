@@ -35,7 +35,7 @@ public class MainMenuScript : MonoBehaviour
         Debug.Log("MainMenuScript: OpenSettings called");
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.OpenSettingsPanel();
+            GameManager.Instance.ToggleSettingsPanel();
             
 
         }

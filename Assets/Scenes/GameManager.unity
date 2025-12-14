@@ -677,8 +677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c58c715e52c4d7f92819601e41a212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sanity_Meter
-  Player_Sanity: 75
-  fovIncreaseAmount: 10
 --- !u!1 &798890758
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btn_back
       objectReference: {fileID: 0}
+    - target: {fileID: 4605280259185076132, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4855692269773624507, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
       propertyPath: fadeGroup
       value: 
@@ -959,7 +961,7 @@ PrefabInstance:
       objectReference: {fileID: 681021444}
     - target: {fileID: 6242701438504674332, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SettingsGoBackBtn
+      value: ToggleSettingsPanel
       objectReference: {fileID: 0}
     - target: {fileID: 6242701438504674332, guid: 4125b50aa1dec744895dbf1efcc718bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

@@ -81,7 +81,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   MoveSpeed: 6
   SprintSpeed: 10
-  RotationSpeed: 12
+  RotationSpeed: 10
   SpeedChangeRate: 10
   JumpHeight: 1.2
   Gravity: -15
