@@ -4,265 +4,94 @@
     {
       "id": "n03_start",
       "speaker": "you",
-      "text": "",
-      "waitSeconds": 0.5,
+      "text": "[KNOCK KNOCK]",
+      "waitSeconds": 0.6,
       "next": "n03_01"
     },
     {
       "id": "n03_01",
-      "speaker": "you",
-      "text": "[Knock knock]",
-      "waitSeconds": 0.6,
+      "speaker": "nervous",
+      "portrait": "02",
+      "text": "",
+      "animationTriggerDoor": "DoorHalfOpen",
+      "showChar": "true",
       "next": "n03_02"
     },
     {
       "id": "n03_02",
       "speaker": "nervous",
-      "portrait": "04",
-      "text": "",
-      "animationTriggerDoor": "DoorOpenWide",
-      "showChar": "true",
+      "portrait": "02",
+      "text": "Well hello there.",
       "next": "n03_03"
     },
     {
       "id": "n03_03",
-      "speaker": "nervous",
-      "portrait": "04",
-      "text": "You're on time.",
+      "speaker": "you",
+      "text": "I have the pizza you ordered.",
       "next": "n03_04"
     },
     {
       "id": "n03_04",
       "speaker": "nervous",
+      "portrait": "02",
+      "text": "Great.",
+      "next": "n03_05"
+    },
+    {
+      "id": "n03_05",
+      "speaker": "you",
+      "text": "……….",
+      "next": "n03_06"
+    },
+    {
+      "id": "n03_06",
+      "speaker": "you",
+      "text": "What? No questions?",
+      "next": "n03_07"
+    },
+    {
+      "id": "n03_07",
+      "speaker": "you",
+      "text": "Nope. No questions.",
+      "next": "n03_08"
+    },
+    {
+      "id": "n03_08",
+      "speaker": "nervous",
       "portrait": "04",
-      "text": "Good.",
-      "next": "n03_choice1"
+      "text": "",
+      "animationTriggerDoor": "DoorOpen",
+      "showChar": "true",
+      "next": "n03_09"
+    },
+    {
+      "id": "n03_09",
+      "speaker": "nervous",
+      "portrait": "04",
+      "text": "Thank you for the pizza. I'll go grab your tip.",
+      "next": "n03_choice_final"
     },
 
     {
-      "id": "n03_choice1",
-      "speaker": "you",
-      "color": "#657385",
-      "text": "(He's acting... different.)",
-      "type": "choice",
-      "options": [
-        { "text": "...You okay today, sir?", "next": "n03_ok_01" },
-        { "text": "Uh, thanks?", "next": "n03_ok_02" },
-        { "text": "Here’s your pizza.", "next": "n03_ok_03" }
-      ]
-    },
-
-    {
-      "id": "n03_ok_01",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "Perfectly fine.",
-      "next": "n03_ok_01b"
-    },
-    {
-      "id": "n03_ok_01b",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "Why wouldn’t I be?",
-      "next": "n03_smile"
-    },
-
-    {
-      "id": "n03_ok_02",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "No need for attitude.",
-      "next": "n03_ok_02b"
-    },
-    {
-      "id": "n03_ok_02b",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "I appreciate punctuality.",
-      "next": "n03_smile"
-    },
-
-    {
-      "id": "n03_ok_03",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "Yes. The pizza.",
-      "next": "n03_ok_03b"
-    },
-    {
-      "id": "n03_ok_03b",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "You remembered.",
-      "next": "n03_smile"
-    },
-
-    {
-      "id": "n03_smile",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "Come closer.",
-      "next": "n03_choice2"
-    },
-
-    {
-      "id": "n03_choice2",
+      "id": "n03_choice_final",
       "speaker": "you",
       "type": "choice",
       "text": "",
       "options": [
-        { "text": "Step closer.", "next": "n03_close_01" },
-        { "text": "I'll leave it on the porch.", "next": "n03_porch_01" }
+        { "text": "Leave", "next": "n03_leave" },
+        { "text": "Stay", "next": "n03_stay" }
       ]
     },
 
     {
-      "id": "n03_close_01",
+      "id": "n03_leave",
       "speaker": "you",
-      "text": "...",
-      "next": "n03_close_02"
-    },
-    {
-      "id": "n03_close_02",
-      "speaker": "nervous",
-      "portrait": "07",
-      "text": "You smell different today.",
-      "next": "n03_close_03"
-    },
-    {
-      "id": "n03_close_03",
-      "speaker": "nervous",
-      "portrait": "07",
-      "text": "Did you change soap?",
-      "next": "n03_memory_01"
-    },
-
-    {
-      "id": "n03_porch_01",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "…Right.",
-      "next": "n03_porch_02"
-    },
-    {
-      "id": "n03_porch_02",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "That's what we usually do.",
-      "next": "n03_porch_03"
-    },
-    {
-      "id": "n03_porch_03",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "(He hesitates, like he's recalling a script.)",
-      "next": "n03_memory_01"
-    },
-
-    {
-      "id": "n03_memory_01",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "You came yesterday.",
-      "next": "n03_memory_02"
-    },
-    {
-      "id": "n03_memory_02",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "And the day before.",
-      "next": "n03_memory_03"
-    },
-    {
-      "id": "n03_memory_03",
-      "speaker": "nervous",
-      "portrait": "06",
-      "text": "What did I complain about on the first day?",
-      "next": "n03_choice3"
-    },
-
-    {
-      "id": "n03_choice3",
-      "speaker": "you",
-      "type": "choice",
       "text": "",
-      "options": [
-        { "text": "The shoes.", "next": "n03_wrong_01" },
-        { "text": "The pizza.", "next": "n03_wrong_01" },
-        { "text": "Being late.", "next": "n03_right_01" }
-      ]
-    },
-
-    {
-      "id": "n03_right_01",
-      "speaker": "nervous",
-      "portrait": "07",
-      "text": "…Right.",
-      "next": "n03_right_02"
+      "nextDialFile": "dial_nervous_04",
+      "finished": true
     },
     {
-      "id": "n03_right_02",
-      "speaker": "nervous",
-      "portrait": "07",
-      "text": "Good memory.",
-      "next": "n03_endwalk_01"
-    },
-
-    {
-      "id": "n03_wrong_01",
-      "speaker": "nervous",
-      "portrait": "07",
-      "text": "No.",
-      "next": "n03_wrong_02"
-    },
-    {
-      "id": "n03_wrong_02",
-      "speaker": "nervous",
-      "portrait": "07",
-      "text": "That's not right.",
-      "next": "n03_wrong_03"
-    },
-    {
-      "id": "n03_wrong_03",
-      "speaker": "nervous",
-      "portrait": "07",
-      "text": "You sure you've been here before?",
-      "next": "n03_doorclose"
-    },
-    {
-      "id": "n03_doorclose",
-      "speaker": "nervous",
-      "waitSeconds": 0.8,
-      "text": "",
-      "animationTriggerDoor": "DoorCloseSlow",
-      "showChar": "false",
-      "next": "n03_endwalk_02"
-    },
-
-    {
-      "id": "n03_endwalk_01",
-      "speaker": "you",
-      "color": "#657385",
-      "text": "(He smiled... Nervous Man doesn't smile.)",
-      "next": "n03_endwalk_03"
-    },
-    {
-      "id": "n03_endwalk_02",
-      "speaker": "you",
-      "color": "#657385",
-      "text": "(That didn't feel like him. Not at all.)",
-      "next": "n03_endwalk_03"
-    },
-    {
-      "id": "n03_endwalk_03",
-      "speaker": "you",
-      "color": "#657385",
-      "text": "(As I walk away... his shadow doesn't match his movements.)",
-      "next": "end"
-    },
-
-    {
-      "id": "end",
+      "id": "n03_stay",
       "speaker": "you",
       "text": "",
       "nextDialFile": "dial_nervous_04",
