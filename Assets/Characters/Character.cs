@@ -55,8 +55,8 @@ public class Character : MonoBehaviour
     void Awake()
     {
         // Find controller already in the scene
-        doorBGPallet = FindFirstObjectByType<DoorBGPallet>();
-        if (doorBGPallet != null) doorBGPallet.ApplyColorSet(houseColorGood);
+        // doorBGPallet = FindFirstObjectByType<DoorBGPallet>();
+        // if (doorBGPallet != null) doorBGPallet.ApplyColorSet(houseColorGood);
     }
 
     // ===================================================================================

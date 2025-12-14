@@ -270,6 +270,7 @@ MonoBehaviour:
   choiceUI: {fileID: 362345139}
   doorAnimator: {fileID: 637218779}
   sfxSource: {fileID: 1739038759}
+  houseBG: {fileID: 619711833}
   characterDB: {fileID: 11400000, guid: ff3d9f0e44d63a94abdb1de0b6923ee2, type: 2}
 --- !u!114 &362345139
 MonoBehaviour:
@@ -409,6 +410,16 @@ MonoBehaviour:
   - setName: Brown
     doorS: {fileID: 21300000, guid: 5a30e5043bf238743824701b4bc5e680, type: 3}
     outerWallS: {fileID: 21300000, guid: 9c457de98d8221f468b828d34c7a5a70, type: 3}
+    innerWallS: {fileID: 21300000, guid: a925929ae82083a4f9497e7252d75662, type: 3}
+    floorS: {fileID: 21300000, guid: 3beb8ff25a0b40d44841922ae0e32f89, type: 3}
+  - setName: Blue01
+    doorS: {fileID: 21300000, guid: 35a29f971301f3c4e90a701db08bf6f7, type: 3}
+    outerWallS: {fileID: 21300000, guid: 18250c547e91019469c7f48104bdbcbb, type: 3}
+    innerWallS: {fileID: 21300000, guid: a925929ae82083a4f9497e7252d75662, type: 3}
+    floorS: {fileID: 21300000, guid: 3beb8ff25a0b40d44841922ae0e32f89, type: 3}
+  - setName: Blue02
+    doorS: {fileID: 21300000, guid: 35a29f971301f3c4e90a701db08bf6f7, type: 3}
+    outerWallS: {fileID: 21300000, guid: 64d15aa5f230a4e418d2d707c42d0bd6, type: 3}
     innerWallS: {fileID: 21300000, guid: a925929ae82083a4f9497e7252d75662, type: 3}
     floorS: {fileID: 21300000, guid: 3beb8ff25a0b40d44841922ae0e32f89, type: 3}
 --- !u!1 &637218776
@@ -755,8 +766,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StoryLine
   dialogueManager: {fileID: 362345138}
-  testDialogue: 0
-  ifTestDialogueFileName: dial_hippie_02
+  testDialogue: 1
+  ifTestDialogueFileName: dial_concerned_01
 --- !u!4 &1266667920
 Transform:
   m_ObjectHideFlags: 0

@@ -66,6 +66,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 37ee83f143f3c5741b62e41b19c26cff, type: 3}
   - name: pizza
     sprite: {fileID: 21300000, guid: 04f631eccf27a2e488fd956574d21c54, type: 3}
+  - name: V1
+    sprite: {fileID: 21300000, guid: efed202b5f9fdae4ba7596fef99c3d88, type: 3}
 --- !u!95 &62286867094759595
 Animator:
   serializedVersion: 7
