@@ -175,6 +175,21 @@ public class GameManager : MonoBehaviour
     {
 
         Debug.Log("GAME MANAGER RESET");
+
+        carPhase = 0;
+        carTick = 0;
+        walkingSceneSpawnByDoor = false;
+        currentDay = 0;
+        currentTime = 3;
+
+        char_00_nextDialogue = "dial_kyle_01"; // le dudebro
+        char_01_nextDialogue = "dial_tired_01"; // tiered is first character
+        char_02_nextDialogue = "dial_proxy_01"; // proxy is seconf 
+        char_03_nextDialogue = "dial_hippie_01"; 
+        char_04_nextDialogue = "dial_grumpy_01"; //
+        char_05_nextDialogue = "dial_mary_01"; //
+        char_06_nextDialogue = "dial_concerned_01"; //
+        char_07_nextDialogue = "dial_visitor_01"; //
     }
     public void GenerateNextCustomer() {}
     public string GetPhoneDescription() { return ""; }
