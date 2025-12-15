@@ -1,225 +1,205 @@
 {
-    "scene": "dial_proxy_02",
-    "houseBgPallet": "Blue02",
-    "lines": [
-        {
-        "id": "test01",
-        "speaker": "proxy",
-        "portrait": "visitorOpen",
-        "text": "hello again!",
-        "animationTriggerDoor": "DoorOpen",
-        "showChar": "true",
-        "next": "test02"
-        },
-        {
-        "id": "test02",
-        "speaker": "you",
-        "portrait": "visitorOpen",
-        "text": "!",
-        "next": "test03"
-        },
-        {
-        "id": "test03",
-        "speaker": "proxy",
-        "portrait": "visitorOpen",
-        "text": "hm? Why Do You Look So Suprised?",
-        "next": "test04"
-        },
-        {
-        "id": "test04",
-        "speaker": "you",
-        "text": "oh, uh.. I guess I wasn't expecting you to be so much more energetic?",
-        "next": "test05"
-        },
-        {
-        "id": "test05",
-        "speaker": "proxy",
-        "portrait": "visitorOpen",
-        "text": "heh...",
-        "next": "06"
-        },
-        {
-        "id": "06",
-        "speaker": "you",
-        "text": "a-anyway, I saw ahead of time that you already paid, so here you are",
-        "next": "07"
-        },
-        {
-        "id": "07",
-        "speaker": "proxy",
-        "portrait": "visitorUp",
-        "text": "Why Thank You.",
-        "next": "08"
-        },
-        {
-        "id": "08",
-        "speaker": "proxy",
-        "text": "My, I Must be such a Hassle to deal with, ordering a pizza 2 days in a row.",
-        "next": "09"
-        },
-        {
-        "id": "09",
-        "speaker": "proxy",
-        "portrait": "V1",
-        "text": "You must think I'm a slob, don't you?",
-        "next": "10"
-        },
-        {
-        "id": "10",
-        "speaker": "you",
-        "color": "#657385",
-        "text": "** huh??? **",
-        "type": "choice",
-        "options": [
-            {"text": "No, Of course not!!", "next": "vop_good"},
-            {"text": "I just figured YOU couldn't get enough of this face", "next": "vop_bad"}
-            ]
-        },
-
-
-
-        {
-        "id": "vop_good",
-        "speaker": "you",
-        "text": "No, Of course not!! ",
-        "next": "g1"
-        },
-        {
-        "id": "g1",
-        "speaker": "proxy",
-        "portrait": "V2",
-        "text": "tch",
-        "next": "g2"
-        },
-        {
-        "id": "g2",
-        "speaker": "you",
-        "portrait": "visitorUp",
-        "text": "?",
-        "next": "g3"
-        },
-        {
-        "id": "g3",
-        "speaker": "you",
-        "portrait": "V1",
-        "text": "Anyway, thank you again! I'm sure You must be very busy considering the takeout",
-        "next": "g4"
-        },
-        {
-        "id": "g4",
-        "speaker": "you",
-        "portrait": "V1",
-        "text": "I'll get out of your hair!",
-        "next": "g5"
-        },
-        {
-        "id": "g5",
-        "speaker": "proxy",
-        "portrait": "visitorUp",
-        "text": "....",
-        "next": "g6"
-        },
-        {
-        "id": "g6",
-        "speaker": "proxy",
-        "text": "fine",
-        "showChar": false,
-        "animationTriggerDoor": "DoorClose",
-        "next": "g7"
-        },
-        {
-        "id": "g7",
-        "speaker": "you",
-        "text": "............",
-        "next": "g8"
-        },
-        {
-        "id": "g8",
-        "speaker": "you",
-        "text": "FEWHHH, I think I dodged a bullet there, they were definitely acting a bit off today.",
-        "waitSeconds": 0.2,
-        "next": "end"
-        },
-
-
-
-
-
-
-        {
-        "id": "vop_bad",
-        "speaker": "you",
-        "text": "I just figured YOU couldn't get enough of this face",
-        "next": "b1"
-        },
-        {
-        "id": "b1",
-        "speaker": "proxy",
-        "portrait": "visitorUp",
-        "text": "",
-        "waitSeconds": 0.2,
-        "next": "b2"
-        },
-        {
-        "id": "b2",
-        "speaker": "proxy",
-        "portrait": "visitorUp",
-        "text": "Yes,                  Quite.",
-        "waitSeconds": 0.2,
-        "typeSpeed": 0.1,
-        "next": "b3"
-        },
-        {
-        "id": "b3",
-        "speaker": "proxy",
-        "portrait": "visitorUp",
-        "text": "Hold on for a second won't you? I want to thank you again for bringing me my food.",
-        "next": "wait"
-        },
-        {
-        "id": "wait",
-        "speaker": "you",
-        "text": "10 9 8 7 6 5 4 3 2 1 0",
-        "typeSpeed": 10,
-        "showChar": false,
-        "next": "bad01"
-        },
-
-
-        {
-        "id": "bad01",
-        "speaker": "you",
-        "text": "",
-        "animationTriggerDoor": "DoorOpenWide",
-        "waitSeconds": 0.2,
-        "next": "bad02"
-        },
-        {
-        "id": "bad02",
-        "speaker": "proxy",
-        "portrait": "V3",
-        "text": "You.  Waited.",
-        "showChar": true,
-        "typeSpeed": 0.2,
-        "next": "end"
-        },
-
-
-
-
-
-
-
-
-
-
-
-        {
-        "id": "end",
-        "speaker": "you",
-        "text": "",
-        "nextDialFile": "dial_proxy_03",
-        "finished": true
-        }
-    ]
+  "scene": "dial_proxy_02",
+  "houseBgPallet": "Blue02",
+  "lines": [
+    {
+      "id": "test01",
+      "speaker": "proxy",
+      "portrait": "visitorOpen",
+      "text": "hello again!",
+      "animationTriggerDoor": "DoorOpen",
+      "showChar": "true",
+      "next": "test02"
+    },
+    {
+      "id": "test02",
+      "speaker": "you",
+      "portrait": "visitorOpen",
+      "text": "!",
+      "next": "test03"
+    },
+    {
+      "id": "test03",
+      "speaker": "proxy",
+      "portrait": "visitorOpen",
+      "text": "hm? Why Do You Look So Suprised?",
+      "next": "test04"
+    },
+    {
+      "id": "test04",
+      "speaker": "you",
+      "text": "oh, uh.. I guess I wasn't expecting you to be so much more energetic?",
+      "next": "test05"
+    },
+    {
+      "id": "test05",
+      "speaker": "proxy",
+      "portrait": "visitorOpen",
+      "text": "heh...",
+      "next": "06"
+    },
+    {
+      "id": "06",
+      "speaker": "you",
+      "text": "a-anyway, I saw ahead of time that you already paid, so here you are",
+      "next": "07"
+    },
+    {
+      "id": "07",
+      "speaker": "proxy",
+      "portrait": "visitorUp",
+      "text": "Why Thank You.",
+      "next": "08"
+    },
+    {
+      "id": "08",
+      "speaker": "proxy",
+      "text": "My, I Must be such a Hassle to deal with, ordering a pizza 2 days in a row.",
+      "next": "09"
+    },
+    {
+      "id": "09",
+      "speaker": "proxy",
+      "portrait": "V1",
+      "text": "You must think I'm a slob, don't you?",
+      "next": "10"
+    },
+    {
+      "id": "10",
+      "speaker": "you",
+      "color": "#657385",
+      "text": "** huh??? **",
+      "type": "choice",
+      "options": [
+        { "text": "No, Of course not!!", "next": "vop_good" },
+        { "text": "I just figured YOU couldn't get enough of this face", "next": "vop_bad" }
+      ]
+    },
+    {
+      "id": "vop_good",
+      "speaker": "you",
+      "text": "No, Of course not!! ",
+      "next": "g1"
+    },
+    {
+      "id": "g1",
+      "speaker": "proxy",
+      "portrait": "V2",
+      "text": "tch",
+      "next": "g2"
+    },
+    {
+      "id": "g2",
+      "speaker": "you",
+      "portrait": "visitorUp",
+      "text": "?",
+      "next": "g3"
+    },
+    {
+      "id": "g3",
+      "speaker": "you",
+      "portrait": "V1",
+      "text": "Anyway, thank you again! I'm sure You must be very busy considering the takeout",
+      "next": "g4"
+    },
+    {
+      "id": "g4",
+      "speaker": "you",
+      "portrait": "V1",
+      "text": "I'll get out of your hair!",
+      "next": "g5"
+    },
+    {
+      "id": "g5",
+      "speaker": "proxy",
+      "portrait": "visitorUp",
+      "text": "....",
+      "next": "g6"
+    },
+    {
+      "id": "g6",
+      "speaker": "proxy",
+      "text": "fine",
+      "showChar": "false",
+      "animationTriggerDoor": "DoorClose",
+      "next": "g7"
+    },
+    {
+      "id": "g7",
+      "speaker": "you",
+      "text": "............",
+      "next": "g8"
+    },
+    {
+      "id": "g8",
+      "speaker": "you",
+      "text": "FEWHHH, I think I dodged a bullet there, they were definitely acting a bit off today.",
+      "waitSeconds": 0.2,
+      "next": "end"
+    },
+    {
+      "id": "vop_bad",
+      "speaker": "you",
+      "text": "I just figured YOU couldn't get enough of this face",
+      "next": "b1"
+    },
+    {
+      "id": "b1",
+      "speaker": "proxy",
+      "portrait": "visitorUp",
+      "text": "",
+      "waitSeconds": 0.2,
+      "next": "b2"
+    },
+    {
+      "id": "b2",
+      "speaker": "proxy",
+      "portrait": "visitorUp",
+      "text": "Yes,                  Quite.",
+      "waitSeconds": 0.2,
+      "typeSpeed": 0.1,
+      "next": "b3"
+    },
+    {
+      "id": "b3",
+      "speaker": "proxy",
+      "portrait": "visitorUp",
+      "text": "Hold on for a second won't you? I want to thank you again for bringing me my food.",
+      "animationTriggerDoor": "DoorClose",
+      "showChar": "false",
+      "next": "waiting_game"
+    },
+    {
+      "id": "waiting_game",
+      "speaker": "you",
+      "type": "countdown",
+      "countDownSeconds": 10,
+      "prompt": ".....",
+      "timeOutNext": "bad01"
+    },
+    {
+      "id": "bad01",
+      "speaker": "you",
+      "text": "",
+      "animationTriggerDoor": "DoorOpenWide",
+      "waitSeconds": 0.2,
+      "next": "bad02"
+    },
+    {
+      "id": "bad02",
+      "speaker": "proxy",
+      "portrait": "V3",
+      "text": "You.  Waited.",
+      "showChar": "true",
+      "typeSpeed": 0.2,
+      "next": "end"
+    },
+    {
+      "id": "end",
+      "speaker": "you",
+      "text": "",
+      "nextDialFile": "dial_proxy_03",
+      "finished": true
+    }
+  ]
 }

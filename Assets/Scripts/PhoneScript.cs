@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
+using TMPro;
 
-public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class PhoneScript : MonoBehaviour,
+    IPointerClickHandler,
+    IPointerEnterHandler,
+    IPointerExitHandler
 {
     [Header("Hover Brightness")]
     public float normalBrightness = 0.8f;
@@ -16,34 +19,36 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public float loopTime = 5f;
 
     [Header("Click Animation")]
-    public float scaleMultiplier = 2.5f;   // 250%
-    public float moveX = -100f;            // -100 X movement
+    public float scaleMultiplier = 2.5f;
+    public float moveX = -100f;
     public float animDuration = 0.5f;
 
-    [Header("Screen Change After Phone Click")]
-    public Sprite newScreenSprite;         // first screen (after opening phone)
+    [Header("Start Images")]
+    public Sprite firstVisitStartImage;
+    public Sprite repeatVisitStartImage;
 
-    [Header("Second Screen After Button Click")]
-    public Sprite secondScreenSprite;      // second screen (after order button)
+    [Header("Flow Images")]
+    public Sprite callScreenImage;
+    public Sprite pizzaScreenImage;
+    public Sprite acceptScreenImage;
 
     [Header("Sound")]
-    public AudioClip screenChangeSound;    // plays on screen changes
-    private AudioSource audioSource;
+    public AudioClip screenChangeSound;
 
-    [Header("Objects That Appear After Phone Click")]
-    public GameObject firstOrderButton;    // the first button shown after phone opens
+    [Header("Buttons")]
+    public GameObject declineCallButton;   // invisible but clickable
+    public GameObject pizzaOrderButton;
+    public GameObject acceptOrderButton;
 
-    [Header("Text Revealed After Order Button Click")]
-    public GameObject textToShow;          // text/panel shown after clicking firstOrderButton
-
-    [Header("Buttons After Text")]
-    public GameObject acceptButton;        // appears after firstOrderButton click
-    public GameObject declineButton;       // appears after firstOrderButton click
-
-    // [Header("Accept Order Scene")]
-    // public string acceptSceneName;         // name of scene to load on Accept
+    [Header("Pizza Order UI")]
+    public GameObject orderPanel;
+    public TMP_Text customerNameText;
+    public TMP_Text customerAddressText;
+    public TMP_Text pizzaOrderText;
 
     public System.Action OnPhoneCompleted;
+    public System.Action OnDeclineCall;
+    public System.Action OnPhoneOpened;
 
     private Image img;
     private Color originalColor;
@@ -52,72 +57,175 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     private Vector2 originalPos;
     private Quaternion originalRot;
 
-    private bool clicked = false;
+    private bool clicked;
+    private bool phoneOpened;
+    private bool isFirstVisit = true;
 
-    void Start()
+    private AudioSource audioSource;
+
+    private enum PhoneState { Closed, Call, Pizza, Accept }
+    private PhoneState state = PhoneState.Closed;
+
+    // -------------------------
+    // JSON ORDERS
+    // -------------------------
+    [System.Serializable]
+    private class PizzaOrder
+    {
+        public int id;
+        public string customerName;
+        public string customerAddress;
+        public string pizzaOrder;
+    }
+
+    [System.Serializable]
+    private class PizzaOrderList
+    {
+        public PizzaOrder[] orders;
+    }
+
+    private PizzaOrderList loadedOrders;
+    private PizzaOrder currentOrder;
+
+    private const string OrderIndexKey = "PizzaOrderIndex";
+    private bool orderAssignedThisScene = false;
+
+    void Awake()
     {
         img = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
+    }
 
+    public void SetFirstVisit(bool first)
+    {
+        isFirstVisit = first;
+
+        if (img != null && !phoneOpened)
+        {
+            img.sprite = isFirstVisit ? firstVisitStartImage : repeatVisitStartImage;
+        }
+    }
+
+    // ✅ NEW: call this when starting the story (so customer 1 is guaranteed)
+    public void ResetOrderSequence()
+    {
+        PlayerPrefs.SetInt(OrderIndexKey, 0);
+        PlayerPrefs.Save();
+    }
+
+    // Called by CarSceneTriggers ONCE per CarScene entry
+    public void AssignOrderForCarSceneEntry(bool advanceToNext)
+    {
+        if (orderAssignedThisScene) return;
+        orderAssignedThisScene = true;
+
+        TextAsset jsonAsset = Resources.Load<TextAsset>("PizzaOrders");
+        if (jsonAsset == null)
+        {
+            Debug.LogWarning("PizzaOrders.json not found! Put it in Assets/Resources/PizzaOrders.json");
+            return;
+        }
+
+        loadedOrders = JsonUtility.FromJson<PizzaOrderList>(jsonAsset.text);
+        if (loadedOrders == null || loadedOrders.orders == null || loadedOrders.orders.Length == 0)
+        {
+            Debug.LogWarning("PizzaOrders.json has no orders.");
+            return;
+        }
+
+        int count = loadedOrders.orders.Length;
+
+        // read current index (default 0 if missing)
+        int index = PlayerPrefs.GetInt(OrderIndexKey, 0);
+        index = ((index % count) + count) % count;
+
+        // advance only on repeat carscene entries
+        if (advanceToNext)
+        {
+            index = (index + 1) % count;
+            PlayerPrefs.SetInt(OrderIndexKey, index);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            // keep whatever index is stored (but carscene trigger will reset it on true first entry)
+            PlayerPrefs.SetInt(OrderIndexKey, index);
+            PlayerPrefs.Save();
+        }
+
+        currentOrder = loadedOrders.orders[index];
+    }
+
+    void Start()
+    {
         originalColor = img.color;
         originalScale = rect.localScale;
         originalPos = rect.anchoredPosition;
         originalRot = transform.rotation;
 
-        // Audio setup
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
 
-        // Start slightly darker for hover contrast
+        if (!phoneOpened)
+            img.sprite = isFirstVisit ? firstVisitStartImage : repeatVisitStartImage;
+
         SetBrightness(normalBrightness);
 
-        // Hide / wire first order button
-        if (firstOrderButton != null)
-        {
-            firstOrderButton.SetActive(false);
+        SetupButton(declineCallButton, OnDeclineCallClicked, false);
+        SetupButton(pizzaOrderButton, OnPizzaOrderClicked, false);
+        SetupButton(acceptOrderButton, OnAcceptOrderClicked, false);
 
-            Button btn = firstOrderButton.GetComponent<Button>();
-            if (btn != null)
-            {
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(OnFirstOrderButtonClicked);
-            }
-        }
+        SetButtonInvisible(declineCallButton);
 
-        // Hide text
-        if (textToShow != null)
-            textToShow.SetActive(false);
+        if (orderPanel != null)
+            orderPanel.SetActive(false);
 
-        // Hide / wire accept & decline buttons
-        if (acceptButton != null)
-        {
-            acceptButton.SetActive(false);
-            Button btn = acceptButton.GetComponent<Button>();
-            if (btn != null)
-            {
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(OnAcceptOrderClicked);
-            }
-        }
-
-        if (declineButton != null)
-        {
-            declineButton.SetActive(false);
-            Button btn = declineButton.GetComponent<Button>();
-            if (btn != null)
-            {
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(OnDeclineOrderClicked);
-            }
-        }
-
-        // Start vibration loop
         InvokeRepeating(nameof(StartVibration), startDelay, loopTime);
     }
 
-    // -------------------------
-    // HOVER
-    // -------------------------
+    private void SetupButton(GameObject go, UnityEngine.Events.UnityAction action, bool active)
+    {
+        if (go == null) return;
+
+        go.SetActive(active);
+        Button btn = go.GetComponent<Button>();
+        if (btn != null)
+        {
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(action);
+        }
+    }
+
+    private void SetButtonInvisible(GameObject buttonGO)
+    {
+        if (buttonGO == null) return;
+
+        Image i = buttonGO.GetComponent<Image>();
+        if (i != null)
+        {
+            Color c = i.color;
+            c.a = 0f;
+            i.color = c;
+        }
+
+        Text t = buttonGO.GetComponentInChildren<Text>();
+        if (t != null)
+        {
+            Color c = t.color;
+            c.a = 0f;
+            t.color = c;
+        }
+    }
+
+    private void ApplyOrderToUI()
+    {
+        if (currentOrder == null) return;
+
+        if (customerNameText != null) customerNameText.text = currentOrder.customerName;
+        if (customerAddressText != null) customerAddressText.text = currentOrder.customerAddress;
+        if (pizzaOrderText != null) pizzaOrderText.text = currentOrder.pizzaOrder;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (clicked) return;
@@ -140,12 +248,9 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         );
     }
 
-    // -------------------------
-    // VIBRATION
-    // -------------------------
     void StartVibration()
     {
-        if (clicked) return;   // stop vibration forever after click
+        if (clicked) return;
         StartCoroutine(Vibrate());
     }
 
@@ -162,24 +267,17 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         transform.rotation = originalRot;
     }
 
-    // -------------------------
-    // PHONE CLICK
-    // -------------------------
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!clicked)
-        {
-            clicked = true;
-            CancelInvoke(nameof(StartVibration)); // stop ALL future vibration
-            SetBrightness(normalBrightness);      // override hover
-        }
+        if (phoneOpened) return;
+
+        clicked = true;
+        CancelInvoke(nameof(StartVibration));
+        SetBrightness(normalBrightness);
 
         StartCoroutine(ClickAnimation());
     }
 
-    // -------------------------
-    // PHONE CLICK ANIMATION
-    // -------------------------
     System.Collections.IEnumerator ClickAnimation()
     {
         float t = 0f;
@@ -197,19 +295,36 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
             rect.localScale = Vector3.Lerp(startScale, endScale, p);
             rect.anchoredPosition = Vector2.Lerp(startPos, endPos, p);
-
             yield return null;
         }
 
-        // Final pose
         rect.localScale = endScale;
         rect.anchoredPosition = endPos;
 
-        // First screen change (phone opened)
-        if (newScreenSprite != null)
-            img.sprite = newScreenSprite;
+        phoneOpened = true;
+        OnPhoneOpened?.Invoke();
 
-        // Brightness = 2
+        if (isFirstVisit) SetState(PhoneState.Call);
+        else SetState(PhoneState.Pizza);
+    }
+
+    private void SetState(PhoneState newState)
+    {
+        state = newState;
+
+        switch (state)
+        {
+            case PhoneState.Call:
+                if (callScreenImage != null) img.sprite = callScreenImage;
+                break;
+            case PhoneState.Pizza:
+                if (pizzaScreenImage != null) img.sprite = pizzaScreenImage;
+                break;
+            case PhoneState.Accept:
+                if (acceptScreenImage != null) img.sprite = acceptScreenImage;
+                break;
+        }
+
         img.color = new Color(
             Mathf.Clamp01(originalColor.r * 2f),
             Mathf.Clamp01(originalColor.g * 2f),
@@ -217,82 +332,45 @@ public class PhoneScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
             originalColor.a
         );
 
-        // Play sound
         if (screenChangeSound != null)
             audioSource.PlayOneShot(screenChangeSound);
 
-        // Show the first order button
-        if (firstOrderButton != null)
-            firstOrderButton.SetActive(true);
+        if (declineCallButton != null) declineCallButton.SetActive(false);
+        if (pizzaOrderButton != null) pizzaOrderButton.SetActive(false);
+        if (acceptOrderButton != null) acceptOrderButton.SetActive(false);
+
+        if (state == PhoneState.Call && declineCallButton != null) declineCallButton.SetActive(true);
+        if (state == PhoneState.Pizza && pizzaOrderButton != null) pizzaOrderButton.SetActive(true);
+        if (state == PhoneState.Accept && acceptOrderButton != null) acceptOrderButton.SetActive(true);
     }
 
-    // -------------------------
-    // FIRST ORDER BUTTON CLICK
-    // -------------------------
-    private void OnFirstOrderButtonClicked()
+    private void OnDeclineCallClicked()
     {
-        // Hide the first button
-        if (firstOrderButton != null)
-            firstOrderButton.SetActive(false);
-
-        // Show the text
-        if (textToShow != null)
-            textToShow.SetActive(true);
-
-        // Change to second screen image
-        if (secondScreenSprite != null)
-            img.sprite = secondScreenSprite;
-
-        // Optional: play same sound again
-        if (screenChangeSound != null)
-            audioSource.PlayOneShot(screenChangeSound);
-
-        // Show accept/decline buttons
-        if (acceptButton != null)
-            acceptButton.SetActive(true);
-
-        if (declineButton != null)
-            declineButton.SetActive(true);
+        OnDeclineCall?.Invoke();
+        SetState(PhoneState.Pizza);
     }
 
-    // -------------------------
-    // ACCEPT ORDER
-    // -------------------------
+    private void OnPizzaOrderClicked()
+    {
+        ApplyOrderToUI();
+        if (orderPanel != null) orderPanel.SetActive(true);
+
+        SetState(PhoneState.Accept);
+    }
+
     private void OnAcceptOrderClicked()
     {
         OnPhoneCompleted?.Invoke();
     }
 
-    // -------------------------
-    // DECLINE ORDER
-    // -------------------------
-    private void OnDeclineOrderClicked()
+    public bool IsOnCallScreen()
     {
-        // Hide text
-        if (textToShow != null)
-            textToShow.SetActive(false);
+        return phoneOpened && state == PhoneState.Call;
+    }
 
-        // Hide accept/decline buttons
-        if (acceptButton != null)
-            acceptButton.SetActive(false);
-
-        if (declineButton != null)
-            declineButton.SetActive(false);
-
-        // Show the first order button again
-        if (firstOrderButton != null)
-            firstOrderButton.SetActive(true);
-
-        // Return phone to "menu" state (first opened screen)
-        if (newScreenSprite != null)
-            img.sprite = newScreenSprite;
-
-        // Keep brightness at 2 (since phone is still open)
-        img.color = new Color(
-            Mathf.Clamp01(originalColor.r * 2f),
-            Mathf.Clamp01(originalColor.g * 2f),
-            Mathf.Clamp01(originalColor.b * 2f),
-            originalColor.a
-        );
+    public void AutoDeclineCall()
+    {
+        if (IsOnCallScreen())
+            OnDeclineCallClicked();
     }
 }

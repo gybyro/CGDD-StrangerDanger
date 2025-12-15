@@ -718,6 +718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   settingsPanel: {fileID: 798890763}
+  sanity: 3
   carPhase: 0
   walkingSceneSpawnByDoor: 0
   skyEvening: {fileID: 2100000, guid: b8f8a7d6caf58104794f9ae36e700ddf, type: 2}
