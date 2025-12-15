@@ -366,6 +366,4 @@ public class CarSceneTriggers : MonoBehaviour
 
     }
 
-
-
 }

@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     private string char_00_nextDialogue = "dial_kyle_01"; // le dudebro
     private string char_01_nextDialogue = "dial_tired_01"; // tired is first character
-    private string char_02_nextDialogue = "dial_proxy_V1"; // proxy is second
+    private string char_02_nextDialogue = "dial_proxy_01"; // proxy is second
     private string char_03_nextDialogue = "dial_hippie_01";
     private string char_04_nextDialogue = "dial_grumpy_01";
     private string char_05_nextDialogue = "dial_mary_01";
