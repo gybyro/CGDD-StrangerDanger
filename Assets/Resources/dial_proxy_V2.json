@@ -70,6 +70,7 @@
         "showChar": true,
         "sound": "sonic_exe_laugh",
         "waitSeconds": 0.4,
+        "sanity": 25,
         "next": "end"
         },
         
@@ -79,7 +80,7 @@
         "speaker": "you",
         "text": "",
 
-        "nextDialFile": "dial_proxy_V3",
+        "nextDialFile": "dial_proxy_V1",
         "finished": true
         }
     ]

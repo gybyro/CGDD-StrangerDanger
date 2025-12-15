@@ -72,49 +72,50 @@ public class StoryLine : MonoBehaviour
                 StartCoroutine(RunStart());
 
         else {
+            charIndex = 2;
             // charIndex = 0;
-            if(currentDay == 1) // DAY 1 Monday
-            {
-                if (currentTime == 1) charIndex = 3;
-                else if (currentTime == 2) charIndex = 2;
-                else if (currentTime == 3) charIndex = 1;
-            }
-            else if(currentDay == 2) // 
-            {
-                if (currentTime == 1) charIndex = 1;
-                else if (currentTime == 2) charIndex = 5;
-                else if (currentTime == 3) charIndex = 2;
-            }
-            else if(currentDay == 3) // 
-            {
-                if (currentTime == 1) charIndex = 3;
-                else if (currentTime == 2) charIndex = 6;
-                else if (currentTime == 3) charIndex = 1;
-            }
-            else if(currentDay == 4) // 
-            {
-                if (currentTime == 1) charIndex = 2;
-                else if (currentTime == 2) charIndex = 3;
-                else if (currentTime == 3) charIndex = 5;
-            }
-            else if(currentDay == 5) // 
-            {
-                if (currentTime == 1) charIndex = 6;
-                else if (currentTime == 2) charIndex = 7;
-                else if (currentTime == 3) charIndex = 2;
-            }
-            else if(currentDay == 6) // 
-            {
-                if (currentTime == 1) charIndex = 3;
-                else if (currentTime == 2) charIndex = 2;
-                else if (currentTime == 3) charIndex = 5;
-            }
-            else if(currentDay == 7) // 
-            {
-                if (currentTime == 1) charIndex = 3;
-                else if (currentTime == 2) charIndex = 2;
-                else if (currentTime == 3) charIndex = 5;
-            }
+            // if(currentDay == 1) // DAY 1 Monday
+            // {
+            //     if (currentTime == 1) charIndex = 3;
+            //     else if (currentTime == 2) charIndex = 2;
+            //     else if (currentTime == 3) charIndex = 1;
+            // }
+            // else if(currentDay == 2) // 
+            // {
+            //     if (currentTime == 1) charIndex = 1;
+            //     else if (currentTime == 2) charIndex = 5;
+            //     else if (currentTime == 3) charIndex = 2;
+            // }
+            // else if(currentDay == 3) // 
+            // {
+            //     if (currentTime == 1) charIndex = 3;
+            //     else if (currentTime == 2) charIndex = 6;
+            //     else if (currentTime == 3) charIndex = 1;
+            // }
+            // else if(currentDay == 4) // 
+            // {
+            //     if (currentTime == 1) charIndex = 2;
+            //     else if (currentTime == 2) charIndex = 3;
+            //     else if (currentTime == 3) charIndex = 5;
+            // }
+            // else if(currentDay == 5) // 
+            // {
+            //     if (currentTime == 1) charIndex = 6;
+            //     else if (currentTime == 2) charIndex = 7;
+            //     else if (currentTime == 3) charIndex = 2;
+            // }
+            // else if(currentDay == 6) // 
+            // {
+            //     if (currentTime == 1) charIndex = 3;
+            //     else if (currentTime == 2) charIndex = 2;
+            //     else if (currentTime == 3) charIndex = 5;
+            // }
+            // else if(currentDay == 7) // 
+            // {
+            //     if (currentTime == 1) charIndex = 3;
+            //     else if (currentTime == 2) charIndex = 2;
+            //     else if (currentTime == 3) charIndex = 5;
+            // }
             // end
 
             

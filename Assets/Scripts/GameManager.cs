@@ -14,23 +14,23 @@ public class GameManager : MonoBehaviour
     private bool settingsMenuIsOpen;
 
     // ------------------- SANITY -------------------
-    [Header("Sanity")]
-    [Range(0, 3)]
-    [SerializeField] private int sanity = 3;
+    // [Header("Sanity")]
+    // [Range(0, 3)]
+    // [SerializeField] private int sanity = 3;
 
-    public int GetSanity() { return sanity; }
+    // public int GetSanity() { return sanity; }
 
-    public void LoseSanity(int amount = 1)
-    {
-        sanity = Mathf.Clamp(sanity - amount, 0, 3);
-        Debug.Log("[GM] Sanity now: " + sanity);
-    }
+    // public void LoseSanity(int amount = 1)
+    // {
+    //     sanity = Mathf.Clamp(sanity - amount, 0, 3);
+    //     Debug.Log("[GM] Sanity now: " + sanity);
+    // }
 
-    public void ResetSanity()
-    {
-        sanity = 3;
-        Debug.Log("[GM] Sanity reset to 3");
-    }
+    // public void ResetSanity()
+    // {
+    //     sanity = 3;
+    //     Debug.Log("[GM] Sanity reset to 3");
+    // }
     // ---------------------------------------------
 
     // car stuff
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     private string char_00_nextDialogue = "dial_kyle_01"; // le dudebro
     private string char_01_nextDialogue = "dial_tired_01"; // tired is first character
-    private string char_02_nextDialogue = "dial_proxy_01"; // proxy is second
+    private string char_02_nextDialogue = "dial_proxy_V1"; // proxy is second
     private string char_03_nextDialogue = "dial_hippie_01";
     private string char_04_nextDialogue = "dial_grumpy_01";
     private string char_05_nextDialogue = "dial_mary_01";

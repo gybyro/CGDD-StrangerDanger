@@ -1,7 +1,6 @@
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 using UnityEngine.UI;
 
 public class Sanity_Meter : MonoBehaviour
@@ -12,8 +11,8 @@ public class Sanity_Meter : MonoBehaviour
     // Starting sanity
     public int Player_Sanity = 100;
 
-    [Header("FOV insanity settings")]
-    [SerializeField] private float fovIncreaseAmount = 10f;   // how much to ADD
+    // [Header("FOV insanity settings")]
+    // [SerializeField] private float fovIncreaseAmount = 10f;   // how much to ADD
     // private bool hasTriggeredInsanityPov = false;
 
     [Header("barder images")]
@@ -60,16 +59,22 @@ public class Sanity_Meter : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Try to find a CinemachineVirtualCamera in the newly loaded scene
-        sanityVcam = FindObjectOfType<CinemachineVirtualCamera>();
+        // sanityVcam = FindObjectOfType<CinemachineVirtualCamera>();
 
-        if (sanityVcam != null)
-        {
-            Debug.Log($"Sanity_Meter: Found Cinemachine vcam in scene '{scene.name}': {sanityVcam.name}");
-        }
-        else
-        {
-            Debug.Log($"Sanity_Meter: No Cinemachine vcam found in scene '{scene.name}'. That's fine if it's a 2D scene.");
-        }
+        // if (sanityVcam != null)
+        // {
+        //     Debug.Log($"Sanity_Meter: Found Cinemachine vcam in scene '{scene.name}': {sanityVcam.name}");
+        // }
+        // else
+        // {
+        //     Debug.Log($"Sanity_Meter: No Cinemachine vcam found in scene '{scene.name}'. That's fine if it's a 2D scene.");
+        // }
+    }
+
+    public void SetSanity(int amount)
+    {
+        Player_Sanity = amount;
+        UpdateSanity();
     }
 
     // Call this whenever a "bad thing" happens
@@ -82,9 +87,18 @@ public class Sanity_Meter : MonoBehaviour
             GameManager.Instance.ResetAllData();
             GameManager.Instance.FadeToScene("END_NoSanity");
         }
-            
-
         Debug.Log($"Sanity lowered by {amount}. Current sanity = {Player_Sanity}");
+
+        UpdateSanity();
+    }
+
+    public void UpdateSanity()
+    {
+        if (Player_Sanity <= 0)
+        {
+            GameManager.Instance.ResetAllData();
+            GameManager.Instance.FadeToScene("END_NoSanity");
+        }
 
         // Trigger insanity POV effect only once
         if (Player_Sanity <= 75)

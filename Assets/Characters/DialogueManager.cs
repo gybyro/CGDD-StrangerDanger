@@ -205,6 +205,8 @@ public class DialogueManager : MonoBehaviour
 
         // SOUND ======================
         PlayDialogueSound(line.sound);
+        Debug.LogWarning("current sanity Line: " + line.sanity);
+        if (line.sanity != 0) Sanity_Meter.Instance.Lower_Sanity(line.sanity);
 
 
         // BRANCHES
@@ -258,7 +260,9 @@ public class DialogueManager : MonoBehaviour
 
                 yield return null;
             }
+
             if (line.tips != 0) Money_Manager.Instance.AddMoney(line.tips);
+            
         }
         else { textBox.alpha = 0; textBox.interactable = false; }
       
