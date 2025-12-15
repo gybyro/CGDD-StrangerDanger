@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
     public ChoiceUI choiceUI;
     public Animator doorAnimator;
     public AudioSource sfxSource;
+    public DoorBGPallet houseBG;
     // public SceneTransition sceneTransition; // optional fade system
 
 
@@ -105,6 +106,7 @@ public class DialogueManager : MonoBehaviour
 
         // Start at line 0
         currentLine = dialogue.lines[0];
+        if (houseBG != null) houseBG.ApplyColorSet(dialogue.houseBgPallet);
 
         while (currentLine != null)
         {
@@ -193,11 +195,18 @@ public class DialogueManager : MonoBehaviour
         TriggerDoorAnimation(line.animationTriggerDoor);
 
         // after door play show or hides
-        if (line.showChar == "true") { activeNPC.Show(); }
-        else if (line.showChar == "false") { activeNPC.Hide(); }
+        if (activeNPC != null)
+        {
+            if (line.showChar == "true")
+                activeNPC.Show();
+            else if (line.showChar == "false")
+                activeNPC.Hide();
+        }
 
         // SOUND ======================
         PlayDialogueSound(line.sound);
+        Debug.LogWarning("current sanity Line: " + line.sanity);
+        if (line.sanity != 0) Sanity_Meter.Instance.Lower_Sanity(line.sanity);
 
 
         // BRANCHES
@@ -251,7 +260,9 @@ public class DialogueManager : MonoBehaviour
 
                 yield return null;
             }
+
             if (line.tips != 0) Money_Manager.Instance.AddMoney(line.tips);
+            
         }
         else { textBox.alpha = 0; textBox.interactable = false; }
       
@@ -416,7 +427,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Stop choice state (in case time runs out)
-        if (isChoosing) isChoosing = false;
+       // Stop choice state (in case time runs out)
+        if (isChoosing)
+        {
+            isChoosing = false;
+            choiceUI.HideChoices(); // ✅ hide "Leave" button
+        }
 
         // If the player escaped, follow the escape option's next.
         if (escapeChosen && hasEscapeOption)
@@ -504,13 +520,24 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue(DialogueLine line)
     {
-        int charID = activeNPC.ID;
-        string nextDialogue = line.nextDialFile;
-        
+        string nextDialogue = line != null ? line.nextDialFile : null;
 
-        // GameManager updates the next file to play for that character
-        GameManager.Instance.AdvanceCharDial(charID, nextDialogue);
-        
-        // goes back to StoryLine class after this
+        // Night 3 / empty house cases: no NPC ever spoke, so activeNPC is null.
+        if (activeNPC == null)
+        {
+            Debug.LogWarning($"EndDialogue: activeNPC is null. nextDialFile='{nextDialogue}'. " +
+                            "This dialogue ended without an NPC speaker.");
+
+            // If your game can still continue without updating a character, just return safely.
+            // (Dialogue is already finished; your StoryLine or caller can move on.)
+            return;
+        }
+
+        int charID = activeNPC.ID;
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.AdvanceCharDial(charID, nextDialogue);
+        else
+            Debug.LogWarning("EndDialogue: GameManager.Instance is null.");
     }
 }
