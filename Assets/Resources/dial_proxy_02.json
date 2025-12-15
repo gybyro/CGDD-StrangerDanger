@@ -190,6 +190,7 @@
       "speaker": "proxy",
       "portrait": "V3",
       "text": "You.  Waited.",
+      "sanity": 25,
       "showChar": "true",
       "typeSpeed": 0.2,
       "next": "end"

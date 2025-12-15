@@ -40,6 +40,7 @@
         "speaker": "proxy",
         "showChar": false,
         "waitSeconds": 0.8,
+        "sanity": 25,
         "next": "end"
         },
      
@@ -49,7 +50,7 @@
         "id": "end",
         "speaker": "you",
         "text": "",
-        "nextDialFile": "dial_proxy_V3",
+        "nextDialFile": "dial_proxy_V2",
         "finished": true
         }
     ]

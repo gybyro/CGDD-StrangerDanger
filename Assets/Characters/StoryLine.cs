@@ -72,6 +72,7 @@ public class StoryLine : MonoBehaviour
                 StartCoroutine(RunStart());
 
         else {
+            
             // charIndex = 0;
             if(currentDay == 1) // DAY 1 Monday
             {

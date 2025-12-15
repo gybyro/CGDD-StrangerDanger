@@ -82,6 +82,7 @@ public class DialogueLine
     public float typeSpeed;
     public string next;
     public int tips;
+    public int sanity;
     public string nextDialFile;
     public bool finished;
 
