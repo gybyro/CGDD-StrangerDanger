@@ -134,14 +134,17 @@ namespace StarterAssets
 
 		private void Update()
 		{
+            //Debug.Log("move=" + _input.move + " sprint=" + _input.sprint);
+
 			// What scene are we in?
 			string sceneName = SceneManager.GetActiveScene().name;
 
 			// Only handle cursor & movement in the gameplay scene
-			bool inGameplay = sceneName == "WalkingScene" 
-            || sceneName == "eyrunWalkingSanaty"
-            // || sceneName == "GameManager"
-            || sceneName == "StartingHouseScene"
+			bool inGameplay = sceneName == "WalkingScene"
+               || sceneName == "eyrunWalkingSanaty"
+               || sceneName == "StartingHouseScene"
+               || sceneName == "GameManager";
+
             
             ;   // <- change name if needed
 
@@ -330,7 +333,7 @@ namespace StarterAssets
 
             Gizmos.DrawSphere(
                 new Vector3(
-                    transform.position.x,
+                    transform.position.x,//walking
                     transform.position.y - GroundedOffset,
                     transform.position.z),
                 GroundedRadius);
