@@ -29,11 +29,7 @@ public class CarSceneTriggers : MonoBehaviour
     private int carTick;
 
     private Coroutine bossCallCoroutine;
-
-    // Scene to load after accept
     private string pendingSceneToLoad = "";
-
-    // Controls first-entry logic
     private bool isFirstCarSceneEntry = false;
 
     void Awake()
@@ -58,13 +54,9 @@ public class CarSceneTriggers : MonoBehaviour
 
     private void HandlePhoneCompleted()
     {
-        if (mainCamSound != null)
-            mainCamSound.Stop();
+        if (mainCamSound != null) mainCamSound.Stop();
 
-        string scene = string.IsNullOrEmpty(pendingSceneToLoad)
-            ? phoneAcceptSceneName
-            : pendingSceneToLoad;
-
+        string scene = string.IsNullOrEmpty(pendingSceneToLoad) ? phoneAcceptSceneName : pendingSceneToLoad;
         pendingSceneToLoad = "";
 
         if (GameManager.Instance != null)
@@ -79,7 +71,6 @@ public class CarSceneTriggers : MonoBehaviour
 
     private void HandlePhoneOpened()
     {
-        // Boss call only on very first CarScene entry
         if (isFirstCarSceneEntry && phoneInteracted == 0)
         {
             PlayBossCallAndAutoDecline();
@@ -95,13 +86,23 @@ public class CarSceneTriggers : MonoBehaviour
             currentTime = GameManager.Instance.GetTime();
             carTick     = GameManager.Instance.GetCarTick();
 
-            // Define first time entering CarScene
+            // "true first entry" of the story
             isFirstCarSceneEntry = (currentDay == 1 && currentTime == 0 && carTick == 0);
 
             if (phone != null)
                 phone.SetFirstVisit(isFirstCarSceneEntry);
 
-            // Advance time ONLY on repeat entries
+            // ✅ FIX: guarantee customer 1 on true first entry
+            if (phone != null && isFirstCarSceneEntry)
+                phone.ResetOrderSequence();
+
+            // Now assign the order for this entry:
+            // - first entry: don't advance (customer 1)
+            // - later entries: advance to next customer
+            if (phone != null)
+                phone.AssignOrderForCarSceneEntry(advanceToNext: !isFirstCarSceneEntry);
+
+            // Time advances on repeat entry (your behavior)
             if (!isFirstCarSceneEntry)
                 GameManager.Instance.AdvanceTime();
 
@@ -127,6 +128,7 @@ public class CarSceneTriggers : MonoBehaviour
             yield break;
         }
 
+        // Keep your original day flow
         switch (currentDay)
         {
             case 1: yield return PlayMon(); break;
@@ -139,9 +141,6 @@ public class CarSceneTriggers : MonoBehaviour
         }
     }
 
-    // -------------------------
-    // BOSS CALL + AUTO DECLINE
-    // -------------------------
     private void PlayBossCallAndAutoDecline()
     {
         if (mainCamSound == null || phone == null) return;
@@ -153,8 +152,7 @@ public class CarSceneTriggers : MonoBehaviour
             return;
         }
 
-        // 🔊 ONLY CHANGE: increased volume (1.5x)
-        mainCamSound.PlayOneShot(clip, 3f);
+        mainCamSound.PlayOneShot(clip, 1.5f);
 
         if (bossCallCoroutine != null)
             StopCoroutine(bossCallCoroutine);
@@ -176,16 +174,10 @@ public class CarSceneTriggers : MonoBehaviour
         if (GameManager.Instance == null) return;
 
         carTick = GameManager.Instance.GetCarTick();
-
-        if (carTick == 0)
-            pendingSceneToLoad = phoneAcceptSceneName;
-        else
-            pendingSceneToLoad = "WalkingScene";
+        pendingSceneToLoad = (carTick == 0) ? phoneAcceptSceneName : "WalkingScene";
     }
 
-    // -------------------------
-    // DAYS
-    // -------------------------
+    // ---- your existing day functions (unchanged) ----
     IEnumerator PlayMon()
     {
         switch (carTick)
