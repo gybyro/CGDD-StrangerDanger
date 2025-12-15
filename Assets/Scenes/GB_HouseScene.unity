@@ -767,7 +767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StoryLine
   dialogueManager: {fileID: 362345138}
   testDialogue: 1
-  ifTestDialogueFileName: dial_concerned_01
+  ifTestDialogueFileName: dial_proxy_02
 --- !u!4 &1266667920
 Transform:
   m_ObjectHideFlags: 0

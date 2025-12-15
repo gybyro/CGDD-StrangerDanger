@@ -418,7 +418,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Stop choice state (in case time runs out)
-        if (isChoosing) isChoosing = false;
+       // Stop choice state (in case time runs out)
+        if (isChoosing)
+        {
+            isChoosing = false;
+            choiceUI.HideChoices(); // ✅ hide "Leave" button
+        }
 
         // If the player escaped, follow the escape option's next.
         if (escapeChosen && hasEscapeOption)
