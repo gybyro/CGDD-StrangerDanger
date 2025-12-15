@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class PhoneScript : MonoBehaviour,
     IPointerClickHandler,
@@ -39,8 +40,17 @@ public class PhoneScript : MonoBehaviour,
     public GameObject pizzaOrderButton;
     public GameObject acceptOrderButton;
 
+    [Header("Pizza Order UI")]
+    public GameObject orderPanel;
+    public TMP_Text customerNameText;
+    public TMP_Text customerAddressText;
+    public TMP_Text pizzaOrderText;
+
     public System.Action OnPhoneCompleted;
     public System.Action OnDeclineCall;
+
+    // ✅ NEW: event fired when phone opens (first click)
+    public System.Action OnPhoneOpened;
 
     private Image img;
     private Color originalColor;
@@ -59,19 +69,57 @@ public class PhoneScript : MonoBehaviour,
     private PhoneState state = PhoneState.Closed;
 
     // -------------------------
-    // EXTERNAL SETUP
+    // JSON ORDERS
     // -------------------------
+    [System.Serializable]
+    private class PizzaOrder
+    {
+        public int id;
+        public string customerName;
+        public string customerAddress;
+        public string pizzaOrder;
+    }
+
+    [System.Serializable]
+    private class PizzaOrderList
+    {
+        public PizzaOrder[] orders;
+    }
+
+    private PizzaOrderList loadedOrders;
+    private PizzaOrder currentOrder;
+
+    private const string OrderIndexKey = "PizzaOrderIndex";
+
+    void Awake()
+    {
+        img = GetComponent<Image>();
+        rect = GetComponent<RectTransform>();
+    }
+
+    // Called by CarSceneTriggers BEFORE Start or at Start
     public void SetFirstVisit(bool first)
     {
         isFirstVisit = first;
+
+        // Update start image immediately if phone not opened yet
+        if (img != null && !phoneOpened)
+        {
+            if (isFirstVisit)
+            {
+                if (firstVisitStartImage != null) img.sprite = firstVisitStartImage;
+            }
+            else
+            {
+                if (repeatVisitStartImage != null) img.sprite = repeatVisitStartImage;
+            }
+        }
     }
 
     void Start()
     {
-        img = GetComponent<Image>();
-        rect = GetComponent<RectTransform>();
-
         originalColor = img.color;
+        rect = GetComponent<RectTransform>();
         originalScale = rect.localScale;
         originalPos = rect.anchoredPosition;
         originalRot = transform.rotation;
@@ -79,14 +127,17 @@ public class PhoneScript : MonoBehaviour,
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
 
-        // Starting image (before click)
-        if (isFirstVisit)
+        // Start image (before click)
+        if (!phoneOpened)
         {
-            if (firstVisitStartImage != null) img.sprite = firstVisitStartImage;
-        }
-        else
-        {
-            if (repeatVisitStartImage != null) img.sprite = repeatVisitStartImage;
+            if (isFirstVisit)
+            {
+                if (firstVisitStartImage != null) img.sprite = firstVisitStartImage;
+            }
+            else
+            {
+                if (repeatVisitStartImage != null) img.sprite = repeatVisitStartImage;
+            }
         }
 
         SetBrightness(normalBrightness);
@@ -97,7 +148,61 @@ public class PhoneScript : MonoBehaviour,
 
         SetButtonInvisible(declineCallButton);
 
+        // ✅ load order for this CarScene entry:
+        // - first carscene entry: do NOT advance (show customer 1)
+        // - later entries: advance to next customer
+        LoadOrderForThisCarSceneEntry(advanceOnEntry: !isFirstVisit);
+
+        if (orderPanel != null) orderPanel.SetActive(false);
+
         InvokeRepeating(nameof(StartVibration), startDelay, loopTime);
+    }
+
+    private void LoadOrderForThisCarSceneEntry(bool advanceOnEntry)
+    {
+        TextAsset jsonAsset = Resources.Load<TextAsset>("PizzaOrders");
+        if (jsonAsset == null)
+        {
+            Debug.LogWarning("PizzaOrders.json not found! Put it in Assets/Resources/PizzaOrders.json");
+            return;
+        }
+
+        loadedOrders = JsonUtility.FromJson<PizzaOrderList>(jsonAsset.text);
+        if (loadedOrders == null || loadedOrders.orders == null || loadedOrders.orders.Length == 0)
+        {
+            Debug.LogWarning("PizzaOrders.json has no orders.");
+            return;
+        }
+
+        int count = loadedOrders.orders.Length;
+
+        int index = PlayerPrefs.GetInt(OrderIndexKey, 0);
+        if (index < 0) index = 0;
+        index %= count;
+
+        // ✅ only advance on repeat entries
+        if (advanceOnEntry)
+        {
+            index = (index + 1) % count;
+            PlayerPrefs.SetInt(OrderIndexKey, index);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            PlayerPrefs.SetInt(OrderIndexKey, index);
+            PlayerPrefs.Save();
+        }
+
+        currentOrder = loadedOrders.orders[index];
+    }
+
+    private void ApplyOrderToUI()
+    {
+        if (currentOrder == null) return;
+
+        if (customerNameText != null) customerNameText.text = currentOrder.customerName;
+        if (customerAddressText != null) customerAddressText.text = currentOrder.customerAddress;
+        if (pizzaOrderText != null) pizzaOrderText.text = currentOrder.pizzaOrder;
     }
 
     private void SetupButton(GameObject go, UnityEngine.Events.UnityAction action, bool active)
@@ -134,9 +239,7 @@ public class PhoneScript : MonoBehaviour,
         }
     }
 
-    // -------------------------
-    // HOVER
-    // -------------------------
+    // Hover
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (clicked) return;
@@ -159,9 +262,7 @@ public class PhoneScript : MonoBehaviour,
         );
     }
 
-    // -------------------------
-    // VIBRATION
-    // -------------------------
+    // Vibration
     void StartVibration()
     {
         if (clicked) return;
@@ -181,9 +282,7 @@ public class PhoneScript : MonoBehaviour,
         transform.rotation = originalRot;
     }
 
-    // -------------------------
-    // PHONE CLICK
-    // -------------------------
+    // Phone click
     public void OnPointerClick(PointerEventData eventData)
     {
         if (phoneOpened) return;
@@ -220,15 +319,13 @@ public class PhoneScript : MonoBehaviour,
 
         phoneOpened = true;
 
-        if (isFirstVisit)
-            SetState(PhoneState.Call);
-        else
-            SetState(PhoneState.Pizza);
+        // ✅ NEW: notify carscene that the phone was opened
+        OnPhoneOpened?.Invoke();
+
+        if (isFirstVisit) SetState(PhoneState.Call);
+        else SetState(PhoneState.Pizza);
     }
 
-    // -------------------------
-    // STATES
-    // -------------------------
     private void SetState(PhoneState newState)
     {
         state = newState;
@@ -260,19 +357,11 @@ public class PhoneScript : MonoBehaviour,
         if (pizzaOrderButton != null) pizzaOrderButton.SetActive(false);
         if (acceptOrderButton != null) acceptOrderButton.SetActive(false);
 
-        if (state == PhoneState.Call && declineCallButton != null)
-            declineCallButton.SetActive(true);
-
-        if (state == PhoneState.Pizza && pizzaOrderButton != null)
-            pizzaOrderButton.SetActive(true);
-
-        if (state == PhoneState.Accept && acceptOrderButton != null)
-            acceptOrderButton.SetActive(true);
+        if (state == PhoneState.Call && declineCallButton != null) declineCallButton.SetActive(true);
+        if (state == PhoneState.Pizza && pizzaOrderButton != null) pizzaOrderButton.SetActive(true);
+        if (state == PhoneState.Accept && acceptOrderButton != null) acceptOrderButton.SetActive(true);
     }
 
-    // -------------------------
-    // BUTTON ACTIONS
-    // -------------------------
     private void OnDeclineCallClicked()
     {
         OnDeclineCall?.Invoke();
@@ -281,6 +370,9 @@ public class PhoneScript : MonoBehaviour,
 
     private void OnPizzaOrderClicked()
     {
+        ApplyOrderToUI();
+        if (orderPanel != null) orderPanel.SetActive(true);
+
         SetState(PhoneState.Accept);
     }
 
@@ -289,9 +381,6 @@ public class PhoneScript : MonoBehaviour,
         OnPhoneCompleted?.Invoke();
     }
 
-    // -------------------------
-    // AUTO DECLINE SUPPORT
-    // -------------------------
     public bool IsOnCallScreen()
     {
         return phoneOpened && state == PhoneState.Call;

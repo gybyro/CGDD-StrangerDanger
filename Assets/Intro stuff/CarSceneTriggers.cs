@@ -21,7 +21,7 @@ public class CarSceneTriggers : MonoBehaviour
     [Header("CRT")]
     public CRTController crtController;
 
-    [Header("Phone Accept -> Next Scene")]
+    [Header("Phone Accept -> Default Next Scene")]
     public string phoneAcceptSceneName = "StartingHouseScene";
 
     private int currentDay;
@@ -30,15 +30,19 @@ public class CarSceneTriggers : MonoBehaviour
 
     private Coroutine bossCallCoroutine;
 
-    // -------------------------
-    // SETUP
-    // -------------------------
+    // Scene to load after accept
+    private string pendingSceneToLoad = "";
+
+    // Controls first-entry logic
+    private bool isFirstCarSceneEntry = false;
+
     void Awake()
     {
         if (phone != null)
         {
             phone.OnPhoneCompleted += HandlePhoneCompleted;
             phone.OnDeclineCall += HandleDeclineCall;
+            phone.OnPhoneOpened += HandlePhoneOpened;
         }
     }
 
@@ -48,19 +52,23 @@ public class CarSceneTriggers : MonoBehaviour
         {
             phone.OnPhoneCompleted -= HandlePhoneCompleted;
             phone.OnDeclineCall -= HandleDeclineCall;
+            phone.OnPhoneOpened -= HandlePhoneOpened;
         }
     }
 
-    // -------------------------
-    // PHONE EVENTS
-    // -------------------------
     private void HandlePhoneCompleted()
     {
         if (mainCamSound != null)
             mainCamSound.Stop();
 
+        string scene = string.IsNullOrEmpty(pendingSceneToLoad)
+            ? phoneAcceptSceneName
+            : pendingSceneToLoad;
+
+        pendingSceneToLoad = "";
+
         if (GameManager.Instance != null)
-            GameManager.Instance.LoadSceneWithFade(phoneAcceptSceneName);
+            GameManager.Instance.LoadSceneWithFade(scene);
     }
 
     private void HandleDeclineCall()
@@ -69,16 +77,39 @@ public class CarSceneTriggers : MonoBehaviour
             mainCamSound.Stop();
     }
 
-    // -------------------------
-    // START
-    // -------------------------
+    private void HandlePhoneOpened()
+    {
+        // Boss call only on very first CarScene entry
+        if (isFirstCarSceneEntry && phoneInteracted == 0)
+        {
+            PlayBossCallAndAutoDecline();
+            phoneInteracted = 1;
+        }
+    }
+
     void Start()
     {
-        StartCoroutine(RunCarScene());
+        if (GameManager.Instance != null)
+        {
+            currentDay  = GameManager.Instance.GetDay();
+            currentTime = GameManager.Instance.GetTime();
+            carTick     = GameManager.Instance.GetCarTick();
 
-        carTick = GameManager.Instance.GetCarTick();
-        if (carTick != 0)
-            crtController.ToggleCRT(false);
+            // Define first time entering CarScene
+            isFirstCarSceneEntry = (currentDay == 1 && currentTime == 0 && carTick == 0);
+
+            if (phone != null)
+                phone.SetFirstVisit(isFirstCarSceneEntry);
+
+            // Advance time ONLY on repeat entries
+            if (!isFirstCarSceneEntry)
+                GameManager.Instance.AdvanceTime();
+
+            if (carTick != 0 && crtController != null)
+                crtController.ToggleCRT(false);
+        }
+
+        StartCoroutine(RunCarScene());
     }
 
     private IEnumerator RunCarScene()
@@ -88,11 +119,6 @@ public class CarSceneTriggers : MonoBehaviour
         currentDay  = GameManager.Instance.GetDay();
         currentTime = GameManager.Instance.GetTime();
         carTick     = GameManager.Instance.GetCarTick();
-
-        // Decide FIRST vs REPEAT visit for the phone
-        bool firstVisit = (currentDay == 1 && currentTime == 0 && carTick == 0);
-        if (phone != null)
-            phone.SetFirstVisit(firstVisit);
 
         if (carTick == 4 || carTick == 8 || carTick == 12 || carTick == 16 || carTick == 20)
         {
@@ -114,7 +140,7 @@ public class CarSceneTriggers : MonoBehaviour
     }
 
     // -------------------------
-    // BOSS CALL
+    // BOSS CALL + AUTO DECLINE
     // -------------------------
     private void PlayBossCallAndAutoDecline()
     {
@@ -127,7 +153,8 @@ public class CarSceneTriggers : MonoBehaviour
             return;
         }
 
-        mainCamSound.PlayOneShot(clip);
+        // 🔊 ONLY CHANGE: increased volume (1.5x)
+        mainCamSound.PlayOneShot(clip, 3f);
 
         if (bossCallCoroutine != null)
             StopCoroutine(bossCallCoroutine);
@@ -140,33 +167,20 @@ public class CarSceneTriggers : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         if (phone != null && phone.IsOnCallScreen())
-        {
             phone.AutoDeclineCall();
-        }
     }
 
-    // -------------------------
-    // PHONE BUTTON
-    // -------------------------
+    // Optional legacy hook
     public void ClickedOnPhone()
     {
-        if (carTick != 0)
-            GameManager.Instance.AdvanceTime();
+        if (GameManager.Instance == null) return;
+
+        carTick = GameManager.Instance.GetCarTick();
 
         if (carTick == 0)
-        {
-            switch (phoneInteracted)
-            {
-                case 0:
-                    PlayBossCallAndAutoDecline();
-                    break;
-            }
-            phoneInteracted++;
-        }
+            pendingSceneToLoad = phoneAcceptSceneName;
         else
-        {
-            GameManager.Instance.LoadSceneWithFade("WalkingScene");
-        }
+            pendingSceneToLoad = "WalkingScene";
     }
 
     // -------------------------
