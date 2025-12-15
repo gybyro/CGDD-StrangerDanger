@@ -33,9 +33,10 @@
       "options": [
         { "text": "What does that necklace mean?", "next": "player_ask1" },
         { "text": "You owe me 30 bucks", "next": "player_ask2" },
-        { "text": "'Say nothing'", "next": "how_much_money"}
+        { "text": "'Say nothing'", "next": "how_much_money" }
       ]
     },
+
     {
       "id": "player_ask1",
       "speaker": "hippie",
@@ -48,6 +49,7 @@
       "text": "You don't say much do you darlin, you know what the best thing that goes with a pizza is? A good weed joint, that's what 1 year of sobriety gets you...",
       "next": "how_much_money"
     },
+
     {
       "id": "player_ask1_01",
       "type": "choice",
@@ -60,6 +62,7 @@
         { "text": "I could never", "next": "player_ask1_03" }
       ]
     },
+
     {
       "id": "player_ask1_03",
       "speaker": "hippie",
@@ -72,17 +75,27 @@
       "text": "Thanks a lot my life has truly changed for the better, so how much do I owe you",
       "next": "how_much_money"
     },
+
     {
       "id": "how_much_money",
       "speaker": "you",
       "text": "You owe me 30 bucks",
       "next": "money_exchange"
     },
+
     {
       "id": "money_exchange",
       "speaker": "hippie",
-      "text": "Ye no problem, here you go let me get you your tip",
       "portrait": "pizza",
+      "text": "Yeah no problem — here, that's for the pizza.",
+      "tips": 10,
+      "next": "tip_setup"
+    },
+
+    {
+      "id": "tip_setup",
+      "speaker": "hippie",
+      "text": "Let me grab your tip too, just wait here a sec.",
       "animationTriggerDoor": "DoorClose",
       "showChar": "false",
       "next": "waiting_game"
@@ -103,8 +116,8 @@
       "id": "tip_arrives",
       "speaker": "hippie",
       "portrait": "normal",
-      "text": "I'm back — here's your tip!",
-      "tips": 15,
+      "text": "I'm back — here's a little extra for ya!",
+      "tips": 5,
       "animationTriggerDoor": "DoorOpen",
       "showChar": "true",
       "next": "end"
