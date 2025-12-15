@@ -1,121 +1,76 @@
 {
-  "scene": "dial_tired_01",
+  "scene": "dial_tired_night1",
   "lines": [
     {
-      "id": "test01",
+      "id": "start",
       "speaker": "tired",
       "portrait": "01",
-      "text": "THIS IS dial_tired_01 !!!!!!!!!",
+      "text": "oh… hey… sorry, took me a second.",
       "animationTriggerDoor": "DoorOpenWide",
       "showChar": "true",
-      "next": "test02"
+      "next": "n1_01"
     },
     {
-      "id": "test02",
+      "id": "n1_01",
       "speaker": "you",
-      "text": "hey",
-      "next": "test03"
+      "text": "Rough night?",
+      "next": "n1_02"
     },
     {
-      "id": "test03",
+      "id": "n1_02",
+      "speaker": "tired",
+      "portrait": "02",
+      "text": "yeah… haven’t been sleeping much.",
+      "next": "n1_03"
+    },
+    {
+      "id": "n1_03",
       "speaker": "tired",
       "portrait": "03",
-      "text": "Aw sick! Pizza time!",
-      "next": "test04"
+      "text": "I’ve been going on walks late at night. Helps me clear my head.",
+      "next": "n1_04"
     },
     {
-      "id": "test04",
-      "speaker": "you",
-      "text": "Thats right, the last time im delivering to you for now.",
-      "next": "test05"
-    },
-    {
-      "id": "test05",
+      "id": "n1_04",
       "speaker": "tired",
       "portrait": "04",
-      "text": "... HUH??",
-      "next": "test06"
+      "text": "But… the neighbors have been acting weird.",
+      "next": "n1_05"
     },
     {
-      "id": "test06",
+      "id": "n1_05",
       "speaker": "you",
-      "text": "Yeah, they're sending me over to this small ass town called 'whitetail hollow' I think? Guy working there quit all of a sudden so I'm filling in for the week.",
-      "next": "test07"
+      "text": "Weird how?",
+      "next": "n1_06"
     },
     {
-      "id": "test07",
-      "speaker": "tired",
-      "portrait": "02",
-      "text": "Ive heard of it, the one in the walley right?",
-      "next": "test08"
-    },
-    {
-      "id": "test08",
-      "speaker": "tired",
-      "portrait": "02",
-      "text": "You gotta be careful man, Ive heards some spooky shit round those parts.",
-      "next": "test09"
-    },
-    {
-      "id": "test09",
-      "speaker": "you",
-      "text": "I will try to come back in one piece, then ill beat you in wario cart again!",
-      "next": "test10"
-    },
-    {
-      "id": "test10",
+      "id": "n1_06",
       "speaker": "tired",
       "portrait": "05",
-      "typeSpeed": 0.12,
-      "text": "Bet.",
-      "next": "test11"
-    },
-    {
-      "id": "test11",
-      "speaker": "tired",
-      "portrait": "01",
-      "text": "Ok then, Ill see you later man!",
-      "next": "test12"
-    },
-    {
-      "id": "test12",
-      "speaker": "tired",
-      "waitSeconds": 1,
-      "animationTriggerDoor": "DoorClose",
-      "showChar": "false",
-      "next": "test13"
-    },
-    {
-      "id": "test13",
-      "speaker": "you",
-      "text": "hmmmmmmmmm...",
-      "next": "test14"
-    },
-    {
-      "id": "test14",
-      "speaker": "tired",
-      "animationTriggerDoor": "DoorOpenWide",
-      "showChar": "true",
-      "next": "test15"
-    },
-    {
-      "id": "test15",
-      "speaker": "you",
-      "text": "!",
-      "next": "test16"
+      "text": "Lights on all night. Whispering. Scraping sounds.",
+      "next": "n1_pay"
     },
 
     {
-      "id": "test16",
+      "id": "n1_pay",
       "speaker": "tired",
-      "text": "Teehee I forgor your tip! Wait here — I'll grab it!",
+      "portrait": "02",
+      "text": "Oh— right. Here, that’s for the pizza.",
+      "tips": 10,
+      "next": "n1_tip_setup"
+    },
+
+    {
+      "id": "n1_tip_setup",
+      "speaker": "tired",
+      "portrait": "02",
+      "text": "I’ll grab your tip too. Just— wait here a sec.",
       "next": "tip_leave"
     },
-
     {
       "id": "tip_leave",
       "speaker": "tired",
-      "waitSeconds": 0.5,
+      "waitSeconds": 0.4,
       "animationTriggerDoor": "DoorClose",
       "showChar": "false",
       "next": "waiting_game"
@@ -126,6 +81,7 @@
       "speaker": "you",
       "type": "countdown",
       "countDownSeconds": 10,
+      "prompt": "Waiting for tip...",
       "timeOutNext": "tip_arrives",
       "options": [
         { "text": "Leave", "next": "end" }
@@ -136,27 +92,28 @@
       "id": "tip_arrives",
       "speaker": "tired",
       "portrait": "01",
-      "text": "Found it! Here ya go!",
-      "tips": 15,
+      "text": "Sorry about that. Found a couple extra bucks.",
+      "tips": 5,
       "animationTriggerDoor": "DoorOpenWide",
       "showChar": "true",
-      "next": "test17"
+      "next": "tip_goodbye"
     },
 
     {
-      "id": "test17",
+      "id": "tip_goodbye",
       "speaker": "tired",
-      "waitSeconds": 1,
-      "text": "Toodles.",
+      "text": "Goodnight.",
+      "waitSeconds": 0.3,
       "animationTriggerDoor": "DoorClose",
       "showChar": "false",
       "next": "end"
     },
+
     {
       "id": "end",
       "speaker": "you",
       "text": "",
-      "nextDialFile": "dial_tired_02",
+      "nextDialFile": "dial_tired_night2",
       "finished": true
     }
   ]
