@@ -40,9 +40,10 @@
     {
       "id": "player_ask1",
       "speaker": "hippie",
-      "text": "ohh thanks for asking, the purple color signifies peace and wards off bad people, if it turns then I know that I should be careful",
+      "text": "ohh thanks for asking, the purple color signifies peace and wards off bad people. I started wearing it when I got sober — it helps remind me to stay calm and not fall back into old habits.",
       "next": "player_ask1_01"
     },
+
     {
       "id": "player_ask2",
       "speaker": "hippie",
@@ -58,21 +59,21 @@
       "waitSeconds": 0.2,
       "text": "Your choice",
       "options": [
-        { "text": "Congratulations on your sobriety", "next": "player_ask1_02" },
-        { "text": "I could never", "next": "player_ask1_03" }
+        { "text": "That’s actually really strong. Respect.", "next": "player_ask1_02" },
+        { "text": "Does it really work, or is it just for show?", "next": "player_ask1_03" }
       ]
     },
 
     {
-      "id": "player_ask1_03",
+      "id": "player_ask1_02",
       "speaker": "hippie",
-      "text": "To each their own, so how much do I owe you?",
+      "text": "Thanks darlin. It ain’t easy, but I’m trying. Anyway— how much do I owe you?",
       "next": "how_much_money"
     },
     {
-      "id": "player_ask1_02",
+      "id": "player_ask1_03",
       "speaker": "hippie",
-      "text": "Thanks a lot my life has truly changed for the better, so how much do I owe you",
+      "text": "Heh… maybe it’s both. But it keeps my head straight, so I’ll take it. So how much do I owe you?",
       "next": "how_much_money"
     },
 
