@@ -1,5 +1,6 @@
 {
 "scene": "dial_proxy_01",
+"houseBgPallet": "Blue01",
 "lines": 
     [
         {
@@ -121,7 +122,7 @@
         "id": "01_08",
         "speaker": "you",
         "color": "#657385",
-        "text": "should I ask about the previous delivery guy?",
+        "text": "** should I ask about the previous delivery guy? **",
         "type": "choice",
         "options": [
             {"text": "couldn't hurt to try right?", "next": "pizza01_ask1"},
@@ -166,6 +167,9 @@
         "text": "(Aaaand thank you too!!  please DO NOT order from us again.)",
         "next": "end"
         },
+
+
+
 
         {
         "id": "pizza01_ask1",
@@ -214,14 +218,61 @@
         "portrait": "pizzaUp",
         "typeSpeed": 0.1,
         "text": "Be careful not to 'quit' prematurely as well.",
+        "next": "pizza01_ask8"
+        },
+        {
+        "id": "pizza01_ask8",
+        "speaker": "you",
+        "portrait": "pizzaSide1",
+        "text": "ri-right... *gulp*",
         "next": "pizza01_ask9"
         },
         {
         "id": "pizza01_ask9",
-        "speaker": "you",
+        "speaker": "proxy",
         "portrait": "pizzaSide1",
-        "text": "ri-right... *gulp*",
-        "next": "pizza01_name8"
+        "text": "oh, wait one moment please.",
+        "next": "pizza01_ask10"
+        },
+        {
+        "id": "pizza01_ask10",
+        "speaker": "you",
+        "portrait": "?",
+        "text": "?",
+        "waitSeconds": 2,
+        "animationTriggerDoor": "DoorClose",
+        "showChar": false,
+        "next": "tip01"
+        },
+        {
+        "id": "tip01",
+        "speaker": "proxy",
+        "portrait": "openDoor2",
+        "text": "here, thanks for the trouble",
+        "animationTriggerDoor": "DoorHalfOpen",
+        "showChar": true,
+        "tips": 5,
+        "next": "tip02"
+        },
+        {
+        "id": "tip02",
+        "speaker": "you",
+        "text": "oh! Thank you.  It was no trouble at all.",
+        "next": "tip03"
+        },
+        {
+        "id": "tip03",
+        "speaker": "proxy",
+        "text": "...",
+        "next": "tip04"
+        },
+        {
+        "id": "tip04",
+        "speaker": "proxy",
+        "text": "See ya",
+        "animationTriggerDoor": "DoorClose",
+        "showChar": false,
+        "next": "end"
         },
 
 
