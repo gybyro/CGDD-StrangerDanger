@@ -643,7 +643,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   settingsPanel: {fileID: 798890763}
+  sanity: 3
   carPhase: 0
+  walkingSceneSpawnByDoor: 0
   skyEvening: {fileID: 2100000, guid: b8f8a7d6caf58104794f9ae36e700ddf, type: 2}
   skyDusk: {fileID: 2100000, guid: b8c70697fa6faf548a1df6ab4c8fd1b7, type: 2}
   skyMidnight: {fileID: 2100000, guid: 51762e7c2a66b8247a2638afd1b51c36, type: 2}
@@ -664,6 +666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Money_Manager
   money: 0
+  currentDayMoney: 0
   quota: 100
 --- !u!114 &681021446
 MonoBehaviour:
