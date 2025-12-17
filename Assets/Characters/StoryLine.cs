@@ -86,7 +86,7 @@ public class StoryLine : MonoBehaviour
                 else if (currentTime == 2) charIndex = 5;
                 else if (currentTime == 3) charIndex = 2;
             }
-            else if(currentDay == 3) // 
+            else if(currentDay == 3) // done
             {
                 if (currentTime == 1) charIndex = 1; // done
                 else if (currentTime == 2) charIndex = 3; // done
@@ -94,9 +94,9 @@ public class StoryLine : MonoBehaviour
             }
             else if(currentDay == 4) // 
             {
-                if (currentTime == 1) charIndex = 2;
-                else if (currentTime == 2) charIndex = 1;
-                else if (currentTime == 3) charIndex = 3;
+                if (currentTime == 1) charIndex = 2; // done
+                else if (currentTime == 2) charIndex = 1; //done
+                // else if (currentTime == 3) charIndex = 3; 
             }
             else if(currentDay == 5) // 
             {

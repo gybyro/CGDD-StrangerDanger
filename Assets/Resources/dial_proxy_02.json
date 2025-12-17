@@ -1,89 +1,170 @@
 {
-  "scene": "dial_hippie_02",
+  "scene": "dial_proxy_02",
+  "houseBgPallet": "Blue02",
   "lines": [
     {
       "id": "test01",
-      "speaker": "hippie",
-      "portrait": "hippie_evil",
-      "text": "hi!",
+      "speaker": "proxy",
+      "portrait": "visitorOpen",
+      "text": "hello again!",
       "animationTriggerDoor": "DoorOpen",
       "showChar": "true",
       "next": "test02"
     },
     {
       "id": "test02",
-      "speaker": "hippie",
-      "portrait": "hippie_evil",
-      "text": "Hello stranger.",
+      "speaker": "you",
+      "portrait": "visitorOpen",
+      "text": "!",
       "next": "test03"
     },
     {
       "id": "test03",
-      "type": "choice",
+      "speaker": "proxy",
+      "portrait": "visitorOpen",
+      "text": "hm? Why Do You Look So Suprised?",
+      "next": "test04"
+    },
+    {
+      "id": "test04",
       "speaker": "you",
-      "text": "",
+      "text": "oh, uh.. I guess I wasn't expecting you to be so much more energetic?",
+      "next": "test05"
+    },
+    {
+      "id": "test05",
+      "speaker": "proxy",
+      "portrait": "visitorOpen",
+      "text": "heh...",
+      "next": "06"
+    },
+    {
+      "id": "06",
+      "speaker": "you",
+      "text": "a-anyway, I saw ahead of time that you already paid, so here you are",
+      "next": "07"
+    },
+    {
+      "id": "07",
+      "speaker": "proxy",
+      "portrait": "visitorUp",
+      "text": "Why Thank You.",
+      "next": "08"
+    },
+    {
+      "id": "08",
+      "speaker": "proxy",
+      "text": "My, I Must be such a Hassle to deal with, ordering a pizza 2 days in a row.",
+      "next": "09"
+    },
+    {
+      "id": "09",
+      "speaker": "proxy",
+      "portrait": "V1",
+      "text": "You must think I'm a slob, don't you?",
+      "next": "10"
+    },
+    {
+      "id": "10",
+      "speaker": "you",
+      "color": "#657385",
+      "text": "** huh??? **",
+      "type": "choice",
       "options": [
-        { "text": "You don't remember me?", "next": "player_ask1" },
-        { "text": "Did anything happen to your eyes?", "next": "player_ask2" },
-        { "text": "Hey, here is your pizza, you owe me 10$", "next": "money_exchange" }
+        { "text": "No, Of course not!!", "next": "vop_good" },
+        { "text": "I just figured YOU couldn't get enough of this face", "next": "vop_bad" }
       ]
     },
     {
-      "id": "player_ask1",
-      "speaker": "hippie",
-      "portrait": "hippie_evil",
-      "typeSpeed": 1.12,
-      "text": "No clue who you are, pizza driver. How much for the pizza?",
-      "next": "how_much_money"
-    },
-    {
-      "id": "player_ask2",
-      "type": "choice",
-      "speaker": "hippie",
-      "portrait": "hippie_evil",
-      "typeSpeed": 1.12,
-      "text": "Ohh yeah, my eyes. They get real red when I smoke. Helps with the munchies.",
-      "options": [
-        { "text": "I thought you were staying sober?", "next": "player_ask1_angry" },
-        { "text": "Alright, fair enough. That’ll be 21$", "next": "money_exchange" }
-      ]
-    },
-    {
-      "id": "player_ask1_angry",
-      "speaker": "hippie",
-      "portrait": "hippie_evil",
-      "typeSpeed": 1.12,
-      "text": "I never said that. Give me the pizza before I get angry.",
-      "next": "how_much_money_scared"
-    },
-    {
-      "id": "how_much_money_scared",
+      "id": "vop_good",
       "speaker": "you",
-      "typeSpeed": 1.12,
-      "text": "Sorry, didn’t mean to push it. That’ll be 10$.",
-      "next": "money_exchange_angry"
+      "text": "No, Of course not!! ",
+      "next": "g1"
     },
     {
-      "id": "money_exchange_angry",
+      "id": "g1",
+      "speaker": "proxy",
+      "portrait": "V2",
+      "text": "tch",
+      "next": "g2"
+    },
+    {
+      "id": "g2",
       "speaker": "you",
-      "typeSpeed": 1.12,
-      "text": "Here. Don’t move. I’ll get your tip.",
-      "animationTriggerDoor": "DoorClose",
+      "portrait": "visitorUp",
+      "text": "?",
+      "next": "g3"
+    },
+    {
+      "id": "g3",
+      "speaker": "you",
+      "portrait": "V1",
+      "text": "Anyway, thank you again! I'm sure You must be very busy considering the takeout",
+      "next": "g4"
+    },
+    {
+      "id": "g4",
+      "speaker": "you",
+      "portrait": "V1",
+      "text": "I'll get out of your hair!",
+      "next": "g5"
+    },
+    {
+      "id": "g5",
+      "speaker": "proxy",
+      "portrait": "visitorUp",
+      "text": "....",
+      "next": "g6"
+    },
+    {
+      "id": "g6",
+      "speaker": "proxy",
+      "text": "fine",
       "showChar": "false",
-      "next": "waiting_game"
+      "animationTriggerDoor": "DoorClose",
+      "next": "g7"
     },
     {
-      "id": "how_much_money",
+      "id": "g7",
       "speaker": "you",
-      "typeSpeed": 1.12,
-      "text": "Alright, that’ll be 10$.",
-      "next": "money_exchange"
+      "text": "............",
+      "next": "g8"
     },
     {
-      "id": "money_exchange",
+      "id": "g8",
       "speaker": "you",
-      "typeSpeed": 1.12,
-      "text": "Here you go. Wait here while I grab your tip.",
+      "text": "FEWHHH, I think I dodged a bullet there, they were definitely acting a bit off today.",
+      "waitSeconds": 0.2,
+      "next": "end"
+    },
+    {
+      "id": "vop_bad",
+      "speaker": "you",
+      "text": "I just figured YOU couldn't get enough of this face",
+      "next": "b1"
+    },
+    {
+      "id": "b1",
+      "speaker": "proxy",
+      "portrait": "visitorUp",
+      "text": "",
+      "waitSeconds": 0.2,
+      "next": "b2"
+    },
+    {
+      "id": "b2",
+      "speaker": "proxy",
+      "portrait": "visitorUp",
+      "text": "Yes,                  Quite.",
+      "waitSeconds": 0.2,
+      "typeSpeed": 0.1,
+      "next": "b3"
+    },
+    {
+      "id": "b3",
+      "speaker": "proxy",
+      "portrait": "visitorUp",
+      "text": "Hold on for a second won't you? I want to thank you again for bringing me my food.",
       "animationTriggerDoor": "DoorClose",
       "showChar": "false",
       "next": "waiting_game"
@@ -93,28 +174,27 @@
       "speaker": "you",
       "type": "countdown",
       "countDownSeconds": 10,
-      "prompt": "Waiting for tip...",
+      "prompt": ".....",
       "timeOutNext": "bad01",
       "options": [
-        { "text": "Leave", "next": "end" }
+        { "text": "Leave", "next": "g8" }
       ]
     },
     {
       "id": "bad01",
-      "speaker": "hippie",
-      "portrait": "hippie_evil",
+      "speaker": "you",
       "text": "",
-      "animationTriggerDoor": "DoorOpen",
+      "animationTriggerDoor": "DoorOpenWide",
       "waitSeconds": 0.2,
-      "showChar": "true",
       "next": "bad02"
     },
     {
       "id": "bad02",
-      "speaker": "hippie",
-      "portrait": "hippe_jumpscare",
-      "text": "Oh wow... you actually waited.",
+      "speaker": "proxy",
+      "portrait": "V3",
+      "text": "You.  Waited.",
       "sanity": 25,
+      "showChar": "true",
       "typeSpeed": 0.2,
       "next": "end"
     },
@@ -122,7 +202,7 @@
       "id": "end",
       "speaker": "you",
       "text": "",
-      "nextDialFile": "dial_hippie_03S",
+      "nextDialFile": "dial_proxy_03",
       "finished": true
     }
   ]
