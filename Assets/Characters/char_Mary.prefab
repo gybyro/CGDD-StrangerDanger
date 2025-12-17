@@ -66,6 +66,12 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 64a8771b8f7eb904f9f1dde6db09ae75, type: 3}
   - name: pizza
     sprite: {fileID: 21300000, guid: 2bacf5b44ead2bb4282883ead7ddc1ad, type: 3}
+  - name: Neck1
+    sprite: {fileID: 21300000, guid: 6d4bef73a3cdf7d46b7664ba81c81aaa, type: 3}
+  - name: Neck2
+    sprite: {fileID: 21300000, guid: 3897d9e11b7625b45b0c104a04869757, type: 3}
+  - name: Neck3
+    sprite: {fileID: 21300000, guid: c8afe60939ba6814e8e71ad497ca7b21, type: 3}
 --- !u!95 &62286867094759595
 Animator:
   serializedVersion: 7

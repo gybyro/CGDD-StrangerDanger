@@ -54,10 +54,9 @@
       "id": "n2_07",
       "speaker": "tired",
       "portrait": "second_tired",
-      "text": "The neighbors were watching me.",
+      "text": "I know it sounds stupid. I'm just… really tired.",
       "next": "n2_pay"
     },
-
     {
       "id": "n2_pay",
       "speaker": "tired",
@@ -66,12 +65,11 @@
       "tips": 10,
       "next": "n2_tip_setup"
     },
-
     {
       "id": "n2_tip_setup",
       "speaker": "tired",
       "portrait": "second_tired",
-      "text": "I'll get your tip. Just… don't move.",
+      "text": "I'll get your tip. Just… give me a second.",
       "next": "tip_leave"
     },
     {
@@ -82,7 +80,6 @@
       "showChar": "false",
       "next": "waiting_game"
     },
-
     {
       "id": "waiting_game",
       "speaker": "you",
@@ -94,28 +91,25 @@
         { "text": "Leave", "next": "end" }
       ]
     },
-
     {
       "id": "tip_arrives",
       "speaker": "tired",
       "portrait": "second_tired",
-      "text": "That's all I've got. Please… don't come back tomorrow.",
+      "text": "Sorry. Took me a minute to find it. Thanks for waiting.",
       "tips": 5,
       "animationTriggerDoor": "DoorOpenWide",
       "showChar": "true",
       "next": "tip_goodbye"
     },
-
     {
       "id": "tip_goodbye",
       "speaker": "tired",
-      "text": "Please.",
+      "text": "Drive safe, alright?",
       "waitSeconds": 0.3,
       "animationTriggerDoor": "DoorClose",
       "showChar": "false",
       "next": "end"
     },
-
     {
       "id": "end",
       "speaker": "you",

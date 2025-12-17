@@ -1,56 +1,78 @@
 {
-    "scene": "dial_mary_01",
-    "lines": [
-        {
-        "id": "test01",
-        "speaker": "mary",
-        "portrait": "normal",
-        "text": "hi! (dial_mary_01)",
-        "animationTriggerDoor": "DoorOpen",
-        "showChar": "true",
-        "next": "test02"
-        },
-        {
-        "id": "test02",
-        "speaker": "mary",
-        "text": "I want Pizza!",
-        "next": "test03"
-        },
-        {
-        "id": "test03",
-        "speaker": "you",
-        "text": "Here you go",
-        "portrait": "pizza",
-        "next": "test04"
-        },
-        {
-        "id": "test04",
-        "speaker": "mary",
-        "portrait": "pizza",
-        "typeSpeed": 1.12,
-        "text": "THANK YOU!!11!",
-        "next": "test05"
-        },
-        {
-        "id": "test05",
-        "speaker": "you",
-        "text": "you are welcome",
-        "next": "test06"
-        },
-        {
-        "id": "test06",
-        "speaker": "you",
-        "animationTriggerDoor": "DoorClose",
-        "showChar": "false",
-        "waitSeconds": 0.1,
-        "next": "end"
-        },
-        {
-        "id": "end",
-        "speaker": "you",
-        "text": "",
-        "nextDialFile": "dial_mary_02",
-        "finished": true
-        }
-    ]
+  "scene": "dial_mary_01",
+  "lines": [
+    {
+      "id": "test01",
+      "speaker": "mary",
+      "portrait": "normal",
+      "text": "Oh! Hello there, dear!",
+      "animationTriggerDoor": "DoorOpen",
+      "showChar": "true",
+      "next": "test02"
+    },
+    {
+      "id": "test02",
+      "speaker": "mary",
+      "text": "Is that my pizza I smell? My goodness, I've been waiting all evening.",
+      "next": "test03"
+    },
+    {
+      "id": "test03",
+      "speaker": "you",
+      "text": "Yep, here you go!",
+      "portrait": "pizza",
+      "next": "test04"
+    },
+    {
+      "id": "test04",
+      "speaker": "mary",
+      "portrait": "pizza",
+      "typeSpeed": 1.12,
+      "text": "Oh thank you, sweetheart!! You're an angel, you really are!",
+      "tips": 10,
+      "next": "test05"
+    },
+    {
+      "id": "test05",
+      "speaker": "mary",
+      "text": "Let me grab a little something extra for you. Just wait right here, okay?",
+      "next": "test06"
+    },
+    {
+      "id": "test06",
+      "speaker": "you",
+      "animationTriggerDoor": "DoorClose",
+      "showChar": "false",
+      "waitSeconds": 0.2,
+      "next": "waiting_game"
+    },
+    {
+      "id": "waiting_game",
+      "speaker": "you",
+      "type": "countdown",
+      "countDownSeconds": 10,
+      "prompt": "Waiting for Mary...",
+      "timeOutNext": "tip_arrives",
+      "options": [
+        { "text": "Leave", "next": "end" }
+      ]
+    },
+    {
+      "id": "tip_arrives",
+      "speaker": "mary",
+      "portrait": "normal",
+      "text": "Sorry to keep you waiting, dear! Here, take this too.",
+      "tips": 5,
+      "animationTriggerDoor": "DoorOpen",
+      "showChar": "true",
+      "next": "end"
+    },
+    {
+      "id": "end",
+      "speaker": "you",
+      "text": "",
+      "nextDialFile": "dial_mary_02",
+      "finished": true
+    }
+  ]
 }

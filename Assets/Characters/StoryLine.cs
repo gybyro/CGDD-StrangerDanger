@@ -74,13 +74,13 @@ public class StoryLine : MonoBehaviour
         else {
             
             // charIndex = 0;
-            if(currentDay == 1) // DAY 1 Monday
+            if(currentDay == 1) // DAY 1 Monday // done
             {
-                if (currentTime == 1) charIndex = 1;
+                if (currentTime == 1) charIndex = 1; 
                 else if (currentTime == 2) charIndex = 2;
                 else if (currentTime == 3) charIndex = 7; 
             }
-            else if(currentDay == 2) // 
+            else if(currentDay == 2) // Done
             {
                 if (currentTime == 1) charIndex = 3;
                 else if (currentTime == 2) charIndex = 5;
@@ -88,8 +88,8 @@ public class StoryLine : MonoBehaviour
             }
             else if(currentDay == 3) // 
             {
-                if (currentTime == 1) charIndex = 1;
-                else if (currentTime == 2) charIndex = 3;
+                if (currentTime == 1) charIndex = 1; // done
+                else if (currentTime == 2) charIndex = 3; // done
                 else if (currentTime == 3) charIndex = 4;
             }
             else if(currentDay == 4) // 
