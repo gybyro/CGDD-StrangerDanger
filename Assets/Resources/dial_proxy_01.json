@@ -228,13 +228,6 @@
         "speaker": "you",
         "portrait": "pizzaSide1",
         "text": "ri-right... *gulp*",
-        "next": "pizza01_ask8"
-        },
-        {
-        "id": "pizza01_ask8",
-        "speaker": "you",
-        "portrait": "pizzaSide1",
-        "text": "ri-right... *gulp*",
         "next": "pizza01_ask9"
         },
         {
