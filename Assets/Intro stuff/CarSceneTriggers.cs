@@ -20,7 +20,7 @@ public class CarSceneTriggers : MonoBehaviour
     public PlayerInput playerInput;
     public PhoneScript phone;
 
-    public Button phoneBtn;
+    // public Button phoneBtn;
     private int phoneInteracted = 0;
 
     [Header("CRT")]
@@ -156,59 +156,63 @@ public class CarSceneTriggers : MonoBehaviour
 
     public void ClickedOnPhone()
     {
-        if (carTick != 0) GameManager.Instance.AdvanceTime();
-        if (carTick == 0)
-        {
-            switch (phoneInteracted)
-            {
-                case 0:
-                    PlayFromResources(mainCamSound, "boss_call"); 
-                    break; 
-                case 1:
-                    mainCamSound.Stop();
-                    break;
-                case 2:
-                    StartCoroutine(dialogueManager.RunDialogue(1));
-                    break;
-                case 3:
-                    StartCoroutine(dialogueManager.RunDialogue(2));
-                    break;
-                case 4:
-                    GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
-                    break;
-            }
-            phoneInteracted++;
-        }
-        else if (carTick == 1) { 
-            switch (phoneInteracted)
-            {
-                case 0:
-                    StartCoroutine(dialogueManager.RunDialogue(2));
-                    break; 
-                case 1:
-                    mainCamSound.Stop();
-                    break;
-
-            }
-            phoneInteracted++;
-
-            GameManager.Instance.LoadSceneWithFade("WalkingScene");
-        }
-        else if (carTick == 2) { 
-
-            GameManager.Instance.LoadSceneWithFade("WalkingScene");
-        }
-        else if (carTick == 3) { 
-
-            GameManager.Instance.LoadSceneWithFade("WalkingScene");
-        }
-        else if (carTick == 5) { 
-
-            GameManager.Instance.LoadSceneWithFade("WalkingScene");
-        }
-        else GameManager.Instance.LoadSceneWithFade("WalkingScene");
-
+         if (carTick != 0) GameManager.Instance.AdvanceTime();
+         if (carTick == 0) GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
+         else GameManager.Instance.LoadSceneWithFade("WalkingScene");
     }
+
+    // public void ClickedOnPhone()
+    // {
+    //     if (carTick != 0) GameManager.Instance.AdvanceTime();
+    //     if (carTick == 0)
+    //     {
+    //         switch (phoneInteracted)
+    //         {
+    //             case 0:
+    //                 PlayFromResources(mainCamSound, "boss_call"); 
+    //                 break; 
+    //             case 1:
+    //                 mainCamSound.Stop();
+    //                 break;
+    //             case 2:
+    //                 GameManager.Instance.LoadSceneWithFade("StartingHouseScene");
+    //                 break;
+    //         }
+    //         phoneInteracted++;
+    //     }
+    //     else if (carTick == 1) { 
+    //         switch (phoneInteracted)
+    //         {
+    //             case 0:
+    //                 StartCoroutine(dialogueManager.RunDialogue(2));
+    //                 break; 
+    //             case 1:
+    //                 mainCamSound.Stop();
+    //                 break;
+
+    //         }
+    //         phoneInteracted++;
+
+    //         GameManager.Instance.LoadSceneWithFade("WalkingScene");
+    //     }
+    //     else if (carTick == 2) { 
+
+    //         GameManager.Instance.LoadSceneWithFade("WalkingScene");
+    //     }
+    //     else if (carTick == 3) { 
+
+    //         GameManager.Instance.LoadSceneWithFade("WalkingScene");
+    //     }
+    //     else if (carTick == 5) { 
+
+    //         GameManager.Instance.LoadSceneWithFade("WalkingScene");
+    //     }
+    //     else GameManager.Instance.LoadSceneWithFade("WalkingScene");
+
+    // }
+
+
+
     IEnumerator PlayMon01()
     {
         // CRTController.ToggleCRT(true);

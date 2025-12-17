@@ -1,6 +1,12 @@
 {
   "orders": [
     {
+      "id": 0,
+      "customerName": "Name: Kyle",
+      "customerAddress": "Address: Raven Street 221",
+      "pizzaOrder": "Pizza Order:Large Pepperoni + extra cheese"
+    },
+    {
       "id": 1,
       "customerName": "Name: Ryan",
       "customerAddress": "Address: Raven Street 221",
