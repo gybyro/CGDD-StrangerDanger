@@ -78,7 +78,7 @@ public class StoryLine : MonoBehaviour
             {
                 if (currentTime == 1) charIndex = 1;
                 else if (currentTime == 2) charIndex = 2;
-                else if (currentTime == 3) charIndex = 4;
+                else if (currentTime == 3) charIndex = 8; 
             }
             else if(currentDay == 2) // 
             {

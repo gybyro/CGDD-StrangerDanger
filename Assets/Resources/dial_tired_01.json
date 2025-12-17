@@ -4,7 +4,7 @@
     {
       "id": "start",
       "speaker": "tired",
-      "portrait": "01",
+      "portrait": "first_tired",
       "text": "oh… hey… sorry, took me a second.",
       "animationTriggerDoor": "DoorOpenWide",
       "showChar": "true",
@@ -19,21 +19,21 @@
     {
       "id": "n1_02",
       "speaker": "tired",
-      "portrait": "02",
+      "portrait": "first_tired",
       "text": "yeah… haven't been sleeping much.",
       "next": "n1_03"
     },
     {
       "id": "n1_03",
       "speaker": "tired",
-      "portrait": "03",
+      "portrait": "first_tired",
       "text": "I've been going on walks late at night. Helps me clear my head.",
       "next": "n1_04"
     },
     {
       "id": "n1_04",
       "speaker": "tired",
-      "portrait": "04",
+      "portrait": "first_tired",
       "text": "But… the neighbors have been acting weird.",
       "next": "n1_05"
     },
@@ -46,7 +46,7 @@
     {
       "id": "n1_06",
       "speaker": "tired",
-      "portrait": "05",
+      "portrait": "first_tired",
       "text": "Lights on all night. Whispering. Scraping sounds.",
       "next": "n1_pay"
     },
@@ -54,7 +54,7 @@
     {
       "id": "n1_pay",
       "speaker": "tired",
-      "portrait": "02",
+      "portrait": "first_tired",
       "text": "Oh— right. Here, that's for the pizza.",
       "tips": 10,
       "next": "n1_tip_setup"
@@ -63,7 +63,7 @@
     {
       "id": "n1_tip_setup",
       "speaker": "tired",
-      "portrait": "02",
+      "portrait": "first_tired",
       "text": "I'll grab your tip too. Just— wait here a sec.",
       "next": "tip_leave"
     },
@@ -91,7 +91,7 @@
     {
       "id": "tip_arrives",
       "speaker": "tired",
-      "portrait": "01",
+      "portrait": "first_tired",
       "text": "Sorry about that. Found a couple extra bucks.",
       "tips": 5,
       "animationTriggerDoor": "DoorOpenWide",

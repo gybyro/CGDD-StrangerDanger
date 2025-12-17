@@ -4,7 +4,7 @@
     {
       "id": "start",
       "speaker": "tired",
-      "portrait": "03",
+      "portrait": "second_tired",
       "text": "You came back.",
       "animationTriggerDoor": "DoorOpenWide",
       "showChar": "true",
@@ -19,14 +19,14 @@
     {
       "id": "n2_02",
       "speaker": "tired",
-      "portrait": "04",
+      "portrait": "second_tired",
       "text": "No.",
       "next": "n2_03"
     },
     {
       "id": "n2_03",
       "speaker": "tired",
-      "portrait": "05",
+      "portrait": "second_tired",
       "text": "Something followed me last night.",
       "next": "n2_04"
     },
@@ -39,21 +39,21 @@
     {
       "id": "n2_05",
       "speaker": "tired",
-      "portrait": "03",
+      "portrait": "second_tired",
       "text": "Footsteps. Always when I stopped walking.",
       "next": "n2_06"
     },
     {
       "id": "n2_06",
       "speaker": "tired",
-      "portrait": "02",
+      "portrait": "second_tired",
       "text": "When I turned around… nothing.",
       "next": "n2_07"
     },
     {
       "id": "n2_07",
       "speaker": "tired",
-      "portrait": "04",
+      "portrait": "second_tired",
       "text": "The neighbors were watching me.",
       "next": "n2_pay"
     },
@@ -61,7 +61,7 @@
     {
       "id": "n2_pay",
       "speaker": "tired",
-      "portrait": "05",
+      "portrait": "second_tired",
       "text": "Here— that's for the pizza.",
       "tips": 10,
       "next": "n2_tip_setup"
@@ -70,7 +70,7 @@
     {
       "id": "n2_tip_setup",
       "speaker": "tired",
-      "portrait": "05",
+      "portrait": "second_tired",
       "text": "I'll get your tip. Just… don't move.",
       "next": "tip_leave"
     },
@@ -98,7 +98,7 @@
     {
       "id": "tip_arrives",
       "speaker": "tired",
-      "portrait": "03",
+      "portrait": "second_tired",
       "text": "That's all I've got. Please… don't come back tomorrow.",
       "tips": 5,
       "animationTriggerDoor": "DoorOpenWide",

@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f697fcd10346d4f9c542b1e29a9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
-  ID: 6
-  characterID: face
-  displayName: '[]'
+  ID: 7
+  characterID: visitor
+  displayName: Scary
   houseColorGood: Gray
   houseColorBad: Gray
   animator: {fileID: 62286867094759595}
@@ -63,7 +63,7 @@ MonoBehaviour:
   defaultTextColor: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
   spriteRenderer: {fileID: 7718615900848793663}
   expressions:
-  - name: 1
+  - name: visitor
     sprite: {fileID: 21300000, guid: e3ca975be69386b41870fd54752c3ebb, type: 3}
 --- !u!95 &62286867094759595
 Animator:
@@ -75,7 +75,7 @@ Animator:
   m_GameObject: {fileID: 46065221635854547}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5415b108ae97f604d8d368ef3f751d17, type: 2}
+  m_Controller: {fileID: 9100000, guid: 33f56c01edd07124bbcb400f2b75d140, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -274,9 +274,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteSequence
   spriteRenderer: {fileID: 7718615900848793663}
   frames:
-  - {fileID: 21300000, guid: e80110de948de784bb94f43333b7410b, type: 3}
-  - {fileID: 21300000, guid: 86c31a3dcb5352745b340beaca60e15c, type: 3}
-  - {fileID: 21300000, guid: 61576ced3f2f6ce4097e985873a7f5ce, type: 3}
-  - {fileID: 21300000, guid: 60171fa821bc5104fa6813c5d24675a2, type: 3}
-  frameRate: 1.6
+  - {fileID: 21300000, guid: e3ca975be69386b41870fd54752c3ebb, type: 3}
+  frameRate: 1
   loop: 1

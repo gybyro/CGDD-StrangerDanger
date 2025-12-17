@@ -66,7 +66,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 3648ebb5f84720f43972cd37f9a03012, type: 3}
   - name: pizza
     sprite: {fileID: 21300000, guid: 188829be5e9c89e44bdef564b561ffa2, type: 3}
-  - name: V1
+  - name: hippie_bad
     sprite: {fileID: 21300000, guid: fd48fd89b194c2d44873438eb6d9a0d3, type: 3}
 --- !u!95 &62286867094759595
 Animator:

@@ -4,7 +4,7 @@
     {
       "id": "test01",
       "speaker": "hippie",
-      "portrait": "normal",
+      "portrait": "hippie_bad",
       "text": "Hello darlin",
       "animationTriggerDoor": "DoorOpen",
       "showChar": "true",
