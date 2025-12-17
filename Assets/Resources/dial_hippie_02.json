@@ -4,7 +4,7 @@
     {
       "id": "test01",
       "speaker": "hippie",
-      "portrait": "hippe_evil",
+      "portrait": "hippie_evil",
       "text": "hi! (dial_mary_02)",
       "animationTriggerDoor": "DoorOpen",
       "showChar": "true",
@@ -13,7 +13,7 @@
     {
       "id": "test02",
       "speaker": "hippie",
-      "portrait":"hippe_evil",
+      "portrait":"hippie_evil",
       "text": "Hello stranger",
       "next": "test03"
     },
@@ -31,7 +31,7 @@
     {
       "id": "player_ask1",
       "speaker": "hippie",
-      "portrait": "hippe_evil",
+      "portrait": "hippie_evil",
       "typeSpeed": 1.12,
       "text": "No clue who you are pizza driver, how much for the pizza?",
       "next": "how_much_money"
@@ -40,7 +40,7 @@
       "id": "player_ask2",
       "type": "choice",
       "speaker": "hippie",
-      "portrait": "hippe_evil",
+      "portrait": "hippie_evil",
       "typeSpeed": 1.12,
       "text": "Ohh yea my eyes, they get very red when I smoke weed, I need those munchies to add an extra spice to my pizza",
       "options": [
@@ -51,7 +51,7 @@
     {
       "id": "player_ask1_angry",
       "speaker": "hippie",
-      "portrait": "hippe_evil",
+      "portrait": "hippie_evil",
       "typeSpeed": 1.12,
       "text": "I never said that you disciple of a human, give me the damn pizza before I get angry",
       "next": "how_much_money_scared"
@@ -59,7 +59,7 @@
     {
       "id": "how_much_money_scared",
       "speaker": "you",
-      "portrait": "hippe_evil",
+      "portrait": "hippie_evil",
       "typeSpeed": 1.12,
       "text": "I am sorry didn't mean to push your buttons, that will be 10$",
       "next": "money_exchange_angry"
@@ -67,7 +67,7 @@
     {
       "id": "money_exchange_angry",
       "speaker": "you",
-      "portrait": "hippe_evil",
+      "portrait": "hippie_evil",
       "typeSpeed": 1.12,
       "text": "Here you go you little shit, your lucky I was raised to tip everyone, wait here and don't move or I will get very angry!",
       "animationTriggerDoor": "DoorClose",
@@ -77,7 +77,7 @@
     {
       "id": "how_much_money",
       "speaker": "you",
-      "portrait": "hippe_evil",
+      "portrait": "hippie_evil",
       "typeSpeed": 1.12,
       "text": "Alrighty, that will be a total of 10$",
       "next": "money_exchange"
@@ -85,7 +85,7 @@
     {
       "id": "money_exchange",
       "speaker": "you",
-      "portrait": "hippe_evil",
+      "portrait": "hippie_evil",
       "typeSpeed": 1.12,
       "text": "Here you go, wait here while I get your tip!",
       "animationTriggerDoor": "DoorClose",
