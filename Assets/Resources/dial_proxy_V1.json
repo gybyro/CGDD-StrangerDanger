@@ -55,3 +55,60 @@
         }
     ]
 }
+{
+    "scene": "dial_proxy_V1",
+    "houseBgPallet": "Blue01",
+    "lines": [
+        {
+        "id": "test01",
+        "speaker": "you",
+        "text": "?",
+        "next": "test02"
+        },
+        {
+        "id": "test02",
+        "speaker": "you",
+        "text": "Hello?",
+        "next": "test03"
+        },
+        {
+        "id": "test03",
+        "speaker": "proxy",
+        "portrait": "V4",
+        "animationTriggerDoor": "DoorOpenWide",
+        "next": "test04"
+        },
+        {
+        "id": "test04",
+        "speaker": "you",
+        "text": "!",
+        "next": "test05"
+        },
+        {
+        "id": "test05",
+        "speaker": "proxy",
+        "portrait": "V5",
+        "sound": "sonic_exe_laugh",
+        "waitSeconds": 0.4,
+        "next": "06"
+        },
+        {
+        "id": "06",
+        "speaker": "proxy",
+        "showChar": false,
+        "waitSeconds": 0.8,
+        "sanity": 25,
+        "next": "end"
+        },
+     
+        
+
+        {
+        "id": "end",
+        "speaker": "you",
+        "text": "",
+        "nextDialFile": "dial_proxy_V2",
+        "finished": true
+        }
+    ]
+}

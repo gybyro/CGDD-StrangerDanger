@@ -131,6 +131,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         PlayDialogueSound(line.sound);
+        Debug.LogWarning("current sanity Line: " + line.sanity);
+        if (line.sanity != 0) Sanity_Meter.Instance.Lower_Sanity(line.sanity);
 
         if (line.sanity != 0 && Sanity_Meter.Instance != null)
             Sanity_Meter.Instance.Lower_Sanity(line.sanity);

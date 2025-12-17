@@ -30,42 +30,52 @@ public class ChoiceUI : MonoBehaviour
         upAction = playerInput.actions["Up"];
         downAction = playerInput.actions["Down"];
 
-        panel.alpha = 0;
-        panel.interactable = false;
-        panel.blocksRaycasts = false;
+        HideChoices(); // start hidden safely
     }
 
     void Update()
     {
         if (!isActive) return;
 
-        if (upAction.WasPressedThisFrame())
+        if (upAction != null && upAction.WasPressedThisFrame())
             MoveSelection(-1);
 
-        if (downAction.WasPressedThisFrame())
+        if (downAction != null && downAction.WasPressedThisFrame())
             MoveSelection(1);
 
-        if (nextAction.WasPressedThisFrame())
+        if (nextAction != null && nextAction.WasPressedThisFrame())
             ConfirmSelection();
     }
 
     public void ShowChoices(DialogueLine line, Action<int> callback)
     {
+        // Safety: if line/options is null, just hide and do nothing
+        if (line == null || line.options == null || line.options.Length == 0)
+        {
+            HideChoices();
+            return;
+        }
+
         onChoiceSelected = callback;
         isActive = true;
 
-        panel.alpha = 1;
+        // Show panel (DO NOT disable this GameObject)
+        panel.alpha = 1f;
         panel.interactable = true;
         panel.blocksRaycasts = true;
 
         currentIndex = 0;
-        activeOptionCount = line.options.Length;
+        activeOptionCount = Mathf.Min(line.options.Length, optionButtons.Length);
 
+        // Setup buttons
         for (int i = 0; i < optionButtons.Length; i++)
         {
-            if (i < line.options.Length)
+            bool shouldBeActive = (i < activeOptionCount);
+
+            optionButtons[i].gameObject.SetActive(shouldBeActive);
+
+            if (shouldBeActive)
             {
-                optionButtons[i].gameObject.SetActive(true);
                 optionLabels[i].text = line.options[i].text;
 
                 int index = i;
@@ -73,30 +83,50 @@ public class ChoiceUI : MonoBehaviour
                 optionButtons[i].onClick.RemoveAllListeners();
                 optionButtons[i].onClick.AddListener(() => SelectOption(index));
 
-                //  Mouse hover sync
                 AddHoverSync(optionButtons[i], index);
-            }
-            else
-            {
-                optionButtons[i].gameObject.SetActive(false);
             }
         }
 
         HighlightCurrent();
     }
 
+    public void HideChoices()
+    {
+        // Hide the panel ONLY — keep the script alive for later ShowChoices calls.
+        isActive = false;
+
+        if (panel != null)
+        {
+            panel.alpha = 0f;
+            panel.interactable = false;
+            panel.blocksRaycasts = false;
+        }
+
+        // Clear selection so Unity doesn't keep a stale selected button
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+    }
+
     private void AddHoverSync(Button button, int index)
     {
+        if (button == null) return;
+
         EventTrigger trigger = button.GetComponent<EventTrigger>();
         if (trigger == null)
             trigger = button.gameObject.AddComponent<EventTrigger>();
 
         trigger.triggers.Clear();
 
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerEnter;
+        EventTrigger.Entry entry = new EventTrigger.Entry
+        {
+            eventID = EventTriggerType.PointerEnter
+        };
+
         entry.callback.AddListener((_) =>
         {
+            // Only allow hover selection when choices are active
+            if (!isActive) return;
+
             currentIndex = index;
             HighlightCurrent();
         });
@@ -106,6 +136,8 @@ public class ChoiceUI : MonoBehaviour
 
     private void MoveSelection(int direction)
     {
+        if (activeOptionCount <= 0) return;
+
         currentIndex += direction;
 
         if (currentIndex < 0)
@@ -121,6 +153,10 @@ public class ChoiceUI : MonoBehaviour
     {
         for (int i = 0; i < optionButtons.Length; i++)
         {
+            // Skip inactive buttons so we don't highlight hidden ones
+            if (!optionButtons[i].gameObject.activeInHierarchy)
+                continue;
+
             ColorBlock colors = optionButtons[i].colors;
 
             if (i == currentIndex)
@@ -129,12 +165,14 @@ public class ChoiceUI : MonoBehaviour
                 colors.highlightedColor = colors.normalColor;
                 colors.selectedColor = colors.normalColor;
 
-                //  Force Unity's EventSystem to match our selection
-                EventSystem.current.SetSelectedGameObject(optionButtons[i].gameObject);
+                if (EventSystem.current != null)
+                    EventSystem.current.SetSelectedGameObject(optionButtons[i].gameObject);
             }
             else
             {
                 colors.normalColor = Color.white;
+                colors.highlightedColor = Color.white;
+                colors.selectedColor = Color.white;
             }
 
             optionButtons[i].colors = colors;
@@ -148,13 +186,25 @@ public class ChoiceUI : MonoBehaviour
 
     private void SelectOption(int index)
     {
+        // Prevent selecting out of range
+        if (index < 0 || index >= activeOptionCount)
+        {
+            HideChoices();
+            return;
+        }
+
+        // Hide UI immediately and stop input
         isActive = false;
 
-        panel.alpha = 0;
-        panel.interactable = false;
-        panel.blocksRaycasts = false;
+        if (panel != null)
+        {
+            panel.alpha = 0f;
+            panel.interactable = false;
+            panel.blocksRaycasts = false;
+        }
 
-        EventSystem.current.SetSelectedGameObject(null);
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
 
         onChoiceSelected?.Invoke(index);
     }

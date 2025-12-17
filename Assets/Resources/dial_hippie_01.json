@@ -133,4 +133,12 @@
       "finished": true
     }
   ]
+    {
+      "id": "end",
+      "speaker": "you",
+      "text": "",
+      "nextDialFile": "dial_hippie_02",
+      "finished": true
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "scene": "dial_nervous_01",
+  "scene": "dial_concerned_01",
   "lines": [
     {
       "id": "n01_start",
@@ -17,8 +17,8 @@
     },
     {
       "id": "n01_02",
-      "speaker": "nervous",
-      "portrait": "01",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "Who's there?",
       "animationTriggerDoor": "DoorClosed",
       "showChar": "false",
@@ -32,8 +32,8 @@
     },
     {
       "id": "n01_04",
-      "speaker": "nervous",
-      "portrait": "02",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "…",
       "animationTriggerDoor": "DoorHalfOpen",
       "showChar": "true",
@@ -41,8 +41,8 @@
     },
     {
       "id": "n01_05",
-      "speaker": "nervous",
-      "portrait": "02",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "You're not the usual guy.",
       "next": "n01_06"
     },
@@ -54,8 +54,8 @@
     },
     {
       "id": "n01_07",
-      "speaker": "nervous",
-      "portrait": "03",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "Why?",
       "next": "n01_08"
     },
@@ -67,15 +67,15 @@
     },
     {
       "id": "n01_09",
-      "speaker": "nervous",
-      "portrait": "03",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "Suspicious.",
       "next": "n01_10"
     },
     {
       "id": "n01_10",
-      "speaker": "nervous",
-      "portrait": "04",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "What's in the box?",
       "animationTriggerDoor": "DoorOpen",
       "showChar": "true",
@@ -89,8 +89,8 @@
     },
     {
       "id": "n01_12",
-      "speaker": "nervous",
-      "portrait": "04",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "What type of pizza?",
       "next": "n01_choice_pizza"
     },
@@ -109,8 +109,8 @@
 
     {
       "id": "n01_wrong_01",
-      "speaker": "nervous",
-      "portrait": "05",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "Get out of here!! I didn't order that. You must be one of them!",
       "next": "n01_wrong_02"
     },
@@ -122,8 +122,8 @@
     },
     {
       "id": "n01_wrong_03",
-      "speaker": "nervous",
-      "portrait": "05",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "I don't believe you. I'm not paying for that. Now leave my property!",
       "next": "n01_wrong_04"
     },
@@ -135,7 +135,7 @@
     },
     {
       "id": "n01_wrong_05",
-      "speaker": "nervous",
+      "speaker": "concerned",
       "waitSeconds": 0.6,
       "text": "",
       "animationTriggerDoor": "DoorSlam",
@@ -144,22 +144,22 @@
     },
     {
       "id": "n01_wrong_06",
-      "speaker": "nervous",
+      "speaker": "concerned",
       "text": "Leave!",
       "next": "n01_end"
     },
 
     {
       "id": "n01_correct_01",
-      "speaker": "nervous",
-      "portrait": "04",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "Hmmm… alright. I suppose you are just a delivery driver.",
       "next": "n01_correct_02"
     },
     {
       "id": "n01_correct_02",
-      "speaker": "nervous",
-      "portrait": "04",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "Leave the pizza on the front porch. I'm going to grab you your… payment.",
       "next": "n01_correct_wait"
     },
@@ -176,16 +176,16 @@
     },
     {
       "id": "n01_correct_tip_01",
-      "speaker": "nervous",
-      "portrait": "06",
+      "speaker": "concerned",
+      "portrait": "normal",
       "waitSeconds": 1.3,
       "text": "(He comes back.)",
       "next": "n01_correct_tip_02"
     },
     {
       "id": "n01_correct_tip_02",
-      "speaker": "nervous",
-      "portrait": "06",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "Stay safe out there.",
       "tips": 10,
       "next": "n01_end"
@@ -195,7 +195,7 @@
       "id": "n01_end",
       "speaker": "you",
       "text": "",
-      "nextDialFile": "dial_nervous_02",
+      "nextDialFile": "dial_concerned_02",
       "finished": true
     }
   ]
