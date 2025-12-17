@@ -91,6 +91,7 @@
       "id": "end",
       "speaker": "you",
       "text": "",
+      "nextDialFile": "dial_visitor_02",
       "finished": true
     }
   ]
