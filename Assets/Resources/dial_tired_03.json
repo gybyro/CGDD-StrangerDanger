@@ -10,7 +10,7 @@
     {
       "id": "n3_01",
       "speaker": "you",
-      "text": "…That’s strange.",
+      "text": "…That's strange.",
       "waitSeconds": 0.4,
       "next": "n3_02"
     },
@@ -51,7 +51,7 @@
     {
       "id": "mailbox_note",
       "speaker": "you",
-      "text": "…There’s something stuffed inside the mailbox.",
+      "text": "…There's something stuffed inside the mailbox.",
       "waitSeconds": 0.4,
       "next": "mailbox_note_02"
     },
@@ -59,7 +59,7 @@
     {
       "id": "mailbox_note_02",
       "speaker": "you",
-      "text": "It’s cash. And a folded note.",
+      "text": "It's cash. And a folded note.",
       "tips": 15,
       "waitSeconds": 0.3,
       "next": "mailbox_note_03"
@@ -68,7 +68,7 @@
     {
       "id": "mailbox_note_03",
       "speaker": "you",
-      "text": "\"I finally understand what’s been happening here. The walks weren’t helping — they were watching. I can’t stay in this house anymore.\"",
+      "text": "\"I finally understand what's been happening here. The walks weren't helping — they were watching. I can't stay in this house anymore.\"",
       "waitSeconds": 0.8,
       "next": "mailbox_note_04"
     },
@@ -76,7 +76,7 @@
     {
       "id": "mailbox_note_04",
       "speaker": "you",
-      "text": "\"I’m leaving tonight, and I’m not coming back. If you value your life, don’t deliver here again. Whatever you do — stay away from the neighbors.\"",
+      "text": "\"I'm leaving tonight, and I'm not coming back. If you value your life, don't deliver here again. Whatever you do — stay away from the neighbors.\"",
       "waitSeconds": 1.0,
       "next": "end"
     },
@@ -85,7 +85,7 @@
       "id": "end",
       "speaker": "you",
       "text": "",
-      "nextDialFile": "dial_next_route_or_day",
+      "nextDialFile": "dial_tired_04",
       "finished": true
     }
   ]

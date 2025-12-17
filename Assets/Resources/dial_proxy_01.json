@@ -1,7 +1,6 @@
 {
 "scene": "dial_proxy_01",
 "houseBgPallet": "Blue01",
-"houseBgPallet": "Blue01",
 "lines": 
     [
         {
@@ -124,7 +123,6 @@
         "speaker": "you",
         "color": "#657385",
         "text": "** should I ask about the previous delivery guy? **",
-        "text": "** should I ask about the previous delivery guy? **",
         "type": "choice",
         "options": [
             {"text": "couldn't hurt to try right?", "next": "pizza01_ask1"},
@@ -242,50 +240,7 @@
         {
         "id": "pizza01_ask9",
         "speaker": "proxy",
-        "speaker": "proxy",
         "portrait": "pizzaSide1",
-        "text": "oh, wait one moment please.",
-        "next": "pizza01_ask10"
-        },
-        {
-        "id": "pizza01_ask10",
-        "speaker": "you",
-        "portrait": "?",
-        "text": "?",
-        "waitSeconds": 2,
-        "animationTriggerDoor": "DoorClose",
-        "showChar": false,
-        "next": "tip01"
-        },
-        {
-        "id": "tip01",
-        "speaker": "proxy",
-        "portrait": "openDoor2",
-        "text": "here, thanks for the trouble",
-        "animationTriggerDoor": "DoorHalfOpen",
-        "showChar": true,
-        "tips": 5,
-        "next": "tip02"
-        },
-        {
-        "id": "tip02",
-        "speaker": "you",
-        "text": "oh! Thank you.  It was no trouble at all.",
-        "next": "tip03"
-        },
-        {
-        "id": "tip03",
-        "speaker": "proxy",
-        "text": "...",
-        "next": "tip04"
-        },
-        {
-        "id": "tip04",
-        "speaker": "proxy",
-        "text": "See ya",
-        "animationTriggerDoor": "DoorClose",
-        "showChar": false,
-        "next": "end"
         "text": "oh, wait one moment please.",
         "next": "pizza01_ask10"
         },

@@ -1,5 +1,5 @@
 {
-  "scene": "dial_tired_night1",
+  "scene": "dial_tired_01",
   "lines": [
     {
       "id": "start",
@@ -20,14 +20,14 @@
       "id": "n1_02",
       "speaker": "tired",
       "portrait": "02",
-      "text": "yeah… haven’t been sleeping much.",
+      "text": "yeah… haven't been sleeping much.",
       "next": "n1_03"
     },
     {
       "id": "n1_03",
       "speaker": "tired",
       "portrait": "03",
-      "text": "I’ve been going on walks late at night. Helps me clear my head.",
+      "text": "I've been going on walks late at night. Helps me clear my head.",
       "next": "n1_04"
     },
     {
@@ -55,7 +55,7 @@
       "id": "n1_pay",
       "speaker": "tired",
       "portrait": "02",
-      "text": "Oh— right. Here, that’s for the pizza.",
+      "text": "Oh— right. Here, that's for the pizza.",
       "tips": 10,
       "next": "n1_tip_setup"
     },
@@ -64,7 +64,7 @@
       "id": "n1_tip_setup",
       "speaker": "tired",
       "portrait": "02",
-      "text": "I’ll grab your tip too. Just— wait here a sec.",
+      "text": "I'll grab your tip too. Just— wait here a sec.",
       "next": "tip_leave"
     },
     {
@@ -113,7 +113,7 @@
       "id": "end",
       "speaker": "you",
       "text": "",
-      "nextDialFile": "dial_tired_night2",
+      "nextDialFile": "dial_tired_02",
       "finished": true
     }
   ]

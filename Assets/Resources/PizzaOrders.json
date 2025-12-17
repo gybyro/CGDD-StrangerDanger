@@ -2,21 +2,21 @@
   "orders": [
     {
       "id": 1,
-      "customerName": "Name: Kyle",
+      "customerName": "Name: Ryan",
       "customerAddress": "Address: Raven Street 221",
       "pizzaOrder": "Pizza Order:Large Pepperoni + extra cheese"
     },
     {
       "id": 2,
-      "customerName": "Name: Mary",
-      "customerAddress": "Address: HollowTown 2",
-      "pizzaOrder": "Pizza Order: Medium Margherita + garlic dip"
-    },
-    {
-      "id": 3,
-      "customerName": "Name: Ryan",
+      "customerName": "Name: ",
       "customerAddress": "Address: HollowTown 5",
       "pizzaOrder": "Pizza Order: Large Mexican Style"
+    },
+    {
+      "id": 2,
+      "customerName": "Name: Grumparony",
+      "customerAddress": "Address: EndLane 0",
+      "pizzaOrder": "Pizza Order: Medium Margherita, NO MUSHROOMS"
     }
   ]
 }

@@ -42,7 +42,7 @@
     {
       "id": "n01_05",
       "speaker": "concerned",
-      "portrait": "normal",
+      "portrait": "concerned",
       "text": "You're not the usual guy.",
       "next": "n01_06"
     },
@@ -68,7 +68,7 @@
     {
       "id": "n01_09",
       "speaker": "concerned",
-      "portrait": "normal",
+      "portrait": "concerned",
       "text": "Suspicious.",
       "next": "n01_10"
     },
@@ -110,7 +110,7 @@
     {
       "id": "n01_wrong_01",
       "speaker": "concerned",
-      "portrait": "normal",
+      "portrait": "concerned",
       "text": "Get out of here!! I didn't order that. You must be one of them!",
       "next": "n01_wrong_02"
     },
@@ -123,7 +123,7 @@
     {
       "id": "n01_wrong_03",
       "speaker": "concerned",
-      "portrait": "normal",
+      "portrait": "concerned",
       "text": "I don't believe you. I'm not paying for that. Now leave my property!",
       "next": "n01_wrong_04"
     },

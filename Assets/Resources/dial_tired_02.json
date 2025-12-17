@@ -1,5 +1,5 @@
 {
-  "scene": "dial_tired_night2",
+  "scene": "dial_tired_02",
   "lines": [
     {
       "id": "start",
@@ -62,7 +62,7 @@
       "id": "n2_pay",
       "speaker": "tired",
       "portrait": "05",
-      "text": "Here— that’s for the pizza.",
+      "text": "Here— that's for the pizza.",
       "tips": 10,
       "next": "n2_tip_setup"
     },
@@ -71,7 +71,7 @@
       "id": "n2_tip_setup",
       "speaker": "tired",
       "portrait": "05",
-      "text": "I’ll get your tip. Just… don’t move.",
+      "text": "I'll get your tip. Just… don't move.",
       "next": "tip_leave"
     },
     {
@@ -99,7 +99,7 @@
       "id": "tip_arrives",
       "speaker": "tired",
       "portrait": "03",
-      "text": "That’s all I’ve got. Please… don’t come back tomorrow.",
+      "text": "That's all I've got. Please… don't come back tomorrow.",
       "tips": 5,
       "animationTriggerDoor": "DoorOpenWide",
       "showChar": "true",

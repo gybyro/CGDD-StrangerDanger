@@ -5,7 +5,7 @@
         "id": "test01",
         "speaker": "grumpy",
         "portrait": "normal",
-        "text": "hi! (dial_grumpy_01)",
+        "text": "hi!",
         "animationTriggerDoor": "DoorOpen",
         "showChar": "true",
         "next": "test02"

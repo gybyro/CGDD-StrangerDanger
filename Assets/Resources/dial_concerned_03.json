@@ -1,5 +1,5 @@
 {
-  "scene": "dial_nervous_03",
+  "scene": "dial_concerned_03",
   "lines": [
     {
       "id": "n03_start",
@@ -10,8 +10,8 @@
     },
     {
       "id": "n03_01",
-      "speaker": "nervous",
-      "portrait": "02",
+      "speaker": "concerned",
+      "portrait": "normal",
       "text": "",
       "animationTriggerDoor": "DoorHalfOpen",
       "showChar": "true",
@@ -19,8 +19,8 @@
     },
     {
       "id": "n03_02",
-      "speaker": "nervous",
-      "portrait": "02",
+      "speaker": "concerned",
+
       "text": "Well hello there.",
       "next": "n03_03"
     },
@@ -32,8 +32,8 @@
     },
     {
       "id": "n03_04",
-      "speaker": "nervous",
-      "portrait": "02",
+      "speaker": "concerned",
+
       "text": "Great.",
       "next": "n03_05"
     },
@@ -57,8 +57,8 @@
     },
     {
       "id": "n03_08",
-      "speaker": "nervous",
-      "portrait": "04",
+      "speaker": "concerned",
+
       "text": "",
       "animationTriggerDoor": "DoorOpen",
       "showChar": "true",
@@ -66,8 +66,8 @@
     },
     {
       "id": "n03_09",
-      "speaker": "nervous",
-      "portrait": "04",
+      "speaker": "concerned",
+
       "text": "Thank you for the pizza. I'll go grab your tip.",
       "next": "n03_choice_final"
     },
@@ -94,7 +94,7 @@
       "id": "n03_stay",
       "speaker": "you",
       "text": "",
-      "nextDialFile": "dial_nervous_04",
+      "nextDialFile": "dial_concerned_04",
       "finished": true
     }
   ]
