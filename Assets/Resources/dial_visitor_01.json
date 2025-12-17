@@ -3,56 +3,56 @@
   "lines": [
     {
       "id": "test00",
-      "speaker": "face_bad",
+      "speaker": "visitor",
       "waitSeconds": 5,
       "sound": "Ambience_2",
       "next": "test01"
     },
     {
       "id": "test01",
-      "speaker": "face_bad",
+      "speaker": "visitor",
       "animationTriggerDoor": "DoorOpenWide",
-      "portrait": "face_normal",
+      "portrait": "1",
       "next": "test02"
     },
     {
       "id": "test02",
-      "speaker": "face_bad",
+      "speaker": "visitor",
       "waitSeconds": 3,
       "showChar": "true",
       "next": "test03"
     },
     {
       "id": "test03",
-      "speaker": "face_bad",
+      "speaker": "visitor",
       "typeSpeed": 0.13,
       "text": "You’re doing fine so far.",
       "next": "test04"
     },
     {
       "id": "test04",
-      "speaker": "face_bad",
+      "speaker": "visitor",
       "typeSpeed": 0.15,
       "text": "Most people hesitate more at this point.",
       "next": "test05"
     },
     {
       "id": "test05",
-      "speaker": "face_bad",
+      "speaker": "visitor",
       "typeSpeed": 0.17,
       "text": "That usually means they are thinking too much.",
       "next": "test06"
     },
     {
       "id": "test06",
-      "speaker": "face_bad",
+      "speaker": "visitor",
       "typeSpeed": 0.18,
       "text": "You don’t need to do that.",
       "next": "test07"
     },
     {
       "id": "test07",
-      "speaker": "face_bad",
+      "speaker": "visitor",
       "color": "#474DC8",
       "text": "",
       "animationTriggerDoor": "DoorClose",
@@ -65,30 +65,27 @@
       "type": "countdown",
       "prompt": "You wait.",
       "countDownSeconds": 10,
-      "timeOutNext": "end",
+      "timeOutNext": "bad01",
       "options": [
-        { "text": "Leave", "next": "bad01" }
+        { "text": "Leave", "next": "end" }
       ]
     },
-
     {
       "id": "bad01",
       "speaker": "you",
       "text": "",
       "animationTriggerDoor": "DoorOpenWide",
       "waitSeconds": 0.2,
-      "next": "leave_now"
+      "next": "bad02"
     },
-
     {
-      "id": "leave_now",
-      "speaker": "face_bad",
+      "id": "bad02",
+      "speaker": "visitor",
       "text": "You... waited...",
       "typeSpeed": 0.25,
       "showChar": "true",
       "sanity": 25,
       "next": "end"
-        
     },
     {
       "id": "end",
