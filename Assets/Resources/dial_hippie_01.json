@@ -5,15 +5,9 @@
       "id": "test01",
       "speaker": "hippie",
       "portrait": "normal",
-      "text": "hi! (dial_mary_01)",
+      "text": "Hello darlin",
       "animationTriggerDoor": "DoorOpen",
       "showChar": "true",
-      "next": "test02"
-    },
-    {
-      "id": "test02",
-      "speaker": "hippie",
-      "text": "Hello darlin",
       "next": "test03"
     },
     {
