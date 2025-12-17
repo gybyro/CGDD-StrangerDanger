@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GB_HouseScene.unity
     guid: 90f8494456186954b91b8ea6947fb1ee
   - enabled: 1
+    path: Assets/Scenes/DoneForTheDay.unity
+    guid: 0ce9ea2ccc682db4bbf1e4116802e9be
+  - enabled: 1
     path: Assets/Scenes/END_NoSanity.unity
     guid: 94a22eaa0236eae4497874f134119eee
   - enabled: 1
